@@ -1,26 +1,48 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
+import { BrandLayout } from "@/components/brandguide/BrandLayout";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
+const sections = [
+  { path: "/logo", label: "LOGO" },
+  { path: "/cores", label: "CORES" },
+  { path: "/fontes", label: "FONTES" },
+  { path: "/assets", label: "ASSETS" },
+  { path: "/formas", label: "FORMAS" },
+] as const;
 
 function Index() {
-  return <PlaceholderIndex />;
+  return (
+    <BrandLayout>
+      <section className="guide-grid flex min-h-screen flex-col justify-between overflow-hidden bg-background px-4 py-8 sm:px-6 md:px-12 md:py-12 lg:px-24">
+        <div className="animate-soft-reveal pt-2 md:pt-4">
+          <p className="mb-5 text-xs font-bold uppercase text-primary">CazéTV</p>
+          <h1 className="max-w-6xl text-6xl font-bold uppercase leading-none text-foreground sm:text-7xl md:text-8xl lg:text-9xl">
+            BEM-VINDO AO BRANDGUIDE CAZÉTV
+          </h1>
+        </div>
+
+        <div className="min-h-12 flex-1" />
+
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div className="flex flex-wrap gap-2 sm:gap-3">
+            {sections.map((section) => (
+              <Link
+                key={section.path}
+                to={section.path}
+                className="border border-border bg-guide-panel px-4 py-3 text-sm font-bold uppercase text-foreground shadow-guide transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:px-6"
+              >
+                {section.label}
+              </Link>
+            ))}
+          </div>
+          <div className="text-right text-xs font-bold uppercase text-muted-foreground">
+            Base limpa · Gilroy · CazéTV
+          </div>
+        </div>
+      </section>
+    </BrandLayout>
+  );
 }
