@@ -114,7 +114,11 @@ function IconCard({
         title={`Baixar ${label}`}
       >
         <span className="inline-flex items-center gap-1">
-          <Download className="size-3" />
+          <span
+            aria-hidden="true"
+            className="gradient-hover-icon size-3"
+            style={{ ["--icon-mask" as string]: DOWNLOAD_ICON_MASK }}
+          />
           SVG
         </span>
       </button>
