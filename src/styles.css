@@ -174,7 +174,8 @@
 
 @layer components {
   /* No hover, o texto recebe o gradiente CazéTV completo (sem áreas brancas)
-     e ele circula continuamente — como pontos de luz coloridos se misturando. */
+     e ele circula continuamente — como pontos de luz coloridos se misturando.
+     A borda também recebe o mesmo gradiente animado via pseudo-elemento. */
   .gradient-hover {
     position: relative;
     transition: border-color 250ms ease;
@@ -200,9 +201,45 @@
     color: transparent;
     animation: gradientSweep 3s linear infinite;
   }
+  /* Borda gradiente animada no hover — usa pseudo-elemento com mask
+     para pintar apenas a região da borda. */
+  .gradient-hover::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background-image: linear-gradient(
+      90deg,
+      #F64C68 0%,
+      #F3C11B 25%,
+      #58C071 50%,
+      #61B8E0 75%,
+      #F64C68 100%
+    );
+    background-size: 200% 100%;
+    background-position: 0% 0;
+    background-repeat: repeat-x;
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease;
+  }
+  .gradient-hover:hover::before,
+  .gradient-hover:focus-visible::before {
+    opacity: 1;
+    animation: gradientSweep 3s linear infinite;
+  }
   .gradient-hover:hover,
   .gradient-hover:focus-visible {
-    border-color: currentColor;
+    border-color: transparent;
   }
 }
 
