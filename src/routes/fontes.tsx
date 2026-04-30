@@ -39,18 +39,30 @@ function FontesPage() {
       </SectionBlock>
 
       <SectionBlock
-        title="Tusker"
+        title="Tusker Grotesk"
         eyebrow="Tipografia de display"
-        description="Reservada para títulos e textos em destaque. Ideal para transmitir informações curtas e de alto impacto. Pesos de referência: 4600 SemiBold e 3500 Medium."
+        description="Reservada para títulos e textos em destaque. Ideal para transmitir informações curtas e de alto impacto. Pesos disponíveis: 4600 SemiBold e 3500 Medium."
       >
-        <div className="border border-border bg-card p-6 md:p-10">
-          <p className="mb-2 text-xs font-bold uppercase text-muted-foreground">Tusker · Display</p>
-          <p className="text-4xl font-bold uppercase tracking-wide text-foreground md:text-7xl">
-            BEM-VINDO À CAZÉTV
-          </p>
-          <p className="mt-4 text-xs text-muted-foreground">
-            *Tusker não está embarcada nesta versão do brandguide. Use Gilroy ExtraBold como substituto até a fonte ser disponibilizada.
-          </p>
+        <div className="space-y-6 border border-border bg-card p-6 md:p-10">
+          <div>
+            <p className="mb-2 text-xs font-bold uppercase text-muted-foreground">Tusker Grotesk · 3500 Medium</p>
+            <p
+              className="text-4xl uppercase tracking-wide text-foreground md:text-6xl"
+              style={{ fontFamily: "var(--font-display)", fontWeight: 500 }}
+            >
+              BEM-VINDO À CAZÉTV
+            </p>
+          </div>
+          <div className="h-px bg-border" />
+          <div>
+            <p className="mb-2 text-xs font-bold uppercase text-muted-foreground">Tusker Grotesk · 4600 SemiBold</p>
+            <p
+              className="text-4xl uppercase tracking-wide text-foreground md:text-6xl"
+              style={{ fontFamily: "var(--font-display)", fontWeight: 600 }}
+            >
+              ESPORTE AO VIVO
+            </p>
+          </div>
         </div>
       </SectionBlock>
 
@@ -61,8 +73,11 @@ function FontesPage() {
       >
         <div className="space-y-6 border border-border bg-card p-6 md:p-10">
           <div>
-            <p className="text-xs font-bold uppercase text-primary">Título · Tusker / Gilroy ExtraBold</p>
-            <h3 className="mt-2 text-4xl font-bold uppercase text-foreground md:text-6xl">
+            <p className="text-xs font-bold uppercase text-primary">Título · Tusker Grotesk SemiBold</p>
+            <h3
+              className="mt-2 text-4xl uppercase text-foreground md:text-6xl"
+              style={{ fontFamily: "var(--font-display)", fontWeight: 600 }}
+            >
               Esporte ao vivo
             </h3>
           </div>
