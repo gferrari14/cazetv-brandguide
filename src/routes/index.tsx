@@ -40,7 +40,7 @@ function Index() {
             ))}
           </div>
           <div className="text-right text-xs font-bold uppercase text-muted-foreground">
-            Base limpa · Gilroy · CazéTV
+            Todos os direitos reservados · CazéTV 2026
           </div>
         </div>
       </section>
