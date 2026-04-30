@@ -173,31 +173,48 @@
 }
 
 @layer components {
+  /* Texto com gradiente animado no hover (luz colorida atravessando) */
   .gradient-hover {
     position: relative;
-    isolation: isolate;
+    transition: border-color 250ms ease;
   }
-  .gradient-hover::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: var(--brand-gradient);
-    opacity: 0;
-    transition: opacity 250ms ease;
-    z-index: 0;
+  .gradient-hover > * {
+    background-image: linear-gradient(
+      90deg,
+      currentColor 0%,
+      currentColor 35%,
+      #F64C68 45%,
+      #F3C11B 55%,
+      #61B8E0 65%,
+      #58C071 75%,
+      currentColor 85%,
+      currentColor 100%
+    );
+    background-size: 300% 100%;
+    background-position: 100% 0;
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    transition: background-position 0ms ease;
   }
-  .gradient-hover:hover::before,
-  .gradient-hover:focus-visible::before {
-    opacity: 1;
+  .gradient-hover:hover > *,
+  .gradient-hover:focus-visible > * {
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: gradientSweep 1.6s linear infinite;
   }
   .gradient-hover:hover,
   .gradient-hover:focus-visible {
-    color: #000 !important;
-    border-color: transparent !important;
+    border-color: currentColor;
   }
-  .gradient-hover > * {
-    position: relative;
-    z-index: 1;
+}
+
+@keyframes gradientSweep {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
   }
 }
 
