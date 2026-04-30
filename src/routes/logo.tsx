@@ -3,6 +3,7 @@ import { BrandLayout } from "@/components/brandguide/BrandLayout";
 import { PageHeader } from "@/components/brandguide/PageHeader";
 import { SectionBlock } from "@/components/brandguide/SectionBlock";
 import { DownloadButton } from "@/components/brandguide/DownloadButton";
+import { DownloadAllButton } from "@/components/brandguide/DownloadAllButton";
 import logoColor from "@/assets/cazetv-logo-color.jpg";
 import logoBlack from "@/assets/cazetv-logo-black.jpg";
 import logoWhite from "@/assets/cazetv-logo-white.jpg";
@@ -19,6 +20,19 @@ function LogoPage() {
       <PageHeader
         title="Logo"
         description="O logotipo colorido é a versão característica da marca CazéTV. Pode aparecer em preto ou branco quando necessário, sempre com aprovação da equipe de marca."
+        action={
+          <DownloadAllButton
+            zipName="cazetv-logos.zip"
+            label="DOWNLOAD DE TODOS OS LOGOS"
+            files={[
+              { url: logoColor, path: "LOGOTIPO/cazetv-logo-color.jpg" },
+              { url: logoBlack, path: "LOGOTIPO/cazetv-logo-black.jpg" },
+              { url: logoWhite, path: "LOGOTIPO/cazetv-logo-white.jpg" },
+              { url: symbolLight, path: "SIMBOLO/cazetv-symbol-light.jpg" },
+              { url: symbolDark, path: "SIMBOLO/cazetv-symbol-dark.jpg" },
+            ]}
+          />
+        }
       />
 
       <SectionBlock

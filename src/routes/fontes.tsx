@@ -3,6 +3,7 @@ import { BrandLayout } from "@/components/brandguide/BrandLayout";
 import { PageHeader } from "@/components/brandguide/PageHeader";
 import { SectionBlock } from "@/components/brandguide/SectionBlock";
 import { DownloadButton } from "@/components/brandguide/DownloadButton";
+import { DownloadAllButton } from "@/components/brandguide/DownloadAllButton";
 
 export const Route = createFileRoute("/fontes")({
   component: FontesPage,
@@ -14,28 +15,83 @@ function FontesPage() {
       <PageHeader
         title="TIPOGRAFIA"
         description="A SELEÇÃO DE FONTES FOI UMA DECISÃO ESTRATÉGICA PARA COMUNICAR OS VALORES DA MARCA, CRIANDO CONTRASTE VISUAL ENTRE O TRADICIONAL E O MODERNO."
+        action={
+          <DownloadAllButton
+            zipName="cazetv-fontes.zip"
+            label="DOWNLOAD DE TODAS AS FONTES"
+            files={[
+              { url: "/fonts/GILROY-REGULAR.TTF", path: "GILROY/GILROY-REGULAR.TTF" },
+              { url: "/fonts/GILROY-BOLD.TTF", path: "GILROY/GILROY-BOLD.TTF" },
+              { url: "/fonts/TUSKERGROTESK-3500MEDIUM.OTF", path: "TUSKER/TUSKERGROTESK-3500MEDIUM.OTF" },
+              { url: "/fonts/TUSKERGROTESK-3500MEDIUM.TTF", path: "TUSKER/TUSKERGROTESK-3500MEDIUM.TTF" },
+              { url: "/fonts/TUSKERGROTESK-4600SEMIBOLD.OTF", path: "TUSKER/TUSKERGROTESK-4600SEMIBOLD.OTF" },
+              { url: "/fonts/TUSKERGROTESK-4600SEMIBOLD.TTF", path: "TUSKER/TUSKERGROTESK-4600SEMIBOLD.TTF" },
+            ]}
+          />
+        }
       />
 
       <SectionBlock
-        title="REGRA OBRIGATÓRIA"
-        eyebrow="USO TIPOGRÁFICO"
+        title="REGRA #1 — SEMPRE EM CAIXA ALTA"
+        eyebrow="REGRA OBRIGATÓRIA · USO TIPOGRÁFICO"
         description="TODA APLICAÇÃO DE TEXTO DA MARCA CAZÉTV — SEM EXCEÇÃO — DEVE SER ESCRITA EM CAIXA ALTA. ESSA REGRA VALE PARA TÍTULOS, SUBTÍTULOS, CORPO DE TEXTO, BOTÕES, LEGENDAS E QUALQUER OUTRO ELEMENTO TEXTUAL."
       >
-        <div className="overflow-hidden border border-border" style={{ backgroundColor: "#000000" }}>
-          <div className="flex flex-col gap-6 p-8 md:p-12">
-            <p className="text-xs font-bold uppercase text-primary">REGRA #1</p>
+        <div
+          className="relative overflow-hidden border-2 border-foreground"
+          style={{ backgroundColor: "#000000" }}
+        >
+          {/* faixa gradiente superior */}
+          <div className="h-2 w-full" style={{ background: "var(--brand-gradient)" }} />
+
+          <div className="flex flex-col gap-8 p-8 md:p-16">
+            <div className="flex items-center gap-3">
+              <span
+                className="inline-flex items-center justify-center px-3 py-1 text-[10px] font-bold uppercase tracking-widest"
+                style={{ background: "var(--brand-gradient)", color: "#000" }}
+              >
+                REGRA #1 · OBRIGATÓRIA
+              </span>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-white/70">
+                IDENTIDADE VERBAL CAZÉTV
+              </span>
+            </div>
+
             <p
-              className="text-4xl uppercase leading-none md:text-6xl"
+              className="text-6xl uppercase leading-[0.9] md:text-8xl lg:text-9xl"
               style={{ color: "#FFFFFF", fontFamily: "var(--font-display)", fontWeight: 600 }}
             >
-              SEMPRE EM CAIXA ALTA
+              SEMPRE EM<br />CAIXA ALTA.
             </p>
-            <div className="h-2 w-full" style={{ background: "var(--brand-gradient)" }} />
+
+            <div className="grid gap-6 border-t border-white/20 pt-6 md:grid-cols-2">
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-white/60">CERTO</p>
+                <p
+                  className="mt-2 text-2xl uppercase md:text-4xl"
+                  style={{ color: "#FFFFFF", fontFamily: "var(--font-display)", fontWeight: 600 }}
+                >
+                  ESPORTE AO VIVO
+                </p>
+              </div>
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-white/60">ERRADO</p>
+                <p
+                  className="mt-2 text-2xl normal-case line-through decoration-2 md:text-4xl"
+                  style={{ color: "#F64C68", fontFamily: "var(--font-display)", fontWeight: 600, textTransform: "none" }}
+                >
+                  Esporte ao vivo
+                </p>
+              </div>
+            </div>
+
             <p className="max-w-2xl text-sm leading-relaxed text-white">
-              A CAIXA ALTA É PARTE DA IDENTIDADE VERBAL DA CAZÉTV. ELA REFORÇA O TOM DE TRANSMISSÃO, GRITO
-              DE TORCIDA E PRESENÇA EDITORIAL DA MARCA. NUNCA APLIQUE TEXTOS EM CAIXA BAIXA OU MISTA.
+              A CAIXA ALTA É PARTE DA IDENTIDADE VERBAL DA CAZÉTV. ELA REFORÇA O TOM DE TRANSMISSÃO,
+              GRITO DE TORCIDA E PRESENÇA EDITORIAL DA MARCA. NUNCA APLIQUE TEXTOS EM CAIXA BAIXA OU MISTA.
             </p>
           </div>
+
+          {/* faixa gradiente inferior */}
+          <div className="h-2 w-full" style={{ background: "var(--brand-gradient)" }} />
         </div>
 
         <div className="mt-6 grid gap-4 md:grid-cols-2">

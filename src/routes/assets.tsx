@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import JSZip from "jszip";
+import { Loader2 } from "lucide-react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -82,16 +84,25 @@ function IconCard({
   Icon,
   label,
   file,
+  registerRef,
 }: {
   Icon: (typeof institutionalIcons)[number]["Icon"];
   label: string;
   file: string;
+  registerRef: (file: string, node: SVGSVGElement | null) => void;
 }) {
   const ref = useRef<SVGSVGElement>(null);
   return (
     <div className="flex flex-col items-center gap-2">
       <div className="flex size-16 items-center justify-center">
-        <Icon ref={ref} className="size-8 stroke-[1.25]" color="#FFFFFF" />
+        <Icon
+          ref={(node) => {
+            ref.current = node;
+            registerRef(file, node);
+          }}
+          className="size-8 stroke-[1.25]"
+          color="#FFFFFF"
+        />
       </div>
       <p className="text-center text-[10px] font-bold uppercase tracking-wide text-muted-foreground">
         {label}
@@ -112,11 +123,59 @@ function IconCard({
 }
 
 function AssetsPage() {
+  const refsMap = useRef<Map<string, SVGSVGElement | null>>(new Map());
+  const [zipping, setZipping] = useState(false);
+
+  const registerRef = (file: string, node: SVGSVGElement | null) => {
+    refsMap.current.set(file, node);
+  };
+
+  const downloadAll = async () => {
+    if (zipping) return;
+    setZipping(true);
+    try {
+      const zip = new JSZip();
+      const folder = zip.folder("ICONES")!;
+      for (const { file } of institutionalIcons) {
+        const node = refsMap.current.get(file);
+        if (!node) continue;
+        const clone = node.cloneNode(true) as SVGSVGElement;
+        clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+        const source = new XMLSerializer().serializeToString(clone);
+        folder.file(`cazetv-icone-${file}.svg`, source);
+      }
+      const blob = await zip.generateAsync({ type: "blob" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "cazetv-assets.zip";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } finally {
+      setZipping(false);
+    }
+  };
+
   return (
     <BrandLayout>
       <PageHeader
         title="ASSETS"
         description="CONJUNTO DE ELEMENTOS GRÁFICOS EXCLUSIVOS DA CAZÉTV, INCLUINDO O SISTEMA DE ÍCONES INSTITUCIONAIS USADO EM INTERFACES, APRESENTAÇÕES E MATERIAIS EDITORIAIS."
+        action={
+          <button
+            type="button"
+            onClick={downloadAll}
+            disabled={zipping}
+            className="gradient-hover inline-flex items-center gap-2 border border-foreground bg-background px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground disabled:opacity-60"
+          >
+            <span className="inline-flex items-center gap-2">
+              {zipping ? <Loader2 className="size-4 animate-spin" /> : <Download className="size-4" />}
+              {zipping ? "GERANDO ZIP..." : "DOWNLOAD DE TODOS OS ASSETS"}
+            </span>
+          </button>
+        }
       />
 
       <SectionBlock
@@ -127,7 +186,13 @@ function AssetsPage() {
         <div className="overflow-hidden border border-border bg-black p-6 md:p-10">
           <div className="grid grid-cols-3 gap-6 sm:grid-cols-4 md:grid-cols-6">
             {institutionalIcons.map(({ Icon, label, file }) => (
-              <IconCard key={label} Icon={Icon} label={label} file={file} />
+              <IconCard
+                key={label}
+                Icon={Icon}
+                label={label}
+                file={file}
+                registerRef={registerRef}
+              />
             ))}
           </div>
         </div>
