@@ -173,7 +173,9 @@
 }
 
 @layer components {
-  /* Texto com gradiente animado no hover (luz colorida atravessando) */
+  /* Texto com luz colorida circulando continuamente no hover.
+     A base permanece branca (currentColor) — apenas uma "lente" de gradiente
+     atravessa o texto repetidamente, então ele nunca fica invisível. */
   .gradient-hover {
     position: relative;
     transition: border-color 250ms ease;
@@ -182,26 +184,25 @@
     background-image: linear-gradient(
       90deg,
       currentColor 0%,
-      currentColor 35%,
-      #F64C68 45%,
-      #F3C11B 55%,
-      #61B8E0 65%,
-      #58C071 75%,
-      currentColor 85%,
+      currentColor 30%,
+      #F64C68 40%,
+      #F3C11B 47%,
+      #58C071 53%,
+      #61B8E0 60%,
+      currentColor 70%,
       currentColor 100%
     );
-    background-size: 300% 100%;
-    background-position: 100% 0;
-    background-repeat: no-repeat;
+    background-size: 250% 100%;
+    background-position: 0% 0;
+    background-repeat: repeat-x;
     -webkit-background-clip: text;
     background-clip: text;
-    transition: background-position 0ms ease;
   }
   .gradient-hover:hover > *,
   .gradient-hover:focus-visible > * {
     -webkit-text-fill-color: transparent;
     color: transparent;
-    animation: gradientSweep 1.6s linear infinite;
+    animation: gradientSweep 2.4s linear infinite;
   }
   .gradient-hover:hover,
   .gradient-hover:focus-visible {
@@ -211,10 +212,10 @@
 
 @keyframes gradientSweep {
   0% {
-    background-position: 100% 0;
+    background-position: 0% 0;
   }
   100% {
-    background-position: -100% 0;
+    background-position: -250% 0;
   }
 }
 
