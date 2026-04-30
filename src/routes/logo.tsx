@@ -67,10 +67,18 @@ function LogoPage() {
             <div className="flex aspect-square items-center justify-center p-10">
               <img src={symbolLight} alt="Símbolo CazéTV em fundo claro" className="max-h-full max-w-full object-contain" />
             </div>
+            <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
+              <p className="text-xs font-bold uppercase text-primary">SÍMBOLO · FUNDO CLARO</p>
+              <DownloadButton href={symbolLight} filename="cazetv-symbol-light.jpg" />
+            </div>
           </div>
           <div className="overflow-hidden border border-border bg-black">
             <div className="flex aspect-square items-center justify-center p-10">
               <img src={symbolDark} alt="Símbolo CazéTV em fundo escuro" className="max-h-full max-w-full object-contain" />
+            </div>
+            <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
+              <p className="text-xs font-bold uppercase text-primary">SÍMBOLO · FUNDO ESCURO</p>
+              <DownloadButton href={symbolDark} filename="cazetv-symbol-dark.jpg" />
             </div>
           </div>
         </div>
