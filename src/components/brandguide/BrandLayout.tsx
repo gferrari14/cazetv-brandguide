@@ -29,11 +29,11 @@ export function BrandLayout({ children }: { children: React.ReactNode }) {
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`px-4 py-2 text-xs font-bold uppercase transition-colors hover:text-primary ${
+                  className={`gradient-hover border border-transparent px-4 py-2 text-xs font-bold uppercase transition-colors ${
                     location.pathname === link.path ? "text-primary" : "text-muted-foreground"
                   }`}
                 >
-                  {link.label}
+                  <span>{link.label}</span>
                 </Link>
               ))}
             </div>

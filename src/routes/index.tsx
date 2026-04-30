@@ -32,9 +32,9 @@ function Index() {
               <Link
                 key={section.path}
                 to={section.path}
-                className="border border-border bg-guide-panel px-4 py-3 text-sm font-bold uppercase text-foreground shadow-guide transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:px-6"
+                className="gradient-hover border border-border bg-guide-panel px-4 py-3 text-sm font-bold uppercase text-foreground shadow-guide transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:px-6"
               >
-                {section.label}
+                <span>{section.label}</span>
               </Link>
             ))}
           </div>

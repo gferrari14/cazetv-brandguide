@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BrandLayout } from "@/components/brandguide/BrandLayout";
 import { PageHeader } from "@/components/brandguide/PageHeader";
 import { SectionBlock } from "@/components/brandguide/SectionBlock";
+import { DownloadButton } from "@/components/brandguide/DownloadButton";
 import logoColor from "@/assets/cazetv-logo-color.jpg";
 import logoBlack from "@/assets/cazetv-logo-black.jpg";
 import logoWhite from "@/assets/cazetv-logo-white.jpg";
@@ -30,24 +31,27 @@ function LogoPage() {
             <div className="flex aspect-video items-center justify-center p-8">
               <img src={logoColor} alt="Logo CazéTV colorido" className="max-h-full max-w-full object-contain" />
             </div>
-            <div className="border-t border-border bg-card p-4">
-              <p className="text-xs font-bold uppercase text-primary">Principal · Colorido</p>
+            <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
+              <p className="text-xs font-bold uppercase text-primary">PRINCIPAL · COLORIDO</p>
+              <DownloadButton href={logoColor} filename="cazetv-logo-color.jpg" />
             </div>
           </div>
           <div className="overflow-hidden border border-border bg-white">
             <div className="flex aspect-video items-center justify-center p-8">
               <img src={logoBlack} alt="Logo CazéTV preto" className="max-h-full max-w-full object-contain" />
             </div>
-            <div className="border-t border-border bg-card p-4">
-              <p className="text-xs font-bold uppercase text-primary">Preto · Fundo claro</p>
+            <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
+              <p className="text-xs font-bold uppercase text-primary">PRETO · FUNDO CLARO</p>
+              <DownloadButton href={logoBlack} filename="cazetv-logo-black.jpg" />
             </div>
           </div>
           <div className="overflow-hidden border border-border bg-black">
             <div className="flex aspect-video items-center justify-center p-8">
               <img src={logoWhite} alt="Logo CazéTV branco" className="max-h-full max-w-full object-contain" />
             </div>
-            <div className="border-t border-border bg-card p-4">
-              <p className="text-xs font-bold uppercase text-primary">Branco · Fundo escuro</p>
+            <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
+              <p className="text-xs font-bold uppercase text-primary">BRANCO · FUNDO ESCURO</p>
+              <DownloadButton href={logoWhite} filename="cazetv-logo-white.jpg" />
             </div>
           </div>
         </div>
@@ -63,10 +67,18 @@ function LogoPage() {
             <div className="flex aspect-square items-center justify-center p-10">
               <img src={symbolLight} alt="Símbolo CazéTV em fundo claro" className="max-h-full max-w-full object-contain" />
             </div>
+            <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
+              <p className="text-xs font-bold uppercase text-primary">SÍMBOLO · FUNDO CLARO</p>
+              <DownloadButton href={symbolLight} filename="cazetv-symbol-light.jpg" />
+            </div>
           </div>
           <div className="overflow-hidden border border-border bg-black">
             <div className="flex aspect-square items-center justify-center p-10">
               <img src={symbolDark} alt="Símbolo CazéTV em fundo escuro" className="max-h-full max-w-full object-contain" />
+            </div>
+            <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
+              <p className="text-xs font-bold uppercase text-primary">SÍMBOLO · FUNDO ESCURO</p>
+              <DownloadButton href={symbolDark} filename="cazetv-symbol-dark.jpg" />
             </div>
           </div>
         </div>
