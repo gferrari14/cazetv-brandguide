@@ -63,7 +63,15 @@ export function DownloadAllButton({
       className={`gradient-hover inline-flex items-center gap-2 border border-foreground bg-background px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground disabled:opacity-60 ${className}`}
     >
       <span className="inline-flex items-center gap-2">
-        {loading ? <Loader2 className="size-4 animate-spin" /> : <Download className="size-4" />}
+        {loading ? (
+          <Loader2 className="size-4 animate-spin" />
+        ) : (
+          <span
+            aria-hidden="true"
+            className="gradient-hover-icon size-4"
+            style={{ ["--icon-mask" as string]: DOWNLOAD_ICON_MASK }}
+          />
+        )}
         {loading ? "GERANDO ZIP..." : label}
       </span>
     </button>
