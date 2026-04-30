@@ -17,7 +17,7 @@ const sections = [
 function Index() {
   return (
     <BrandLayout>
-      <section className="guide-grid relative flex min-h-screen flex-col justify-between overflow-hidden px-4 py-8 sm:px-6 md:px-12 md:py-12 lg:px-24">
+      <section className="relative flex min-h-screen flex-col justify-between overflow-hidden px-4 py-8 sm:px-6 md:px-12 md:py-12 lg:px-24">
         <video
           src="/videos/hero-bg.mp4"
           autoPlay
