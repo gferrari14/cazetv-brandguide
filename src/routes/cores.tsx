@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Check, Copy, Download } from "lucide-react";
+import { Check, Copy } from "lucide-react";
 import { BrandLayout } from "@/components/brandguide/BrandLayout";
 import { PageHeader } from "@/components/brandguide/PageHeader";
 import { SectionBlock } from "@/components/brandguide/SectionBlock";
@@ -103,47 +103,8 @@ function GradientCopyCard() {
   );
 }
 
-function buildPaletteText() {
-  const lines = [
-    "PALETA CAZÉTV",
-    "",
-    ...palette.map((c) => `${c.name}\n  HEX: ${c.hex}\n  RGB: ${c.rgb}\n  CMYK: ${c.cmyk}\n`),
-    "GRADIENTE PRINCIPAL",
-    "  CSS: linear-gradient(90deg, #F64C68 0%, #F3C11B 35%, #61B8E0 70%, #58C071 100%)",
-  ];
-  return lines.join("\n");
-}
 
-function buildGradientSvg() {
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200" width="1200" height="200">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#F64C68"/>
-      <stop offset="35%" stop-color="#F3C11B"/>
-      <stop offset="70%" stop-color="#61B8E0"/>
-      <stop offset="100%" stop-color="#58C071"/>
-    </linearGradient>
-  </defs>
-  <rect width="1200" height="200" fill="url(#g)"/>
-</svg>`;
-}
 
-async function downloadCoresZip() {
-  const { default: JSZip } = await import("jszip");
-  const zip = new JSZip();
-  zip.file("PALETA/paleta-cazetv.txt", buildPaletteText());
-  zip.file("GRADIENTE/cazetv-gradiente.svg", buildGradientSvg());
-  const blob = await zip.generateAsync({ type: "blob" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "cazetv-cores.zip";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
 
 function CoresPage() {
   return (
@@ -151,19 +112,8 @@ function CoresPage() {
       <PageHeader
         title="CORES"
         description="A PALETA DA CAZÉTV É CONSTRUÍDA SOBRE DOIS NEUTROS — PRETO E BRANCO — ACOMPANHADOS PELO GRADIENTE COLORIDO PROPRIETÁRIO, QUE CARREGA TODA A VIBRAÇÃO DA MARCA."
-        action={
-          <button
-            type="button"
-            onClick={downloadCoresZip}
-            className="gradient-hover inline-flex items-center gap-2 border border-foreground bg-background px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
-          >
-            <span className="inline-flex items-center gap-2">
-              <Download className="size-4" />
-              DOWNLOAD DA PALETA
-            </span>
-          </button>
-        }
       />
+
 
       <SectionBlock
         title="PALETA PRINCIPAL"

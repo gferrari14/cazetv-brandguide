@@ -1,6 +1,9 @@
-import { Download, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import JSZip from "jszip";
+
+const DOWNLOAD_ICON_MASK =
+  "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/><polyline points='7 10 12 15 17 10'/><line x1='12' y1='15' x2='12' y2='3'/></svg>\")";
 
 export interface ZipFileSpec {
   /** URL pública do arquivo (ex.: /fonts/GILROY-BOLD.TTF) ou data URL */
@@ -60,7 +63,15 @@ export function DownloadAllButton({
       className={`gradient-hover inline-flex items-center gap-2 border border-foreground bg-background px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground disabled:opacity-60 ${className}`}
     >
       <span className="inline-flex items-center gap-2">
-        {loading ? <Loader2 className="size-4 animate-spin" /> : <Download className="size-4" />}
+        {loading ? (
+          <Loader2 className="size-4 animate-spin" />
+        ) : (
+          <span
+            aria-hidden="true"
+            className="gradient-hover-icon size-4"
+            style={{ ["--icon-mask" as string]: DOWNLOAD_ICON_MASK }}
+          />
+        )}
         {loading ? "GERANDO ZIP..." : label}
       </span>
     </button>

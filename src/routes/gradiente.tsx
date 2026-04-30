@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Download } from "lucide-react";
 import { BrandLayout } from "@/components/brandguide/BrandLayout";
 import { PageHeader } from "@/components/brandguide/PageHeader";
 import { SectionBlock } from "@/components/brandguide/SectionBlock";
@@ -24,39 +23,6 @@ const stops = [
   { name: "Verde", value: "#58C071", position: "100%" },
 ];
 
-function buildGradientSvg() {
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200" width="1200" height="200">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#F64C68"/>
-      <stop offset="35%" stop-color="#F3C11B"/>
-      <stop offset="70%" stop-color="#61B8E0"/>
-      <stop offset="100%" stop-color="#58C071"/>
-    </linearGradient>
-  </defs>
-  <rect width="1200" height="200" fill="url(#g)"/>
-</svg>`;
-}
-
-async function downloadGradienteZip() {
-  const { default: JSZip } = await import("jszip");
-  const zip = new JSZip();
-  zip.file("GRADIENTE/cazetv-gradiente.svg", buildGradientSvg());
-  zip.file(
-    "GRADIENTE/cazetv-gradiente.css",
-    `/* CazéTV — Gradiente Principal */\n.cazetv-gradient {\n  background: linear-gradient(90deg, #F64C68 0%, #F3C11B 35%, #61B8E0 70%, #58C071 100%);\n}\n`,
-  );
-  const blob = await zip.generateAsync({ type: "blob" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "cazetv-gradiente.zip";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
 
 function GradientePage() {
   return (
@@ -64,18 +30,6 @@ function GradientePage() {
       <PageHeader
         title="Gradiente CazéTV"
         description="O gradiente colorido da CazéTV funciona como um elemento gráfico proprietário, capaz de reforçar o reconhecimento da marca mesmo na ausência do logotipo."
-        action={
-          <button
-            type="button"
-            onClick={downloadGradienteZip}
-            className="gradient-hover inline-flex items-center gap-2 border border-foreground bg-background px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
-          >
-            <span className="inline-flex items-center gap-2">
-              <Download className="size-4" />
-              DOWNLOAD DO GRADIENTE
-            </span>
-          </button>
-        }
       />
 
       <SectionBlock
