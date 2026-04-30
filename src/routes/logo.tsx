@@ -48,16 +48,7 @@ function LogoPage() {
         eyebrow="Versões oficiais"
         description="Use sempre os arquivos oficiais. A versão colorida é a principal. As versões em preto e branco devem ser aplicadas conforme o contraste do fundo."
       >
-        <div className="grid gap-4 md:grid-cols-3">
-          <div className="overflow-hidden border border-border bg-white">
-            <div className="flex aspect-video items-center justify-center p-8">
-              <img src={logoFullColor} alt="Logotipo CazéTV colorido" className="max-h-full max-w-full object-contain" />
-            </div>
-            <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
-              <p className="text-xs font-bold uppercase text-primary">PRINCIPAL · COLORIDO</p>
-              <DownloadButton href={logoFullColor} filename="cazetv-logo-color.png" />
-            </div>
-          </div>
+        <div className="grid gap-4 md:grid-cols-2">
           <div className="overflow-hidden border border-border bg-white">
             <div className="flex aspect-video items-center justify-center p-8">
               <img src={logoFullBlack} alt="Logotipo CazéTV preto" className="max-h-full max-w-full object-contain" />
