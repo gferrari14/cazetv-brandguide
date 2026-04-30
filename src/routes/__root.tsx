@@ -29,14 +29,18 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Brandguide CazéTV" },
-      { name: "description", content: "Base limpa do brandguide CazéTV com tipografia Gilroy." },
+      { title: "CAZÉTV BRANDGUIDE" },
+      { name: "description", content: "CazéTV Brandguide Reimagined is a digital brand guide for CazéTV." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Brandguide CazéTV" },
-      { property: "og:description", content: "Base limpa do brandguide CazéTV com tipografia Gilroy." },
+      { property: "og:title", content: "CAZÉTV BRANDGUIDE" },
+      { property: "og:description", content: "CazéTV Brandguide Reimagined is a digital brand guide for CazéTV." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "CAZÉTV BRANDGUIDE" },
+      { name: "twitter:description", content: "CazéTV Brandguide Reimagined is a digital brand guide for CazéTV." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/IUHSo6mN33WrNraakyjSvYOPjFj1/social-images/social-1777558479872-CAZÉTV_ÍCONE.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/IUHSo6mN33WrNraakyjSvYOPjFj1/social-images/social-1777558479872-CAZÉTV_ÍCONE.webp" },
     ],
     links: [
       {
