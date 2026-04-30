@@ -110,9 +110,15 @@ function GradientePage() {
         description="O gradiente deve ser aplicado exclusivamente sobre fundos preto ou branco. O uso predominante é recomendado sobre fundo preto, onde atinge maior intensidade, profundidade e presença visual."
       >
         <div className="grid gap-4 md:grid-cols-2">
-          <div className="overflow-hidden border border-border bg-black">
+          <div className="group overflow-hidden border border-border bg-black transition-colors duration-300 hover:bg-white">
             <div className="flex h-72 items-center justify-end p-6">
-              <div className="h-full w-2 rounded-full" style={{ background: "var(--brand-gradient)" }} />
+              <div
+                className="h-full w-2"
+                style={{
+                  background:
+                    "linear-gradient(180deg, #F64C68 0%, #F3C11B 35%, #61B8E0 70%, #58C071 100%)",
+                }}
+              />
             </div>
             <div className="border-t border-border bg-card p-5">
               <p className="text-xs font-bold uppercase text-primary">Recomendado</p>
@@ -120,9 +126,9 @@ function GradientePage() {
             </div>
           </div>
 
-          <div className="overflow-hidden border border-border bg-white">
+          <div className="group overflow-hidden border border-border bg-white transition-colors duration-300 hover:bg-black">
             <div className="flex h-72 items-end p-6">
-              <div className="h-2 w-full rounded-full" style={{ background: "var(--brand-gradient)" }} />
+              <div className="h-2 w-full" style={{ background: "var(--brand-gradient)" }} />
             </div>
             <div className="border-t border-border bg-card p-5">
               <p className="text-xs font-bold uppercase text-primary">Permitido</p>
