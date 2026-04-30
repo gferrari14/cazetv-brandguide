@@ -223,17 +223,12 @@ function LogoPage() {
         eyebrow="Versatilidade"
         description="O logo deve sempre garantir contraste e legibilidade. Use a versão branca em fundos escuros ou coloridos saturados, e a versão preta em fundos claros ou amarelos."
       >
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {backgroundSwatches.map((bg) => (
-            <div key={bg.label} className="overflow-hidden border border-border">
-              <div className={`flex aspect-square items-center justify-center p-10 ${bg.className}`}>
-                <img src={bg.logo} alt={`Logo CazéTV em fundo ${bg.label}`} className="max-h-full max-w-full object-contain" />
-              </div>
-              <div className="border-t border-border bg-card p-4">
-                <p className="text-xs font-bold uppercase text-primary">FUNDO · {bg.label}</p>
-              </div>
-            </div>
-          ))}
+        <div className="overflow-hidden border border-border bg-white">
+          <img
+            src={logoFundosAplicacao}
+            alt="Logo CazéTV aplicado em diferentes fundos"
+            className="block h-auto w-full"
+          />
         </div>
       </SectionBlock>
 
