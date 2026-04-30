@@ -28,7 +28,7 @@ function Index() {
           className="pointer-events-none absolute inset-0 z-0 size-full object-cover opacity-15"
         />
         <div className="animate-soft-reveal relative z-10 pt-2 md:pt-4">
-          <img src={navLogo} alt="CazéTV" className="mb-5 h-7 w-auto md:h-8" />
+          <img src={navLogo} alt="CazéTV" className="mb-5 h-10 w-auto md:h-12" />
           <h1 className="max-w-6xl text-6xl font-bold uppercase leading-none text-foreground sm:text-7xl md:text-8xl lg:text-9xl">
             BEM-VINDO AO BRANDGUIDE CAZÉTV
           </h1>
@@ -42,7 +42,7 @@ function Index() {
               <Link
                 key={section.path}
                 to={section.path}
-                className="gradient-hover border border-border bg-guide-panel px-4 py-3 text-sm font-bold uppercase text-foreground shadow-guide transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:px-6"
+                className="gradient-hover border border-border bg-transparent px-4 py-3 text-sm font-bold uppercase text-foreground transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:px-6"
               >
                 <span>{section.label}</span>
               </Link>
