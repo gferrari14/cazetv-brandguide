@@ -19,14 +19,6 @@ export const Route = createFileRoute("/logo")({
   component: LogoPage,
 });
 
-const backgroundSwatches = [
-  { label: "Rosa", className: "bg-[#ff3ea5]", logo: logoFullWhite },
-  { label: "Azul", className: "bg-[#1e3a8a]", logo: logoFullWhite },
-  { label: "Gramado", className: "bg-[#1f6f3f]", logo: logoFullWhite },
-  { label: "Estádio", className: "bg-[#0a0a0a]", logo: logoFullWhite },
-  { label: "Amarelo", className: "bg-[#facc15]", logo: logoFullBlack },
-  { label: "Bokeh", className: "bg-gradient-to-br from-[#0a0a0a] via-[#1a1a2e] to-[#3a1a5a]", logo: logoFullWhite },
-] as const;
 
 function LogoPage() {
   return (
