@@ -64,18 +64,6 @@ function GradientePage() {
       <PageHeader
         title="Gradiente CazéTV"
         description="O gradiente colorido da CazéTV funciona como um elemento gráfico proprietário, capaz de reforçar o reconhecimento da marca mesmo na ausência do logotipo."
-        action={
-          <button
-            type="button"
-            onClick={downloadGradienteZip}
-            className="gradient-hover inline-flex items-center gap-2 border border-foreground bg-background px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
-          >
-            <span className="inline-flex items-center gap-2">
-              <Download className="size-4" />
-              DOWNLOAD DO GRADIENTE
-            </span>
-          </button>
-        }
       />
 
       <SectionBlock
