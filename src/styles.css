@@ -216,6 +216,35 @@
 }
 
 @layer components {
+  /* Mesmo efeito do gradient-hover, mas para o logo (imagem).
+     Usa mask-image para recortar uma camada de gradiente animado
+     no formato exato do logo, exibida apenas no hover. */
+  .logo-overlay {
+    background-image: linear-gradient(
+      90deg,
+      #F64C68 0%,
+      #F3C11B 25%,
+      #58C071 50%,
+      #61B8E0 75%,
+      #F64C68 100%
+    );
+    background-size: 200% 100%;
+    background-repeat: repeat-x;
+    background-position: 0% 0;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-position: left center;
+    mask-position: left center;
+  }
+  .logo-gradient-hover:hover .logo-overlay,
+  .logo-gradient-hover:focus-visible .logo-overlay {
+    animation: gradientSweep 3s linear infinite;
+  }
+}
+
+@layer components {
   .brand-container {
     width: min(100% - 2rem, 80rem);
     margin-inline: auto;
