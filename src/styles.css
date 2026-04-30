@@ -196,6 +196,9 @@
     position: relative;
     transition: border-color 250ms ease;
   }
+  .gradient-hover.no-border::before {
+    display: none;
+  }
   .gradient-hover > * {
     background-image: linear-gradient(
       90deg,
