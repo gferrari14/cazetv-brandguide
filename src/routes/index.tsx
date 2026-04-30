@@ -1,5 +1,6 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { BrandLayout } from "@/components/brandguide/BrandLayout";
+import navLogo from "@/assets/cazetv-logo-nav.png";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -18,7 +19,7 @@ function Index() {
     <BrandLayout>
       <section className="guide-grid flex min-h-screen flex-col justify-between overflow-hidden bg-background px-4 py-8 sm:px-6 md:px-12 md:py-12 lg:px-24">
         <div className="animate-soft-reveal pt-2 md:pt-4">
-          <p className="mb-5 text-xs font-bold uppercase text-primary">CazéTV</p>
+          <img src={navLogo} alt="CazéTV" className="mb-5 h-7 w-auto md:h-8" />
           <h1 className="max-w-6xl text-6xl font-bold uppercase leading-none text-foreground sm:text-7xl md:text-8xl lg:text-9xl">
             BEM-VINDO AO BRANDGUIDE CAZÉTV
           </h1>
