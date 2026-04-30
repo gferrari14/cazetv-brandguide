@@ -11,19 +11,14 @@ import symbolBlack from "@/assets/symbol-black.png";
 import symbolWhite from "@/assets/symbol-white.png";
 import nominativaBlack from "@/assets/nominativa-symbol-black.png";
 import nominativaWhite from "@/assets/nominativa-symbol-white.png";
+import nominativaSimboloBlack from "@/assets/nominativa-simbolo-black.png";
+import nominativaSimboloWhite from "@/assets/nominativa-simbolo-white.png";
+import logoFundosAplicacao from "@/assets/logo-fundos-aplicacao.png";
 
 export const Route = createFileRoute("/logo")({
   component: LogoPage,
 });
 
-const backgroundSwatches = [
-  { label: "Rosa", className: "bg-[#ff3ea5]", logo: logoFullWhite },
-  { label: "Azul", className: "bg-[#1e3a8a]", logo: logoFullWhite },
-  { label: "Gramado", className: "bg-[#1f6f3f]", logo: logoFullWhite },
-  { label: "Estádio", className: "bg-[#0a0a0a]", logo: logoFullWhite },
-  { label: "Amarelo", className: "bg-[#facc15]", logo: logoFullBlack },
-  { label: "Bokeh", className: "bg-gradient-to-br from-[#0a0a0a] via-[#1a1a2e] to-[#3a1a5a]", logo: logoFullWhite },
-] as const;
 
 function LogoPage() {
   return (
@@ -117,41 +112,44 @@ function LogoPage() {
       <SectionBlock
         title="Parâmetros de uso"
         eyebrow="Área de proteção"
-        description="A área de proteção é definida pela altura da letra X do logotipo. Esse espaço mínimo deve ser respeitado em todos os lados, garantindo que nenhum elemento gráfico, texto ou imagem invada a marca."
       >
         <div className="border border-border bg-white p-6 md:p-12">
-          <div className="relative mx-auto flex max-w-2xl items-center justify-center">
-            {/* Guides */}
-            <div className="relative">
-              {/* Top X marker */}
-              <div className="absolute -top-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1">
-                <span className="font-mono text-xs font-bold text-[#ff3ea5]">X</span>
-                <div className="h-6 w-px bg-[#ff3ea5]" />
-              </div>
-              {/* Bottom X marker */}
-              <div className="absolute -bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1">
-                <div className="h-6 w-px bg-[#ff3ea5]" />
-                <span className="font-mono text-xs font-bold text-[#ff3ea5]">X</span>
-              </div>
-              {/* Left X marker */}
-              <div className="absolute -left-10 top-1/2 flex -translate-y-1/2 items-center gap-1">
-                <span className="font-mono text-xs font-bold text-[#ff3ea5]">X</span>
-                <div className="h-px w-6 bg-[#ff3ea5]" />
-              </div>
-              {/* Right X marker */}
-              <div className="absolute -right-10 top-1/2 flex -translate-y-1/2 items-center gap-1">
-                <div className="h-px w-6 bg-[#ff3ea5]" />
-                <span className="font-mono text-xs font-bold text-[#ff3ea5]">X</span>
-              </div>
-              {/* Dashed protection box */}
-              <div className="border border-dashed border-[#ff3ea5] p-12">
-                <img src={logoFullColor} alt="Logotipo com área de proteção" className="h-32 w-auto md:h-40" />
-              </div>
+          <div className="grid gap-10 md:grid-cols-[1fr_2fr] md:items-center">
+            <div className="space-y-4 text-sm leading-relaxed text-neutral-700">
+              <p>
+                Nosso logotipo deve sempre ter espaço para <strong>respirar e se destacar</strong>. Para garantir essa presença, definimos uma área de respiro mínima em torno da marca.
+              </p>
+              <p>
+                Utilizamos a largura da letra <strong>T</strong> como medida ideal para estabelecer essa margem. Essa proporção assegura equilíbrio nas aplicações e reforça a clareza e autoridade visual do logotipo em qualquer contexto.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+              {[
+                { src: logoFullColor, alt: "Logotipo CazéTV com área de proteção", h: "h-24 md:h-28" },
+                { src: symbolBlack, alt: "Símbolo CazéTV com área de proteção", h: "h-24 md:h-28" },
+              ].map((item, i) => (
+                <div key={i} className="relative mx-auto w-full max-w-[260px] aspect-square">
+                  {/* Dashed inner box */}
+                  <div className="absolute inset-[14%] border border-dashed border-neutral-400" />
+                  {/* Grey corner blocks (T-width markers) */}
+                  <div className="absolute left-0 top-0 h-[14%] w-[14%] bg-neutral-400" />
+                  <div className="absolute right-0 top-0 h-[14%] w-[14%] bg-neutral-400" />
+                  <div className="absolute bottom-0 left-0 h-[14%] w-[14%] bg-neutral-400" />
+                  <div className="absolute bottom-0 right-0 h-[14%] w-[14%] bg-neutral-400" />
+                  {/* Mid-edge grey blocks */}
+                  <div className="absolute left-1/2 top-0 h-[14%] w-[14%] -translate-x-1/2 bg-neutral-400" />
+                  <div className="absolute bottom-0 left-1/2 h-[14%] w-[14%] -translate-x-1/2 bg-neutral-400" />
+                  <div className="absolute left-0 top-1/2 h-[14%] w-[14%] -translate-y-1/2 bg-neutral-400" />
+                  <div className="absolute right-0 top-1/2 h-[14%] w-[14%] -translate-y-1/2 bg-neutral-400" />
+                  {/* Logo */}
+                  <div className="absolute inset-[14%] flex items-center justify-center p-3">
+                    <img src={item.src} alt={item.alt} className={`${item.h} w-auto max-h-full max-w-full object-contain`} />
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-          <p className="mt-12 text-center text-xs uppercase tracking-wide text-muted-foreground">
-            X = altura da letra do logotipo · Mantenha esse respiro mínimo em todos os lados
-          </p>
         </div>
       </SectionBlock>
 
@@ -192,20 +190,20 @@ function LogoPage() {
         <div className="grid gap-4 md:grid-cols-2">
           <div className="overflow-hidden border border-border bg-white">
             <div className="flex aspect-video items-center justify-center p-10">
-              <img src={logoFullBlack} alt="Símbolo + nominativa preto" className="max-h-full max-w-full object-contain" />
+              <img src={nominativaSimboloBlack} alt="Símbolo Cazé preto" className="max-h-full max-w-full object-contain" />
             </div>
             <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
               <p className="text-xs font-bold uppercase text-primary">PRETO · FUNDO CLARO</p>
-              <DownloadButton href={logoFullBlack} filename="cazetv-nominativa-simbolo-black.png" />
+              <DownloadButton href={nominativaSimboloBlack} filename="cazetv-nominativa-simbolo-black.png" />
             </div>
           </div>
           <div className="overflow-hidden border border-border bg-black">
             <div className="flex aspect-video items-center justify-center p-10">
-              <img src={logoFullWhite} alt="Símbolo + nominativa branco" className="max-h-full max-w-full object-contain" />
+              <img src={nominativaSimboloWhite} alt="Símbolo Cazé branco" className="max-h-full max-w-full object-contain" />
             </div>
             <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
               <p className="text-xs font-bold uppercase text-primary">BRANCO · FUNDO ESCURO</p>
-              <DownloadButton href={logoFullWhite} filename="cazetv-nominativa-simbolo-white.png" />
+              <DownloadButton href={nominativaSimboloWhite} filename="cazetv-nominativa-simbolo-white.png" />
             </div>
           </div>
         </div>
@@ -217,17 +215,12 @@ function LogoPage() {
         eyebrow="Versatilidade"
         description="O logo deve sempre garantir contraste e legibilidade. Use a versão branca em fundos escuros ou coloridos saturados, e a versão preta em fundos claros ou amarelos."
       >
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {backgroundSwatches.map((bg) => (
-            <div key={bg.label} className="overflow-hidden border border-border">
-              <div className={`flex aspect-square items-center justify-center p-10 ${bg.className}`}>
-                <img src={bg.logo} alt={`Logo CazéTV em fundo ${bg.label}`} className="max-h-full max-w-full object-contain" />
-              </div>
-              <div className="border-t border-border bg-card p-4">
-                <p className="text-xs font-bold uppercase text-primary">FUNDO · {bg.label}</p>
-              </div>
-            </div>
-          ))}
+        <div className="overflow-hidden border border-border bg-white">
+          <img
+            src={logoFundosAplicacao}
+            alt="Logo CazéTV aplicado em diferentes fundos"
+            className="block h-auto w-full"
+          />
         </div>
       </SectionBlock>
 
