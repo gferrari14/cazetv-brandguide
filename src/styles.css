@@ -173,9 +173,8 @@
 }
 
 @layer components {
-  /* Texto com luz colorida circulando continuamente no hover.
-     A base permanece branca (currentColor) — apenas uma "lente" de gradiente
-     atravessa o texto repetidamente, então ele nunca fica invisível. */
+  /* No hover, o texto recebe o gradiente CazéTV completo (sem áreas brancas)
+     e ele circula continuamente — como pontos de luz coloridos se misturando. */
   .gradient-hover {
     position: relative;
     transition: border-color 250ms ease;
@@ -183,16 +182,13 @@
   .gradient-hover > * {
     background-image: linear-gradient(
       90deg,
-      currentColor 0%,
-      currentColor 30%,
-      #F64C68 40%,
-      #F3C11B 47%,
-      #58C071 53%,
-      #61B8E0 60%,
-      currentColor 70%,
-      currentColor 100%
+      #F64C68 0%,
+      #F3C11B 25%,
+      #58C071 50%,
+      #61B8E0 75%,
+      #F64C68 100%
     );
-    background-size: 250% 100%;
+    background-size: 200% 100%;
     background-position: 0% 0;
     background-repeat: repeat-x;
     -webkit-background-clip: text;
@@ -202,7 +198,7 @@
   .gradient-hover:focus-visible > * {
     -webkit-text-fill-color: transparent;
     color: transparent;
-    animation: gradientSweep 2.4s linear infinite;
+    animation: gradientSweep 3s linear infinite;
   }
   .gradient-hover:hover,
   .gradient-hover:focus-visible {
@@ -215,7 +211,7 @@
     background-position: 0% 0;
   }
   100% {
-    background-position: -250% 0;
+    background-position: -200% 0;
   }
 }
 
