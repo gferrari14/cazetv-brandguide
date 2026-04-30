@@ -10,7 +10,7 @@ const sections = [
   { path: "/cores", label: "CORES" },
   { path: "/fontes", label: "FONTES" },
   { path: "/assets", label: "ASSETS" },
-  { path: "/formas", label: "FORMAS" },
+  { path: "/gradiente", label: "GRADIENTE" },
 ] as const;
 
 function Index() {
