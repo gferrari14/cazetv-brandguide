@@ -3,6 +3,7 @@ import { BrandLayout } from "@/components/brandguide/BrandLayout";
 import { PageHeader } from "@/components/brandguide/PageHeader";
 import { SectionBlock } from "@/components/brandguide/SectionBlock";
 import { DownloadButton } from "@/components/brandguide/DownloadButton";
+import { DownloadAllButton } from "@/components/brandguide/DownloadAllButton";
 
 export const Route = createFileRoute("/fontes")({
   component: FontesPage,
@@ -14,6 +15,20 @@ function FontesPage() {
       <PageHeader
         title="TIPOGRAFIA"
         description="A SELEÇÃO DE FONTES FOI UMA DECISÃO ESTRATÉGICA PARA COMUNICAR OS VALORES DA MARCA, CRIANDO CONTRASTE VISUAL ENTRE O TRADICIONAL E O MODERNO."
+        action={
+          <DownloadAllButton
+            zipName="cazetv-fontes.zip"
+            label="DOWNLOAD DE TODAS AS FONTES"
+            files={[
+              { url: "/fonts/GILROY-REGULAR.TTF", path: "GILROY/GILROY-REGULAR.TTF" },
+              { url: "/fonts/GILROY-BOLD.TTF", path: "GILROY/GILROY-BOLD.TTF" },
+              { url: "/fonts/TUSKERGROTESK-3500MEDIUM.OTF", path: "TUSKER/TUSKERGROTESK-3500MEDIUM.OTF" },
+              { url: "/fonts/TUSKERGROTESK-3500MEDIUM.TTF", path: "TUSKER/TUSKERGROTESK-3500MEDIUM.TTF" },
+              { url: "/fonts/TUSKERGROTESK-4600SEMIBOLD.OTF", path: "TUSKER/TUSKERGROTESK-4600SEMIBOLD.OTF" },
+              { url: "/fonts/TUSKERGROTESK-4600SEMIBOLD.TTF", path: "TUSKER/TUSKERGROTESK-4600SEMIBOLD.TTF" },
+            ]}
+          />
+        }
       />
 
       <SectionBlock
