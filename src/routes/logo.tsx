@@ -4,11 +4,11 @@ import { PageHeader } from "@/components/brandguide/PageHeader";
 import { SectionBlock } from "@/components/brandguide/SectionBlock";
 import { DownloadButton } from "@/components/brandguide/DownloadButton";
 import { DownloadAllButton } from "@/components/brandguide/DownloadAllButton";
-import logoFullColor from "@/assets/logo-icon-color.png";
+import logoFullColor from "@/assets/cazetv-logo-color.jpg";
 import logoFullBlack from "@/assets/logo-full-black.png";
 import logoFullWhite from "@/assets/logo-full-white.png";
-import symbolBlack from "@/assets/symbol-black.png";
-import symbolWhite from "@/assets/symbol-white.png";
+import symbolColor from "@/assets/logo-icon-color.png";
+import logoAreaProtecao from "@/assets/logo-area-protecao.png";
 import nominativaBlack from "@/assets/nominativa-symbol-black.png";
 import nominativaWhite from "@/assets/nominativa-symbol-white.png";
 import nominativaSimboloBlack from "@/assets/nominativa-simbolo-black.png";
@@ -34,8 +34,7 @@ function LogoPage() {
               { url: logoFullColor, path: "LOGOTIPO/cazetv-logo-color.png" },
               { url: logoFullBlack, path: "LOGOTIPO/cazetv-logo-black.png" },
               { url: logoFullWhite, path: "LOGOTIPO/cazetv-logo-white.png" },
-              { url: symbolBlack, path: "SIMBOLO/cazetv-symbol-black.png" },
-              { url: symbolWhite, path: "SIMBOLO/cazetv-symbol-white.png" },
+              { url: symbolColor, path: "SIMBOLO/cazetv-symbol-color.png" },
               { url: nominativaBlack, path: "NOMINATIVA/cazetv-nominativa-black.png" },
               { url: nominativaWhite, path: "NOMINATIVA/cazetv-nominativa-white.png" },
             ]}
@@ -89,20 +88,20 @@ function LogoPage() {
         <div className="grid gap-4 md:grid-cols-2">
           <div className="overflow-hidden border border-border bg-white">
             <div className="flex aspect-square items-center justify-center p-12">
-              <img src={symbolBlack} alt="Símbolo CazéTV em fundo claro" className="max-h-full max-w-full object-contain" />
+              <img src={symbolColor} alt="Símbolo CazéTV em fundo claro" className="max-h-full max-w-full object-contain" />
             </div>
             <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
               <p className="text-xs font-bold uppercase text-primary">SÍMBOLO · FUNDO CLARO</p>
-              <DownloadButton href={symbolBlack} filename="cazetv-symbol-black.png" />
+              <DownloadButton href={symbolColor} filename="cazetv-symbol-color.png" />
             </div>
           </div>
           <div className="overflow-hidden border border-border bg-black">
             <div className="flex aspect-square items-center justify-center p-12">
-              <img src={symbolWhite} alt="Símbolo CazéTV em fundo escuro" className="max-h-full max-w-full object-contain" />
+              <img src={symbolColor} alt="Símbolo CazéTV em fundo escuro" className="max-h-full max-w-full object-contain" />
             </div>
             <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
               <p className="text-xs font-bold uppercase text-primary">SÍMBOLO · FUNDO ESCURO</p>
-              <DownloadButton href={symbolWhite} filename="cazetv-symbol-white.png" />
+              <DownloadButton href={symbolColor} filename="cazetv-symbol-color.png" />
             </div>
           </div>
         </div>
@@ -124,30 +123,12 @@ function LogoPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-              {[
-                { src: logoFullColor, alt: "Logotipo CazéTV com área de proteção", h: "h-24 md:h-28" },
-                { src: symbolBlack, alt: "Símbolo CazéTV com área de proteção", h: "h-24 md:h-28" },
-              ].map((item, i) => (
-                <div key={i} className="relative mx-auto w-full max-w-[260px] aspect-square">
-                  {/* Dashed inner box */}
-                  <div className="absolute inset-[14%] border border-dashed border-neutral-400" />
-                  {/* Grey corner blocks (T-width markers) */}
-                  <div className="absolute left-0 top-0 h-[14%] w-[14%] bg-neutral-400" />
-                  <div className="absolute right-0 top-0 h-[14%] w-[14%] bg-neutral-400" />
-                  <div className="absolute bottom-0 left-0 h-[14%] w-[14%] bg-neutral-400" />
-                  <div className="absolute bottom-0 right-0 h-[14%] w-[14%] bg-neutral-400" />
-                  {/* Mid-edge grey blocks */}
-                  <div className="absolute left-1/2 top-0 h-[14%] w-[14%] -translate-x-1/2 bg-neutral-400" />
-                  <div className="absolute bottom-0 left-1/2 h-[14%] w-[14%] -translate-x-1/2 bg-neutral-400" />
-                  <div className="absolute left-0 top-1/2 h-[14%] w-[14%] -translate-y-1/2 bg-neutral-400" />
-                  <div className="absolute right-0 top-1/2 h-[14%] w-[14%] -translate-y-1/2 bg-neutral-400" />
-                  {/* Logo */}
-                  <div className="absolute inset-[14%] flex items-center justify-center p-3">
-                    <img src={item.src} alt={item.alt} className={`${item.h} w-auto max-h-full max-w-full object-contain`} />
-                  </div>
-                </div>
-              ))}
+            <div className="flex items-center justify-center">
+              <img
+                src={logoAreaProtecao}
+                alt="Área de proteção do logotipo e símbolo CazéTV"
+                className="block h-auto w-full max-w-[640px] object-contain"
+              />
             </div>
           </div>
         </div>
