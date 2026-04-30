@@ -22,6 +22,7 @@ function FontesPage() {
             files={[
               { url: "/fonts/GILROY-REGULAR.TTF", path: "GILROY/GILROY-REGULAR.TTF" },
               { url: "/fonts/GILROY-BOLD.TTF", path: "GILROY/GILROY-BOLD.TTF" },
+              { url: "/fonts/GILROY-BLACK.TTF", path: "GILROY/GILROY-BLACK.TTF" },
               { url: "/fonts/TUSKERGROTESK-3500MEDIUM.OTF", path: "TUSKER/TUSKERGROTESK-3500MEDIUM.OTF" },
               { url: "/fonts/TUSKERGROTESK-3500MEDIUM.TTF", path: "TUSKER/TUSKERGROTESK-3500MEDIUM.TTF" },
               { url: "/fonts/TUSKERGROTESK-4600SEMIBOLD.OTF", path: "TUSKER/TUSKERGROTESK-4600SEMIBOLD.OTF" },
@@ -46,11 +47,17 @@ function FontesPage() {
             <p className="mb-2 text-xs font-bold uppercase text-muted-foreground">BOLD · 700</p>
             <p className="text-3xl font-bold uppercase text-foreground md:text-5xl">AA BB CC 0123 CAZÉTV</p>
           </div>
+          <div className="h-px bg-border" />
+          <div>
+            <p className="mb-2 text-xs font-bold uppercase text-muted-foreground">BLACK · 900</p>
+            <p className="text-3xl uppercase text-foreground md:text-5xl" style={{ fontWeight: 900 }}>AA BB CC 0123 CAZÉTV</p>
+          </div>
         </div>
 
         <div className="mt-4 flex flex-wrap gap-3">
           <DownloadButton href="/fonts/GILROY-REGULAR.TTF" filename="GILROY-REGULAR.TTF" label="GILROY REGULAR" />
           <DownloadButton href="/fonts/GILROY-BOLD.TTF" filename="GILROY-BOLD.TTF" label="GILROY BOLD" />
+          <DownloadButton href="/fonts/GILROY-BLACK.TTF" filename="GILROY-BLACK.TTF" label="GILROY BLACK" />
         </div>
       </SectionBlock>
 
