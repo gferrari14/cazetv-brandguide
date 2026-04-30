@@ -82,7 +82,7 @@ export function BrandLayout({ children }: { children: React.ReactNode }) {
         <footer className="border-t border-border py-6">
           <div className="brand-container flex flex-col gap-2 text-xs uppercase text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
             <span>Brandguide CazéTV</span>
-            <span>Base limpa para evolução visual.</span>
+            <span>Todos os direitos reservados · CazéTV 2026</span>
           </div>
         </footer>
       )}
