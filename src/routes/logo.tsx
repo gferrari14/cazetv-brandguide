@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BrandLayout } from "@/components/brandguide/BrandLayout";
 import { PageHeader } from "@/components/brandguide/PageHeader";
 import { SectionBlock } from "@/components/brandguide/SectionBlock";
+import { DownloadButton } from "@/components/brandguide/DownloadButton";
 import logoColor from "@/assets/cazetv-logo-color.jpg";
 import logoBlack from "@/assets/cazetv-logo-black.jpg";
 import logoWhite from "@/assets/cazetv-logo-white.jpg";
