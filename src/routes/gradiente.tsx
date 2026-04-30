@@ -167,6 +167,20 @@ function GradientePage() {
           </div>
         </div>
       </SectionBlock>
+
+      <SectionBlock
+        title="Exemplos de uso"
+        eyebrow="Posts e materiais de produção"
+        description="Aplicações reais do gradiente em peças de conteúdo da CazéTV, como detalhe inferior em posts e cards editoriais."
+      >
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {exemplos.map((ex) => (
+            <div key={ex.src} className="overflow-hidden border border-border bg-card">
+              <img src={ex.src} alt={ex.alt} loading="lazy" className="block h-auto w-full" />
+            </div>
+          ))}
+        </div>
+      </SectionBlock>
     </BrandLayout>
   );
 }
