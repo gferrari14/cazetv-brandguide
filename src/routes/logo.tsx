@@ -88,20 +88,20 @@ function LogoPage() {
         <div className="grid gap-4 md:grid-cols-2">
           <div className="overflow-hidden border border-border bg-white">
             <div className="flex aspect-square items-center justify-center p-12">
-              <img src={symbolBlack} alt="Símbolo CazéTV em fundo claro" className="max-h-full max-w-full object-contain" />
+              <img src={symbolColor} alt="Símbolo CazéTV em fundo claro" className="max-h-full max-w-full object-contain" />
             </div>
             <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
               <p className="text-xs font-bold uppercase text-primary">SÍMBOLO · FUNDO CLARO</p>
-              <DownloadButton href={symbolBlack} filename="cazetv-symbol-black.png" />
+              <DownloadButton href={symbolColor} filename="cazetv-symbol-color.png" />
             </div>
           </div>
           <div className="overflow-hidden border border-border bg-black">
             <div className="flex aspect-square items-center justify-center p-12">
-              <img src={symbolWhite} alt="Símbolo CazéTV em fundo escuro" className="max-h-full max-w-full object-contain" />
+              <img src={symbolColor} alt="Símbolo CazéTV em fundo escuro" className="max-h-full max-w-full object-contain" />
             </div>
             <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
               <p className="text-xs font-bold uppercase text-primary">SÍMBOLO · FUNDO ESCURO</p>
-              <DownloadButton href={symbolWhite} filename="cazetv-symbol-white.png" />
+              <DownloadButton href={symbolColor} filename="cazetv-symbol-color.png" />
             </div>
           </div>
         </div>
