@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import JSZip from "jszip";
+import { Loader2 } from "lucide-react";
 import {
   ArrowLeft,
   ArrowRight,
