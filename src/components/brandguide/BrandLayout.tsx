@@ -1,6 +1,7 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import navLogo from "@/assets/cazetv-logo-nav.png";
 
 const navLinks = [
   { path: "/logo", label: "LOGO" },
