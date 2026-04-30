@@ -1,6 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Check, Copy } from "lucide-react";
+import { ArrowRight, Check, Copy } from "lucide-react";
 import { BrandLayout } from "@/components/brandguide/BrandLayout";
 import { PageHeader } from "@/components/brandguide/PageHeader";
 import { SectionBlock } from "@/components/brandguide/SectionBlock";
@@ -133,6 +133,16 @@ function CoresPage() {
         description="O GRADIENTE É O ÚNICO ELEMENTO COLORIDO DA MARCA E DEVE SER USADO COMO ASSET GRÁFICO — NÃO COMO COR DE TEXTO OU FUNDO DE LEITURA."
       >
         <GradientCopyCard />
+
+        <div className="mt-4">
+          <Link
+            to="/gradiente"
+            className="inline-flex items-center gap-2 border border-border bg-card px-5 py-3 text-xs font-bold uppercase text-foreground transition-colors hover:bg-secondary"
+          >
+            <span>VER PÁGINA COMPLETA DO GRADIENTE</span>
+            <ArrowRight className="size-4" />
+          </Link>
+        </div>
       </SectionBlock>
 
       <SectionBlock

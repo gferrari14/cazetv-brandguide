@@ -269,7 +269,7 @@ function LogoPage() {
             { label: "Não distorcer", style: { transform: "scaleX(1.4)" } },
             { label: "Não rotacionar", style: { transform: "rotate(-12deg)" } },
             { label: "Não alterar cores", style: { filter: "hue-rotate(120deg) saturate(2)" } },
-            { label: "Não adicionar sombra", style: { filter: "drop-shadow(6px 6px 0 #ff3ea5)" } },
+            { label: "Não adicionar sombra", style: { filter: "drop-shadow(8px 8px 12px rgba(0,0,0,0.55))" } },
             { label: "Não aplicar em fundo poluído", bg: "bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22><circle cx=%2210%22 cy=%2210%22 r=%224%22 fill=%22%23ff3ea5%22/></svg>')] bg-repeat" },
             { label: "Não usar baixo contraste", bg: "bg-[#3a3a3a]" },
           ].map((item) => (
@@ -281,7 +281,6 @@ function LogoPage() {
                   className="max-h-full max-w-full object-contain"
                   style={item.style}
                 />
-                <div className="pointer-events-none absolute inset-4 border-2 border-destructive" />
                 <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
                   <div className="h-1 w-3/4 rotate-[-18deg] bg-destructive/80" />
                 </div>
