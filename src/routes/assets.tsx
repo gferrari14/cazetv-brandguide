@@ -175,7 +175,15 @@ function AssetsPage() {
             className="gradient-hover inline-flex items-center gap-2 border border-foreground bg-background px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground disabled:opacity-60"
           >
             <span className="inline-flex items-center gap-2">
-              {zipping ? <Loader2 className="size-4 animate-spin" /> : <Download className="size-4" />}
+              {zipping ? (
+                <Loader2 className="size-4 animate-spin" />
+              ) : (
+                <span
+                  aria-hidden="true"
+                  className="gradient-hover-icon size-4"
+                  style={{ ["--icon-mask" as string]: DOWNLOAD_ICON_MASK }}
+                />
+              )}
               {zipping ? "GERANDO ZIP..." : "DOWNLOAD DE TODOS OS ASSETS"}
             </span>
           </button>
