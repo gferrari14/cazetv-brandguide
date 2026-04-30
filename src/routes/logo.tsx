@@ -11,6 +11,9 @@ import symbolBlack from "@/assets/symbol-black.png";
 import symbolWhite from "@/assets/symbol-white.png";
 import nominativaBlack from "@/assets/nominativa-symbol-black.png";
 import nominativaWhite from "@/assets/nominativa-symbol-white.png";
+import nominativaSimboloBlack from "@/assets/nominativa-simbolo-black.png";
+import nominativaSimboloWhite from "@/assets/nominativa-simbolo-white.png";
+import logoFundosAplicacao from "@/assets/logo-fundos-aplicacao.png";
 
 export const Route = createFileRoute("/logo")({
   component: LogoPage,
