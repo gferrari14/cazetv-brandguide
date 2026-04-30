@@ -125,7 +125,7 @@ function FontesPage() {
             </div>
 
             <p
-              className="text-6xl uppercase leading-[0.9] text-white md:text-8xl lg:text-9xl"
+              className="text-6xl uppercase leading-[1.1] text-white md:text-8xl lg:text-9xl"
               style={{ fontFamily: "var(--font-display)", fontWeight: 600 }}
             >
               SEMPRE EM<br />CAIXA ALTA.

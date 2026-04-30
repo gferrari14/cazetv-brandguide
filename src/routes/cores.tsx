@@ -196,7 +196,7 @@ function CoresPage() {
               COMBINAÇÃO PRINCIPAL
             </p>
             <p
-              className="text-4xl uppercase leading-none md:text-6xl"
+              className="text-4xl uppercase leading-[1.15] md:text-6xl"
               style={{ color: "#FFFFFF", fontFamily: "var(--font-display)", fontWeight: 600 }}
             >
               FUNDO PRETO<br />INFORMAÇÃO EM BRANCO<br />ASSET GRADIENTE
