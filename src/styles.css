@@ -152,7 +152,7 @@
     font-synthesis: none;
     letter-spacing: 0;
     text-transform: uppercase;
-    cursor: url("/cursors/finger-cursor.svg") 34 6, auto;
+    cursor: url("/cursors/finger-cursor-64.svg") 22 4, auto;
   }
 
   a,
@@ -167,7 +167,7 @@
   input[type="button"],
   input[type="reset"],
   .cursor-pointer {
-    cursor: url("/cursors/finger-cursor.svg") 34 6, pointer;
+    cursor: url("/cursors/finger-cursor-64.svg") 22 4, pointer;
   }
 
   h1,
