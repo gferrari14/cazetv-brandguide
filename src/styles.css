@@ -152,7 +152,7 @@
     font-synthesis: none;
     letter-spacing: 0;
     text-transform: uppercase;
-    cursor: url("/cursors/default-56.png") 16 4, auto;
+    cursor: url("/cursors/default-filled-72.png") 24 4, auto;
   }
 
   a,
@@ -167,7 +167,7 @@
   input[type="button"],
   input[type="reset"],
   .cursor-pointer {
-    cursor: url("/cursors/pointer-64.png") 18 4, pointer;
+    cursor: url("/cursors/pointer-filled-88.png") 30 5, pointer;
   }
 
   h1,
