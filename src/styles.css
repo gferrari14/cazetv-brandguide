@@ -152,6 +152,22 @@
     font-synthesis: none;
     letter-spacing: 0;
     text-transform: uppercase;
+    cursor: url("/cursors/default-24.png") 4 2, auto;
+  }
+
+  a,
+  button,
+  [role="button"],
+  label[for],
+  summary,
+  select,
+  input[type="checkbox"],
+  input[type="radio"],
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"],
+  .cursor-pointer {
+    cursor: url("/cursors/pointer-32.png") 6 2, pointer;
   }
 
   h1,
