@@ -21,8 +21,8 @@ export function BrandLayout({ children }: { children: React.ReactNode }) {
       {!isHome && (
         <nav className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/90 backdrop-blur-xl">
           <div className="brand-container flex h-16 items-center justify-between">
-            <Link to="/" className="text-sm font-bold uppercase tracking-normal text-foreground">
-              Brandguide CazéTV
+            <Link to="/" className="flex items-center" aria-label="Brandguide CazéTV">
+              <img src={navLogo} alt="CazéTV" className="h-7 w-auto md:h-8" />
             </Link>
 
             <div className="hidden items-center gap-1 md:flex">
