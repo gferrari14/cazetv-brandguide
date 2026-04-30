@@ -4,15 +4,26 @@ import { PageHeader } from "@/components/brandguide/PageHeader";
 import { SectionBlock } from "@/components/brandguide/SectionBlock";
 import { DownloadButton } from "@/components/brandguide/DownloadButton";
 import { DownloadAllButton } from "@/components/brandguide/DownloadAllButton";
-import logoColor from "@/assets/cazetv-logo-color.jpg";
-import logoBlack from "@/assets/cazetv-logo-black.jpg";
-import logoWhite from "@/assets/cazetv-logo-white.jpg";
-import symbolLight from "@/assets/cazetv-symbol-light.jpg";
-import symbolDark from "@/assets/cazetv-symbol-dark.jpg";
+import logoFullColor from "@/assets/logo-icon-color.png";
+import logoFullBlack from "@/assets/logo-full-black.png";
+import logoFullWhite from "@/assets/logo-full-white.png";
+import symbolBlack from "@/assets/symbol-black.png";
+import symbolWhite from "@/assets/symbol-white.png";
+import nominativaBlack from "@/assets/nominativa-symbol-black.png";
+import nominativaWhite from "@/assets/nominativa-symbol-white.png";
 
 export const Route = createFileRoute("/logo")({
   component: LogoPage,
 });
+
+const backgroundSwatches = [
+  { label: "Rosa", className: "bg-[#ff3ea5]", logo: logoFullWhite },
+  { label: "Azul", className: "bg-[#1e3a8a]", logo: logoFullWhite },
+  { label: "Gramado", className: "bg-[#1f6f3f]", logo: logoFullWhite },
+  { label: "Estádio", className: "bg-[#0a0a0a]", logo: logoFullWhite },
+  { label: "Amarelo", className: "bg-[#facc15]", logo: logoFullBlack },
+  { label: "Bokeh", className: "bg-gradient-to-br from-[#0a0a0a] via-[#1a1a2e] to-[#3a1a5a]", logo: logoFullWhite },
+] as const;
 
 function LogoPage() {
   return (
@@ -25,91 +36,202 @@ function LogoPage() {
             zipName="cazetv-logos.zip"
             label="DOWNLOAD DE TODOS OS LOGOS"
             files={[
-              { url: logoColor, path: "LOGOTIPO/cazetv-logo-color.jpg" },
-              { url: logoBlack, path: "LOGOTIPO/cazetv-logo-black.jpg" },
-              { url: logoWhite, path: "LOGOTIPO/cazetv-logo-white.jpg" },
-              { url: symbolLight, path: "SIMBOLO/cazetv-symbol-light.jpg" },
-              { url: symbolDark, path: "SIMBOLO/cazetv-symbol-dark.jpg" },
+              { url: logoFullColor, path: "LOGOTIPO/cazetv-logo-color.png" },
+              { url: logoFullBlack, path: "LOGOTIPO/cazetv-logo-black.png" },
+              { url: logoFullWhite, path: "LOGOTIPO/cazetv-logo-white.png" },
+              { url: symbolBlack, path: "SIMBOLO/cazetv-symbol-black.png" },
+              { url: symbolWhite, path: "SIMBOLO/cazetv-symbol-white.png" },
+              { url: nominativaBlack, path: "NOMINATIVA/cazetv-nominativa-black.png" },
+              { url: nominativaWhite, path: "NOMINATIVA/cazetv-nominativa-white.png" },
             ]}
           />
         }
       />
 
+      {/* 1. LOGOTIPOS */}
       <SectionBlock
-        title="Marca nominativa"
+        title="Logotipos"
         eyebrow="Versões oficiais"
-        description="Use sempre os arquivos oficiais. Não recrie, deforme ou altere as cores do logo."
+        description="Use sempre os arquivos oficiais. A versão colorida é a principal. As versões em preto e branco devem ser aplicadas conforme o contraste do fundo."
       >
         <div className="grid gap-4 md:grid-cols-3">
           <div className="overflow-hidden border border-border bg-white">
             <div className="flex aspect-video items-center justify-center p-8">
-              <img src={logoColor} alt="Logo CazéTV colorido" className="max-h-full max-w-full object-contain" />
+              <img src={logoFullColor} alt="Logotipo CazéTV colorido" className="max-h-full max-w-full object-contain" />
             </div>
             <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
               <p className="text-xs font-bold uppercase text-primary">PRINCIPAL · COLORIDO</p>
-              <DownloadButton href={logoColor} filename="cazetv-logo-color.jpg" />
+              <DownloadButton href={logoFullColor} filename="cazetv-logo-color.png" />
             </div>
           </div>
           <div className="overflow-hidden border border-border bg-white">
             <div className="flex aspect-video items-center justify-center p-8">
-              <img src={logoBlack} alt="Logo CazéTV preto" className="max-h-full max-w-full object-contain" />
+              <img src={logoFullBlack} alt="Logotipo CazéTV preto" className="max-h-full max-w-full object-contain" />
             </div>
             <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
               <p className="text-xs font-bold uppercase text-primary">PRETO · FUNDO CLARO</p>
-              <DownloadButton href={logoBlack} filename="cazetv-logo-black.jpg" />
+              <DownloadButton href={logoFullBlack} filename="cazetv-logo-black.png" />
             </div>
           </div>
           <div className="overflow-hidden border border-border bg-black">
             <div className="flex aspect-video items-center justify-center p-8">
-              <img src={logoWhite} alt="Logo CazéTV branco" className="max-h-full max-w-full object-contain" />
+              <img src={logoFullWhite} alt="Logotipo CazéTV branco" className="max-h-full max-w-full object-contain" />
             </div>
             <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
               <p className="text-xs font-bold uppercase text-primary">BRANCO · FUNDO ESCURO</p>
-              <DownloadButton href={logoWhite} filename="cazetv-logo-white.jpg" />
+              <DownloadButton href={logoFullWhite} filename="cazetv-logo-white.png" />
             </div>
           </div>
         </div>
       </SectionBlock>
 
+      {/* 2. SIMBOLO CAZÉ */}
       <SectionBlock
-        title="Cazé símbolo"
+        title="Símbolo Cazé"
         eyebrow="Símbolo isolado"
         description="O símbolo pode ser usado isoladamente em aplicações reduzidas, ícones e contextos onde a marca já esteja consolidada."
       >
         <div className="grid gap-4 md:grid-cols-2">
           <div className="overflow-hidden border border-border bg-white">
-            <div className="flex aspect-square items-center justify-center p-10">
-              <img src={symbolLight} alt="Símbolo CazéTV em fundo claro" className="max-h-full max-w-full object-contain" />
+            <div className="flex aspect-square items-center justify-center p-12">
+              <img src={symbolBlack} alt="Símbolo CazéTV em fundo claro" className="max-h-full max-w-full object-contain" />
             </div>
             <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
               <p className="text-xs font-bold uppercase text-primary">SÍMBOLO · FUNDO CLARO</p>
-              <DownloadButton href={symbolLight} filename="cazetv-symbol-light.jpg" />
+              <DownloadButton href={symbolBlack} filename="cazetv-symbol-black.png" />
             </div>
           </div>
           <div className="overflow-hidden border border-border bg-black">
-            <div className="flex aspect-square items-center justify-center p-10">
-              <img src={symbolDark} alt="Símbolo CazéTV em fundo escuro" className="max-h-full max-w-full object-contain" />
+            <div className="flex aspect-square items-center justify-center p-12">
+              <img src={symbolWhite} alt="Símbolo CazéTV em fundo escuro" className="max-h-full max-w-full object-contain" />
             </div>
             <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
               <p className="text-xs font-bold uppercase text-primary">SÍMBOLO · FUNDO ESCURO</p>
-              <DownloadButton href={symbolDark} filename="cazetv-symbol-dark.jpg" />
+              <DownloadButton href={symbolWhite} filename="cazetv-symbol-white.png" />
             </div>
           </div>
         </div>
       </SectionBlock>
 
+      {/* 3. PARÂMETROS DE USO - ÁREA DE PROTEÇÃO */}
       <SectionBlock
-        title="Área de proteção"
-        eyebrow="Parâmetros de uso"
-        description="O logotipo deve sempre ter espaço para respirar e se destacar. A largura da letra T é a medida ideal de respiro mínimo em torno da marca."
+        title="Parâmetros de uso"
+        eyebrow="Área de proteção"
+        description="A área de proteção é definida pela altura da letra X do logotipo. Esse espaço mínimo deve ser respeitado em todos os lados, garantindo que nenhum elemento gráfico, texto ou imagem invada a marca."
       >
-        <div className="border border-border bg-white p-10">
-          <div className="flex items-center justify-center">
-            <img src={logoColor} alt="Logo CazéTV com área de proteção" className="max-h-48" />
+        <div className="border border-border bg-white p-6 md:p-12">
+          <div className="relative mx-auto flex max-w-2xl items-center justify-center">
+            {/* Guides */}
+            <div className="relative">
+              {/* Top X marker */}
+              <div className="absolute -top-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1">
+                <span className="font-mono text-xs font-bold text-[#ff3ea5]">X</span>
+                <div className="h-6 w-px bg-[#ff3ea5]" />
+              </div>
+              {/* Bottom X marker */}
+              <div className="absolute -bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1">
+                <div className="h-6 w-px bg-[#ff3ea5]" />
+                <span className="font-mono text-xs font-bold text-[#ff3ea5]">X</span>
+              </div>
+              {/* Left X marker */}
+              <div className="absolute -left-10 top-1/2 flex -translate-y-1/2 items-center gap-1">
+                <span className="font-mono text-xs font-bold text-[#ff3ea5]">X</span>
+                <div className="h-px w-6 bg-[#ff3ea5]" />
+              </div>
+              {/* Right X marker */}
+              <div className="absolute -right-10 top-1/2 flex -translate-y-1/2 items-center gap-1">
+                <div className="h-px w-6 bg-[#ff3ea5]" />
+                <span className="font-mono text-xs font-bold text-[#ff3ea5]">X</span>
+              </div>
+              {/* Dashed protection box */}
+              <div className="border border-dashed border-[#ff3ea5] p-12">
+                <img src={logoFullColor} alt="Logotipo com área de proteção" className="h-32 w-auto md:h-40" />
+              </div>
+            </div>
+          </div>
+          <p className="mt-12 text-center text-xs uppercase tracking-wide text-muted-foreground">
+            X = altura da letra do logotipo · Mantenha esse respiro mínimo em todos os lados
+          </p>
+        </div>
+      </SectionBlock>
+
+      {/* 4. MARCA NOMINATIVA */}
+      <SectionBlock
+        title="Marca nominativa"
+        eyebrow="Logotipo + símbolo"
+        description="A marca nominativa combina o símbolo Cazé ao lado do logotipo. Use essa versão quando precisar reforçar a identidade completa da marca."
+      >
+        <div className="grid gap-4 md:grid-cols-2">
+          <div className="overflow-hidden border border-border bg-white">
+            <div className="flex aspect-video items-center justify-center p-10">
+              <img src={nominativaBlack} alt="Marca nominativa CazéTV preta" className="max-h-full max-w-full object-contain" />
+            </div>
+            <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
+              <p className="text-xs font-bold uppercase text-primary">PRETO · FUNDO CLARO</p>
+              <DownloadButton href={nominativaBlack} filename="cazetv-nominativa-black.png" />
+            </div>
+          </div>
+          <div className="overflow-hidden border border-border bg-black">
+            <div className="flex aspect-video items-center justify-center p-10">
+              <img src={nominativaWhite} alt="Marca nominativa CazéTV branca" className="max-h-full max-w-full object-contain" />
+            </div>
+            <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
+              <p className="text-xs font-bold uppercase text-primary">BRANCO · FUNDO ESCURO</p>
+              <DownloadButton href={nominativaWhite} filename="cazetv-nominativa-white.png" />
+            </div>
           </div>
         </div>
       </SectionBlock>
 
+      {/* 5. MARCA NOMINATIVA SÍMBOLO CAZÉ */}
+      <SectionBlock
+        title="Marca nominativa · Símbolo Cazé"
+        eyebrow="Versão consolidada"
+        description="Combinação do símbolo Cazé com a marca nominativa. Aplicação recomendada quando há espaço para a marca completa em destaque."
+      >
+        <div className="grid gap-4 md:grid-cols-2">
+          <div className="overflow-hidden border border-border bg-white">
+            <div className="flex aspect-video items-center justify-center p-10">
+              <img src={logoFullBlack} alt="Símbolo + nominativa preto" className="max-h-full max-w-full object-contain" />
+            </div>
+            <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
+              <p className="text-xs font-bold uppercase text-primary">PRETO · FUNDO CLARO</p>
+              <DownloadButton href={logoFullBlack} filename="cazetv-nominativa-simbolo-black.png" />
+            </div>
+          </div>
+          <div className="overflow-hidden border border-border bg-black">
+            <div className="flex aspect-video items-center justify-center p-10">
+              <img src={logoFullWhite} alt="Símbolo + nominativa branco" className="max-h-full max-w-full object-contain" />
+            </div>
+            <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
+              <p className="text-xs font-bold uppercase text-primary">BRANCO · FUNDO ESCURO</p>
+              <DownloadButton href={logoFullWhite} filename="cazetv-nominativa-simbolo-white.png" />
+            </div>
+          </div>
+        </div>
+      </SectionBlock>
+
+      {/* 6. LOGO APLICADO EM FUNDOS */}
+      <SectionBlock
+        title="Logo aplicado em fundos"
+        eyebrow="Versatilidade"
+        description="O logo deve sempre garantir contraste e legibilidade. Use a versão branca em fundos escuros ou coloridos saturados, e a versão preta em fundos claros ou amarelos."
+      >
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {backgroundSwatches.map((bg) => (
+            <div key={bg.label} className="overflow-hidden border border-border">
+              <div className={`flex aspect-square items-center justify-center p-10 ${bg.className}`}>
+                <img src={bg.logo} alt={`Logo CazéTV em fundo ${bg.label}`} className="max-h-full max-w-full object-contain" />
+              </div>
+              <div className="border-t border-border bg-card p-4">
+                <p className="text-xs font-bold uppercase text-primary">FUNDO · {bg.label}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </SectionBlock>
+
+      {/* 7. REDUÇÕES MÍNIMAS */}
       <SectionBlock
         title="Reduções mínimas"
         eyebrow="Tamanhos mínimos"
@@ -141,6 +263,7 @@ function LogoPage() {
         </div>
       </SectionBlock>
 
+      {/* 8. DO & DON'T */}
       <SectionBlock title="Do & Don't" eyebrow="Boas práticas">
         <div className="grid gap-4 md:grid-cols-2">
           <div className="border border-border bg-card p-6">
@@ -167,6 +290,42 @@ function LogoPage() {
               <li>• Não modificar a tipografia do logo.</li>
             </ul>
           </div>
+        </div>
+      </SectionBlock>
+
+      {/* 9. APLICAÇÕES INCORRETAS */}
+      <SectionBlock
+        title="Aplicações incorretas"
+        eyebrow="O que evitar"
+        description="Os exemplos abaixo mostram usos que comprometem a integridade da marca e devem ser evitados."
+      >
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            { label: "Não distorcer", style: { transform: "scaleX(1.4)" } },
+            { label: "Não rotacionar", style: { transform: "rotate(-12deg)" } },
+            { label: "Não alterar cores", style: { filter: "hue-rotate(120deg) saturate(2)" } },
+            { label: "Não adicionar sombra", style: { filter: "drop-shadow(6px 6px 0 #ff3ea5)" } },
+            { label: "Não aplicar em fundo poluído", bg: "bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22><circle cx=%2210%22 cy=%2210%22 r=%224%22 fill=%22%23ff3ea5%22/></svg>')] bg-repeat" },
+            { label: "Não usar baixo contraste", bg: "bg-[#3a3a3a]" },
+          ].map((item) => (
+            <div key={item.label} className="overflow-hidden border border-border">
+              <div className={`relative flex aspect-video items-center justify-center p-8 ${item.bg ?? "bg-white"}`}>
+                <img
+                  src={item.bg?.includes("#3a3a3a") ? logoFullBlack : logoFullColor}
+                  alt={item.label}
+                  className="max-h-full max-w-full object-contain"
+                  style={item.style}
+                />
+                <div className="pointer-events-none absolute inset-4 border-2 border-destructive" />
+                <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                  <div className="h-1 w-3/4 rotate-[-18deg] bg-destructive/80" />
+                </div>
+              </div>
+              <div className="border-t border-border bg-card p-4">
+                <p className="text-xs font-bold uppercase text-destructive">✕ {item.label}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </SectionBlock>
     </BrandLayout>
