@@ -1,5 +1,6 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { BrandLayout } from "@/components/brandguide/BrandLayout";
+import navLogo from "@/assets/cazetv-logo-nav.png";
 
 export const Route = createFileRoute("/")({
   component: Index,
