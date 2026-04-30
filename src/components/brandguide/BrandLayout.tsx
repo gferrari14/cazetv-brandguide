@@ -7,7 +7,7 @@ const navLinks = [
   { path: "/cores", label: "CORES" },
   { path: "/fontes", label: "FONTES" },
   { path: "/assets", label: "ASSETS" },
-  { path: "/formas", label: "FORMAS" },
+  { path: "/gradiente", label: "GRADIENTE" },
 ] as const;
 
 export function BrandLayout({ children }: { children: React.ReactNode }) {

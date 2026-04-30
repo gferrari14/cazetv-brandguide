@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LogoRouteImport } from './routes/logo'
+import { Route as GradienteRouteImport } from './routes/gradiente'
 import { Route as FontesRouteImport } from './routes/fontes'
 import { Route as CoresRouteImport } from './routes/cores'
 import { Route as AssetsRouteImport } from './routes/assets'
@@ -18,6 +19,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const LogoRoute = LogoRouteImport.update({
   id: '/logo',
   path: '/logo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GradienteRoute = GradienteRouteImport.update({
+  id: '/gradiente',
+  path: '/gradiente',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FontesRoute = FontesRouteImport.update({
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/assets': typeof AssetsRoute
   '/cores': typeof CoresRoute
   '/fontes': typeof FontesRoute
+  '/gradiente': typeof GradienteRoute
   '/logo': typeof LogoRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/assets': typeof AssetsRoute
   '/cores': typeof CoresRoute
   '/fontes': typeof FontesRoute
+  '/gradiente': typeof GradienteRoute
   '/logo': typeof LogoRoute
 }
 export interface FileRoutesById {
@@ -61,14 +69,22 @@ export interface FileRoutesById {
   '/assets': typeof AssetsRoute
   '/cores': typeof CoresRoute
   '/fontes': typeof FontesRoute
+  '/gradiente': typeof GradienteRoute
   '/logo': typeof LogoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/assets' | '/cores' | '/fontes' | '/logo'
+  fullPaths: '/' | '/assets' | '/cores' | '/fontes' | '/gradiente' | '/logo'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/assets' | '/cores' | '/fontes' | '/logo'
-  id: '__root__' | '/' | '/assets' | '/cores' | '/fontes' | '/logo'
+  to: '/' | '/assets' | '/cores' | '/fontes' | '/gradiente' | '/logo'
+  id:
+    | '__root__'
+    | '/'
+    | '/assets'
+    | '/cores'
+    | '/fontes'
+    | '/gradiente'
+    | '/logo'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,6 +92,7 @@ export interface RootRouteChildren {
   AssetsRoute: typeof AssetsRoute
   CoresRoute: typeof CoresRoute
   FontesRoute: typeof FontesRoute
+  GradienteRoute: typeof GradienteRoute
   LogoRoute: typeof LogoRoute
 }
 
@@ -86,6 +103,13 @@ declare module '@tanstack/react-router' {
       path: '/logo'
       fullPath: '/logo'
       preLoaderRoute: typeof LogoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gradiente': {
+      id: '/gradiente'
+      path: '/gradiente'
+      fullPath: '/gradiente'
+      preLoaderRoute: typeof GradienteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fontes': {
@@ -124,6 +148,7 @@ const rootRouteChildren: RootRouteChildren = {
   AssetsRoute: AssetsRoute,
   CoresRoute: CoresRoute,
   FontesRoute: FontesRoute,
+  GradienteRoute: GradienteRoute,
   LogoRoute: LogoRoute,
 }
 export const routeTree = rootRouteImport
