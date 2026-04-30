@@ -123,30 +123,12 @@ function LogoPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-              {[
-                { src: logoFullColor, alt: "Logotipo CazéTV com área de proteção", h: "h-24 md:h-28" },
-                { src: symbolBlack, alt: "Símbolo CazéTV com área de proteção", h: "h-24 md:h-28" },
-              ].map((item, i) => (
-                <div key={i} className="relative mx-auto w-full max-w-[260px] aspect-square">
-                  {/* Dashed inner box */}
-                  <div className="absolute inset-[14%] border border-dashed border-neutral-400" />
-                  {/* Grey corner blocks (T-width markers) */}
-                  <div className="absolute left-0 top-0 h-[14%] w-[14%] bg-neutral-400" />
-                  <div className="absolute right-0 top-0 h-[14%] w-[14%] bg-neutral-400" />
-                  <div className="absolute bottom-0 left-0 h-[14%] w-[14%] bg-neutral-400" />
-                  <div className="absolute bottom-0 right-0 h-[14%] w-[14%] bg-neutral-400" />
-                  {/* Mid-edge grey blocks */}
-                  <div className="absolute left-1/2 top-0 h-[14%] w-[14%] -translate-x-1/2 bg-neutral-400" />
-                  <div className="absolute bottom-0 left-1/2 h-[14%] w-[14%] -translate-x-1/2 bg-neutral-400" />
-                  <div className="absolute left-0 top-1/2 h-[14%] w-[14%] -translate-y-1/2 bg-neutral-400" />
-                  <div className="absolute right-0 top-1/2 h-[14%] w-[14%] -translate-y-1/2 bg-neutral-400" />
-                  {/* Logo */}
-                  <div className="absolute inset-[14%] flex items-center justify-center p-3">
-                    <img src={item.src} alt={item.alt} className={`${item.h} w-auto max-h-full max-w-full object-contain`} />
-                  </div>
-                </div>
-              ))}
+            <div className="flex items-center justify-center">
+              <img
+                src={logoAreaProtecao}
+                alt="Área de proteção do logotipo e símbolo CazéTV"
+                className="block h-auto w-full max-w-[640px] object-contain"
+              />
             </div>
           </div>
         </div>
