@@ -151,19 +151,8 @@ function CoresPage() {
       <PageHeader
         title="CORES"
         description="A PALETA DA CAZÉTV É CONSTRUÍDA SOBRE DOIS NEUTROS — PRETO E BRANCO — ACOMPANHADOS PELO GRADIENTE COLORIDO PROPRIETÁRIO, QUE CARREGA TODA A VIBRAÇÃO DA MARCA."
-        action={
-          <button
-            type="button"
-            onClick={downloadCoresZip}
-            className="gradient-hover inline-flex items-center gap-2 border border-foreground bg-background px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
-          >
-            <span className="inline-flex items-center gap-2">
-              <Download className="size-4" />
-              DOWNLOAD DA PALETA
-            </span>
-          </button>
-        }
       />
+
 
       <SectionBlock
         title="PALETA PRINCIPAL"
