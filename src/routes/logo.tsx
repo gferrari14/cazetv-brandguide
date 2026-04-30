@@ -34,8 +34,7 @@ function LogoPage() {
               { url: logoFullColor, path: "LOGOTIPO/cazetv-logo-color.png" },
               { url: logoFullBlack, path: "LOGOTIPO/cazetv-logo-black.png" },
               { url: logoFullWhite, path: "LOGOTIPO/cazetv-logo-white.png" },
-              { url: symbolBlack, path: "SIMBOLO/cazetv-symbol-black.png" },
-              { url: symbolWhite, path: "SIMBOLO/cazetv-symbol-white.png" },
+              { url: symbolColor, path: "SIMBOLO/cazetv-symbol-color.png" },
               { url: nominativaBlack, path: "NOMINATIVA/cazetv-nominativa-black.png" },
               { url: nominativaWhite, path: "NOMINATIVA/cazetv-nominativa-white.png" },
             ]}
