@@ -202,15 +202,60 @@
     animation: gradientSweep 3s linear infinite;
   }
 
-  /* Ícones SVG dentro de .gradient-hover recebem o mesmo gradiente
-     animado no hover, via currentColor transparente + background com
-     mask no formato do ícone. */
-  .gradient-hover svg {
-    transition: color 200ms ease;
+  /* Borda gradiente animada no hover — usa pseudo-elemento com mask
+     para pintar apenas a região da borda. */
+  .gradient-hover::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background-image: linear-gradient(
+      90deg,
+      #F64C68 0%,
+      #F3C11B 25%,
+      #58C071 50%,
+      #61B8E0 75%,
+      #F64C68 100%
+    );
+    background-size: 200% 100%;
+    background-position: 0% 0;
+    background-repeat: repeat-x;
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease;
   }
-  .gradient-hover:hover svg,
-  .gradient-hover:focus-visible svg {
-    color: transparent;
+  .gradient-hover:hover::before,
+  .gradient-hover:focus-visible::before {
+    opacity: 1;
+    animation: gradientSweep 3s linear infinite;
+  }
+  .gradient-hover:hover,
+  .gradient-hover:focus-visible {
+    border-color: transparent;
+  }
+
+  /* Ícone gradiente: span com mask-image do SVG, recebe o mesmo
+     gradiente animado no hover. Use a classe .gradient-hover-icon
+     no elemento e defina --icon-mask como url() do SVG. */
+  .gradient-hover-icon {
+    display: inline-block;
+    background-color: currentColor;
+    -webkit-mask: var(--icon-mask) center / contain no-repeat;
+    mask: var(--icon-mask) center / contain no-repeat;
+    transition: background-color 200ms ease, background-image 200ms ease;
+  }
+  .gradient-hover:hover .gradient-hover-icon,
+  .gradient-hover:focus-visible .gradient-hover-icon {
+    background-color: transparent;
     background-image: linear-gradient(
       90deg,
       #F64C68 0%,
@@ -221,8 +266,6 @@
     );
     background-size: 200% 100%;
     background-repeat: repeat-x;
-    -webkit-background-clip: text;
-    background-clip: text;
     animation: gradientSweep 3s linear infinite;
   }
 }
