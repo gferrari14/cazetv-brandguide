@@ -17,7 +17,7 @@ const sections = [
 function Index() {
   return (
     <BrandLayout>
-      <section className="guide-grid relative flex min-h-screen flex-col justify-between overflow-hidden bg-background px-4 py-8 sm:px-6 md:px-12 md:py-12 lg:px-24">
+      <section className="guide-grid relative flex min-h-screen flex-col justify-between overflow-hidden px-4 py-8 sm:px-6 md:px-12 md:py-12 lg:px-24">
         <video
           src="/videos/hero-bg.mp4"
           autoPlay
@@ -25,9 +25,9 @@ function Index() {
           muted
           playsInline
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 size-full object-cover opacity-15"
+          className="pointer-events-none absolute inset-0 z-0 size-full object-cover opacity-15"
         />
-        <div className="animate-soft-reveal pt-2 md:pt-4">
+        <div className="animate-soft-reveal relative z-10 pt-2 md:pt-4">
           <img src={navLogo} alt="CazéTV" className="mb-5 h-7 w-auto md:h-8" />
           <h1 className="max-w-6xl text-6xl font-bold uppercase leading-none text-foreground sm:text-7xl md:text-8xl lg:text-9xl">
             BEM-VINDO AO BRANDGUIDE CAZÉTV
@@ -36,7 +36,7 @@ function Index() {
 
         <div className="min-h-12 flex-1" />
 
-        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <div className="relative z-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="flex flex-wrap gap-2 sm:gap-3">
             {sections.map((section) => (
               <Link
