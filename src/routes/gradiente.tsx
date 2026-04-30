@@ -3,6 +3,15 @@ import { Download } from "lucide-react";
 import { BrandLayout } from "@/components/brandguide/BrandLayout";
 import { PageHeader } from "@/components/brandguide/PageHeader";
 import { SectionBlock } from "@/components/brandguide/SectionBlock";
+import exemplo1 from "@/assets/gradiente-exemplo-1.jpg";
+import exemplo2 from "@/assets/gradiente-exemplo-2.jpg";
+import exemplo3 from "@/assets/gradiente-exemplo-3.jpg";
+
+const exemplos = [
+  { src: exemplo1, alt: "Post CazéTV — De Volta? José Mourinho" },
+  { src: exemplo2, alt: "Post CazéTV — É Vermelho, regra Copa do Mundo" },
+  { src: exemplo3, alt: "Post CazéTV — Desfalque no Clássico, Lucas Paquetá" },
+];
 
 export const Route = createFileRoute("/gradiente")({
   component: GradientePage,
