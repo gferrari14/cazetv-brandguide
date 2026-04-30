@@ -3,6 +3,15 @@ import { Download } from "lucide-react";
 import { BrandLayout } from "@/components/brandguide/BrandLayout";
 import { PageHeader } from "@/components/brandguide/PageHeader";
 import { SectionBlock } from "@/components/brandguide/SectionBlock";
+import exemplo1 from "@/assets/gradiente-exemplo-1.jpg";
+import exemplo2 from "@/assets/gradiente-exemplo-2.jpg";
+import exemplo3 from "@/assets/gradiente-exemplo-3.jpg";
+
+const exemplos = [
+  { src: exemplo1, alt: "Post CazéTV — De Volta? José Mourinho" },
+  { src: exemplo2, alt: "Post CazéTV — É Vermelho, regra Copa do Mundo" },
+  { src: exemplo3, alt: "Post CazéTV — Desfalque no Clássico, Lucas Paquetá" },
+];
 
 export const Route = createFileRoute("/gradiente")({
   component: GradientePage,
@@ -156,6 +165,20 @@ function GradientePage() {
               <li>• Não sobrepor ao logotipo nem prejudicar a leitura de textos.</li>
             </ul>
           </div>
+        </div>
+      </SectionBlock>
+
+      <SectionBlock
+        title="Exemplos de uso"
+        eyebrow="Posts e materiais de produção"
+        description="Aplicações reais do gradiente em peças de conteúdo da CazéTV, como detalhe inferior em posts e cards editoriais."
+      >
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {exemplos.map((ex) => (
+            <div key={ex.src} className="overflow-hidden border border-border bg-card">
+              <img src={ex.src} alt={ex.alt} loading="lazy" className="block h-auto w-full" />
+            </div>
+          ))}
         </div>
       </SectionBlock>
     </BrandLayout>
