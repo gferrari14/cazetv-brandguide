@@ -16,12 +16,8 @@ interface BrandColor {
 }
 
 const palette: BrandColor[] = [
+  { name: "Preto", hex: "#000000", rgb: "0, 0, 0", cmyk: "0, 0, 0, 100", textOnDark: true },
   { name: "Branco", hex: "#FFFFFF", rgb: "255, 255, 255", cmyk: "0, 0, 0, 0" },
-  { name: "Preto", hex: "#000000", rgb: "0, 0, 0", cmyk: "100, 100, 100, 100", textOnDark: true },
-  { name: "Azul", hex: "#61B8E0", rgb: "97, 184, 224", cmyk: "60, 10, 5, 0" },
-  { name: "Verde", hex: "#58C071", rgb: "88, 192, 113", cmyk: "65, 0, 70, 0" },
-  { name: "Rosa", hex: "#F64C68", rgb: "246, 76, 104", cmyk: "0, 82, 42, 0" },
-  { name: "Amarelo", hex: "#F3C11B", rgb: "243, 193, 27", cmyk: "5, 24, 92, 0" },
 ];
 
 function CoresPage() {
@@ -29,15 +25,15 @@ function CoresPage() {
     <BrandLayout>
       <PageHeader
         title="Cores"
-        description="A paleta principal da CazéTV combina neutros (preto e branco) com quatro cores vibrantes que dão vida à marca em todos os pontos de contato."
+        description="A paleta da CazéTV é construída sobre dois neutros — preto e branco — acompanhados pelo gradiente colorido proprietário, que carrega toda a vibração da marca."
       />
 
       <SectionBlock
         title="Paleta principal"
         eyebrow="Cores oficiais"
-        description="Especificações para web (HEX/RGB) e impresso (CMYK)."
+        description="Apenas preto e branco compõem a base de comunicação. As cores vivas aparecem exclusivamente através do gradiente."
       >
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2">
           {palette.map((color) => (
             <div key={color.hex} className="overflow-hidden border border-border bg-card">
               <div
@@ -57,37 +53,65 @@ function CoresPage() {
       </SectionBlock>
 
       <SectionBlock
-        title="Regras de contraste"
-        eyebrow="Aplicações"
-        description="As escolhas de contraste impactam diretamente a legibilidade e a experiência. Combinações recomendadas para títulos, textos e fundos."
+        title="Gradiente CazéTV"
+        eyebrow="Elemento gráfico"
+        description="O gradiente é o único elemento colorido da marca e deve ser usado como asset gráfico — não como cor de texto ou fundo de leitura."
       >
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <div className="border border-border p-8" style={{ backgroundColor: "#000000" }}>
-            <p className="text-xs font-bold uppercase" style={{ color: "#FFFFFF" }}>Texto branco</p>
-            <p className="mt-2 text-2xl font-bold uppercase" style={{ color: "#F3C11B" }}>CazéTV</p>
-            <p className="mt-3 text-xs" style={{ color: "#FFFFFF" }}>Recomendado</p>
+        <div className="overflow-hidden border border-border bg-card">
+          <div className="h-32 w-full" style={{ background: "var(--brand-gradient)" }} />
+          <div className="border-t border-border p-5">
+            <p className="text-sm font-bold uppercase text-foreground">Gradiente principal</p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Rosa → Amarelo → Azul → Verde. Veja a página GRADIENTE para regras completas de aplicação.
+            </p>
           </div>
-          <div className="border border-border p-8" style={{ backgroundColor: "#FFFFFF" }}>
-            <p className="text-xs font-bold uppercase" style={{ color: "#000000" }}>Texto preto</p>
-            <p className="mt-2 text-2xl font-bold uppercase" style={{ color: "#F64C68" }}>CazéTV</p>
-            <p className="mt-3 text-xs" style={{ color: "#000000" }}>Recomendado</p>
-          </div>
-          <div className="border border-border p-8" style={{ backgroundColor: "#61B8E0" }}>
-            <p className="text-xs font-bold uppercase" style={{ color: "#000000" }}>Texto preto</p>
-            <p className="mt-2 text-2xl font-bold uppercase" style={{ color: "#FFFFFF" }}>CazéTV</p>
-            <p className="mt-3 text-xs" style={{ color: "#000000" }}>Recomendado</p>
-          </div>
-          <div className="border border-border p-8" style={{ backgroundColor: "#58C071" }}>
-            <p className="text-xs font-bold uppercase" style={{ color: "#000000" }}>Texto preto</p>
-            <p className="mt-2 text-2xl font-bold uppercase" style={{ color: "#FFFFFF" }}>CazéTV</p>
-            <p className="mt-3 text-xs" style={{ color: "#000000" }}>Recomendado</p>
+        </div>
+      </SectionBlock>
+
+      <SectionBlock
+        title="Combinação recomendada"
+        eyebrow="Regra principal"
+        description="Existe uma combinação oficial e prioritária para transmitir a identidade CazéTV em qualquer ponto de contato."
+      >
+        <div className="overflow-hidden border border-border" style={{ backgroundColor: "#000000" }}>
+          <div className="flex flex-col gap-8 p-8 md:p-14">
+            <p className="text-xs font-bold uppercase tracking-wide" style={{ color: "#FFFFFF" }}>
+              Combinação principal
+            </p>
+            <p
+              className="text-4xl uppercase leading-none md:text-6xl"
+              style={{ color: "#FFFFFF", fontFamily: "var(--font-display)", fontWeight: 600 }}
+            >
+              Fundo preto<br />Informação em branco<br />Asset gradiente
+            </p>
+            <div className="h-2 w-full" style={{ background: "var(--brand-gradient)" }} />
+            <p className="max-w-2xl text-sm leading-relaxed" style={{ color: "#FFFFFF" }}>
+              A combinação mais recomendada para transmitir CazéTV é o <strong>fundo preto</strong> com{" "}
+              <strong>informação em branco</strong>, complementada por um <strong>asset gradiente</strong> —
+              de preferência um retângulo fino aplicado como detalhe gráfico. Essa fórmula garante o máximo
+              de presença, contraste e reconhecimento da marca.
+            </p>
           </div>
         </div>
 
-        <p className="mt-8 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-          As cores devem ser aplicadas garantindo alto contraste e legibilidade em qualquer contexto. Fundos
-          claros pedem cores escuras; fundos escuros exigem cores claras ou versões negativas da marca.
-        </p>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <div className="border border-border bg-card p-6">
+            <p className="text-xs font-bold uppercase text-foreground">Do</p>
+            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+              <li>• Priorize sempre fundo preto + texto branco.</li>
+              <li>• Use o gradiente como asset gráfico fino (régua, detalhe, divisor).</li>
+              <li>• Mantenha alto contraste e leitura limpa.</li>
+            </ul>
+          </div>
+          <div className="border border-border bg-card p-6">
+            <p className="text-xs font-bold uppercase text-destructive">Don&apos;t</p>
+            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+              <li>• Não use o gradiente como fundo de textos longos.</li>
+              <li>• Não aplique cores fora do preto/branco em tipografia.</li>
+              <li>• Não substitua o fundo preto por cores chapadas da paleta.</li>
+            </ul>
+          </div>
+        </div>
       </SectionBlock>
     </BrandLayout>
   );
