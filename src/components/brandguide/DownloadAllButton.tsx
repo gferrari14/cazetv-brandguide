@@ -1,4 +1,4 @@
-import { Download, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import JSZip from "jszip";
 
