@@ -80,7 +80,7 @@ function IdentidadesPage() {
       {/* Header */}
       <header className="sticky top-0 z-30 flex items-center px-6 py-5 md:px-10">
         <Link to="/" className="flex items-center gap-3" aria-label="Início">
-          <img src={navLogo} alt="CazéTV" className="h-7 w-auto md:h-8" />
+          <img src={navLogo} alt="CazéTV" className="h-10 w-auto md:h-12" />
         </Link>
       </header>
 
