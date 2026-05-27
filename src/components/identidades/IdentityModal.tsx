@@ -93,7 +93,7 @@ export function IdentityModal({ identity, open, onClose }: Props) {
 
       {/* Floating download menu */}
       <div className="pointer-events-none absolute inset-x-0 bottom-6 z-10 flex justify-center px-4">
-        <div className="pointer-events-auto flex items-center gap-1 border border-white/15 bg-black/70 p-1.5 backdrop-blur-md shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)]">
+        <div className="pointer-events-auto flex items-center gap-1 border-2 border-white/25 bg-black/70 p-1.5 backdrop-blur-md shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)]">
           {assets.map((a) => (
             <a
               key={a.label}
