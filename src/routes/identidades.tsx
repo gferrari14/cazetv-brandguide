@@ -72,29 +72,43 @@ function IdentidadesPage() {
     };
   }, []);
 
-  // Animação suave do gradiente: drift autônomo + leve influência do cursor
+  // Gradiente: segue o cursor diretamente + drift autônomo quando ocioso
+  // + expansão baseada na velocidade do cursor
   const gradientRef = useRef<HTMLDivElement | null>(null);
-  const mouseTarget = useRef({ x: 0, y: 0 }); // -1..1 (offset desejado pelo mouse)
-  const mouseCurrent = useRef({ x: 0, y: 0 }); // estado interpolado
+  const mousePos = useRef<{ x: number; y: number } | null>(null); // %, ou null se fora
+  const lastMove = useRef({ t: 0, x: 0, y: 0 });
+  const velocity = useRef(0); // 0..1
   useEffect(() => {
     let raf = 0;
     const start = performance.now();
     const tick = (now: number) => {
       const t = (now - start) / 1000;
-      // drift lento autônomo
+      // drift autônomo (sempre ativo, mais forte quando sem cursor)
       const driftX = Math.sin(t * 0.25) * 12; // %
       const driftY = Math.cos(t * 0.2) * 6; // %
-      // easing em direção ao alvo do mouse
-      mouseCurrent.current.x +=
-        (mouseTarget.current.x - mouseCurrent.current.x) * 0.04;
-      mouseCurrent.current.y +=
-        (mouseTarget.current.y - mouseCurrent.current.y) * 0.04;
-      const mx = 50 + driftX + mouseCurrent.current.x * 12; // % no eixo X
-      const my = 90 + driftY + mouseCurrent.current.y * 6; // % no eixo Y
+
+      const m = mousePos.current;
+      let mx: number;
+      let my: number;
+      if (m) {
+        // segue cursor direto, com leve drift superposto
+        mx = m.x + driftX * 0.25;
+        my = m.y + driftY * 0.25;
+      } else {
+        // drift puro na base
+        mx = 50 + driftX;
+        my = 90 + driftY;
+      }
+
+      // decai velocidade gradualmente
+      velocity.current *= 0.92;
+      const scale = 1 + Math.min(velocity.current, 1) * 0.6;
+
       const el = gradientRef.current;
       if (el) {
         el.style.setProperty("--mx", `${mx}%`);
         el.style.setProperty("--my", `${my}%`);
+        el.style.setProperty("--scale", `${scale}`);
       }
       raf = requestAnimationFrame(tick);
     };
@@ -104,13 +118,23 @@ function IdentidadesPage() {
 
   const onFooterMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
-    // mapeia para -1..1
-    mouseTarget.current.x = ((e.clientX - r.left) / r.width) * 2 - 1;
-    mouseTarget.current.y = ((e.clientY - r.top) / r.height) * 2 - 1;
+    const x = ((e.clientX - r.left) / r.width) * 100;
+    const y = ((e.clientY - r.top) / r.height) * 100;
+    const now = performance.now();
+    const last = lastMove.current;
+    if (last.t) {
+      const dt = Math.max(1, now - last.t);
+      const dist = Math.hypot(x - last.x, y - last.y); // em %
+      // velocidade normalizada (%/ms → 0..1)
+      const v = Math.min(1, (dist / dt) * 2);
+      velocity.current = Math.max(velocity.current, v);
+    }
+    lastMove.current = { t: now, x, y };
+    mousePos.current = { x, y };
   };
   const onFooterMouseLeave = () => {
-    mouseTarget.current.x = 0;
-    mouseTarget.current.y = 0;
+    mousePos.current = null;
+    lastMove.current = { t: 0, x: 0, y: 0 };
   };
 
   const scrollToTop = () =>
@@ -223,9 +247,9 @@ function IdentidadesPage() {
           className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[80%]"
           style={{
             background: `
-              radial-gradient(60% 80% at var(--mx, 30%) var(--my, 100%), rgba(246,76,104,0.55), transparent 60%),
-              radial-gradient(55% 75% at calc(var(--mx, 70%) + 25%) calc(var(--my, 100%) - 5%), rgba(97,184,224,0.55), transparent 65%),
-              radial-gradient(40% 60% at calc(var(--mx, 50%) - 15%) calc(var(--my, 100%) + 10%), rgba(243,193,27,0.35), transparent 70%)
+              radial-gradient(calc(60% * var(--scale, 1)) calc(80% * var(--scale, 1)) at var(--mx, 30%) var(--my, 100%), rgba(246,76,104,0.55), transparent 60%),
+              radial-gradient(calc(55% * var(--scale, 1)) calc(75% * var(--scale, 1)) at calc(var(--mx, 70%) + 25%) calc(var(--my, 100%) - 5%), rgba(97,184,224,0.55), transparent 65%),
+              radial-gradient(calc(40% * var(--scale, 1)) calc(60% * var(--scale, 1)) at calc(var(--mx, 50%) - 15%) calc(var(--my, 100%) + 10%), rgba(243,193,27,0.35), transparent 70%)
             `,
             filter: "blur(40px)",
           }}
