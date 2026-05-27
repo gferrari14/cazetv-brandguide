@@ -253,10 +253,7 @@ function IdentidadesPage() {
           </button>
 
           <div className="mt-12 flex-1">
-            <h2 className="max-w-[14ch] text-[clamp(3rem,8vw,7.5rem)] font-light leading-[0.95] tracking-tight">
-              AS IDENTIDADES DA CAZÉTV.
-            </h2>
-            <p className="mt-10 max-w-xl text-base leading-relaxed text-black/70 md:text-lg">
+            <p className="max-w-3xl text-xl font-semibold leading-relaxed text-black md:text-2xl lg:text-3xl">
               AS IDENTIDADES DA CAZÉTV NASCEM PARA DAR FORMA, VOZ E ENERGIA A CADA PROGRAMA, CAMPEONATO E PROJETO ESPECIAL. ESTE ESPAÇO REÚNE OS SISTEMAS VISUAIS QUE CONSTRUÍMOS AO LONGO DO TEMPO: LOGOS, CORES, TIPOGRAFIAS, GRAFISMOS, ASSETS E REGRAS DE USO. PARA MANTER NOSSA MARCA VIVA, CONSISTENTE E DINÂMICA.
             </p>
           </div>
