@@ -12,10 +12,10 @@ export const Route = createFileRoute("/identidades")({
 });
 
 const COLS = 4;
-const CARD_W = 300;
-const GAP_X = 40;
-const GAP_Y = 56;
-const SIDE_PAD = 200;
+const CARD_W = 240;
+const GAP_X = 32;
+const GAP_Y = 48;
+const SIDE_PAD = 120;
 const TOP_PAD = 120;
 
 function IdentidadesPage() {
