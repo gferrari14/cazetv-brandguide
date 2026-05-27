@@ -6,7 +6,9 @@ import mascotIcon from "@/assets/logo-icon-color.png";
 import { identities, type IdentityCategory } from "@/data/identities";
 import { IdentityCard } from "@/components/identidades/IdentityCard";
 import { IdentitiesSidebar } from "@/components/identidades/IdentitiesSidebar";
+import { IdentityModal } from "@/components/identidades/IdentityModal";
 import { SearchBar } from "@/components/identidades/SearchBar";
+
 
 export const Route = createFileRoute("/identidades")({
   component: IdentidadesPage,
