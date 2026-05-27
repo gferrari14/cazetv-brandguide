@@ -59,11 +59,17 @@ export function IdentityCard({ identity, initial, zIndex, onFocus, onOpenModal }
     if (d && !d.moved) {
       onFocus();
       setZooming(true);
-      // duração total da animação salto + zoom in antes de navegar
+      // duração total da animação salto + zoom in antes de abrir/navegar
       window.setTimeout(() => {
-        navigate({ to: "/identidades/$slug", params: { slug: identity.slug } });
+        if (onOpenModal) {
+          onOpenModal(identity);
+          setZooming(false);
+        } else {
+          navigate({ to: "/identidades/$slug", params: { slug: identity.slug } });
+        }
       }, 650);
     }
+
   };
 
   return (
