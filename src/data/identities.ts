@@ -1,19 +1,55 @@
+export type IdentityCategory = "programas" | "competicoes";
+
 export interface Identity {
   slug: string;
   name: string;
+  category: IdentityCategory;
 }
 
+const slugify = (name: string) =>
+  name
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+
+const programasNames = [
+  "GERAL CAZÉTV",
+  "BORA COPAR",
+  "JÁ É COPA",
+  "COPEIROS",
+  "AQUI É BRASIL",
+  "CONCEITO DE CRAQUE",
+  "NOCHE DE COPA",
+  "DESTRINCHA DONAN",
+  "BR-360",
+  "RECOPANDO",
+  "RODA DE BOBO",
+  "UM DIA COM",
+  "COPAZONA",
+  "CAFÉTV",
+  "LIVE CAZÉTV",
+];
+
+const competicoesNames = [
+  "BRASILEIRÃO",
+  "PAULISTÃO",
+  "COPA DAVIS",
+  "MUTIRÃO OLÍMPICO",
+  "COPA ACERJ",
+  "FUTEBOL INTERNACIONAL",
+];
+
 export const identities: Identity[] = [
-  { slug: "copa-do-mundo", name: "Copa do Mundo" },
-  { slug: "libertadores", name: "Libertadores" },
-  { slug: "champions-league", name: "Champions League" },
-  { slug: "premier-league", name: "Premier League" },
-  { slug: "la-liga", name: "La Liga" },
-  { slug: "serie-a", name: "Serie A" },
-  { slug: "brasileirao", name: "Brasileirão" },
-  { slug: "copa-america", name: "Copa América" },
-  { slug: "nba", name: "NBA" },
-  { slug: "ufc", name: "UFC" },
-  { slug: "formula-1", name: "Fórmula 1" },
-  { slug: "olimpiadas", name: "Olimpíadas" },
+  ...programasNames.map((name) => ({
+    slug: slugify(name),
+    name,
+    category: "programas" as const,
+  })),
+  ...competicoesNames.map((name) => ({
+    slug: slugify(name),
+    name,
+    category: "competicoes" as const,
+  })),
 ];

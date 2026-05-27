@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowUp } from "lucide-react";
 import navLogo from "@/assets/cazetv-logo-nav.png";
 import mascotIcon from "@/assets/logo-icon-color.png";
-import { identities } from "@/data/identities";
+import { identities, type IdentityCategory } from "@/data/identities";
 import { IdentityCard } from "@/components/identidades/IdentityCard";
 import { IdentitiesSidebar } from "@/components/identidades/IdentitiesSidebar";
 import { SearchBar } from "@/components/identidades/SearchBar";
@@ -22,29 +22,35 @@ const REVEAL_DISTANCE = 600; // px de rolagem para o rodapé subir totalmente
 
 function IdentidadesPage() {
   const [query, setQuery] = useState("");
+  const [category, setCategory] = useState<IdentityCategory>("programas");
   const [topSlug, setTopSlug] = useState<string | null>(null);
   const [footerProgress, setFooterProgress] = useState(0);
 
+  const categoryItems = useMemo(
+    () => identities.filter((i) => i.category === category),
+    [category],
+  );
+
   const filtered = useMemo(
     () =>
-      identities.filter((i) =>
+      categoryItems.filter((i) =>
         i.name.toLowerCase().includes(query.trim().toLowerCase()),
       ),
-    [query],
+    [query, categoryItems],
   );
 
   const layout = useMemo(() => {
     const cardH = (CARD_W * 9) / 16;
-    return identities.map((id, i) => {
+    return categoryItems.map((id, i) => {
       const col = i % COLS;
       const row = Math.floor(i / COLS);
       const x = SIDE_PAD + col * (CARD_W + GAP_X);
       const y = TOP_PAD + row * (cardH + GAP_Y);
       return { slug: id.slug, x, y, w: CARD_W, rotate: 0 };
     });
-  }, []);
+  }, [categoryItems]);
 
-  const totalRows = Math.ceil(identities.length / COLS);
+  const totalRows = Math.max(1, Math.ceil(categoryItems.length / COLS));
   const galleryHeight =
     TOP_PAD + totalRows * ((CARD_W * 9) / 16 + GAP_Y) + 240;
 
@@ -128,14 +134,46 @@ function IdentidadesPage() {
   return (
     <div className="relative bg-background text-foreground">
       {/* Header */}
-      <header className="sticky top-0 z-30 flex items-center px-6 py-5 md:px-10">
-        <Link to="/" className="flex items-center gap-3" aria-label="Início">
-          <img src={navLogo} alt="CazéTV" className="h-10 w-auto md:h-12" />
-        </Link>
+      <header className="sticky top-0 z-30 flex items-start px-6 py-5 md:px-10">
+        <div className="flex flex-col items-start gap-4">
+          <Link to="/" className="flex items-center gap-3" aria-label="Início">
+            <img src={navLogo} alt="CazéTV" className="h-10 w-auto md:h-12" />
+          </Link>
+          <div
+            role="tablist"
+            aria-label="Categoria"
+            className="inline-flex items-center border border-white/20 bg-black/40 p-1 text-[10px] font-bold uppercase tracking-widest backdrop-blur-md"
+          >
+            {(
+              [
+                { id: "programas", label: "Programas" },
+                { id: "competicoes", label: "Competições" },
+              ] as const
+            ).map((opt) => {
+              const active = category === opt.id;
+              return (
+                <button
+                  key={opt.id}
+                  role="tab"
+                  aria-selected={active}
+                  onClick={() => setCategory(opt.id)}
+                  className={`px-3 py-1.5 transition-colors ${
+                    active
+                      ? "bg-white text-black"
+                      : "text-white/70 hover:text-white"
+                  }`}
+                >
+                  {opt.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
       </header>
 
       {/* Sidebar */}
-      <IdentitiesSidebar items={identities} />
+      <IdentitiesSidebar items={categoryItems} />
+
 
       {/* Galeria */}
       <div
@@ -146,7 +184,7 @@ function IdentidadesPage() {
         }}
       >
         {layout.map((l, i) => {
-          const identity = identities.find((id) => id.slug === l.slug)!;
+          const identity = categoryItems.find((id) => id.slug === l.slug)!;
           const isVisible = visibleSlugs.has(l.slug);
           return (
             <div
