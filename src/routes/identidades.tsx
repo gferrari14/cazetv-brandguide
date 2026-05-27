@@ -27,6 +27,10 @@ function IdentidadesPage() {
   const [category, setCategory] = useState<IdentityCategory>("programas");
   const [topSlug, setTopSlug] = useState<string | null>(null);
   const [footerProgress, setFooterProgress] = useState(0);
+  const [modalIdentity, setModalIdentity] = useState<
+    import("@/data/identities").Identity | null
+  >(null);
+
 
   const categoryItems = useMemo(
     () => identities.filter((i) => i.category === category),
