@@ -10,15 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LogoRouteImport } from './routes/logo'
+import { Route as IdentidadesRouteImport } from './routes/identidades'
 import { Route as GradienteRouteImport } from './routes/gradiente'
 import { Route as FontesRouteImport } from './routes/fontes'
 import { Route as CoresRouteImport } from './routes/cores'
+import { Route as BrandguideRouteImport } from './routes/brandguide'
 import { Route as AssetsRouteImport } from './routes/assets'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as IdentidadesSlugRouteImport } from './routes/identidades.$slug'
 
 const LogoRoute = LogoRouteImport.update({
   id: '/logo',
   path: '/logo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IdentidadesRoute = IdentidadesRouteImport.update({
+  id: '/identidades',
+  path: '/identidades',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GradienteRoute = GradienteRouteImport.update({
@@ -36,6 +44,11 @@ const CoresRoute = CoresRouteImport.update({
   path: '/cores',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BrandguideRoute = BrandguideRouteImport.update({
+  id: '/brandguide',
+  path: '/brandguide',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AssetsRoute = AssetsRouteImport.update({
   id: '/assets',
   path: '/assets',
@@ -46,53 +59,90 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IdentidadesSlugRoute = IdentidadesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => IdentidadesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/assets': typeof AssetsRoute
+  '/brandguide': typeof BrandguideRoute
   '/cores': typeof CoresRoute
   '/fontes': typeof FontesRoute
   '/gradiente': typeof GradienteRoute
+  '/identidades': typeof IdentidadesRouteWithChildren
   '/logo': typeof LogoRoute
+  '/identidades/$slug': typeof IdentidadesSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/assets': typeof AssetsRoute
+  '/brandguide': typeof BrandguideRoute
   '/cores': typeof CoresRoute
   '/fontes': typeof FontesRoute
   '/gradiente': typeof GradienteRoute
+  '/identidades': typeof IdentidadesRouteWithChildren
   '/logo': typeof LogoRoute
+  '/identidades/$slug': typeof IdentidadesSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/assets': typeof AssetsRoute
+  '/brandguide': typeof BrandguideRoute
   '/cores': typeof CoresRoute
   '/fontes': typeof FontesRoute
   '/gradiente': typeof GradienteRoute
+  '/identidades': typeof IdentidadesRouteWithChildren
   '/logo': typeof LogoRoute
+  '/identidades/$slug': typeof IdentidadesSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/assets' | '/cores' | '/fontes' | '/gradiente' | '/logo'
+  fullPaths:
+    | '/'
+    | '/assets'
+    | '/brandguide'
+    | '/cores'
+    | '/fontes'
+    | '/gradiente'
+    | '/identidades'
+    | '/logo'
+    | '/identidades/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/assets' | '/cores' | '/fontes' | '/gradiente' | '/logo'
+  to:
+    | '/'
+    | '/assets'
+    | '/brandguide'
+    | '/cores'
+    | '/fontes'
+    | '/gradiente'
+    | '/identidades'
+    | '/logo'
+    | '/identidades/$slug'
   id:
     | '__root__'
     | '/'
     | '/assets'
+    | '/brandguide'
     | '/cores'
     | '/fontes'
     | '/gradiente'
+    | '/identidades'
     | '/logo'
+    | '/identidades/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AssetsRoute: typeof AssetsRoute
+  BrandguideRoute: typeof BrandguideRoute
   CoresRoute: typeof CoresRoute
   FontesRoute: typeof FontesRoute
   GradienteRoute: typeof GradienteRoute
+  IdentidadesRoute: typeof IdentidadesRouteWithChildren
   LogoRoute: typeof LogoRoute
 }
 
@@ -103,6 +153,13 @@ declare module '@tanstack/react-router' {
       path: '/logo'
       fullPath: '/logo'
       preLoaderRoute: typeof LogoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/identidades': {
+      id: '/identidades'
+      path: '/identidades'
+      fullPath: '/identidades'
+      preLoaderRoute: typeof IdentidadesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gradiente': {
@@ -126,6 +183,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoresRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/brandguide': {
+      id: '/brandguide'
+      path: '/brandguide'
+      fullPath: '/brandguide'
+      preLoaderRoute: typeof BrandguideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/assets': {
       id: '/assets'
       path: '/assets'
@@ -140,26 +204,38 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/identidades/$slug': {
+      id: '/identidades/$slug'
+      path: '/$slug'
+      fullPath: '/identidades/$slug'
+      preLoaderRoute: typeof IdentidadesSlugRouteImport
+      parentRoute: typeof IdentidadesRoute
+    }
   }
 }
+
+interface IdentidadesRouteChildren {
+  IdentidadesSlugRoute: typeof IdentidadesSlugRoute
+}
+
+const IdentidadesRouteChildren: IdentidadesRouteChildren = {
+  IdentidadesSlugRoute: IdentidadesSlugRoute,
+}
+
+const IdentidadesRouteWithChildren = IdentidadesRoute._addFileChildren(
+  IdentidadesRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AssetsRoute: AssetsRoute,
+  BrandguideRoute: BrandguideRoute,
   CoresRoute: CoresRoute,
   FontesRoute: FontesRoute,
   GradienteRoute: GradienteRoute,
+  IdentidadesRoute: IdentidadesRouteWithChildren,
   LogoRoute: LogoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}

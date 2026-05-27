@@ -13,7 +13,7 @@ const navLinks = [
 
 export function BrandLayout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
-  const isHome = location.pathname === "/";
+  const isHome = location.pathname === "/brandguide";
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -21,7 +21,7 @@ export function BrandLayout({ children }: { children: React.ReactNode }) {
       {!isHome && (
         <nav className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/90 backdrop-blur-xl">
           <div className="brand-container flex h-16 items-center justify-between">
-            <Link to="/" className="logo-gradient-hover group relative flex items-center" aria-label="Brandguide CazéTV">
+            <Link to="/brandguide" className="logo-gradient-hover group relative flex items-center" aria-label="Brandguide CazéTV">
               <img src={navLogo} alt="CazéTV" className="logo-base h-7 w-auto md:h-8" />
               <span
                 aria-hidden="true"
