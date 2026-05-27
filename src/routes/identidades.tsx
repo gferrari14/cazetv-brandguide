@@ -177,13 +177,8 @@ function IdentidadesPage() {
           transition: "transform 80ms linear",
           willChange: "transform",
         }}
-        onMouseMove={(e) => {
-          const r = e.currentTarget.getBoundingClientRect();
-          const x = ((e.clientX - r.left) / r.width) * 100;
-          const y = ((e.clientY - r.top) / r.height) * 100;
-          e.currentTarget.style.setProperty("--mx", `${x}%`);
-          e.currentTarget.style.setProperty("--my", `${y}%`);
-        }}
+        onMouseMove={onFooterMouseMove}
+        onMouseLeave={onFooterMouseLeave}
       >
         <div className="relative z-10 mx-auto flex h-full max-w-[1600px] flex-col px-8 pb-10 pt-12 md:px-14">
           <button
@@ -221,8 +216,9 @@ function IdentidadesPage() {
           </div>
         </div>
 
-        {/* Gradiente colorido que segue o cursor */}
+        {/* Gradiente colorido com drift autônomo + leve influência do cursor */}
         <div
+          ref={gradientRef}
           aria-hidden
           className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[55%]"
           style={{
@@ -232,7 +228,6 @@ function IdentidadesPage() {
               radial-gradient(40% 60% at calc(var(--mx, 50%) - 15%) calc(var(--my, 100%) + 10%), rgba(243,193,27,0.35), transparent 70%)
             `,
             filter: "blur(40px)",
-            transition: "background 200ms ease",
           }}
         />
       </footer>
