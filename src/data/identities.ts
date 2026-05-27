@@ -20,7 +20,6 @@ const programasNames = [
   "JÁ É COPA",
   "COPEIROS",
   "AQUI É BRASIL",
-  "CONCEITO DE CRAQUE",
   "NOCHE DE COPA",
   "DESTRINCHA DONAN",
   "BR-360",
@@ -28,7 +27,6 @@ const programasNames = [
   "RODA DE BOBO",
   "UM DIA COM",
   "COPAZONA",
-  "CAFÉTV",
   "LIVE CAZÉTV",
 ];
 
