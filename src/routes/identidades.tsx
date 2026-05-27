@@ -72,6 +72,47 @@ function IdentidadesPage() {
     };
   }, []);
 
+  // Animação suave do gradiente: drift autônomo + leve influência do cursor
+  const gradientRef = useRef<HTMLDivElement | null>(null);
+  const mouseTarget = useRef({ x: 0, y: 0 }); // -1..1 (offset desejado pelo mouse)
+  const mouseCurrent = useRef({ x: 0, y: 0 }); // estado interpolado
+  useEffect(() => {
+    let raf = 0;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const t = (now - start) / 1000;
+      // drift lento autônomo
+      const driftX = Math.sin(t * 0.25) * 12; // %
+      const driftY = Math.cos(t * 0.2) * 6; // %
+      // easing em direção ao alvo do mouse
+      mouseCurrent.current.x +=
+        (mouseTarget.current.x - mouseCurrent.current.x) * 0.04;
+      mouseCurrent.current.y +=
+        (mouseTarget.current.y - mouseCurrent.current.y) * 0.04;
+      const mx = 50 + driftX + mouseCurrent.current.x * 12; // % no eixo X
+      const my = 90 + driftY + mouseCurrent.current.y * 6; // % no eixo Y
+      const el = gradientRef.current;
+      if (el) {
+        el.style.setProperty("--mx", `${mx}%`);
+        el.style.setProperty("--my", `${my}%`);
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  const onFooterMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    // mapeia para -1..1
+    mouseTarget.current.x = ((e.clientX - r.left) / r.width) * 2 - 1;
+    mouseTarget.current.y = ((e.clientY - r.top) / r.height) * 2 - 1;
+  };
+  const onFooterMouseLeave = () => {
+    mouseTarget.current.x = 0;
+    mouseTarget.current.y = 0;
+  };
+
   const scrollToTop = () =>
     window.scrollTo({ top: 0, behavior: "smooth" });
 
