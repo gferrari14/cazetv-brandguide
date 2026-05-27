@@ -206,7 +206,13 @@ function IdentidadesPage() {
                 initial={l}
                 zIndex={topSlug === l.slug ? 50 : 10 + i}
                 onFocus={() => setTopSlug(l.slug)}
+                onOpenModal={
+                  identity.slug === "um-dia-com"
+                    ? (id) => setModalIdentity(id)
+                    : undefined
+                }
               />
+
             </div>
           );
         })}
