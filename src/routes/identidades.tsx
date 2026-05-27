@@ -229,7 +229,7 @@ function IdentidadesPage() {
         <div
           ref={gradientRef}
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[80%]"
+          className="pointer-events-none absolute -bottom-24 -left-24 -right-24 z-0 h-[85%]"
           style={{
             background: `
               radial-gradient(calc(60% * var(--scale, 1)) calc(80% * var(--scale, 1)) at var(--mx, 30%) var(--my, 100%), rgba(246,76,104,0.55), transparent 60%),
