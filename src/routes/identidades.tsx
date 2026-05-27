@@ -247,9 +247,9 @@ function IdentidadesPage() {
           className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[80%]"
           style={{
             background: `
-              radial-gradient(60% 80% at var(--mx, 30%) var(--my, 100%), rgba(246,76,104,0.55), transparent 60%),
-              radial-gradient(55% 75% at calc(var(--mx, 70%) + 25%) calc(var(--my, 100%) - 5%), rgba(97,184,224,0.55), transparent 65%),
-              radial-gradient(40% 60% at calc(var(--mx, 50%) - 15%) calc(var(--my, 100%) + 10%), rgba(243,193,27,0.35), transparent 70%)
+              radial-gradient(calc(60% * var(--scale, 1)) calc(80% * var(--scale, 1)) at var(--mx, 30%) var(--my, 100%), rgba(246,76,104,0.55), transparent 60%),
+              radial-gradient(calc(55% * var(--scale, 1)) calc(75% * var(--scale, 1)) at calc(var(--mx, 70%) + 25%) calc(var(--my, 100%) - 5%), rgba(97,184,224,0.55), transparent 65%),
+              radial-gradient(calc(40% * var(--scale, 1)) calc(60% * var(--scale, 1)) at calc(var(--mx, 50%) - 15%) calc(var(--my, 100%) + 10%), rgba(243,193,27,0.35), transparent 70%)
             `,
             filter: "blur(40px)",
           }}
