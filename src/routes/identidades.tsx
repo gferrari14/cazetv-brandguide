@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowUp } from "lucide-react";
 import navLogo from "@/assets/cazetv-logo-nav.png";
 import mascotIcon from "@/assets/logo-icon-color.png";
-import { identities } from "@/data/identities";
+import { identities, type IdentityCategory } from "@/data/identities";
 import { IdentityCard } from "@/components/identidades/IdentityCard";
 import { IdentitiesSidebar } from "@/components/identidades/IdentitiesSidebar";
 import { SearchBar } from "@/components/identidades/SearchBar";
@@ -22,29 +22,35 @@ const REVEAL_DISTANCE = 600; // px de rolagem para o rodapé subir totalmente
 
 function IdentidadesPage() {
   const [query, setQuery] = useState("");
+  const [category, setCategory] = useState<IdentityCategory>("programas");
   const [topSlug, setTopSlug] = useState<string | null>(null);
   const [footerProgress, setFooterProgress] = useState(0);
 
+  const categoryItems = useMemo(
+    () => identities.filter((i) => i.category === category),
+    [category],
+  );
+
   const filtered = useMemo(
     () =>
-      identities.filter((i) =>
+      categoryItems.filter((i) =>
         i.name.toLowerCase().includes(query.trim().toLowerCase()),
       ),
-    [query],
+    [query, categoryItems],
   );
 
   const layout = useMemo(() => {
     const cardH = (CARD_W * 9) / 16;
-    return identities.map((id, i) => {
+    return categoryItems.map((id, i) => {
       const col = i % COLS;
       const row = Math.floor(i / COLS);
       const x = SIDE_PAD + col * (CARD_W + GAP_X);
       const y = TOP_PAD + row * (cardH + GAP_Y);
       return { slug: id.slug, x, y, w: CARD_W, rotate: 0 };
     });
-  }, []);
+  }, [categoryItems]);
 
-  const totalRows = Math.ceil(identities.length / COLS);
+  const totalRows = Math.max(1, Math.ceil(categoryItems.length / COLS));
   const galleryHeight =
     TOP_PAD + totalRows * ((CARD_W * 9) / 16 + GAP_Y) + 240;
 
