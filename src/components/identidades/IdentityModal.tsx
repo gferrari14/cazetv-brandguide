@@ -58,7 +58,7 @@ export function IdentityModal({ identity, open, onClose }: Props) {
         <button
           onClick={onClose}
           aria-label="Fechar"
-          className="flex size-10 items-center justify-center rounded-full border border-white/20 text-white transition hover:bg-white hover:text-black"
+          className="flex size-10 items-center justify-center rounded-full border-2 border-white/30 text-white transition hover:bg-white hover:text-black"
         >
           <X className="size-4" />
         </button>
@@ -72,7 +72,7 @@ export function IdentityModal({ identity, open, onClose }: Props) {
             return (
               <div
                 key={n}
-                className="relative flex aspect-[16/9] w-full items-center justify-center overflow-hidden border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.01]"
+                className="relative flex aspect-[16/9] w-full items-center justify-center overflow-hidden border-2 border-white/20 bg-gradient-to-br from-white/[0.06] to-white/[0.01]"
               >
                 {media ? (
                   <img

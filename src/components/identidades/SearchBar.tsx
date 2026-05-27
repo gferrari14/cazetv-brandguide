@@ -7,7 +7,7 @@ interface Props {
 
 export function SearchBar({ value, onChange }: Props) {
   return (
-    <div className="flex w-full items-center gap-3 border border-white/20 bg-black/60 px-5 py-3 backdrop-blur-xl">
+    <div className="flex w-full items-center gap-3 border-2 border-white/30 bg-black/60 px-5 py-3 backdrop-blur-xl">
       <Search className="size-4 text-white/60" />
       <input
         type="text"

@@ -151,7 +151,7 @@ function IdentidadesPage() {
         <div
           role="tablist"
           aria-label="Categoria"
-          className="inline-flex items-center border border-white/20 bg-black/60 p-1 text-[10px] font-bold uppercase tracking-widest backdrop-blur-xl"
+          className="inline-flex items-center border-2 border-white/30 bg-black/60 p-1 text-[10px] font-bold uppercase tracking-widest backdrop-blur-xl"
         >
           {(
             [
@@ -260,7 +260,7 @@ function IdentidadesPage() {
 
           <div className="relative mt-10">
             <div className="relative mb-6 flex items-center">
-              <div className="h-px w-full bg-black" />
+              <div className="h-0.5 w-full bg-black" />
               <img
                 src={mascotIcon}
                 alt="CazéTV"
