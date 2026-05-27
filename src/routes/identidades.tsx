@@ -1,6 +1,7 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import navLogo from "@/assets/cazetv-logo-nav.png";
+import mascotIcon from "@/assets/logo-icon-color.png";
 import { identities } from "@/data/identities";
 import { IdentityCard } from "@/components/identidades/IdentityCard";
 import { IdentitiesSidebar } from "@/components/identidades/IdentitiesSidebar";
@@ -10,11 +11,12 @@ export const Route = createFileRoute("/identidades")({
   component: IdentidadesPage,
 });
 
-// Pseudo-random determinístico baseado no índice
-function seeded(i: number, salt: number) {
-  const x = Math.sin((i + 1) * 9301 + salt * 49297) * 233280;
-  return x - Math.floor(x);
-}
+const COLS = 4;
+const CARD_W = 300;
+const GAP_X = 40;
+const GAP_Y = 56;
+const SIDE_PAD = 200;
+const TOP_PAD = 120;
 
 function IdentidadesPage() {
   const [query, setQuery] = useState("");
@@ -28,46 +30,44 @@ function IdentidadesPage() {
     [query],
   );
 
-  // Posições orgânicas determinísticas dentro de uma área central
+  // Grid organizado: 4 colunas, posições determinísticas
   const layout = useMemo(() => {
-    // assume viewport ~ 1400x800 como referência; cards posicionados absolutos
-    const areaW = 1400;
-    const areaH = 720;
-    const sidePad = 240; // espaço pra sidebar
+    const cardH = (CARD_W * 9) / 16;
     return identities.map((id, i) => {
-      const w = 280 + Math.floor(seeded(i, 1) * 140); // 280-420
-      const x = sidePad + Math.floor(seeded(i, 2) * (areaW - sidePad - w - 40));
-      const y = 60 + Math.floor(seeded(i, 3) * (areaH - 200));
-      const rotate = (seeded(i, 4) - 0.5) * 6; // -3 a 3 deg
-      return { slug: id.slug, x, y, w, rotate };
+      const col = i % COLS;
+      const row = Math.floor(i / COLS);
+      const x = SIDE_PAD + col * (CARD_W + GAP_X);
+      const y = TOP_PAD + row * (cardH + GAP_Y);
+      return { slug: id.slug, x, y, w: CARD_W, rotate: 0 };
     });
   }, []);
+
+  const totalRows = Math.ceil(identities.length / COLS);
+  const galleryHeight =
+    TOP_PAD + totalRows * ((CARD_W * 9) / 16 + GAP_Y) + 80;
 
   const visibleSlugs = new Set(filtered.map((i) => i.slug));
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
+    <div className="relative min-h-screen bg-background text-foreground">
       {/* Header */}
-      <header className="fixed left-0 right-0 top-0 z-30 flex items-center justify-between px-6 py-5 md:px-10">
+      <header className="fixed left-0 right-0 top-0 z-30 flex items-center px-6 py-5 md:px-10">
         <Link to="/" className="flex items-center gap-3" aria-label="Início">
           <img src={navLogo} alt="CazéTV" className="h-7 w-auto md:h-8" />
-          <span className="hidden text-[10px] font-bold uppercase tracking-widest text-white/70 sm:inline">
-            Identidades
-          </span>
-        </Link>
-        <Link
-          to="/brandguide"
-          className="gradient-hover no-border text-[10px] font-bold uppercase tracking-widest text-white/70"
-        >
-          <span>Brandguide</span>
         </Link>
       </header>
 
       {/* Sidebar */}
       <IdentitiesSidebar items={identities} />
 
-      {/* Galeria */}
-      <div className="relative mx-auto h-screen w-full max-w-[1500px]">
+      {/* Galeria organizada */}
+      <div
+        className="relative mx-auto w-full"
+        style={{
+          height: galleryHeight,
+          maxWidth: SIDE_PAD * 2 + COLS * CARD_W + (COLS - 1) * GAP_X,
+        }}
+      >
         {layout.map((l, i) => {
           const identity = identities.find((id) => id.slug === l.slug)!;
           const isVisible = visibleSlugs.has(l.slug);
@@ -91,8 +91,58 @@ function IdentidadesPage() {
         })}
       </div>
 
-      {/* Search */}
+      {/* Search flutuante */}
       <SearchBar value={query} onChange={setQuery} />
+
+      {/* Footer estilo Stripe Press */}
+      <footer className="bg-white text-black">
+        <div className="mx-auto max-w-6xl px-6 pb-16 pt-24 md:px-10">
+          {/* Divisor com mascote */}
+          <div className="relative mb-16 flex items-center justify-center">
+            <div className="h-px w-full bg-black/80" />
+            <img
+              src={mascotIcon}
+              alt="CazéTV"
+              className="absolute h-14 w-14 rounded-full bg-white p-1"
+            />
+          </div>
+
+          <div className="grid gap-12 md:grid-cols-3">
+            <div>
+              <h3 className="mb-4 text-xs font-bold uppercase tracking-widest">
+                Sobre
+              </h3>
+              <p className="text-sm leading-relaxed text-black/70">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </p>
+            </div>
+            <div>
+              <h3 className="mb-4 text-xs font-bold uppercase tracking-widest">
+                Identidades
+              </h3>
+              <p className="text-sm leading-relaxed text-black/70">
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat.
+              </p>
+            </div>
+            <div>
+              <h3 className="mb-4 text-xs font-bold uppercase tracking-widest">
+                Contato
+              </h3>
+              <p className="text-sm leading-relaxed text-black/70">
+                Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-black/15 pt-8 text-xs uppercase tracking-widest text-black/60 md:flex-row md:items-center">
+            <span>© CazéTV 2026</span>
+            <span>Todos os direitos reservados</span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
