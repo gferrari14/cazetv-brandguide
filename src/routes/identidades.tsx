@@ -141,41 +141,44 @@ function IdentidadesPage() {
     <div className="relative bg-background text-foreground">
       {/* Header */}
       <header className="sticky top-0 z-30 flex items-start px-6 py-5 md:px-10">
-        <div className="flex flex-col items-start gap-4">
-          <Link to="/" className="flex items-center gap-3" aria-label="Início">
-            <img src={navLogo} alt="CazéTV" className="h-10 w-auto md:h-12" />
-          </Link>
-          <div
-            role="tablist"
-            aria-label="Categoria"
-            className="inline-flex items-center border border-white/20 bg-black/40 p-1 text-[10px] font-bold uppercase tracking-widest backdrop-blur-md"
-          >
-            {(
-              [
-                { id: "programas", label: "Programas" },
-                { id: "competicoes", label: "Competições" },
-              ] as const
-            ).map((opt) => {
-              const active = category === opt.id;
-              return (
-                <button
-                  key={opt.id}
-                  role="tab"
-                  aria-selected={active}
-                  onClick={() => setCategory(opt.id)}
-                  className={`px-3 py-1.5 transition-colors ${
-                    active
-                      ? "bg-white text-black"
-                      : "text-white/70 hover:text-white"
-                  }`}
-                >
-                  {opt.label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
+        <Link to="/" className="flex items-center gap-3" aria-label="Início">
+          <img src={navLogo} alt="CazéTV" className="h-10 w-auto md:h-12" />
+        </Link>
       </header>
+
+      {/* Switch Programas/Competições — canto inferior esquerdo, alinhado à busca */}
+      <div className="fixed bottom-20 left-6 z-40 md:left-10">
+        <div
+          role="tablist"
+          aria-label="Categoria"
+          className="inline-flex items-center border border-white/20 bg-black/60 p-1 text-[10px] font-bold uppercase tracking-widest backdrop-blur-xl"
+        >
+          {(
+            [
+              { id: "programas", label: "Programas" },
+              { id: "competicoes", label: "Competições" },
+            ] as const
+          ).map((opt) => {
+            const active = category === opt.id;
+            return (
+              <button
+                key={opt.id}
+                role="tab"
+                aria-selected={active}
+                onClick={() => setCategory(opt.id)}
+                className={`px-3 py-1.5 transition-colors ${
+                  active
+                    ? "bg-white text-black"
+                    : "text-white/70 hover:text-white"
+                }`}
+              >
+                {opt.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
 
       {/* Sidebar */}
       <IdentitiesSidebar items={categoryItems} />
