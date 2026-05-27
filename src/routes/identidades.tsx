@@ -76,8 +76,6 @@ function IdentidadesPage() {
   // + expansão baseada na velocidade do cursor
   const gradientRef = useRef<HTMLDivElement | null>(null);
   const mousePos = useRef<{ x: number; y: number } | null>(null); // %, ou null se fora
-  const lastMove = useRef({ t: 0, x: 0, y: 0 });
-  const velocity = useRef(0); // 0..1
   useEffect(() => {
     let raf = 0;
     const start = performance.now();
