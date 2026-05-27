@@ -80,7 +80,7 @@ function IdentidadesPage() {
       {/* Header */}
       <header className="sticky top-0 z-30 flex items-center px-6 py-5 md:px-10">
         <Link to="/" className="flex items-center gap-3" aria-label="Início">
-          <img src={navLogo} alt="CazéTV" className="h-7 w-auto md:h-8" />
+          <img src={navLogo} alt="CazéTV" className="h-10 w-auto md:h-12" />
         </Link>
       </header>
 
@@ -130,14 +130,21 @@ function IdentidadesPage() {
 
       {/* Footer fixo que SOBE sobre o conteúdo */}
       <footer
-        className="fixed inset-x-0 bottom-0 z-50 h-screen bg-white text-black"
+        className="fixed inset-x-0 bottom-0 z-50 h-screen overflow-hidden bg-white text-black"
         style={{
           transform: `translateY(${(1 - footerProgress) * 100}%)`,
           transition: "transform 80ms linear",
           willChange: "transform",
         }}
+        onMouseMove={(e) => {
+          const r = e.currentTarget.getBoundingClientRect();
+          const x = ((e.clientX - r.left) / r.width) * 100;
+          const y = ((e.clientY - r.top) / r.height) * 100;
+          e.currentTarget.style.setProperty("--mx", `${x}%`);
+          e.currentTarget.style.setProperty("--my", `${y}%`);
+        }}
       >
-        <div className="relative mx-auto flex h-full max-w-[1600px] flex-col px-8 pb-10 pt-12 md:px-14">
+        <div className="relative z-10 mx-auto flex h-full max-w-[1600px] flex-col px-8 pb-10 pt-12 md:px-14">
           <button
             onClick={scrollToTop}
             aria-label="Voltar ao topo"
@@ -163,7 +170,7 @@ function IdentidadesPage() {
               <img
                 src={mascotIcon}
                 alt="CazéTV"
-                className="absolute left-1/2 h-12 w-12 -translate-x-1/2 rounded-full bg-white p-1"
+                className="absolute left-1/2 h-12 w-12 -translate-x-1/2"
               />
             </div>
             <div className="flex flex-col items-start justify-between gap-2 text-xs uppercase tracking-widest text-black/60 md:flex-row md:items-center">
@@ -172,6 +179,21 @@ function IdentidadesPage() {
             </div>
           </div>
         </div>
+
+        {/* Gradiente colorido que segue o cursor */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[55%]"
+          style={{
+            background: `
+              radial-gradient(60% 80% at var(--mx, 30%) var(--my, 100%), rgba(246,76,104,0.55), transparent 60%),
+              radial-gradient(55% 75% at calc(var(--mx, 70%) + 25%) calc(var(--my, 100%) - 5%), rgba(97,184,224,0.55), transparent 65%),
+              radial-gradient(40% 60% at calc(var(--mx, 50%) - 15%) calc(var(--my, 100%) + 10%), rgba(243,193,27,0.35), transparent 70%)
+            `,
+            filter: "blur(40px)",
+            transition: "background 200ms ease",
+          }}
+        />
       </footer>
     </div>
   );
