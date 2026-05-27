@@ -12,10 +12,10 @@ export const Route = createFileRoute("/identidades")({
   component: IdentidadesPage,
 });
 
-const COLS = 4;
-const CARD_W = 290;
-const GAP_X = 36;
-const GAP_Y = 64;
+const COLS = 3;
+const CARD_W = 360;
+const GAP_X = 40;
+const GAP_Y = 72;
 const SIDE_PAD = 80;
 const TOP_PAD = 120;
 const REVEAL_DISTANCE = 600; // px de rolagem para o rodapé subir totalmente
