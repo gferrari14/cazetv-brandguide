@@ -12,6 +12,8 @@ import geralCazetv from "@/assets/programas/geral-cazetv.png";
 import jaECopa from "@/assets/programas/ja-e-copa.png";
 import rodaDeBobo from "@/assets/programas/roda-de-bobo.png";
 import recopando from "@/assets/programas/recopando.gif";
+import boraCopar from "@/assets/competicoes/bora-copar.png";
+import nocheDeCopa from "@/assets/competicoes/noche-de-copa.png";
 
 const COVERS: Record<string, string> = {
   "um-dia-com": umDiaComCover,
@@ -25,6 +27,8 @@ const COVERS: Record<string, string> = {
   "ja-e-copa": jaECopa,
   "roda-de-bobo": rodaDeBobo,
   "recopando": recopando,
+  "bora-copar": boraCopar,
+  "noche-de-copa": nocheDeCopa,
 };
 
 interface Props {
