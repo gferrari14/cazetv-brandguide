@@ -1,6 +1,11 @@
 import { useRef, useState, type PointerEvent } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import type { Identity } from "@/data/identities";
+import umDiaComCover from "@/assets/um-dia-com/capa.jpg";
+
+const COVERS: Record<string, string> = {
+  "um-dia-com": umDiaComCover,
+};
 
 interface Props {
   identity: Identity;
@@ -96,10 +101,21 @@ export function IdentityCard({ identity, initial, zIndex, onFocus, onOpenModal }
         ].join(" ")}
         style={{ aspectRatio: "16 / 9" }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-white/0" />
-        <div className="absolute inset-0 flex items-center justify-center text-xs font-bold uppercase tracking-widest text-white/40">
-          {identity.name}
-        </div>
+        {COVERS[identity.slug] ? (
+          <img
+            src={COVERS[identity.slug]}
+            alt={identity.name}
+            draggable={false}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        ) : (
+          <>
+            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-white/0" />
+            <div className="absolute inset-0 flex items-center justify-center text-xs font-bold uppercase tracking-widest text-white/40">
+              {identity.name}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

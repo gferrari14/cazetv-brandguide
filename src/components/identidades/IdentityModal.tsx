@@ -1,6 +1,11 @@
 import { useEffect } from "react";
 import { X, Download } from "lucide-react";
 import type { Identity } from "@/data/identities";
+import umDiaComSlide1 from "@/assets/um-dia-com/slide-1.gif";
+
+const SLIDE_MEDIA: Record<string, Record<number, string>> = {
+  "um-dia-com": { 1: umDiaComSlide1 },
+};
 
 interface Props {
   identity: Identity;
@@ -62,16 +67,27 @@ export function IdentityModal({ identity, open, onClose }: Props) {
       {/* Scrollable slides */}
       <div className="flex-1 overflow-y-auto px-4 pb-32 pt-4 md:px-10">
         <div className="mx-auto flex w-full max-w-[1100px] flex-col gap-6">
-          {slides.map((n) => (
-            <div
-              key={n}
-              className="relative flex aspect-[16/9] w-full items-center justify-center overflow-hidden border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.01]"
-            >
-              <span className="text-xs font-bold uppercase tracking-[0.3em] text-white/30">
-                {identity.name} — slide {n}
-              </span>
-            </div>
-          ))}
+          {slides.map((n) => {
+            const media = SLIDE_MEDIA[identity.slug]?.[n];
+            return (
+              <div
+                key={n}
+                className="relative flex aspect-[16/9] w-full items-center justify-center overflow-hidden border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.01]"
+              >
+                {media ? (
+                  <img
+                    src={media}
+                    alt={`${identity.name} slide ${n}`}
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <span className="text-xs font-bold uppercase tracking-[0.3em] text-white/30">
+                    {identity.name} — slide {n}
+                  </span>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
 
