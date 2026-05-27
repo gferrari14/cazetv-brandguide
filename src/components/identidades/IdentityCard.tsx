@@ -7,11 +7,13 @@ interface Props {
   initial: { x: number; y: number; w: number; rotate: number };
   zIndex: number;
   onFocus: () => void;
+  onOpenModal?: (identity: Identity) => void;
 }
 
 const DRAG_THRESHOLD = 4;
 
-export function IdentityCard({ identity, initial, zIndex, onFocus }: Props) {
+export function IdentityCard({ identity, initial, zIndex, onFocus, onOpenModal }: Props) {
+
   const navigate = useNavigate();
   const [pos, setPos] = useState({ x: initial.x, y: initial.y });
   const [zooming, setZooming] = useState(false);
