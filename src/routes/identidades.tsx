@@ -211,7 +211,7 @@ function IdentidadesPage() {
                 zIndex={topSlug === l.slug ? 50 : 10 + i}
                 onFocus={() => setTopSlug(l.slug)}
                 onOpenModal={
-                  identity.slug === "um-dia-com"
+                  identity.category === "programas"
                     ? (id) => setModalIdentity(id)
                     : undefined
                 }
