@@ -290,6 +290,13 @@ function IdentidadesPage() {
           }}
         />
       </footer>
+
+      <IdentityModal
+        identity={modalIdentity ?? { slug: "", name: "", category: "programas" }}
+        open={!!modalIdentity}
+        onClose={() => setModalIdentity(null)}
+      />
+
     </div>
   );
 }
