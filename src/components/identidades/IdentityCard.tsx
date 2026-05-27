@@ -2,9 +2,27 @@ import { useRef, useState, type PointerEvent } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import type { Identity } from "@/data/identities";
 import umDiaComCover from "@/assets/um-dia-com/capa.jpg";
+import aquiEBrasil from "@/assets/programas/aqui-e-brasil.png";
+import br360 from "@/assets/programas/br-360.png";
+import liveCazetv from "@/assets/programas/live-cazetv.jpg";
+import copazona from "@/assets/programas/copazona.png";
+import copeiros from "@/assets/programas/copeiros.png";
+import destrinchaDonan from "@/assets/programas/destrincha-donan.png";
+import geralCazetv from "@/assets/programas/geral-cazetv.png";
+import jaECopa from "@/assets/programas/ja-e-copa.png";
+import rodaDeBobo from "@/assets/programas/roda-de-bobo.png";
 
 const COVERS: Record<string, string> = {
   "um-dia-com": umDiaComCover,
+  "aqui-e-brasil": aquiEBrasil,
+  "br-360": br360,
+  "live-cazetv": liveCazetv,
+  "copazona": copazona,
+  "copeiros": copeiros,
+  "destrincha-donan": destrinchaDonan,
+  "geral-cazetv": geralCazetv,
+  "ja-e-copa": jaECopa,
+  "roda-de-bobo": rodaDeBobo,
 };
 
 interface Props {
