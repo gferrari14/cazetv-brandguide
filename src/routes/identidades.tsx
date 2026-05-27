@@ -6,7 +6,9 @@ import mascotIcon from "@/assets/logo-icon-color.png";
 import { identities, type IdentityCategory } from "@/data/identities";
 import { IdentityCard } from "@/components/identidades/IdentityCard";
 import { IdentitiesSidebar } from "@/components/identidades/IdentitiesSidebar";
+import { IdentityModal } from "@/components/identidades/IdentityModal";
 import { SearchBar } from "@/components/identidades/SearchBar";
+
 
 export const Route = createFileRoute("/identidades")({
   component: IdentidadesPage,
@@ -25,6 +27,10 @@ function IdentidadesPage() {
   const [category, setCategory] = useState<IdentityCategory>("programas");
   const [topSlug, setTopSlug] = useState<string | null>(null);
   const [footerProgress, setFooterProgress] = useState(0);
+  const [modalIdentity, setModalIdentity] = useState<
+    import("@/data/identities").Identity | null
+  >(null);
+
 
   const categoryItems = useMemo(
     () => identities.filter((i) => i.category === category),
@@ -200,7 +206,13 @@ function IdentidadesPage() {
                 initial={l}
                 zIndex={topSlug === l.slug ? 50 : 10 + i}
                 onFocus={() => setTopSlug(l.slug)}
+                onOpenModal={
+                  identity.slug === "um-dia-com"
+                    ? (id) => setModalIdentity(id)
+                    : undefined
+                }
               />
+
             </div>
           );
         })}
@@ -278,6 +290,13 @@ function IdentidadesPage() {
           }}
         />
       </footer>
+
+      <IdentityModal
+        identity={modalIdentity ?? { slug: "", name: "", category: "programas" }}
+        open={!!modalIdentity}
+        onClose={() => setModalIdentity(null)}
+      />
+
     </div>
   );
 }
