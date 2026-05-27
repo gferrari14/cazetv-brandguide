@@ -358,3 +358,25 @@
     animation: softReveal 700ms ease both;
   }
 }
+
+@keyframes cardZoom {
+  0% {
+    transform: scale(1) translateY(0);
+  }
+  20% {
+    transform: scale(1.08) translateY(-14px);
+  }
+  40% {
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    transform: scale(14) translateY(0);
+    opacity: 0;
+  }
+}
+
+.animate-card-zoom {
+  animation: cardZoom 650ms cubic-bezier(0.6, 0, 0.4, 1) forwards;
+  transform-origin: center center;
+  will-change: transform, opacity;
+}

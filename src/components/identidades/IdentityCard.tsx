@@ -14,6 +14,7 @@ const DRAG_THRESHOLD = 4;
 export function IdentityCard({ identity, initial, zIndex, onFocus }: Props) {
   const navigate = useNavigate();
   const [pos, setPos] = useState({ x: initial.x, y: initial.y });
+  const [zooming, setZooming] = useState(false);
   const dragRef = useRef<{
     startX: number;
     startY: number;
@@ -23,6 +24,7 @@ export function IdentityCard({ identity, initial, zIndex, onFocus }: Props) {
   } | null>(null);
 
   const onPointerDown = (e: PointerEvent<HTMLDivElement>) => {
+    if (zooming) return;
     (e.currentTarget as HTMLDivElement).setPointerCapture(e.pointerId);
     dragRef.current = {
       startX: e.clientX,
@@ -53,7 +55,12 @@ export function IdentityCard({ identity, initial, zIndex, onFocus }: Props) {
       /* noop */
     }
     if (d && !d.moved) {
-      navigate({ to: "/identidades/$slug", params: { slug: identity.slug } });
+      onFocus();
+      setZooming(true);
+      // duração total da animação salto + zoom in antes de navegar
+      window.setTimeout(() => {
+        navigate({ to: "/identidades/$slug", params: { slug: identity.slug } });
+      }, 650);
     }
   };
 
@@ -68,12 +75,17 @@ export function IdentityCard({ identity, initial, zIndex, onFocus }: Props) {
         top: pos.y,
         width: initial.w,
         transform: `rotate(${initial.rotate}deg)`,
-        zIndex,
+        zIndex: zooming ? 100 : zIndex,
       }}
       className="group absolute touch-none select-none transition-shadow"
     >
       <div
-        className="relative overflow-hidden border border-white/15 bg-white/[0.04] shadow-[0_20px_60px_-30px_rgba(0,0,0,0.8)] transition-transform group-hover:scale-[1.02]"
+        className={[
+          "relative overflow-hidden border border-white/15 bg-white/[0.04] shadow-[0_20px_60px_-30px_rgba(0,0,0,0.8)]",
+          zooming
+            ? "animate-card-zoom origin-center"
+            : "transition-transform group-hover:scale-[1.02]",
+        ].join(" ")}
         style={{ aspectRatio: "16 / 9" }}
       >
         <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-white/0" />
