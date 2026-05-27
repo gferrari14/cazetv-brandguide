@@ -15,7 +15,7 @@ interface Props {
 
 const assets = [
   { label: "LOGO", href: "#" },
-  { label: "CORES", href: "#" },
+  { label: "ASSETS", href: "#" },
   { label: "TIPOGRAFIA", href: "#" },
   { label: "KIT COMPLETO", href: "#" },
 ];
