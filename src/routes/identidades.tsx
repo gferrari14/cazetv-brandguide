@@ -184,7 +184,7 @@ function IdentidadesPage() {
         }}
       >
         {layout.map((l, i) => {
-          const identity = identities.find((id) => id.slug === l.slug)!;
+          const identity = categoryItems.find((id) => id.slug === l.slug)!;
           const isVisible = visibleSlugs.has(l.slug);
           return (
             <div
