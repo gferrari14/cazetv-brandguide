@@ -24,7 +24,7 @@ export function IdentitiesSidebar({ items, highlightSlug }: Props) {
                 className="flex items-center"
               >
                 <span
-                  className={`block h-px w-6 transition-all duration-300 group-hover/item:w-16 group-hover/item:bg-white ${
+                  className={`block h-0.5 w-6 transition-all duration-300 group-hover/item:w-16 group-hover/item:bg-white ${
                     isActive ? "bg-white" : "bg-white/50"
                   }`}
                 />

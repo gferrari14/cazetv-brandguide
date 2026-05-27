@@ -151,7 +151,7 @@ function IdentidadesPage() {
         <div
           role="tablist"
           aria-label="Categoria"
-          className="inline-flex items-center border border-white/20 bg-black/60 p-1 text-[10px] font-bold uppercase tracking-widest backdrop-blur-xl"
+          className="inline-flex items-center border-2 border-white/30 bg-black/60 p-1 text-[10px] font-bold uppercase tracking-widest backdrop-blur-xl"
         >
           {(
             [
@@ -253,17 +253,14 @@ function IdentidadesPage() {
           </button>
 
           <div className="mt-12 flex-1">
-            <h2 className="max-w-[14ch] text-[clamp(3rem,8vw,7.5rem)] font-light leading-[0.95] tracking-tight">
-              AS IDENTIDADES DA CAZÉTV.
-            </h2>
-            <p className="mt-10 max-w-xl text-base leading-relaxed text-black/70 md:text-lg">
+            <p className="max-w-3xl text-xl font-semibold leading-relaxed text-black md:text-2xl lg:text-3xl">
               AS IDENTIDADES DA CAZÉTV NASCEM PARA DAR FORMA, VOZ E ENERGIA A CADA PROGRAMA, CAMPEONATO E PROJETO ESPECIAL. ESTE ESPAÇO REÚNE OS SISTEMAS VISUAIS QUE CONSTRUÍMOS AO LONGO DO TEMPO: LOGOS, CORES, TIPOGRAFIAS, GRAFISMOS, ASSETS E REGRAS DE USO. PARA MANTER NOSSA MARCA VIVA, CONSISTENTE E DINÂMICA.
             </p>
           </div>
 
           <div className="relative mt-10">
             <div className="relative mb-6 flex items-center">
-              <div className="h-px w-full bg-black" />
+              <div className="h-0.5 w-full bg-black" />
               <img
                 src={mascotIcon}
                 alt="CazéTV"

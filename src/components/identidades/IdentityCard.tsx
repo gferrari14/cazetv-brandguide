@@ -118,7 +118,7 @@ export function IdentityCard({ identity, initial, zIndex, onFocus, onOpenModal }
     >
       <div
         className={[
-          "relative overflow-hidden border border-white/15 bg-white/[0.04] shadow-[0_20px_60px_-30px_rgba(0,0,0,0.8)]",
+          "relative overflow-hidden border-2 border-white/25 bg-white/[0.04] shadow-[0_20px_60px_-30px_rgba(0,0,0,0.8)]",
           zooming
             ? "animate-card-zoom origin-center"
             : "transition-transform group-hover:scale-[1.02]",
