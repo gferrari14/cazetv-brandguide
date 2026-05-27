@@ -76,33 +76,29 @@ function IdentidadesPage() {
   // + expansão baseada na velocidade do cursor
   const gradientRef = useRef<HTMLDivElement | null>(null);
   const mousePos = useRef<{ x: number; y: number } | null>(null); // %, ou null se fora
-  const lastMove = useRef({ t: 0, x: 0, y: 0 });
-  const velocity = useRef(0); // 0..1
   useEffect(() => {
     let raf = 0;
     const start = performance.now();
     const tick = (now: number) => {
       const t = (now - start) / 1000;
-      // drift autônomo (sempre ativo, mais forte quando sem cursor)
+      // drift autônomo horizontal na base
       const driftX = Math.sin(t * 0.25) * 12; // %
-      const driftY = Math.cos(t * 0.2) * 6; // %
 
       const m = mousePos.current;
-      let mx: number;
-      let my: number;
-      if (m) {
-        // segue cursor direto, com leve drift superposto
-        mx = m.x + driftX * 0.25;
-        my = m.y + driftY * 0.25;
-      } else {
-        // drift puro na base
-        mx = 50 + driftX;
-        my = 90 + driftY;
-      }
+      // X segue o cursor (com leve drift quando ocioso)
+      const mx = m ? m.x : 50 + driftX;
+      // Y travado na base — expansão controlada pelo --scale
+      const my = 100;
 
-      // decai velocidade gradualmente
-      velocity.current *= 0.92;
-      const scale = 1 + Math.min(velocity.current, 1) * 0.6;
+      // expansão: cursor mais alto / mais distante da base = mais expansão
+      // m.y vai de 0 (topo) a 100 (base). Quanto menor, maior expansão.
+      const cursorLift = m ? Math.max(0, (100 - m.y) / 100) : 0; // 0..1
+      const targetScale = 1 + cursorLift * 1.4;
+      // easing simples para suavizar
+      const prev = parseFloat(
+        gradientRef.current?.style.getPropertyValue("--scale") || "1",
+      );
+      const scale = prev + (targetScale - prev) * 0.15;
 
       const el = gradientRef.current;
       if (el) {
@@ -120,21 +116,10 @@ function IdentidadesPage() {
     const r = e.currentTarget.getBoundingClientRect();
     const x = ((e.clientX - r.left) / r.width) * 100;
     const y = ((e.clientY - r.top) / r.height) * 100;
-    const now = performance.now();
-    const last = lastMove.current;
-    if (last.t) {
-      const dt = Math.max(1, now - last.t);
-      const dist = Math.hypot(x - last.x, y - last.y); // em %
-      // velocidade normalizada (%/ms → 0..1)
-      const v = Math.min(1, (dist / dt) * 2);
-      velocity.current = Math.max(velocity.current, v);
-    }
-    lastMove.current = { t: now, x, y };
     mousePos.current = { x, y };
   };
   const onFooterMouseLeave = () => {
     mousePos.current = null;
-    lastMove.current = { t: 0, x: 0, y: 0 };
   };
 
   const scrollToTop = () =>
@@ -244,7 +229,7 @@ function IdentidadesPage() {
         <div
           ref={gradientRef}
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[80%]"
+          className="pointer-events-none absolute -bottom-24 -left-24 -right-24 z-0 h-[85%]"
           style={{
             background: `
               radial-gradient(calc(60% * var(--scale, 1)) calc(80% * var(--scale, 1)) at var(--mx, 30%) var(--my, 100%), rgba(246,76,104,0.55), transparent 60%),
