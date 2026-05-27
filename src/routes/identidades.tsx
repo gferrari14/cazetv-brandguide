@@ -1,5 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowUp } from "lucide-react";
 import navLogo from "@/assets/cazetv-logo-nav.png";
 import mascotIcon from "@/assets/logo-icon-color.png";
@@ -72,6 +72,47 @@ function IdentidadesPage() {
     };
   }, []);
 
+  // Animação suave do gradiente: drift autônomo + leve influência do cursor
+  const gradientRef = useRef<HTMLDivElement | null>(null);
+  const mouseTarget = useRef({ x: 0, y: 0 }); // -1..1 (offset desejado pelo mouse)
+  const mouseCurrent = useRef({ x: 0, y: 0 }); // estado interpolado
+  useEffect(() => {
+    let raf = 0;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const t = (now - start) / 1000;
+      // drift lento autônomo
+      const driftX = Math.sin(t * 0.25) * 12; // %
+      const driftY = Math.cos(t * 0.2) * 6; // %
+      // easing em direção ao alvo do mouse
+      mouseCurrent.current.x +=
+        (mouseTarget.current.x - mouseCurrent.current.x) * 0.04;
+      mouseCurrent.current.y +=
+        (mouseTarget.current.y - mouseCurrent.current.y) * 0.04;
+      const mx = 50 + driftX + mouseCurrent.current.x * 12; // % no eixo X
+      const my = 90 + driftY + mouseCurrent.current.y * 6; // % no eixo Y
+      const el = gradientRef.current;
+      if (el) {
+        el.style.setProperty("--mx", `${mx}%`);
+        el.style.setProperty("--my", `${my}%`);
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  const onFooterMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    // mapeia para -1..1
+    mouseTarget.current.x = ((e.clientX - r.left) / r.width) * 2 - 1;
+    mouseTarget.current.y = ((e.clientY - r.top) / r.height) * 2 - 1;
+  };
+  const onFooterMouseLeave = () => {
+    mouseTarget.current.x = 0;
+    mouseTarget.current.y = 0;
+  };
+
   const scrollToTop = () =>
     window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -136,13 +177,8 @@ function IdentidadesPage() {
           transition: "transform 80ms linear",
           willChange: "transform",
         }}
-        onMouseMove={(e) => {
-          const r = e.currentTarget.getBoundingClientRect();
-          const x = ((e.clientX - r.left) / r.width) * 100;
-          const y = ((e.clientY - r.top) / r.height) * 100;
-          e.currentTarget.style.setProperty("--mx", `${x}%`);
-          e.currentTarget.style.setProperty("--my", `${y}%`);
-        }}
+        onMouseMove={onFooterMouseMove}
+        onMouseLeave={onFooterMouseLeave}
       >
         <div className="relative z-10 mx-auto flex h-full max-w-[1600px] flex-col px-8 pb-10 pt-12 md:px-14">
           <button
@@ -180,8 +216,9 @@ function IdentidadesPage() {
           </div>
         </div>
 
-        {/* Gradiente colorido que segue o cursor */}
+        {/* Gradiente colorido com drift autônomo + leve influência do cursor */}
         <div
+          ref={gradientRef}
           aria-hidden
           className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[55%]"
           style={{
@@ -191,7 +228,6 @@ function IdentidadesPage() {
               radial-gradient(40% 60% at calc(var(--mx, 50%) - 15%) calc(var(--my, 100%) + 10%), rgba(243,193,27,0.35), transparent 70%)
             `,
             filter: "blur(40px)",
-            transition: "background 200ms ease",
           }}
         />
       </footer>
