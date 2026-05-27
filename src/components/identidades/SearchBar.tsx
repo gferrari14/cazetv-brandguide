@@ -7,7 +7,7 @@ interface Props {
 
 export function SearchBar({ value, onChange }: Props) {
   return (
-    <div className="pointer-events-none fixed inset-x-0 bottom-6 z-40 flex justify-center px-4">
+    <div className="pointer-events-none sticky bottom-6 z-40 flex justify-center px-4 pb-2">
       <div className="pointer-events-auto flex w-full max-w-md items-center gap-3 border border-white/20 bg-black/60 px-5 py-3 backdrop-blur-xl">
         <Search className="size-4 text-white/60" />
         <input
