@@ -13,7 +13,7 @@ const links = [
 
 function Entry() {
   return (
-    <div className="relative h-screen w-screen overflow-hidden bg-background text-foreground" style={{ cursor: "none" }}>
+    <div className="relative h-screen w-screen overflow-hidden bg-background text-foreground">
       <video
         src="/videos/hero-bg.mp4"
         autoPlay
@@ -21,9 +21,8 @@ function Entry() {
         muted
         playsInline
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover"
+        className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-15"
       />
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-black/40" aria-hidden />
 
       {/* Logo top-left */}
       <header className="absolute left-3 top-4 z-10 md:left-4">
@@ -33,7 +32,7 @@ function Entry() {
       </header>
 
       {/* Buttons bottom-left */}
-      <nav className="absolute bottom-4 left-3 z-10 flex flex-col gap-2 md:left-4">
+      <nav className="absolute bottom-4 left-3 z-10 flex flex-row flex-wrap gap-2 md:left-4">
         {links.map((l) => (
           <Link
             key={l.label}
@@ -44,6 +43,11 @@ function Entry() {
           </Link>
         ))}
       </nav>
+
+      {/* Copyright bottom-right */}
+      <div className="absolute bottom-4 right-3 z-10 text-[10px] uppercase tracking-widest text-white/70 md:right-4">
+        Todos os direitos reservados · CazéTV 2026
+      </div>
     </div>
   );
 }
