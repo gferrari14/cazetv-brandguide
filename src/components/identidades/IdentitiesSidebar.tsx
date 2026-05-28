@@ -10,7 +10,7 @@ export function IdentitiesSidebar({ items, highlightSlug }: Props) {
   return (
     <nav
       aria-label="Identidades"
-      className="group/nav fixed left-6 top-1/2 z-40 hidden -translate-y-1/2 md:block"
+      className="group/nav fixed left-3 top-1/2 z-40 hidden -translate-y-1/2 md:block"
     >
       <ul className="flex flex-col">
         {items.map((item) => {
