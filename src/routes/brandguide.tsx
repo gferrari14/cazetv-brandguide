@@ -17,7 +17,7 @@ const sections = [
 function Brandguide() {
   return (
     <BrandLayout>
-      <section className="relative flex min-h-screen flex-col justify-between overflow-hidden px-4 py-8 sm:px-6 md:px-12 md:py-12 lg:px-24">
+      <section className="relative flex min-h-screen flex-col justify-between overflow-hidden px-3 py-4 md:px-4">
         <video
           src="/videos/hero-bg.mp4"
           autoPlay
@@ -27,7 +27,7 @@ function Brandguide() {
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 z-0 size-full object-cover opacity-15"
         />
-        <div className="animate-soft-reveal relative z-10 pt-2 md:pt-4">
+        <div className="animate-soft-reveal relative z-10">
           <img src={navLogo} alt="CazéTV" className="mb-5 h-10 w-auto md:h-12" />
           <h1 className="max-w-6xl text-6xl font-bold uppercase leading-none text-foreground sm:text-7xl md:text-8xl lg:text-9xl">
             BEM-VINDO AO BRANDGUIDE CAZÉTV
@@ -42,9 +42,9 @@ function Brandguide() {
               <Link
                 key={section.path}
                 to={section.path}
-                className="gradient-hover border border-border bg-transparent px-4 py-3 text-sm font-bold uppercase text-foreground transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:px-6"
+                className="inline-flex items-center border-2 border-white/80 bg-transparent px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.18em] text-white transition-colors hover:bg-white hover:text-black"
               >
-                <span>{section.label}</span>
+                {section.label}
               </Link>
             ))}
           </div>

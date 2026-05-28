@@ -5,9 +5,15 @@ export const Route = createFileRoute("/")({
   component: Entry,
 });
 
+const links = [
+  { to: "/brandguide", label: "CAZÉTV" },
+  { to: "/identidades", label: "IDENTIDADES" },
+  { to: "/", label: "DÚVIDAS" },
+] as const;
+
 function Entry() {
   return (
-    <div className="relative flex min-h-screen flex-col overflow-hidden bg-background px-4 py-8 sm:px-6 md:px-12 md:py-12 lg:px-24">
+    <div className="relative h-screen w-screen overflow-hidden bg-background text-foreground" style={{ cursor: "none" }}>
       <video
         src="/videos/hero-bg.mp4"
         autoPlay
@@ -15,36 +21,29 @@ function Entry() {
         muted
         playsInline
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 size-full object-cover opacity-15"
+        className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover"
       />
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-black/40" aria-hidden />
 
-      <header className="animate-soft-reveal relative z-10">
-        <img src={navLogo} alt="CazéTV" className="h-10 w-auto md:h-12" />
+      {/* Logo top-left */}
+      <header className="absolute left-3 top-4 z-10 md:left-4">
+        <Link to="/" aria-label="CazéTV">
+          <img src={navLogo} alt="CazéTV" className="h-10 w-auto md:h-12" />
+        </Link>
       </header>
 
-      <main className="animate-soft-reveal relative z-10 flex flex-1 flex-col items-center justify-center gap-10 text-center">
-        <h1 className="max-w-4xl text-4xl font-bold uppercase leading-none text-foreground sm:text-5xl md:text-6xl">
-          BEM-VINDO À CAZÉTV
-        </h1>
-        <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
+      {/* Buttons bottom-left */}
+      <nav className="absolute bottom-4 left-3 z-10 flex flex-col gap-2 md:left-4">
+        {links.map((l) => (
           <Link
-            to="/brandguide"
-            className="gradient-hover border border-border bg-transparent px-10 py-5 text-base font-bold uppercase text-foreground transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:text-lg"
+            key={l.label}
+            to={l.to}
+            className="inline-flex w-fit items-center border-2 border-white/80 bg-transparent px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.18em] text-white transition-colors hover:bg-white hover:text-black"
           >
-            <span>BRANDGUIDE</span>
+            {l.label}
           </Link>
-          <Link
-            to="/identidades"
-            className="gradient-hover border border-border bg-transparent px-10 py-5 text-base font-bold uppercase text-foreground transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:text-lg"
-          >
-            <span>IDENTIDADES</span>
-          </Link>
-        </div>
-      </main>
-
-      <footer className="relative z-10 text-right text-xs font-bold uppercase text-muted-foreground">
-        Todos os direitos reservados · CazéTV 2026
-      </footer>
+        ))}
+      </nav>
     </div>
   );
 }
