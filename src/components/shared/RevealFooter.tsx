@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowUp } from "lucide-react";
-import mascotIcon from "@/assets/logo-icon-color.png";
+import footerLogo from "@/assets/cazetv-logo-footer.png";
 
 const REVEAL_DISTANCE = 600;
 
@@ -9,8 +9,9 @@ interface RevealFooterProps {
 }
 
 export function RevealFooter({
-  text = "AS IDENTIDADES DA CAZÉTV NASCEM PARA DAR FORMA, VOZ E ENERGIA A CADA PROGRAMA, CAMPEONATO E PROJETO ESPECIAL. ESTE ESPAÇO REÚNE OS SISTEMAS VISUAIS QUE CONSTRUÍMOS AO LONGO DO TEMPO: LOGOS, CORES, TIPOGRAFIAS, GRAFISMOS, ASSETS E REGRAS DE USO. PARA MANTER NOSSA MARCA VIVA, CONSISTENTE E DINÂMICA.",
+  text = "AS IDENTIDADES DA CAZÉTV NASCEM PARA DAR FORMA, VOZ E ENERGIA A CADA PROGRAMA, CAMPEONATO E PROJETO ESPECIAL.\n\nESTE ESPAÇO REÚNE OS SISTEMAS VISUAIS QUE CONSTRUÍMOS AO LONGO DO TEMPO: LOGOS, CORES, TIPOGRAFIAS, GRAFISMOS, ASSETS E REGRAS DE USO. PARA MANTER NOSSA MARCA VIVA, CONSISTENTE E DINÂMICA.",
 }: RevealFooterProps) {
+  const paragraphs = text.split(/\n\n+/);
   const [footerProgress, setFooterProgress] = useState(0);
   const gradientRef = useRef<HTMLDivElement | null>(null);
   const mousePos = useRef<{ x: number; y: number } | null>(null);
