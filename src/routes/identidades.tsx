@@ -8,6 +8,7 @@ import { IdentityCard } from "@/components/identidades/IdentityCard";
 import { IdentitiesSidebar } from "@/components/identidades/IdentitiesSidebar";
 import { IdentityModal } from "@/components/identidades/IdentityModal";
 import { SearchBar } from "@/components/identidades/SearchBar";
+import { CustomCursor } from "@/components/identidades/CustomCursor";
 
 
 export const Route = createFileRoute("/identidades")({
@@ -16,11 +17,12 @@ export const Route = createFileRoute("/identidades")({
 
 const COLS = 3;
 const CARD_W = 360;
-const GAP_X = 40;
-const GAP_Y = 72;
-const SIDE_PAD = 80;
-const TOP_PAD = 120;
+const GAP_X = 56;
+const GAP_Y = 80;
+const SIDE_PAD = 40;
+const TOP_PAD = 100;
 const REVEAL_DISTANCE = 600; // px de rolagem para o rodapé subir totalmente
+const PARALLAX_STRENGTH = 50; // px máximo de deslocamento dos cards seguindo o cursor
 
 function IdentidadesPage() {
   const [query, setQuery] = useState("");
@@ -30,6 +32,7 @@ function IdentidadesPage() {
   const [modalIdentity, setModalIdentity] = useState<
     import("@/data/identities").Identity | null
   >(null);
+
 
 
   const categoryItems = useMemo(
