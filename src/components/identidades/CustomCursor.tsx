@@ -41,13 +41,13 @@ export function CustomCursor() {
       <div
         className="flex items-center justify-center bg-white text-black"
         style={{
-          width: expanded ? 44 : 12,
-          height: expanded ? 44 : 12,
-          borderRadius: expanded ? 999 : 2,
+          width: expanded ? 48 : 12,
+          height: expanded ? 48 : 12,
           transition:
-            "width 220ms cubic-bezier(0.4,0,0.2,1), height 220ms cubic-bezier(0.4,0,0.2,1), border-radius 220ms",
+            "width 220ms cubic-bezier(0.4,0,0.2,1), height 220ms cubic-bezier(0.4,0,0.2,1)",
         }}
       >
+
         <Plus
           className="text-black"
           style={{
