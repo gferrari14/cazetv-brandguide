@@ -82,7 +82,7 @@ export function RevealFooter({
         onMouseMove={onMouseMove}
         onMouseLeave={onMouseLeave}
       >
-        <div className="relative z-10 mx-auto flex h-full max-w-[1600px] flex-col px-8 pb-10 pt-12 md:px-14">
+        <div className="relative z-10 flex h-full w-full flex-col px-3 pb-4 pt-12 md:px-4">
           <button
             onClick={scrollToTop}
             aria-label="Voltar ao topo"
@@ -92,20 +92,13 @@ export function RevealFooter({
           </button>
 
           <div className="mt-12 flex-1">
-            <p className="max-w-3xl text-xl font-semibold leading-relaxed text-black md:text-2xl lg:text-3xl">
+            <p className="max-w-3xl text-base font-normal leading-relaxed text-black md:text-lg lg:text-xl">
               {text}
             </p>
           </div>
 
           <div className="relative mt-10">
-            <div className="relative mb-6 flex items-center">
-              <div className="h-0.5 w-full bg-black" />
-              <img
-                src={mascotIcon}
-                alt="CazéTV"
-                className="absolute left-1/2 h-12 w-12 -translate-x-1/2"
-              />
-            </div>
+            <div className="mb-4 h-0.5 w-full bg-black" />
             <div className="flex flex-col items-start justify-between gap-2 text-xs uppercase tracking-widest text-black/60 md:flex-row md:items-center">
               <span>© CazéTV 2026</span>
               <span>Todos os direitos reservados</span>
