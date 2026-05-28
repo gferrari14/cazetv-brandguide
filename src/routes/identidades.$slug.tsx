@@ -17,13 +17,13 @@ function IdentityPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="flex items-center justify-between px-6 py-5 md:px-10">
+      <header className="flex items-center justify-between px-3 py-4 md:px-4">
         <Link to="/" className="flex items-center gap-3" aria-label="Início">
-          <img src={navLogo} alt="CazéTV" className="h-7 w-auto md:h-8" />
+          <img src={navLogo} alt="CazéTV" className="h-10 w-auto md:h-12" />
         </Link>
         <Link
           to="/identidades"
-          className="gradient-hover no-border flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-white/70"
+          className="inline-flex items-center gap-2 border-2 border-white/80 bg-transparent px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.18em] text-white transition-colors hover:bg-white hover:text-black"
         >
           <ArrowLeft className="size-3" />
           <span>Voltar</span>
