@@ -103,6 +103,7 @@ export function IdentityCard({ identity, initial, zIndex, onFocus, onOpenModal }
 
   return (
     <div
+      data-identity-card
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
@@ -113,9 +114,11 @@ export function IdentityCard({ identity, initial, zIndex, onFocus, onOpenModal }
         width: initial.w,
         transform: `rotate(${initial.rotate}deg)`,
         zIndex: zooming ? 100 : zIndex,
+        cursor: "none",
       }}
       className="group absolute touch-none select-none transition-shadow"
     >
+
       <div
         className={[
           "relative overflow-hidden border-2 border-white/25 bg-white/[0.04] shadow-[0_20px_60px_-30px_rgba(0,0,0,0.8)]",
