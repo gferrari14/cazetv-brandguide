@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Plus } from "lucide-react";
 
+const EXPAND_SELECTOR = "a, button, [role='tab'], [data-cursor-target], [data-identity-card]";
+
 export function CustomCursor() {
   const ref = useRef<HTMLDivElement | null>(null);
   const [expanded, setExpanded] = useState(false);
@@ -14,16 +16,17 @@ export function CustomCursor() {
         el.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
       }
       const target = e.target as HTMLElement | null;
-      const overCard = !!target?.closest?.("[data-identity-card]");
-      setExpanded(overCard);
+      const over = !!target?.closest?.(EXPAND_SELECTOR);
+      setExpanded(over);
     };
-    const onLeave = () => setVisible(false);
+    const onOut = (e: MouseEvent) => {
+      if (!e.relatedTarget) setVisible(false);
+    };
     window.addEventListener("mousemove", onMove);
-    window.addEventListener("mouseout", (e) => {
-      if (!(e as MouseEvent).relatedTarget) onLeave();
-    });
+    window.addEventListener("mouseout", onOut);
     return () => {
       window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseout", onOut);
     };
   }, []);
 
@@ -47,7 +50,6 @@ export function CustomCursor() {
             "width 220ms cubic-bezier(0.4,0,0.2,1), height 220ms cubic-bezier(0.4,0,0.2,1)",
         }}
       >
-
         <Plus
           className="text-black"
           style={{
