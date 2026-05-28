@@ -1,7 +1,6 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Menu, X } from "lucide-react";
-import { useState } from "react";
 import navLogo from "@/assets/cazetv-logo-nav.png";
+import { RevealFooter } from "@/components/shared/RevealFooter";
 
 const navLinks = [
   { path: "/logo", label: "LOGO" },
@@ -13,79 +12,39 @@ const navLinks = [
 
 export function BrandLayout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
-  const isHome = location.pathname === "/brandguide";
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {!isHome && (
-        <nav className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/90 backdrop-blur-xl">
-          <div className="brand-container flex h-16 items-center justify-between">
-            <Link to="/brandguide" className="logo-gradient-hover group relative flex items-center" aria-label="Brandguide CazéTV">
-              <img src={navLogo} alt="CazéTV" className="logo-base h-7 w-auto md:h-8" />
-              <span
-                aria-hidden="true"
-                className="logo-overlay pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-                style={{ WebkitMaskImage: `url(${navLogo})`, maskImage: `url(${navLogo})` }}
-              />
-            </Link>
+    <div className="relative min-h-screen bg-background text-foreground">
+      {/* Logo top-left */}
+      <header className="fixed left-3 top-4 z-40 md:left-4">
+        <Link to="/" aria-label="Início">
+          <img src={navLogo} alt="CazéTV" className="h-10 w-auto md:h-12" />
+        </Link>
+      </header>
 
-            <div className="hidden items-center gap-1 md:flex">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`gradient-hover no-border px-4 py-2 text-xs font-bold uppercase transition-colors ${
-                    location.pathname === link.path ? "text-primary" : "text-muted-foreground"
-                  }`}
-                >
-                  <span>{link.label}</span>
-                </Link>
-              ))}
-            </div>
+      <main className="pb-32 pt-20">{children}</main>
 
-            <button
-              type="button"
-              className="inline-flex size-10 items-center justify-center border border-border text-foreground transition-colors hover:bg-secondary md:hidden"
-              onClick={() => setMobileMenuOpen((open) => !open)}
-              aria-label="Abrir menu"
-              aria-expanded={mobileMenuOpen}
+      {/* Bottom nav — fixed, centered-left */}
+      <nav className="fixed bottom-4 left-3 z-40 flex flex-row flex-wrap gap-2 md:left-4">
+        {navLinks.map((link) => {
+          const active = location.pathname === link.path;
+          return (
+            <Link
+              key={link.path}
+              to={link.path}
+              className={`inline-flex w-fit items-center border-2 px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.18em] transition-colors ${
+                active
+                  ? "border-white bg-white text-black"
+                  : "border-white/80 bg-black/60 text-white backdrop-blur-xl hover:bg-white hover:text-black"
+              }`}
             >
-              {mobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
-            </button>
-          </div>
+              {link.label}
+            </Link>
+          );
+        })}
+      </nav>
 
-          {mobileMenuOpen && (
-            <div className="border-t border-border bg-background md:hidden">
-              <div className="brand-container py-3">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`block py-3 text-sm font-bold uppercase transition-colors hover:text-primary ${
-                      location.pathname === link.path ? "text-primary" : "text-muted-foreground"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
-        </nav>
-      )}
-
-      <main className={!isHome ? "pt-16" : undefined}>{children}</main>
-
-      {!isHome && (
-        <footer className="border-t border-border py-6">
-          <div className="brand-container flex flex-col gap-2 text-xs uppercase text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-            <span>Brandguide CazéTV</span>
-            <span>Todos os direitos reservados · CazéTV 2026</span>
-          </div>
-        </footer>
-      )}
+      <RevealFooter />
     </div>
   );
 }
