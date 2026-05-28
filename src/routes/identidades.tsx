@@ -8,7 +8,7 @@ import { IdentityCard } from "@/components/identidades/IdentityCard";
 import { IdentitiesSidebar } from "@/components/identidades/IdentitiesSidebar";
 import { IdentityModal } from "@/components/identidades/IdentityModal";
 import { SearchBar } from "@/components/identidades/SearchBar";
-import { CustomCursor } from "@/components/identidades/CustomCursor";
+
 
 
 export const Route = createFileRoute("/identidades")({
@@ -184,8 +184,8 @@ function IdentidadesPage() {
   }, []);
 
   return (
-    <div className="relative bg-background text-foreground" style={{ cursor: "none" }}>
-      <CustomCursor />
+    <div className="relative bg-background text-foreground">
+
 
       {/* Header */}
       <header className="sticky top-0 z-30 flex items-start px-3 py-4 md:px-4">
