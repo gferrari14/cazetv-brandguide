@@ -155,17 +155,47 @@ function IdentidadesPage() {
   const scrollToTop = () =>
     window.scrollTo({ top: 0, behavior: "smooth" });
 
+  // Parallax: cards seguem o cursor (com lerp suave)
+  const galleryRef = useRef<HTMLDivElement | null>(null);
+  const cursorOffset = useRef({ x: 0, y: 0, tx: 0, ty: 0 });
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      const nx = (e.clientX / window.innerWidth) * 2 - 1; // -1..1
+      const ny = (e.clientY / window.innerHeight) * 2 - 1;
+      cursorOffset.current.tx = -nx * PARALLAX_STRENGTH;
+      cursorOffset.current.ty = -ny * PARALLAX_STRENGTH * 0.5;
+    };
+    window.addEventListener("mousemove", onMove);
+    let raf = 0;
+    const tick = () => {
+      const c = cursorOffset.current;
+      c.x += (c.tx - c.x) * 0.08;
+      c.y += (c.ty - c.y) * 0.08;
+      if (galleryRef.current) {
+        galleryRef.current.style.transform = `translate3d(${c.x}px, ${c.y}px, 0)`;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
   return (
-    <div className="relative bg-background text-foreground">
+    <div className="relative bg-background text-foreground" style={{ cursor: "none" }}>
+      <CustomCursor />
+
       {/* Header */}
-      <header className="sticky top-0 z-30 flex items-start px-6 py-5 md:px-10">
+      <header className="sticky top-0 z-30 flex items-start px-3 py-4 md:px-4">
         <Link to="/" className="flex items-center gap-3" aria-label="Início">
           <img src={navLogo} alt="CazéTV" className="h-10 w-auto md:h-12" />
         </Link>
       </header>
 
       {/* Switch Programas/Competições — canto inferior esquerdo, alinhado à busca */}
-      <div className="fixed bottom-20 left-6 z-40 md:left-10">
+      <div className="fixed bottom-20 left-3 z-40 md:left-4">
         <div
           role="tablist"
           aria-label="Categoria"
@@ -205,12 +235,15 @@ function IdentidadesPage() {
 
       {/* Galeria */}
       <div
+        ref={galleryRef}
         className="relative mx-auto w-full"
         style={{
           height: galleryHeight,
           maxWidth: SIDE_PAD * 2 + COLS * CARD_W + (COLS - 1) * GAP_X,
+          willChange: "transform",
         }}
       >
+
         {layout.map((l, i) => {
           const identity = categoryItems.find((id) => id.slug === l.slug)!;
           const isVisible = visibleSlugs.has(l.slug);
