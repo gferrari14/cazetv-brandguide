@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowUp } from "lucide-react";
-import mascotIcon from "@/assets/logo-icon-color.png";
+import footerLogo from "@/assets/cazetv-logo-footer.png";
 
 const REVEAL_DISTANCE = 600;
 
@@ -9,8 +9,9 @@ interface RevealFooterProps {
 }
 
 export function RevealFooter({
-  text = "AS IDENTIDADES DA CAZÉTV NASCEM PARA DAR FORMA, VOZ E ENERGIA A CADA PROGRAMA, CAMPEONATO E PROJETO ESPECIAL. ESTE ESPAÇO REÚNE OS SISTEMAS VISUAIS QUE CONSTRUÍMOS AO LONGO DO TEMPO: LOGOS, CORES, TIPOGRAFIAS, GRAFISMOS, ASSETS E REGRAS DE USO. PARA MANTER NOSSA MARCA VIVA, CONSISTENTE E DINÂMICA.",
+  text = "AS IDENTIDADES DA CAZÉTV NASCEM PARA DAR FORMA, VOZ E ENERGIA A CADA PROGRAMA, CAMPEONATO E PROJETO ESPECIAL.\n\nESTE ESPAÇO REÚNE OS SISTEMAS VISUAIS QUE CONSTRUÍMOS AO LONGO DO TEMPO: LOGOS, CORES, TIPOGRAFIAS, GRAFISMOS, ASSETS E REGRAS DE USO. PARA MANTER NOSSA MARCA VIVA, CONSISTENTE E DINÂMICA.",
 }: RevealFooterProps) {
+  const paragraphs = text.split(/\n\n+/);
   const [footerProgress, setFooterProgress] = useState(0);
   const gradientRef = useRef<HTMLDivElement | null>(null);
   const mousePos = useRef<{ x: number; y: number } | null>(null);
@@ -91,13 +92,16 @@ export function RevealFooter({
             <ArrowUp className="size-5" />
           </button>
 
-          <div className="mt-12 flex-1">
-            <p className="max-w-3xl text-base font-normal leading-relaxed text-black md:text-lg lg:text-xl">
-              {text}
-            </p>
+          <div className="mt-12 flex-1 space-y-5">
+            {paragraphs.map((p, i) => (
+              <p key={i} className="max-w-5xl text-base font-normal leading-relaxed text-black md:text-lg lg:text-xl">
+                {p}
+              </p>
+            ))}
           </div>
 
           <div className="relative mt-10">
+            <img src={footerLogo} alt="CazéTV" className="mb-4 h-10 w-auto md:h-12" />
             <div className="mb-4 h-0.5 w-full bg-black" />
             <div className="flex flex-col items-start justify-between gap-2 text-xs uppercase tracking-widest text-black/60 md:flex-row md:items-center">
               <span>© CazéTV 2026</span>
