@@ -27,10 +27,12 @@ function preloadAsset(src: string): Promise<void> {
 export function LoadingScreen() {
   const [progress, setProgress] = useState(0);
   const [leaving, setLeaving] = useState(false);
-  const [mounted, setMounted] = useState(() => {
-    if (typeof window === "undefined") return true;
-    return !sessionStorage.getItem(SESSION_KEY);
-  });
+  // mount apenas no cliente para evitar mismatch de SSR
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!sessionStorage.getItem(SESSION_KEY)) setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!mounted) return;
