@@ -100,6 +100,19 @@ export function IdentityModal({ identity, open, onClose }: Props) {
           {slides.map((n) => {
             const media = SLIDE_MEDIA[identity.slug]?.[n];
             const preserve = PRESERVE_RATIO[identity.slug]?.has(n);
+            const natural = NATURAL_SIZE[identity.slug]?.has(n);
+
+            if (natural && media) {
+              return (
+                <img
+                  key={n}
+                  src={media}
+                  alt={`${identity.name} slide ${n}`}
+                  className="block h-auto w-full"
+                />
+              );
+            }
+
             return (
               <div
                 key={n}
