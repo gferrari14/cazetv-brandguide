@@ -94,12 +94,19 @@ export function IdentityModal({ identity, open, onClose }: Props) {
         <div className="mx-auto flex w-full max-w-[1100px] flex-col gap-6">
           {slides.map((n) => {
             const media = SLIDE_MEDIA[identity.slug]?.[n];
+            const preserve = PRESERVE_RATIO[identity.slug]?.has(n);
             return (
               <div
                 key={n}
                 className="relative flex aspect-[16/9] w-full items-center justify-center overflow-hidden border-2 border-white/20 bg-gradient-to-br from-white/[0.06] to-white/[0.01]"
               >
                 {media ? (
+                  <img
+                    src={media}
+                    alt={`${identity.name} slide ${n}`}
+                    className={`h-full w-full ${preserve ? "object-contain" : "object-cover"}`}
+                  />
+                ) : (
                   <img
                     src={media}
                     alt={`${identity.name} slide ${n}`}
