@@ -53,29 +53,23 @@ function Entry() {
     return () => window.clearInterval(id);
   }, []);
 
-  // efeito de "achatar/expandir" o título conforme a posição do cursor
+  // efeito de "expandir/comprimir horizontalmente" o título conforme a posição do cursor
   useEffect(() => {
     const el = titleRef.current;
     if (!el) return;
     let raf = 0;
-    const state = { sx: 1, sy: 1, tsx: 1, tsy: 1 };
+    const state = { sx: 1, tsx: 1 };
 
     const onMove = (e: MouseEvent) => {
-      const r = el.getBoundingClientRect();
-      const cx = r.left + r.width / 2;
-      const cy = r.top + r.height / 2;
-      const dx = (e.clientX - cx) / window.innerWidth; // -0.5..0.5
-      const dy = (e.clientY - cy) / window.innerHeight; // -0.5..0.5
-      // quanto mais o cursor se afasta no eixo Y, mais o texto "achata"
-      // quanto mais se afasta no X, mais "esticado" horizontalmente
-      state.tsy = 1 - Math.min(0.35, Math.abs(dy) * 0.7);
-      state.tsx = 1 + Math.min(0.25, Math.abs(dx) * 0.5);
+      // -1 (esquerda) .. +1 (direita)
+      const nx = (e.clientX / window.innerWidth) * 2 - 1;
+      // mapeia para 0.65 .. 1.35
+      state.tsx = 1 + nx * 0.35;
     };
 
     const tick = () => {
-      state.sx += (state.tsx - state.sx) * 0.08;
-      state.sy += (state.tsy - state.sy) * 0.08;
-      el.style.transform = `scale(${state.sx.toFixed(3)}, ${state.sy.toFixed(3)})`;
+      state.sx += (state.tsx - state.sx) * 0.1;
+      el.style.transform = `scaleX(${state.sx.toFixed(3)})`;
       raf = requestAnimationFrame(tick);
     };
 
@@ -107,18 +101,18 @@ function Entry() {
       </header>
 
       {/* Título gigante centralizado com card cíclico no meio */}
-      <div className="absolute inset-0 z-[5] flex items-center justify-center px-4">
+      <div className="pointer-events-none absolute inset-0 z-[5] flex items-center justify-center px-4">
         <div
           ref={titleRef}
-          className="flex w-full items-center justify-center gap-[2vw] whitespace-nowrap"
+          className="flex items-center justify-center gap-[2vw]"
           style={{
             transformOrigin: "center center",
             willChange: "transform",
           }}
         >
           <h1
-            className="select-none font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
-            style={{ fontSize: "clamp(48px, 13vw, 240px)" }}
+            className="shrink-0 select-none font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
+            style={{ fontSize: "clamp(40px, 11vw, 200px)" }}
           >
             BRANDING
           </h1>
@@ -126,9 +120,9 @@ function Entry() {
           {/* Card cíclico de identidade */}
           <div
             aria-hidden
-            className="relative overflow-hidden border-2 border-white/25 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.8)]"
+            className="relative shrink-0 overflow-hidden border-2 border-white/25 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.8)]"
             style={{
-              height: "clamp(56px, 10vw, 180px)",
+              height: "clamp(48px, 8vw, 150px)",
               aspectRatio: "16 / 9",
             }}
           >
@@ -145,8 +139,8 @@ function Entry() {
           </div>
 
           <h1
-            className="select-none font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
-            style={{ fontSize: "clamp(48px, 13vw, 240px)" }}
+            className="shrink-0 select-none font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
+            style={{ fontSize: "clamp(40px, 11vw, 200px)" }}
           >
             CAZÉTV
           </h1>
