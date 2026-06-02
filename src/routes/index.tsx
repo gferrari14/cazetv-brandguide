@@ -127,6 +127,8 @@ function Entry() {
           {/* Card cíclico de identidade */}
           <div
             aria-hidden
+            ref={cardRef}
+            aria-hidden
             className="relative shrink-0 overflow-hidden border-2 border-white/25 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.8)]"
             style={{
               height: "clamp(48px, 8vw, 150px)",
