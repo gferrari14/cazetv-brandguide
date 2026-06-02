@@ -140,10 +140,10 @@ function Entry() {
 
           <h1
             ref={rightRef}
-            className="shrink-0 select-none font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
+            className="shrink-0 select-none justify-self-end font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
             style={{
               fontSize: "clamp(40px, 11vw, 200px)",
-              transformOrigin: "left center",
+              transformOrigin: "right center",
               willChange: "transform",
             }}
           >
