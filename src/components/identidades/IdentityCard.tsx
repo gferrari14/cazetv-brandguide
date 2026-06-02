@@ -88,15 +88,17 @@ export function IdentityCard({ identity, initial, zIndex, onFocus, onOpenModal }
     if (d && !d.moved) {
       onFocus();
       setZooming(true);
-      // duração total da animação salto + zoom in antes de abrir/navegar
+      // abre o modal enquanto o card ainda está expandindo, criando uma
+      // transição fluida entre o card e o conteúdo da identidade
       window.setTimeout(() => {
         if (onOpenModal) {
           onOpenModal(identity);
-          setZooming(false);
+          // reset depois que o modal já cobriu a tela
+          window.setTimeout(() => setZooming(false), 400);
         } else {
           navigate({ to: "/identidades/$slug", params: { slug: identity.slug } });
         }
-      }, 650);
+      }, 420);
     }
 
   };
