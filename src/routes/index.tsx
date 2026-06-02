@@ -43,7 +43,8 @@ const COVERS: string[] = [
 
 function Entry() {
   const [coverIdx, setCoverIdx] = useState(0);
-  const titleRef = useRef<HTMLDivElement | null>(null);
+  const leftRef = useRef<HTMLHeadingElement | null>(null);
+  const rightRef = useRef<HTMLHeadingElement | null>(null);
 
   // troca de capas a cada 1.4s
   useEffect(() => {
