@@ -20,7 +20,6 @@ const GAP_X = 56;
 const GAP_Y = 80;
 const SIDE_PAD = 40;
 const TOP_PAD = 100;
-const REVEAL_DISTANCE = 600; // px de rolagem para o rodapé subir totalmente
 const PARALLAX_STRENGTH = 50; // px máximo de deslocamento dos cards seguindo o cursor
 
 function IdentidadesPage() {
