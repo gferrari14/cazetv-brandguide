@@ -103,14 +103,14 @@ function Entry() {
       </header>
 
       {/* Título gigante centralizado com card cíclico no meio */}
-      <div className="pointer-events-none absolute inset-0 z-[5] flex items-center justify-center px-4">
-        <div className="flex items-center justify-center gap-[2vw]">
+      <div className="pointer-events-none absolute inset-0 z-[5] flex items-center px-3 md:px-4">
+        <div className="grid w-full grid-cols-[1fr_auto_1fr] items-center">
           <h1
             ref={leftRef}
-            className="shrink-0 select-none font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
+            className="shrink-0 select-none justify-self-start font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
             style={{
               fontSize: "clamp(40px, 11vw, 200px)",
-              transformOrigin: "right center",
+              transformOrigin: "left center",
               willChange: "transform",
             }}
           >
@@ -140,10 +140,10 @@ function Entry() {
 
           <h1
             ref={rightRef}
-            className="shrink-0 select-none font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
+            className="shrink-0 select-none justify-self-end font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
             style={{
               fontSize: "clamp(40px, 11vw, 200px)",
-              transformOrigin: "left center",
+              transformOrigin: "right center",
               willChange: "transform",
             }}
           >
