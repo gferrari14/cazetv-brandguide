@@ -45,6 +45,7 @@ function Entry() {
   const [coverIdx, setCoverIdx] = useState(0);
   const leftRef = useRef<HTMLHeadingElement | null>(null);
   const rightRef = useRef<HTMLHeadingElement | null>(null);
+  const cardRef = useRef<HTMLDivElement | null>(null);
 
   // troca de capas a cada 1.4s
   useEffect(() => {
@@ -58,7 +59,8 @@ function Entry() {
   useEffect(() => {
     const left = leftRef.current;
     const right = rightRef.current;
-    if (!left || !right) return;
+    const card = cardRef.current;
+    if (!left || !right || !card) return;
     let raf = 0;
     const state = { sx: 1, tsx: 1 };
 
@@ -69,9 +71,14 @@ function Entry() {
 
     const tick = () => {
       state.sx += (state.tsx - state.sx) * 0.1;
-      const t = `scaleX(${state.sx.toFixed(3)})`;
-      left.style.transform = t;
-      right.style.transform = t;
+      const sx = state.sx;
+      left.style.transform = `scaleX(${sx.toFixed(3)})`;
+      right.style.transform = `scaleX(${sx.toFixed(3)})`;
+      // mantém o card colado entre os textos compensando a diferença de larguras
+      const leftW = left.offsetWidth;
+      const rightW = right.offsetWidth;
+      const shift = ((leftW - rightW) * (sx - 1)) / 2;
+      card.style.transform = `translateX(${shift.toFixed(2)}px)`;
       raf = requestAnimationFrame(tick);
     };
 
@@ -119,11 +126,13 @@ function Entry() {
 
           {/* Card cíclico de identidade */}
           <div
+            ref={cardRef}
             aria-hidden
             className="relative shrink-0 overflow-hidden border-2 border-white/25 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.8)]"
             style={{
               height: "clamp(48px, 8vw, 150px)",
               aspectRatio: "16 / 9",
+              willChange: "transform",
             }}
           >
             {COVERS.map((src, i) => (
