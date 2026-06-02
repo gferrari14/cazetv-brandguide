@@ -26,7 +26,6 @@ function IdentidadesPage() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<IdentityCategory>("programas");
   const [topSlug, setTopSlug] = useState<string | null>(null);
-  const [footerProgress, setFooterProgress] = useState(0);
   const [modalIdentity, setModalIdentity] = useState<
     import("@/data/identities").Identity | null
   >(null);
