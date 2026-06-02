@@ -24,15 +24,24 @@ function Entry() {
         className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-15"
       />
 
-      {/* Logo e título top-left */}
-      <header className="absolute left-3 top-4 z-10 flex items-center gap-3 md:left-4">
+      {/* Logo top-left */}
+      <header className="absolute left-3 top-4 z-10 md:left-4">
         <Link to="/" aria-label="CazéTV">
           <img src={navLogo} alt="CazéTV" className="h-10 w-auto md:h-12" />
         </Link>
-        <span className="select-none text-[10px] font-bold uppercase tracking-[0.18em] text-white/80">
-          BRANDING CAZÉTV
-        </span>
       </header>
+
+      {/* Título grande, verticalmente central e alinhado à esquerda */}
+      <div className="pointer-events-none absolute left-3 top-1/2 z-[5] -translate-y-1/2 md:left-4">
+        <h1
+          className="select-none text-left font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
+          style={{ fontSize: "clamp(48px, 14vw, 260px)" }}
+        >
+          BRANDING
+          <br />
+          CAZÉTV
+        </h1>
+      </div>
 
       {/* Buttons bottom-left */}
       <nav className="absolute bottom-4 left-3 z-10 flex flex-row flex-wrap gap-2 md:left-4">
