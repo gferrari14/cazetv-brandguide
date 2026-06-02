@@ -1,10 +1,26 @@
 import { useEffect } from "react";
 import { X, Download } from "lucide-react";
 import type { Identity } from "@/data/identities";
-import umDiaComSlide1 from "@/assets/um-dia-com/slide-1.gif";
+import umDiaComSlide1 from "@/assets/um-dia-com/slide-1-chico-belt.png";
+import umDiaComSlide2 from "@/assets/um-dia-com/slide-2-paleta.png";
+import umDiaComSlide3 from "@/assets/um-dia-com/slide-3-fontes.png";
+import umDiaComSlide4 from "@/assets/um-dia-com/slide-4-logo.gif";
+import umDiaComSlide5 from "@/assets/um-dia-com/slide-5-insert.gif";
+import umDiaComSlide6 from "@/assets/um-dia-com/slide-6-cidade.png";
+import umDiaComSlide7 from "@/assets/um-dia-com/slide-7-prox-ep.gif";
+import umDiaComSlide8 from "@/assets/um-dia-com/slide-8-logo-jp.png";
 
 const SLIDE_MEDIA: Record<string, Record<number, string>> = {
-  "um-dia-com": { 1: umDiaComSlide1 },
+  "um-dia-com": {
+    1: umDiaComSlide1,
+    2: umDiaComSlide2,
+    3: umDiaComSlide3,
+    4: umDiaComSlide4,
+    5: umDiaComSlide5,
+    6: umDiaComSlide6,
+    7: umDiaComSlide7,
+    8: umDiaComSlide8,
+  },
 };
 
 interface Props {
