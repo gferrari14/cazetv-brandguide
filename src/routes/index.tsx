@@ -31,15 +31,11 @@ function Entry() {
         </Link>
       </header>
 
-      {/* Título grande, verticalmente central e alinhado à esquerda */}
+      {/* Título pequeno, verticalmente central e alinhado à esquerda */}
       <div className="pointer-events-none absolute left-3 top-1/2 z-[5] -translate-y-1/2 md:left-4">
-        <h1
-          className="select-none text-left font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
-          style={{ fontSize: "clamp(48px, 14vw, 260px)" }}
-        >
-          BRANDING
-          <br />
-          CAZÉTV
+        <h1 className="select-none text-left font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
+            style={{ fontSize: "clamp(20px, 6vw, 80px)" }}>
+          BRANDING CAZÉTV
         </h1>
       </div>
 
