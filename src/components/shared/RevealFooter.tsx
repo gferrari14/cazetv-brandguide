@@ -87,7 +87,7 @@ export function RevealFooter({
           <button
             onClick={scrollToTop}
             aria-label="Voltar ao topo"
-            className="self-start rounded-full border border-black/20 p-3 transition hover:bg-black hover:text-white"
+            className="self-start border border-black/20 p-3 transition hover:bg-black hover:text-white"
           >
             <ArrowUp className="size-5" />
           </button>
