@@ -107,12 +107,6 @@ export function IdentityModal({ identity, open, onClose }: Props) {
                     className={`h-full w-full ${preserve ? "object-contain" : "object-cover"}`}
                   />
                 ) : (
-                  <img
-                    src={media}
-                    alt={`${identity.name} slide ${n}`}
-                    className="h-full w-full object-cover"
-                  />
-                ) : (
                   <span className="text-xs font-bold uppercase tracking-[0.3em] text-white/30">
                     {identity.name} — slide {n}
                   </span>
