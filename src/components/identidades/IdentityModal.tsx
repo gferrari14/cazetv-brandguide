@@ -48,6 +48,7 @@ const assets = [
   { label: "ASSETS", href: "#" },
   { label: "TIPOGRAFIA", href: "#" },
   { label: "KIT COMPLETO", href: "#" },
+  { label: "GUIDE", href: "#", external: true },
 ];
 
 export function IdentityModal({ identity, open, onClose }: Props) {
