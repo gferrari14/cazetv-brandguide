@@ -278,66 +278,9 @@ function IdentidadesPage() {
         </div>
       </div>
 
-      {/* Espaço extra para permitir mais scroll antes do rodapé */}
-      <div style={{ height: REVEAL_DISTANCE }} aria-hidden />
-
-      {/* Footer fixo que SOBE sobre o conteúdo */}
-      <footer
-        className="fixed inset-x-0 bottom-0 z-50 h-screen overflow-hidden bg-white text-black"
-        style={{
-          transform: `translateY(${(1 - footerProgress) * 100}%)`,
-          transition: "transform 80ms linear",
-          willChange: "transform",
-        }}
-        onMouseMove={onFooterMouseMove}
-        onMouseLeave={onFooterMouseLeave}
-      >
-        <div className="relative z-10 mx-auto flex h-full max-w-[1600px] flex-col px-8 pb-10 pt-12 md:px-14">
-          <button
-            onClick={scrollToTop}
-            aria-label="Voltar ao topo"
-            className="self-start border border-black/20 p-3 transition hover:bg-black hover:text-white"
-          >
-            <ArrowUp className="size-5" />
-          </button>
-
-          <div className="mt-12 flex-1">
-            <p className="max-w-3xl text-xl font-semibold leading-relaxed text-black md:text-2xl lg:text-3xl">
-              AS IDENTIDADES DA CAZÉTV NASCEM PARA DAR FORMA, VOZ E ENERGIA A CADA PROGRAMA, CAMPEONATO E PROJETO ESPECIAL. ESTE ESPAÇO REÚNE OS SISTEMAS VISUAIS QUE CONSTRUÍMOS AO LONGO DO TEMPO: LOGOS, CORES, TIPOGRAFIAS, GRAFISMOS, ASSETS E REGRAS DE USO. PARA MANTER NOSSA MARCA VIVA, CONSISTENTE E DINÂMICA.
-            </p>
-          </div>
-
-          <div className="relative mt-10">
-            <div className="relative mb-6 flex items-center">
-              <div className="h-0.5 w-full bg-black" />
-              <img
-                src={mascotIcon}
-                alt="CazéTV"
-                className="absolute left-1/2 h-12 w-12 -translate-x-1/2"
-              />
-            </div>
-            <div className="flex flex-col items-start justify-between gap-2 text-xs uppercase tracking-widest text-black/60 md:flex-row md:items-center">
-              <span>© CazéTV 2026</span>
-              <span>Todos os direitos reservados</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Gradiente colorido com drift autônomo + leve influência do cursor */}
-        <div
-          ref={gradientRef}
-          aria-hidden
-          className="pointer-events-none absolute -bottom-24 -left-24 -right-24 z-0 h-[85%]"
-          style={{
-            background: `
-              radial-gradient(calc(60% * var(--scale, 1)) calc(80% * var(--scale, 1)) at var(--mx, 30%) var(--my, 100%), rgba(246,76,104,0.55), transparent 60%),
-              radial-gradient(calc(55% * var(--scale, 1)) calc(75% * var(--scale, 1)) at calc(var(--mx, 70%) + 25%) calc(var(--my, 100%) - 5%), rgba(97,184,224,0.55), transparent 65%),
-              radial-gradient(calc(40% * var(--scale, 1)) calc(60% * var(--scale, 1)) at calc(var(--mx, 50%) - 15%) calc(var(--my, 100%) + 10%), rgba(243,193,27,0.35), transparent 70%)
-            `,
-            filter: "blur(40px)",
-          }}
-        />
-      </footer>
+      <RevealFooter
+        text="AS IDENTIDADES DA CAZÉTV NASCEM PARA DAR FORMA, VOZ E ENERGIA A CADA PROGRAMA, CAMPEONATO E PROJETO ESPECIAL. ESTE ESPAÇO REÚNE OS SISTEMAS VISUAIS QUE CONSTRUÍMOS AO LONGO DO TEMPO: LOGOS, CORES, TIPOGRAFIAS, GRAFISMOS, ASSETS E REGRAS DE USO. PARA MANTER NOSSA MARCA VIVA, CONSISTENTE E DINÂMICA."
+      />
 
       <IdentityModal
         identity={modalIdentity ?? { slug: "", name: "", category: "programas" }}
