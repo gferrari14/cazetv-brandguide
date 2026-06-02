@@ -30,6 +30,11 @@ const PRESERVE_RATIO: Record<string, Set<number>> = {
   "um-dia-com": new Set([2, 3, 4, 5, 6, 7, 8, 9]),
 };
 
+// Slides que não são 16:9 — renderizam no tamanho natural, sem caixa
+const NATURAL_SIZE: Record<string, Set<number>> = {
+  "um-dia-com": new Set([5, 6]),
+};
+
 interface Props {
   identity: Identity;
   open: boolean;
