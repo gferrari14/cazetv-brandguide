@@ -103,8 +103,8 @@ function Entry() {
       </header>
 
       {/* Título gigante centralizado com card cíclico no meio */}
-      <div className="pointer-events-none absolute inset-0 z-[5] flex items-center justify-center px-4">
-        <div className="flex items-center justify-center gap-[2vw]">
+      <div className="pointer-events-none absolute inset-0 z-[5] flex items-center px-3 md:px-4">
+        <div className="grid w-full grid-cols-[1fr_auto_1fr] items-center">
           <h1
             ref={leftRef}
             className="shrink-0 select-none font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
