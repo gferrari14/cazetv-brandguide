@@ -145,7 +145,9 @@ export function IdentityModal({ identity, open, onClose }: Props) {
             <a
               key={a.label}
               href={a.href}
-              download
+              {...(a.external
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : { download: true })}
               className="group inline-flex items-center gap-2 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white/80 transition hover:bg-white hover:text-black"
             >
               <Download className="size-3" />
