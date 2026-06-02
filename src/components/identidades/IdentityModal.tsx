@@ -52,7 +52,9 @@ export function IdentityModal({ identity, open, onClose }: Props) {
 
   if (!open) return null;
 
-  const slides = Array.from({ length: 6 }, (_, i) => i + 1);
+  const mediaForIdentity = SLIDE_MEDIA[identity.slug];
+  const slideCount = mediaForIdentity ? Object.keys(mediaForIdentity).length : 6;
+  const slides = Array.from({ length: slideCount }, (_, i) => i + 1);
 
   return (
     <div
