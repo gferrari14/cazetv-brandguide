@@ -107,10 +107,10 @@ function Entry() {
         <div className="grid w-full grid-cols-[1fr_auto_1fr] items-center">
           <h1
             ref={leftRef}
-            className="shrink-0 select-none font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
+            className="shrink-0 select-none justify-self-start font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
             style={{
               fontSize: "clamp(40px, 11vw, 200px)",
-              transformOrigin: "right center",
+              transformOrigin: "left center",
               willChange: "transform",
             }}
           >
