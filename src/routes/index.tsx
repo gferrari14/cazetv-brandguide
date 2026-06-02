@@ -101,18 +101,18 @@ function Entry() {
       </header>
 
       {/* Título gigante centralizado com card cíclico no meio */}
-      <div className="absolute inset-0 z-[5] flex items-center justify-center px-4">
+      <div className="pointer-events-none absolute inset-0 z-[5] flex items-center justify-center px-4">
         <div
           ref={titleRef}
-          className="flex w-full items-center justify-center gap-[2vw] whitespace-nowrap"
+          className="flex items-center justify-center gap-[2vw]"
           style={{
             transformOrigin: "center center",
             willChange: "transform",
           }}
         >
           <h1
-            className="select-none font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
-            style={{ fontSize: "clamp(48px, 13vw, 240px)" }}
+            className="shrink-0 select-none font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
+            style={{ fontSize: "clamp(40px, 11vw, 200px)" }}
           >
             BRANDING
           </h1>
@@ -120,9 +120,9 @@ function Entry() {
           {/* Card cíclico de identidade */}
           <div
             aria-hidden
-            className="relative overflow-hidden border-2 border-white/25 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.8)]"
+            className="relative shrink-0 overflow-hidden border-2 border-white/25 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.8)]"
             style={{
-              height: "clamp(56px, 10vw, 180px)",
+              height: "clamp(48px, 8vw, 150px)",
               aspectRatio: "16 / 9",
             }}
           >
@@ -139,8 +139,8 @@ function Entry() {
           </div>
 
           <h1
-            className="select-none font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
-            style={{ fontSize: "clamp(48px, 13vw, 240px)" }}
+            className="shrink-0 select-none font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
+            style={{ fontSize: "clamp(40px, 11vw, 200px)" }}
           >
             CAZÉTV
           </h1>
