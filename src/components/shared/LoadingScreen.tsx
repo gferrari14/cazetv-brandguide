@@ -2,23 +2,26 @@ import { useEffect, useState } from "react";
 
 // Coleta as URLs de todas as mídias importáveis do projeto para pré-carregar
 const assetUrls = Object.values(
-  import.meta.glob("/src/assets/**/*.{png,jpg,jpeg,gif,webp,svg}", {
-    eager: true,
-    query: "?url",
-    import: "default",
-  }),
+  import.meta.glob(
+    "/src/assets/**/*.{png,jpg,jpeg,gif,webp,avif,svg,mp4,webm,mov,mp3,ogg,wav,woff,woff2,ttf,otf}",
+    {
+      eager: true,
+      query: "?url",
+      import: "default",
+    },
+  ),
 ) as string[];
 
-const MIN_DURATION = 1400; // duração mínima para a animação não piscar
+const MIN_DURATION = 600; // piso visual mínimo para evitar flash em loads instantâneos
 const SESSION_KEY = "cazetv:loaded";
 
-function preloadImage(src: string): Promise<void> {
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.onload = () => resolve();
-    img.onerror = () => resolve();
-    img.src = src;
-  });
+// Baixa de fato o asset (qualquer tipo de mídia) e o coloca no cache do browser.
+// Usamos fetch em vez de new Image() para que vídeos, fontes e áudios também sejam baixados.
+function preloadAsset(src: string): Promise<void> {
+  return fetch(src, { cache: "force-cache" })
+    .then((r) => r.blob())
+    .then(() => undefined)
+    .catch(() => undefined);
 }
 
 export function LoadingScreen() {
@@ -36,45 +39,28 @@ export function LoadingScreen() {
     const total = assetUrls.length || 1;
     let loaded = 0;
 
-    const updateProgress = () => {
-      const realRatio = loaded / total;
-      const elapsedRatio = Math.min(1, (performance.now() - start) / MIN_DURATION);
-      // progresso = o menor entre o real (assets) e o tempo decorrido,
-      // garantindo barra fluida e suave
-      const p = Math.min(realRatio, elapsedRatio);
-      setProgress(p);
-    };
+    // Atualiza o progresso real conforme cada asset termina de baixar
+    const promises = assetUrls.map((url) =>
+      preloadAsset(url).then(() => {
+        if (cancelled) return;
+        loaded += 1;
+        setProgress(loaded / total);
+      }),
+    );
 
-    // tick visual contínuo
-    let raf = 0;
-    const tick = () => {
+    Promise.all(promises).then(async () => {
       if (cancelled) return;
-      updateProgress();
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-
-    // pré-carregamento real
-    Promise.all(
-      assetUrls.map((url) =>
-        preloadImage(url).then(() => {
-          loaded += 1;
-        }),
-      ),
-    ).then(async () => {
-      // aguarda duração mínima
+      // Garante o piso de duração mínima apenas se o load real for mais rápido
       const remaining = MIN_DURATION - (performance.now() - start);
       if (remaining > 0) {
         await new Promise((r) => setTimeout(r, remaining));
       }
       if (cancelled) return;
       setProgress(1);
-      cancelAnimationFrame(raf);
       // pequena pausa para a barra "fechar" antes de subir
       setTimeout(() => {
         if (cancelled) return;
         setLeaving(true);
-        // remove do DOM após a transição
         setTimeout(() => {
           if (cancelled) return;
           sessionStorage.setItem(SESSION_KEY, "1");
@@ -85,7 +71,6 @@ export function LoadingScreen() {
 
     return () => {
       cancelled = true;
-      cancelAnimationFrame(raf);
     };
   }, [mounted]);
 
@@ -107,7 +92,7 @@ export function LoadingScreen() {
           className="h-full bg-foreground"
           style={{
             width: `${progress * 100}%`,
-            transition: "width 120ms linear",
+            transition: "width 200ms ease-out",
           }}
         />
       </div>
