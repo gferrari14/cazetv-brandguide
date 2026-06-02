@@ -90,7 +90,7 @@ export function IdentityModal({ identity, open, onClose }: Props) {
         <button
           onClick={onClose}
           aria-label="Fechar"
-          className="flex size-10 items-center justify-center rounded-full border-2 border-white/30 text-white transition hover:bg-white hover:text-black"
+          className="flex size-10 items-center justify-center border-2 border-white/30 text-white transition hover:bg-white hover:text-black"
         >
           <X className="size-4" />
         </button>
