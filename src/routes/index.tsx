@@ -104,17 +104,15 @@ function Entry() {
 
       {/* Título gigante centralizado com card cíclico no meio */}
       <div className="pointer-events-none absolute inset-0 z-[5] flex items-center justify-center px-4">
-        <div
-          ref={titleRef}
-          className="flex items-center justify-center gap-[2vw]"
-          style={{
-            transformOrigin: "center center",
-            willChange: "transform",
-          }}
-        >
+        <div className="flex items-center justify-center gap-[2vw]">
           <h1
+            ref={leftRef}
             className="shrink-0 select-none font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
-            style={{ fontSize: "clamp(40px, 11vw, 200px)" }}
+            style={{
+              fontSize: "clamp(40px, 11vw, 200px)",
+              transformOrigin: "right center",
+              willChange: "transform",
+            }}
           >
             BRANDING
           </h1>
