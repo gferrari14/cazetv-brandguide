@@ -122,7 +122,11 @@ const ASSETS_BY_IDENTITY: Record<string, AssetItem[]> = {
 
 const DEFAULT_ASSETS: AssetItem[] = [
   { label: "LOGO", href: "#" },
-  { label: "ASSETS", href: "#" },
+    {
+      label: "ASSETS",
+      onClick: () =>
+        downloadFile("/identidades/um-dia-com/ASSETS.zip", "UM-DIA-COM-ASSETS.zip"),
+    },
   { label: "TIPOGRAFIA", href: "#" },
   { label: "KIT COMPLETO", href: "#" },
   { label: "GUIDE", href: "#", external: true },
