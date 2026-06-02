@@ -106,7 +106,11 @@ const ASSETS_BY_IDENTITY: Record<string, AssetItem[]> = {
           "UM-DIA-COM-LOGOS.zip",
         ),
     },
-    { label: "ASSETS", href: "#" },
+    {
+      label: "ASSETS",
+      onClick: () =>
+        downloadFile("/identidades/um-dia-com/ASSETS.zip", "UM-DIA-COM-ASSETS.zip"),
+    },
     {
       label: "FONTES",
       onClick: () =>
@@ -115,18 +119,26 @@ const ASSETS_BY_IDENTITY: Record<string, AssetItem[]> = {
           "RoyaleCouture-Sans.otf",
         ),
     },
-    { label: "KIT COMPLETO", href: "#" },
+    {
+      label: "KIT COMPLETO",
+      onClick: () =>
+        downloadZip(
+          [
+            { url: "/identidades/um-dia-com/LOGO_FUNDO_CLARO.png", path: "LOGO/LOGO_FUNDO_CLARO.png" },
+            { url: "/identidades/um-dia-com/LOGO_FUNDO_ESCURO.png", path: "LOGO/LOGO_FUNDO_ESCURO.png" },
+            { url: "/identidades/um-dia-com/ASSETS.zip", path: "ASSETS.zip" },
+            { url: "/identidades/um-dia-com/RoyaleCouture-Sans.otf", path: "FONTES/RoyaleCouture-Sans.otf" },
+          ],
+          "UM-DIA-COM-KIT-COMPLETO.zip",
+        ),
+    },
     { label: "GUIDE", href: "#", external: true },
   ],
 };
 
 const DEFAULT_ASSETS: AssetItem[] = [
   { label: "LOGO", href: "#" },
-    {
-      label: "ASSETS",
-      onClick: () =>
-        downloadFile("/identidades/um-dia-com/ASSETS.zip", "UM-DIA-COM-ASSETS.zip"),
-    },
+  { label: "ASSETS", href: "#" },
   { label: "TIPOGRAFIA", href: "#" },
   { label: "KIT COMPLETO", href: "#" },
   { label: "GUIDE", href: "#", external: true },
