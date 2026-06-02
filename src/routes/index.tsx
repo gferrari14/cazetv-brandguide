@@ -54,23 +54,24 @@ function Entry() {
     return () => window.clearInterval(id);
   }, []);
 
-  // efeito de "expandir/comprimir horizontalmente" o título conforme a posição do cursor
+  // efeito de "expandir/comprimir horizontalmente" apenas o texto do título
   useEffect(() => {
-    const el = titleRef.current;
-    if (!el) return;
+    const left = leftRef.current;
+    const right = rightRef.current;
+    if (!left || !right) return;
     let raf = 0;
     const state = { sx: 1, tsx: 1 };
 
     const onMove = (e: MouseEvent) => {
-      // -1 (esquerda) .. +1 (direita)
-      const nx = (e.clientX / window.innerWidth) * 2 - 1;
-      // mapeia para 0.65 .. 1.35
-      state.tsx = 1 + nx * 0.35;
+      const nx = (e.clientX / window.innerWidth) * 2 - 1; // -1..1
+      state.tsx = 1 + nx * 0.35; // ~0.65..1.35
     };
 
     const tick = () => {
       state.sx += (state.tsx - state.sx) * 0.1;
-      el.style.transform = `scaleX(${state.sx.toFixed(3)})`;
+      const t = `scaleX(${state.sx.toFixed(3)})`;
+      left.style.transform = t;
+      right.style.transform = t;
       raf = requestAnimationFrame(tick);
     };
 
