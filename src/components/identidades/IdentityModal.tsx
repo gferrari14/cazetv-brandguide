@@ -218,19 +218,36 @@ export function IdentityModal({ identity, open, onClose }: Props) {
       {/* Floating download menu */}
       <div className="pointer-events-none absolute inset-x-0 bottom-6 z-10 flex justify-center px-4">
         <div className="pointer-events-auto flex items-center gap-1 border-2 border-white/25 bg-black/70 p-1.5 backdrop-blur-md shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)]">
-          {assets.map((a) => (
-            <a
-              key={a.label}
-              href={a.href}
-              {...(a.external
-                ? { target: "_blank", rel: "noopener noreferrer" }
-                : { download: true })}
-              className="group inline-flex items-center gap-2 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white/80 transition hover:bg-white hover:text-black"
-            >
-              <Download className="size-3" />
-              {a.label}
-            </a>
-          ))}
+          {(ASSETS_BY_IDENTITY[identity.slug] ?? DEFAULT_ASSETS).map((a) => {
+            const className =
+              "group inline-flex items-center gap-2 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white/80 transition hover:bg-white hover:text-black";
+            if (a.onClick) {
+              return (
+                <button
+                  key={a.label}
+                  type="button"
+                  onClick={() => void a.onClick?.()}
+                  className={className}
+                >
+                  <Download className="size-3" />
+                  {a.label}
+                </button>
+              );
+            }
+            return (
+              <a
+                key={a.label}
+                href={a.href}
+                {...(a.external
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : { download: true })}
+                className={className}
+              >
+                <Download className="size-3" />
+                {a.label}
+              </a>
+            );
+          })}
         </div>
       </div>
     </div>
