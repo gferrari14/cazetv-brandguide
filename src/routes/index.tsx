@@ -43,7 +43,8 @@ const COVERS: string[] = [
 
 function Entry() {
   const [coverIdx, setCoverIdx] = useState(0);
-  const titleRef = useRef<HTMLDivElement | null>(null);
+  const leftRef = useRef<HTMLHeadingElement | null>(null);
+  const rightRef = useRef<HTMLHeadingElement | null>(null);
 
   // troca de capas a cada 1.4s
   useEffect(() => {
@@ -53,23 +54,24 @@ function Entry() {
     return () => window.clearInterval(id);
   }, []);
 
-  // efeito de "expandir/comprimir horizontalmente" o título conforme a posição do cursor
+  // efeito de "expandir/comprimir horizontalmente" apenas o texto do título
   useEffect(() => {
-    const el = titleRef.current;
-    if (!el) return;
+    const left = leftRef.current;
+    const right = rightRef.current;
+    if (!left || !right) return;
     let raf = 0;
     const state = { sx: 1, tsx: 1 };
 
     const onMove = (e: MouseEvent) => {
-      // -1 (esquerda) .. +1 (direita)
-      const nx = (e.clientX / window.innerWidth) * 2 - 1;
-      // mapeia para 0.65 .. 1.35
-      state.tsx = 1 + nx * 0.35;
+      const nx = (e.clientX / window.innerWidth) * 2 - 1; // -1..1
+      state.tsx = 1 + nx * 0.35; // ~0.65..1.35
     };
 
     const tick = () => {
       state.sx += (state.tsx - state.sx) * 0.1;
-      el.style.transform = `scaleX(${state.sx.toFixed(3)})`;
+      const t = `scaleX(${state.sx.toFixed(3)})`;
+      left.style.transform = t;
+      right.style.transform = t;
       raf = requestAnimationFrame(tick);
     };
 
@@ -102,17 +104,15 @@ function Entry() {
 
       {/* Título gigante centralizado com card cíclico no meio */}
       <div className="pointer-events-none absolute inset-0 z-[5] flex items-center justify-center px-4">
-        <div
-          ref={titleRef}
-          className="flex items-center justify-center gap-[2vw]"
-          style={{
-            transformOrigin: "center center",
-            willChange: "transform",
-          }}
-        >
+        <div className="flex items-center justify-center gap-[2vw]">
           <h1
+            ref={leftRef}
             className="shrink-0 select-none font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
-            style={{ fontSize: "clamp(40px, 11vw, 200px)" }}
+            style={{
+              fontSize: "clamp(40px, 11vw, 200px)",
+              transformOrigin: "right center",
+              willChange: "transform",
+            }}
           >
             BRANDING
           </h1>
@@ -139,8 +139,13 @@ function Entry() {
           </div>
 
           <h1
+            ref={rightRef}
             className="shrink-0 select-none font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
-            style={{ fontSize: "clamp(40px, 11vw, 200px)" }}
+            style={{
+              fontSize: "clamp(40px, 11vw, 200px)",
+              transformOrigin: "left center",
+              willChange: "transform",
+            }}
           >
             CAZÉTV
           </h1>
