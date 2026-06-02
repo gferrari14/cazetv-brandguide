@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { X, Download } from "lucide-react";
+import JSZip from "jszip";
 import type { Identity } from "@/data/identities";
 import umDiaComSlide1 from "@/assets/um-dia-com/slide-1.gif";
 import umDiaComSlide2 from "@/assets/um-dia-com/slide-1-chico-belt.png";
@@ -43,7 +44,83 @@ interface Props {
   onClose: () => void;
 }
 
-const assets = [
+type AssetItem = {
+  label: string;
+  href?: string;
+  external?: boolean;
+  onClick?: () => void | Promise<void>;
+};
+
+async function downloadFile(url: string, filename: string) {
+  const res = await fetch(url);
+  const blob = await res.blob();
+  const objectUrl = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = objectUrl;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(objectUrl);
+}
+
+async function downloadZip(
+  files: { url: string; path: string }[],
+  zipName: string,
+) {
+  const zip = new JSZip();
+  await Promise.all(
+    files.map(async (f) => {
+      const res = await fetch(f.url);
+      const blob = await res.blob();
+      zip.file(f.path, blob);
+    }),
+  );
+  const blob = await zip.generateAsync({ type: "blob" });
+  const objectUrl = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = objectUrl;
+  a.download = zipName;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(objectUrl);
+}
+
+const ASSETS_BY_IDENTITY: Record<string, AssetItem[]> = {
+  "um-dia-com": [
+    {
+      label: "LOGO",
+      onClick: () =>
+        downloadZip(
+          [
+            {
+              url: "/identidades/um-dia-com/LOGO_FUNDO_CLARO.png",
+              path: "LOGO_FUNDO_CLARO.png",
+            },
+            {
+              url: "/identidades/um-dia-com/LOGO_FUNDO_ESCURO.png",
+              path: "LOGO_FUNDO_ESCURO.png",
+            },
+          ],
+          "UM-DIA-COM-LOGOS.zip",
+        ),
+    },
+    { label: "ASSETS", href: "#" },
+    {
+      label: "FONTES",
+      onClick: () =>
+        downloadFile(
+          "/identidades/um-dia-com/RoyaleCouture-Sans.otf",
+          "RoyaleCouture-Sans.otf",
+        ),
+    },
+    { label: "KIT COMPLETO", href: "#" },
+    { label: "GUIDE", href: "#", external: true },
+  ],
+};
+
+const DEFAULT_ASSETS: AssetItem[] = [
   { label: "LOGO", href: "#" },
   { label: "ASSETS", href: "#" },
   { label: "TIPOGRAFIA", href: "#" },
