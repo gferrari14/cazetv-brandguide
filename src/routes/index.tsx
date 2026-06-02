@@ -139,8 +139,13 @@ function Entry() {
           </div>
 
           <h1
+            ref={rightRef}
             className="shrink-0 select-none font-black uppercase leading-[0.85] tracking-[-0.04em] text-white"
-            style={{ fontSize: "clamp(40px, 11vw, 200px)" }}
+            style={{
+              fontSize: "clamp(40px, 11vw, 200px)",
+              transformOrigin: "left center",
+              willChange: "transform",
+            }}
           >
             CAZÉTV
           </h1>
