@@ -1,14 +1,15 @@
 import { useEffect } from "react";
 import { X, Download } from "lucide-react";
 import type { Identity } from "@/data/identities";
-import umDiaComSlide1 from "@/assets/um-dia-com/slide-1-chico-belt.png";
-import umDiaComSlide2 from "@/assets/um-dia-com/slide-2-paleta.png";
-import umDiaComSlide3 from "@/assets/um-dia-com/slide-3-fontes.png";
-import umDiaComSlide4 from "@/assets/um-dia-com/slide-4-logo.gif";
-import umDiaComSlide5 from "@/assets/um-dia-com/slide-5-insert.gif";
-import umDiaComSlide6 from "@/assets/um-dia-com/slide-6-cidade.png";
-import umDiaComSlide7 from "@/assets/um-dia-com/slide-7-prox-ep.gif";
-import umDiaComSlide8 from "@/assets/um-dia-com/slide-8-logo-jp.png";
+import umDiaComSlide1 from "@/assets/um-dia-com/slide-1.gif";
+import umDiaComSlide2 from "@/assets/um-dia-com/slide-1-chico-belt.png";
+import umDiaComSlide3 from "@/assets/um-dia-com/slide-2-paleta.png";
+import umDiaComSlide4 from "@/assets/um-dia-com/slide-3-fontes.png";
+import umDiaComSlide5 from "@/assets/um-dia-com/slide-4-logo.gif";
+import umDiaComSlide6 from "@/assets/um-dia-com/slide-5-insert.gif";
+import umDiaComSlide7 from "@/assets/um-dia-com/slide-6-cidade.png";
+import umDiaComSlide8 from "@/assets/um-dia-com/slide-7-prox-ep.gif";
+import umDiaComSlide9 from "@/assets/um-dia-com/slide-8-logo-jp.png";
 
 const SLIDE_MEDIA: Record<string, Record<number, string>> = {
   "um-dia-com": {
@@ -20,7 +21,13 @@ const SLIDE_MEDIA: Record<string, Record<number, string>> = {
     6: umDiaComSlide6,
     7: umDiaComSlide7,
     8: umDiaComSlide8,
+    9: umDiaComSlide9,
   },
+};
+
+// Slides que devem preservar a proporção original (sem cortar)
+const PRESERVE_RATIO: Record<string, Set<number>> = {
+  "um-dia-com": new Set([2, 3, 4, 5, 6, 7, 8, 9]),
 };
 
 interface Props {
