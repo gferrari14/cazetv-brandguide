@@ -444,7 +444,7 @@ function TextBlockView({
 
   return (
     <div className="mx-auto max-w-[820px] px-4 py-10">
-      <p className="whitespace-pre-wrap text-center text-xl font-light leading-relaxed tracking-wide text-white/85 md:text-2xl">
+      <p className="whitespace-pre-wrap text-center text-base font-light leading-relaxed tracking-wide text-white/85 md:text-lg">
         {value}
       </p>
     </div>
