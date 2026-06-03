@@ -59,6 +59,9 @@ export async function reorderBlocks(
   }
 }
 
+// Private bucket — we use long-lived signed URLs (~10 years).
+const SIGNED_URL_TTL = 60 * 60 * 24 * 365 * 10;
+
 export async function uploadSlideImage(
   slug: string,
   file: File,
@@ -71,6 +74,9 @@ export async function uploadSlideImage(
     contentType: file.type || undefined,
   });
   if (error) throw error;
-  const { data } = supabase.storage.from(BUCKET).getPublicUrl(path);
-  return data.publicUrl;
+  const { data, error: signErr } = await supabase.storage
+    .from(BUCKET)
+    .createSignedUrl(path, SIGNED_URL_TTL);
+  if (signErr) throw signErr;
+  return data.signedUrl;
 }
