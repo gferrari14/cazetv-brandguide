@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 // Coleta as URLs de todas as mídias importáveis do projeto para pré-carregar
-const assetUrls = Object.values(
+const srcAssetUrls = Object.values(
   import.meta.glob(
     "/src/assets/**/*.{png,jpg,jpeg,gif,webp,avif,svg,mp4,webm,mov,mp3,ogg,wav,woff,woff2,ttf,otf}",
     {
@@ -11,6 +11,46 @@ const assetUrls = Object.values(
     },
   ),
 ) as string[];
+
+// Mídias servidas a partir de /public — também são pré-carregadas aqui para
+// que não haja delay de aparição depois que a tela de loading sai.
+const publicAssetUrls: string[] = [
+  "/videos/hero-bg.mp4",
+  "/favicon.png",
+  "/cursors/default-28.png",
+  "/cursors/default-40.png",
+  "/cursors/default-56.png",
+  "/cursors/default-filled-72.png",
+  "/cursors/finger-cursor-64.svg",
+  "/cursors/finger-cursor.svg",
+  "/cursors/pointer-32.png",
+  "/cursors/pointer-48.png",
+  "/cursors/pointer-64.png",
+  "/cursors/pointer-filled-88.png",
+  "/cursors/pointer.svg",
+  "/fonts/GILROY-BLACK.TTF",
+  "/fonts/GILROY-BOLD.TTF",
+  "/fonts/GILROY-REGULAR.TTF",
+  "/fonts/TUSKERGROTESK-3500MEDIUM.OTF",
+  "/fonts/TUSKERGROTESK-3500MEDIUM.TTF",
+  "/fonts/TUSKERGROTESK-4600SEMIBOLD.OTF",
+  "/fonts/TUSKERGROTESK-4600SEMIBOLD.TTF",
+  "/identidades/um-dia-com/LOGO_FUNDO_CLARO.png",
+  "/identidades/um-dia-com/LOGO_FUNDO_ESCURO.png",
+  "/identidades/um-dia-com/RoyaleCouture-Sans.otf",
+  "/identidades/um-dia-com/slides/slide-1.gif",
+  "/identidades/um-dia-com/slides/slide-1-chico-belt.png",
+  "/identidades/um-dia-com/slides/slide-2-paleta.png",
+  "/identidades/um-dia-com/slides/slide-3-fontes.png",
+  "/identidades/um-dia-com/slides/slide-4-logo.gif",
+  "/identidades/um-dia-com/slides/slide-assets.png",
+  "/identidades/um-dia-com/slides/slide-5-insert.gif",
+  "/identidades/um-dia-com/slides/slide-6-cidade.png",
+  "/identidades/um-dia-com/slides/slide-7-prox-ep.gif",
+  "/identidades/um-dia-com/slides/slide-8-logo-jp.png",
+];
+
+const assetUrls = Array.from(new Set([...srcAssetUrls, ...publicAssetUrls]));
 
 const MIN_DURATION = 600; // piso visual mínimo para evitar flash em loads instantâneos
 const SESSION_KEY = "cazetv:loaded";
@@ -81,7 +121,7 @@ export function LoadingScreen() {
   return (
     <div
       aria-hidden={leaving}
-      className="fixed inset-0 z-[300] flex items-center justify-center bg-background text-foreground"
+      className="fixed inset-0 z-[300] flex items-center justify-center bg-white text-black"
       style={{
         transform: leaving ? "translateY(-100%)" : "translateY(0)",
         transition: "transform 900ms cubic-bezier(0.77, 0, 0.175, 1)",
@@ -89,9 +129,9 @@ export function LoadingScreen() {
       }}
     >
       {/* Barra de progresso no topo */}
-      <div className="absolute left-0 right-0 top-0 h-[2px] bg-foreground/10">
+      <div className="absolute left-0 right-0 top-0 h-[2px] bg-black/10">
         <div
-          className="h-full bg-foreground"
+          className="h-full bg-black"
           style={{
             width: `${progress * 100}%`,
             transition: "width 200ms ease-out",
@@ -99,8 +139,11 @@ export function LoadingScreen() {
         />
       </div>
 
-      {/* Título centralizado, bem pequeno */}
-      <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-foreground/80">
+      {/* Título centralizado */}
+      <span
+        className="font-black uppercase tracking-[0.25em] text-black"
+        style={{ fontSize: "clamp(20px, 4vw, 48px)" }}
+      >
         BRANDING CAZÉTV
       </span>
     </div>
