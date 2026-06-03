@@ -129,7 +129,7 @@ export function LoadingScreen() {
       }}
     >
       {/* Barra de progresso no topo */}
-      <div className="absolute left-0 right-0 top-0 h-[2px] bg-black/10">
+      <div className="absolute left-0 right-0 top-0 h-[4px] bg-black/20">
         <div
           className="h-full bg-black"
           style={{
