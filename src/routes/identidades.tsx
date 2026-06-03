@@ -15,9 +15,9 @@ export const Route = createFileRoute("/identidades")({
 });
 
 const COLS = 3;
-const CARD_W = 360;
-const GAP_X = 56;
-const GAP_Y = 80;
+const CARD_W = 440;
+const GAP_X = 40;
+const GAP_Y = 48;
 const SIDE_PAD = 40;
 const TOP_PAD = 100;
 const PARALLAX_STRENGTH = 50; // px máximo de deslocamento dos cards seguindo o cursor
@@ -47,26 +47,12 @@ function IdentidadesPage() {
 
   const layout = useMemo(() => {
     const cardH = (CARD_W * 9) / 16;
-    // Padrão assimétrico inspirado em blit.studio
-    const variants = [
-      { dx: 0,    dy: 0,   scale: 1.0,  rot: -1 },
-      { dx: 60,   dy: 40,  scale: 0.85, rot: 1.5 },
-      { dx: -30,  dy: 80,  scale: 1.1,  rot: -0.5 },
-      { dx: 40,   dy: -30, scale: 0.9,  rot: 2 },
-      { dx: -50,  dy: 50,  scale: 1.05, rot: -1.5 },
-      { dx: 20,   dy: 90,  scale: 0.95, rot: 0.5 },
-      { dx: -20,  dy: -20, scale: 1.0,  rot: 1 },
-      { dx: 70,   dy: 30,  scale: 0.88, rot: -2 },
-      { dx: -40,  dy: 60,  scale: 1.08, rot: 0.8 },
-    ];
     return categoryItems.map((id, i) => {
       const col = i % COLS;
       const row = Math.floor(i / COLS);
-      const v = variants[i % variants.length];
-      const w = CARD_W * v.scale;
-      const x = SIDE_PAD + col * (CARD_W + GAP_X) + v.dx;
-      const y = TOP_PAD + row * (cardH + GAP_Y) + v.dy;
-      return { slug: id.slug, x, y, w, rotate: v.rot };
+      const x = SIDE_PAD + col * (CARD_W + GAP_X);
+      const y = TOP_PAD + row * (cardH + GAP_Y);
+      return { slug: id.slug, x, y, w: CARD_W, rotate: 0 };
     });
   }, [categoryItems]);
 
