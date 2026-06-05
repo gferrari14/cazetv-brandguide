@@ -134,6 +134,8 @@ export function IdentityModal({ identity, open, onClose }: Props) {
   const [blocks, setBlocks] = useState<IdentityBlock[]>([]);
   const [loading, setLoading] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  const [materials, setMaterials] = useState<IdentityMaterial[]>([]);
+  const [materialsOpen, setMaterialsOpen] = useState(false);
 
   useEffect(() => {
     if (!open) return;
