@@ -798,14 +798,15 @@ function MaterialSection({
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [uploading, setUploading] = useState(0);
   const [total, setTotal] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragCounter = useRef(0);
 
-  const handleFiles = async (files: FileList | null) => {
+  const processFiles = async (files: FileList | null) => {
     if (!files || files.length === 0) return;
     const list = Array.from(files);
     setTotal(list.length);
     setUploading(0);
     let done = 0;
-    // Limit concurrency to 3 to be gentle on the network
     const queue = [...list];
     const worker = async () => {
       while (queue.length) {
@@ -826,6 +827,33 @@ function MaterialSection({
     setUploading(0);
     if (inputRef.current) inputRef.current.value = "";
     await onChanged();
+  };
+
+  const handleFiles = async (files: FileList | null) => {
+    await processFiles(files);
+  };
+
+  const onDragEnter = (e: React.DragEvent) => {
+    e.preventDefault();
+    dragCounter.current += 1;
+    if (dragCounter.current === 1) setIsDragging(true);
+  };
+
+  const onDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    dragCounter.current -= 1;
+    if (dragCounter.current === 0) setIsDragging(false);
+  };
+
+  const onDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+  };
+
+  const onDrop = async (e: React.DragEvent) => {
+    e.preventDefault();
+    dragCounter.current = 0;
+    setIsDragging(false);
+    await processFiles(e.dataTransfer.files);
   };
 
   const busy = total > 0;
@@ -854,43 +882,63 @@ function MaterialSection({
           onChange={(e) => void handleFiles(e.target.files)}
         />
       </div>
-      {items.length === 0 ? (
-        <p className="border border-dashed border-white/15 px-4 py-6 text-center text-[10px] uppercase tracking-widest text-white/30">
-          Nenhum arquivo
-        </p>
-      ) : (
-        <ul className="flex flex-col gap-1">
-          {items.map((m) => (
-            <li
-              key={m.id}
-              className="flex items-center gap-2 border border-white/10 bg-white/[0.02] px-3 py-2"
-            >
-              <a
-                href={m.file_url}
-                download={m.filename}
-                className="flex-1 truncate text-xs text-white/85 hover:text-white"
-                title={m.filename}
+      <div
+        onDragEnter={onDragEnter}
+        onDragLeave={onDragLeave}
+        onDragOver={onDragOver}
+        onDrop={onDrop}
+        className={`transition-colors ${
+          isDragging
+            ? "border-2 border-dashed border-white/60 bg-white/[0.06]"
+            : "border border-dashed border-white/15 bg-transparent"
+        }`}
+      >
+        {items.length === 0 && !busy ? (
+          <p className="px-4 py-8 text-center text-[10px] uppercase tracking-widest text-white/30">
+            Arraste arquivos aqui ou clique em "Enviar"
+          </p>
+        ) : (
+          <ul className="flex flex-col">
+            {items.map((m) => (
+              <li
+                key={m.id}
+                className="flex items-center gap-2 border-b border-white/10 bg-white/[0.02] px-3 py-2 last:border-b-0"
               >
-                {m.filename}
-              </a>
-              <span className="text-[9px] text-white/40">
-                {(m.size / 1024).toFixed(0)} KB
-              </span>
-              <button
-                onClick={async () => {
-                  if (!confirm(`Excluir ${m.filename}?`)) return;
-                  await deleteMaterial(m);
-                  await onChanged();
-                }}
-                className="flex size-6 items-center justify-center text-white/40 transition hover:text-red-400"
-                aria-label="Excluir"
-              >
-                <Trash2 className="size-3.5" />
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
+                <a
+                  href={m.file_url}
+                  download={m.filename}
+                  className="flex-1 truncate text-xs text-white/85 hover:text-white"
+                  title={m.filename}
+                >
+                  {m.filename}
+                </a>
+                <span className="text-[9px] text-white/40">
+                  {(m.size / 1024).toFixed(0)} KB
+                </span>
+                <button
+                  onClick={async () => {
+                    if (!confirm(`Excluir ${m.filename}?`)) return;
+                    await deleteMaterial(m);
+                    await onChanged();
+                  }}
+                  className="flex size-6 items-center justify-center text-white/40 transition hover:text-red-400"
+                  aria-label="Excluir"
+                >
+                  <Trash2 className="size-3.5" />
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+        {busy && (
+          <div className="flex items-center gap-2 border-t border-white/10 px-3 py-2">
+            <Loader2 className="size-3 animate-spin text-white/60" />
+            <span className="text-[10px] text-white/60">
+              Enviando {uploading} de {total}…
+            </span>
+          </div>
+        )}
+      </div>
     </section>
   );
 }
