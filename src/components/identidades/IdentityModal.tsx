@@ -223,7 +223,7 @@ export function IdentityModal({ identity, open, onClose }: Props) {
         type: "slide",
         image_url: url,
         preserve_ratio: true,
-        natural_size: false,
+        natural_size: true,
       });
     } catch (err) {
       console.error("[IdentityModal] handleAddSlide", err);
@@ -514,19 +514,11 @@ function SlideBlockView({
     }
   };
 
-  const content = block.natural_size && block.image_url ? (
+  const content = block.image_url ? (
     <img src={block.image_url} alt="" className="block h-auto w-full" />
   ) : (
     <div className="relative flex aspect-[16/9] w-full items-center justify-center overflow-hidden border-2 border-white/20 bg-gradient-to-br from-white/[0.06] to-white/[0.01]">
-      {block.image_url ? (
-        <img
-          src={block.image_url}
-          alt=""
-          className={`h-full w-full ${block.preserve_ratio ? "object-contain" : "object-cover"}`}
-        />
-      ) : (
-        <span className="text-xs font-bold uppercase tracking-[0.3em] text-white/30">Sem imagem</span>
-      )}
+      <span className="text-xs font-bold uppercase tracking-[0.3em] text-white/30">Sem imagem</span>
     </div>
   );
 
