@@ -187,29 +187,48 @@ export function IdentityModal({ identity, open, onClose }: Props) {
     setBlocks(data);
   };
 
+  const insertAt = async (
+    insertAfterIndex: number,
+    payload: Partial<IdentityBlock> & { type: "slide" | "text" },
+  ) => {
+    try {
+      const tempPosition =
+        (blocks.reduce((m, b) => Math.max(m, b.position), 0) || 0) + 1;
+      const created = await createBlock({
+        identity_slug: identity.slug,
+        position: tempPosition,
+        ...payload,
+      });
+      // Place the new block at the requested index and renumber 1..N
+      const next = [...blocks];
+      next.splice(insertAfterIndex + 1, 0, created);
+      const renumbered = next.map((b, i) => ({ ...b, position: i + 1 }));
+      setBlocks(renumbered);
+      await reorderBlocks(renumbered.map((b) => ({ id: b.id, position: b.position })));
+    } catch (err) {
+      console.error("[IdentityModal] insertAt", err);
+      alert("Não foi possível adicionar o bloco. Tente novamente.");
+      await refresh();
+    }
+  };
+
   const handleAddText = async (insertAfterIndex: number) => {
-    const position = computePosition(blocks, insertAfterIndex);
-    await createBlock({
-      identity_slug: identity.slug,
-      type: "text",
-      position,
-      text_content: "",
-    });
-    await refresh();
+    await insertAt(insertAfterIndex, { type: "text", text_content: "" });
   };
 
   const handleAddSlide = async (insertAfterIndex: number, file: File) => {
-    const url = await uploadSlideImage(identity.slug, file);
-    const position = computePosition(blocks, insertAfterIndex);
-    await createBlock({
-      identity_slug: identity.slug,
-      type: "slide",
-      position,
-      image_url: url,
-      preserve_ratio: true,
-      natural_size: false,
-    });
-    await refresh();
+    try {
+      const url = await uploadSlideImage(identity.slug, file);
+      await insertAt(insertAfterIndex, {
+        type: "slide",
+        image_url: url,
+        preserve_ratio: true,
+        natural_size: false,
+      });
+    } catch (err) {
+      console.error("[IdentityModal] handleAddSlide", err);
+      alert("Falha ao enviar a imagem. Verifique o arquivo e tente novamente.");
+    }
   };
 
   const handleReplaceImage = async (block: IdentityBlock, file: File) => {
