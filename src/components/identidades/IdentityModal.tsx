@@ -1094,6 +1094,7 @@ function FolderGroup({
                 <a
                   href={m.file_url}
                   download={m.filename}
+                  draggable={false}
                   className="flex-1 truncate text-xs text-white/85 hover:text-white"
                   title={m.filename}
                 >
