@@ -269,6 +269,18 @@ export function IdentityModal({ identity, open, onClose }: Props) {
         </div>
         <div className="flex items-center gap-2">
           <button
+            onClick={() => setMaterialsOpen(true)}
+            className="flex h-10 items-center gap-2 border-2 border-white/30 px-4 text-[10px] font-bold uppercase tracking-widest text-white transition hover:bg-white hover:text-black"
+          >
+            <FolderPlus className="size-3.5" />
+            Materiais
+            {materials.length > 0 && (
+              <span className="ml-1 rounded-full bg-white/15 px-1.5 py-0.5 text-[9px]">
+                {materials.length}
+              </span>
+            )}
+          </button>
+          <button
             onClick={() => setEditMode((v) => !v)}
             className={`flex h-10 items-center gap-2 border-2 px-4 text-[10px] font-bold uppercase tracking-widest transition ${
               editMode
