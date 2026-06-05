@@ -78,6 +78,12 @@ export async function uploadMaterial(
 }
 
 
+export async function updateMaterialFolder(id: string, folder: string): Promise<void> {
+  const safeFolder = folder.replace(/[^\w\- ]+/g, "_").trim();
+  const { error } = await db().update({ folder: safeFolder }).eq("id", id);
+  if (error) throw error;
+}
+
 export async function deleteMaterial(m: IdentityMaterial): Promise<void> {
   await supabase.storage.from(BUCKET).remove([m.storage_path]).catch(() => {});
   const { error } = await db().delete().eq("id", m.id);
