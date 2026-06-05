@@ -12,9 +12,11 @@ export type IdentityMaterial = {
   size: number;
   content_type: string | null;
   position: number;
+  folder: string;
   created_at: string;
   updated_at: string;
 };
+
 
 const TABLE = "identity_materials";
 const BUCKET = "identity-slides"; // reuse existing bucket
