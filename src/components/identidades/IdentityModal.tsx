@@ -1,6 +1,13 @@
-import { useEffect, useRef, useState } from "react";
-import { X, Download, Plus, Type, Image as ImageIcon, Trash2, GripVertical, Pencil, Check, Replace, Loader2 } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { X, Download, Plus, Type, Image as ImageIcon, Trash2, GripVertical, Pencil, Check, Replace, Loader2, FolderPlus, Upload } from "lucide-react";
 import JSZip from "jszip";
+import {
+  type IdentityMaterial,
+  type MaterialKind,
+  deleteMaterial,
+  listMaterials,
+  uploadMaterial,
+} from "@/lib/identity-materials";
 import {
   DndContext,
   PointerSensor,
@@ -127,6 +134,8 @@ export function IdentityModal({ identity, open, onClose }: Props) {
   const [blocks, setBlocks] = useState<IdentityBlock[]>([]);
   const [loading, setLoading] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  const [materials, setMaterials] = useState<IdentityMaterial[]>([]);
+  const [materialsOpen, setMaterialsOpen] = useState(false);
 
   useEffect(() => {
     if (!open) return;
@@ -156,6 +165,22 @@ export function IdentityModal({ identity, open, onClose }: Props) {
       cancelled = true;
     };
   }, [open, identity.slug]);
+
+  // Load materials when opening
+  useEffect(() => {
+    if (!open || !identity.slug) return;
+    let cancelled = false;
+    listMaterials(identity.slug)
+      .then((d) => !cancelled && setMaterials(d))
+      .catch((e) => console.error("[IdentityModal] listMaterials", e));
+    return () => {
+      cancelled = true;
+    };
+  }, [open, identity.slug]);
+
+  const refreshMaterials = async () => {
+    setMaterials(await listMaterials(identity.slug));
+  };
 
   const refresh = async () => {
     const data = await listBlocks(identity.slug);
@@ -244,6 +269,18 @@ export function IdentityModal({ identity, open, onClose }: Props) {
         </div>
         <div className="flex items-center gap-2">
           <button
+            onClick={() => setMaterialsOpen(true)}
+            className="flex h-10 items-center gap-2 border-2 border-white/30 px-4 text-[10px] font-bold uppercase tracking-widest text-white transition hover:bg-white hover:text-black"
+          >
+            <FolderPlus className="size-3.5" />
+            Materiais
+            {materials.length > 0 && (
+              <span className="ml-1 rounded-full bg-white/15 px-1.5 py-0.5 text-[9px]">
+                {materials.length}
+              </span>
+            )}
+          </button>
+          <button
             onClick={() => setEditMode((v) => !v)}
             className={`flex h-10 items-center gap-2 border-2 px-4 text-[10px] font-bold uppercase tracking-widest transition ${
               editMode
@@ -317,33 +354,18 @@ export function IdentityModal({ identity, open, onClose }: Props) {
       {/* Floating download menu */}
       <div className="pointer-events-none absolute inset-x-0 bottom-6 z-10 flex justify-center px-4">
         <div className="pointer-events-auto flex items-center gap-1 border-2 border-white/25 bg-black/70 p-1.5 backdrop-blur-md shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)]">
-          {(ASSETS_BY_IDENTITY[identity.slug] ?? DEFAULT_ASSETS).map((a) => {
-            const className =
-              "group inline-flex items-center gap-2 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white/80 transition hover:bg-white hover:text-black";
-            if (a.onClick) {
-              return (
-                <button key={a.label} type="button" onClick={() => void a.onClick?.()} className={className}>
-                  <Download className="size-3" />
-                  {a.label}
-                </button>
-              );
-            }
-            return (
-              <a
-                key={a.label}
-                href={a.href}
-                {...(a.external
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : { download: true })}
-                className={className}
-              >
-                <Download className="size-3" />
-                {a.label}
-              </a>
-            );
-          })}
+          <DownloadMenu identity={identity} materials={materials} />
         </div>
       </div>
+
+      {materialsOpen && (
+        <MaterialsPanel
+          slug={identity.slug}
+          materials={materials}
+          onClose={() => setMaterialsOpen(false)}
+          onChanged={refreshMaterials}
+        />
+      )}
     </div>
   );
 }
@@ -567,5 +589,308 @@ function InsertBar({
       <div className="h-px flex-1 bg-white/15" />
       <Plus className="size-3 text-white/30" />
     </div>
+  );
+}
+
+// =============== Download menu (uses uploaded materials when present) ===============
+
+const KIND_LABEL: Record<MaterialKind, string> = {
+  logo: "LOGO",
+  asset: "ASSETS",
+  fonte: "FONTES",
+};
+const KIND_ORDER: MaterialKind[] = ["logo", "asset", "fonte"];
+
+async function downloadSingle(url: string, filename: string) {
+  const res = await fetch(url);
+  const blob = await res.blob();
+  const obj = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = obj;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(obj);
+}
+
+async function downloadMaterialsZip(items: IdentityMaterial[], zipName: string) {
+  const zip = new JSZip();
+  await Promise.all(
+    items.map(async (m) => {
+      const res = await fetch(m.file_url);
+      const blob = await res.blob();
+      const folder = KIND_LABEL[m.kind];
+      zip.file(`${folder}/${m.filename}`, blob);
+    }),
+  );
+  const blob = await zip.generateAsync({ type: "blob" });
+  const obj = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = obj;
+  a.download = zipName;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(obj);
+}
+
+function DownloadMenu({
+  identity,
+  materials,
+}: {
+  identity: Identity;
+  materials: IdentityMaterial[];
+}) {
+  const className =
+    "group inline-flex items-center gap-2 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white/80 transition hover:bg-white hover:text-black disabled:opacity-40";
+
+  // If no materials uploaded yet, fall back to legacy hardcoded assets.
+  if (materials.length === 0) {
+    const items = ASSETS_BY_IDENTITY[identity.slug] ?? DEFAULT_ASSETS;
+    return (
+      <>
+        {items.map((a) => {
+          if (a.onClick) {
+            return (
+              <button key={a.label} type="button" onClick={() => void a.onClick?.()} className={className}>
+                <Download className="size-3" />
+                {a.label}
+              </button>
+            );
+          }
+          return (
+            <a
+              key={a.label}
+              href={a.href}
+              {...(a.external ? { target: "_blank", rel: "noopener noreferrer" } : { download: true })}
+              className={className}
+            >
+              <Download className="size-3" />
+              {a.label}
+            </a>
+          );
+        })}
+      </>
+    );
+  }
+
+  const byKind: Record<MaterialKind, IdentityMaterial[]> = { logo: [], asset: [], fonte: [] };
+  for (const m of materials) byKind[m.kind].push(m);
+
+  const slug = identity.slug.toUpperCase();
+
+  return (
+    <>
+      {KIND_ORDER.filter((k) => byKind[k].length > 0).map((k) => {
+        const items = byKind[k];
+        const label = KIND_LABEL[k];
+        const handle = () =>
+          items.length === 1
+            ? downloadSingle(items[0].file_url, items[0].filename)
+            : downloadMaterialsZip(items, `${slug}-${label}.zip`);
+        return (
+          <button key={k} type="button" onClick={() => void handle()} className={className}>
+            <Download className="size-3" />
+            {label}
+          </button>
+        );
+      })}
+      <button
+        type="button"
+        onClick={() => void downloadMaterialsZip(materials, `${slug}-KIT-COMPLETO.zip`)}
+        className={className}
+      >
+        <Download className="size-3" />
+        Kit Completo
+      </button>
+    </>
+  );
+}
+
+// =============== Materials side panel ===============
+
+function MaterialsPanel({
+  slug,
+  materials,
+  onClose,
+  onChanged,
+}: {
+  slug: string;
+  materials: IdentityMaterial[];
+  onClose: () => void;
+  onChanged: () => void | Promise<void>;
+}) {
+  const grouped = useMemo(() => {
+    const g: Record<MaterialKind, IdentityMaterial[]> = { logo: [], asset: [], fonte: [] };
+    for (const m of materials) g[m.kind].push(m);
+    return g;
+  }, [materials]);
+
+  return (
+    <div
+      className="fixed inset-0 z-[300] flex justify-end bg-black/70 backdrop-blur-sm animate-in fade-in duration-150"
+      onClick={onClose}
+    >
+      <div
+        className="flex h-full w-full max-w-md flex-col border-l-2 border-white/15 bg-black"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">Materiais</p>
+            <p className="text-base font-bold uppercase tracking-wide text-white">Logo, Fontes, Assets</p>
+          </div>
+          <button
+            onClick={onClose}
+            aria-label="Fechar"
+            className="flex size-9 items-center justify-center border-2 border-white/30 text-white transition hover:bg-white hover:text-black"
+          >
+            <X className="size-4" />
+          </button>
+        </div>
+        <div className="flex-1 overflow-y-auto px-6 py-6">
+          <MaterialSection
+            slug={slug}
+            kind="logo"
+            title="Logo"
+            accept="image/*,.svg,.ai,.eps,.pdf"
+            items={grouped.logo}
+            onChanged={onChanged}
+          />
+          <MaterialSection
+            slug={slug}
+            kind="fonte"
+            title="Fontes"
+            accept=".otf,.ttf,.woff,.woff2,.zip"
+            items={grouped.fonte}
+            onChanged={onChanged}
+          />
+          <MaterialSection
+            slug={slug}
+            kind="asset"
+            title="Assets"
+            accept="*/*"
+            items={grouped.asset}
+            onChanged={onChanged}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MaterialSection({
+  slug,
+  kind,
+  title,
+  accept,
+  items,
+  onChanged,
+}: {
+  slug: string;
+  kind: MaterialKind;
+  title: string;
+  accept: string;
+  items: IdentityMaterial[];
+  onChanged: () => void | Promise<void>;
+}) {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [uploading, setUploading] = useState(0);
+  const [total, setTotal] = useState(0);
+
+  const handleFiles = async (files: FileList | null) => {
+    if (!files || files.length === 0) return;
+    const list = Array.from(files);
+    setTotal(list.length);
+    setUploading(0);
+    let done = 0;
+    // Limit concurrency to 3 to be gentle on the network
+    const queue = [...list];
+    const worker = async () => {
+      while (queue.length) {
+        const f = queue.shift();
+        if (!f) break;
+        try {
+          await uploadMaterial(slug, kind, f);
+        } catch (e) {
+          console.error("[MaterialsPanel] upload", e);
+        } finally {
+          done += 1;
+          setUploading(done);
+        }
+      }
+    };
+    await Promise.all([worker(), worker(), worker()]);
+    setTotal(0);
+    setUploading(0);
+    if (inputRef.current) inputRef.current.value = "";
+    await onChanged();
+  };
+
+  const busy = total > 0;
+
+  return (
+    <section className="mb-8">
+      <div className="mb-3 flex items-center justify-between">
+        <h3 className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/80">
+          {title} {items.length > 0 && <span className="text-white/40">· {items.length}</span>}
+        </h3>
+        <button
+          type="button"
+          onClick={() => inputRef.current?.click()}
+          disabled={busy}
+          className="inline-flex items-center gap-1.5 border border-white/25 bg-white/[0.04] px-3 py-1.5 text-[9px] font-bold uppercase tracking-widest text-white transition hover:bg-white hover:text-black disabled:opacity-50"
+        >
+          {busy ? <Loader2 className="size-3 animate-spin" /> : <Upload className="size-3" />}
+          {busy ? `${uploading}/${total}` : "Enviar"}
+        </button>
+        <input
+          ref={inputRef}
+          type="file"
+          multiple
+          accept={accept}
+          className="hidden"
+          onChange={(e) => void handleFiles(e.target.files)}
+        />
+      </div>
+      {items.length === 0 ? (
+        <p className="border border-dashed border-white/15 px-4 py-6 text-center text-[10px] uppercase tracking-widest text-white/30">
+          Nenhum arquivo
+        </p>
+      ) : (
+        <ul className="flex flex-col gap-1">
+          {items.map((m) => (
+            <li
+              key={m.id}
+              className="flex items-center gap-2 border border-white/10 bg-white/[0.02] px-3 py-2"
+            >
+              <a
+                href={m.file_url}
+                download={m.filename}
+                className="flex-1 truncate text-xs text-white/85 hover:text-white"
+                title={m.filename}
+              >
+                {m.filename}
+              </a>
+              <span className="text-[9px] text-white/40">
+                {(m.size / 1024).toFixed(0)} KB
+              </span>
+              <button
+                onClick={async () => {
+                  if (!confirm(`Excluir ${m.filename}?`)) return;
+                  await deleteMaterial(m);
+                  await onChanged();
+                }}
+                className="flex size-6 items-center justify-center text-white/40 transition hover:text-red-400"
+                aria-label="Excluir"
+              >
+                <Trash2 className="size-3.5" />
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
   );
 }

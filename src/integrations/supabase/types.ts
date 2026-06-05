@@ -53,6 +53,48 @@ export type Database = {
         }
         Relationships: []
       }
+      identity_materials: {
+        Row: {
+          content_type: string | null
+          created_at: string
+          file_url: string
+          filename: string
+          id: string
+          identity_slug: string
+          kind: string
+          position: number
+          size: number
+          storage_path: string
+          updated_at: string
+        }
+        Insert: {
+          content_type?: string | null
+          created_at?: string
+          file_url: string
+          filename: string
+          id?: string
+          identity_slug: string
+          kind: string
+          position?: number
+          size?: number
+          storage_path: string
+          updated_at?: string
+        }
+        Update: {
+          content_type?: string | null
+          created_at?: string
+          file_url?: string
+          filename?: string
+          id?: string
+          identity_slug?: string
+          kind?: string
+          position?: number
+          size?: number
+          storage_path?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
