@@ -1,6 +1,13 @@
-import { useEffect, useRef, useState } from "react";
-import { X, Download, Plus, Type, Image as ImageIcon, Trash2, GripVertical, Pencil, Check, Replace, Loader2 } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { X, Download, Plus, Type, Image as ImageIcon, Trash2, GripVertical, Pencil, Check, Replace, Loader2, FolderPlus, Upload } from "lucide-react";
 import JSZip from "jszip";
+import {
+  type IdentityMaterial,
+  type MaterialKind,
+  deleteMaterial,
+  listMaterials,
+  uploadMaterial,
+} from "@/lib/identity-materials";
 import {
   DndContext,
   PointerSensor,
