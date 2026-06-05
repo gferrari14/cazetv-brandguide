@@ -166,6 +166,22 @@ export function IdentityModal({ identity, open, onClose }: Props) {
     };
   }, [open, identity.slug]);
 
+  // Load materials when opening
+  useEffect(() => {
+    if (!open || !identity.slug) return;
+    let cancelled = false;
+    listMaterials(identity.slug)
+      .then((d) => !cancelled && setMaterials(d))
+      .catch((e) => console.error("[IdentityModal] listMaterials", e));
+    return () => {
+      cancelled = true;
+    };
+  }, [open, identity.slug]);
+
+  const refreshMaterials = async () => {
+    setMaterials(await listMaterials(identity.slug));
+  };
+
   const refresh = async () => {
     const data = await listBlocks(identity.slug);
     setBlocks(data);
