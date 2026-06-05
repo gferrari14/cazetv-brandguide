@@ -40,9 +40,12 @@ export async function uploadMaterial(
   slug: string,
   kind: MaterialKind,
   file: File,
+  folder: string = "",
 ): Promise<IdentityMaterial> {
   const safeName = file.name.replace(/[^\w.\-]+/g, "_");
-  const path = `materials/${slug}/${kind}/${Date.now()}-${Math.random()
+  const safeFolder = folder.replace(/[^\w\- ]+/g, "_").trim();
+  const folderSeg = safeFolder ? `${safeFolder}/` : "";
+  const path = `materials/${slug}/${kind}/${folderSeg}${Date.now()}-${Math.random()
     .toString(36)
     .slice(2, 8)}-${safeName}`;
   const { error: upErr } = await supabase.storage.from(BUCKET).upload(path, file, {
@@ -66,12 +69,14 @@ export async function uploadMaterial(
       size: file.size,
       content_type: file.type || null,
       position: 0,
+      folder: safeFolder,
     })
     .select()
     .single();
   if (error) throw error;
   return data as IdentityMaterial;
 }
+
 
 export async function deleteMaterial(m: IdentityMaterial): Promise<void> {
   await supabase.storage.from(BUCKET).remove([m.storage_path]).catch(() => {});
