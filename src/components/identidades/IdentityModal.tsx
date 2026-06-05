@@ -992,7 +992,21 @@ function FolderGroup({
     e.preventDefault();
     dragCounter.current = 0;
     setIsDragging(false);
-    await processFiles(e.dataTransfer.files);
+    const materialId = e.dataTransfer.getData("application/x-material-id");
+    if (materialId) {
+      // Internal drag: move existing material to this folder
+      if (items.some((m) => m.id === materialId)) return; // same folder
+      try {
+        await updateMaterialFolder(materialId, folder);
+        await onChanged();
+      } catch (err) {
+        console.error("[MaterialsPanel] move", err);
+      }
+      return;
+    }
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      await processFiles(e.dataTransfer.files);
+    }
   };
 
   const busy = total > 0;
