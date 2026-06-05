@@ -1084,7 +1084,12 @@ function FolderGroup({
             {items.map((m) => (
               <li
                 key={m.id}
-                className="flex items-center gap-2 border-b border-white/10 bg-white/[0.02] px-3 py-2 last:border-b-0"
+                draggable
+                onDragStart={(e) => {
+                  e.dataTransfer.setData("application/x-material-id", m.id);
+                  e.dataTransfer.effectAllowed = "move";
+                }}
+                className="flex cursor-grab items-center gap-2 border-b border-white/10 bg-white/[0.02] px-3 py-2 last:border-b-0 active:cursor-grabbing"
               >
                 <a
                   href={m.file_url}
