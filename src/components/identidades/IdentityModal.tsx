@@ -802,6 +802,7 @@ function MaterialSection({
   accept,
   items,
   onChanged,
+  useFolders = false,
 }: {
   slug: string;
   kind: MaterialKind;
@@ -809,6 +810,135 @@ function MaterialSection({
   accept: string;
   items: IdentityMaterial[];
   onChanged: () => void | Promise<void>;
+  useFolders?: boolean;
+}) {
+  const [extraFolders, setExtraFolders] = useState<string[]>([]);
+  const [newFolderInput, setNewFolderInput] = useState("");
+  const [creating, setCreating] = useState(false);
+
+  const groups = useMemo(() => {
+    const map = new Map<string, IdentityMaterial[]>();
+    if (useFolders) map.set("", []);
+    for (const m of items) {
+      const key = (m.folder || "").trim();
+      if (!map.has(key)) map.set(key, []);
+      map.get(key)!.push(m);
+    }
+    if (useFolders) {
+      for (const f of extraFolders) if (!map.has(f)) map.set(f, []);
+    } else {
+      if (!map.has("")) map.set("", []);
+    }
+    return Array.from(map.entries()).sort(([a], [b]) => {
+      if (a === "") return -1;
+      if (b === "") return 1;
+      return a.localeCompare(b);
+    });
+  }, [items, extraFolders, useFolders]);
+
+  const addFolder = () => {
+    const name = newFolderInput.replace(/[^\w\- ]+/g, "").trim();
+    if (!name) return;
+    setExtraFolders((f) => (f.includes(name) ? f : [...f, name]));
+    setNewFolderInput("");
+    setCreating(false);
+  };
+
+  return (
+    <section className="mb-8">
+      <div className="mb-3 flex items-center justify-between">
+        <h3 className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/80">
+          {title} {items.length > 0 && <span className="text-white/40">· {items.length}</span>}
+        </h3>
+        {useFolders && (
+          creating ? (
+            <div className="flex items-center gap-1">
+              <input
+                autoFocus
+                value={newFolderInput}
+                onChange={(e) => setNewFolderInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") addFolder();
+                  if (e.key === "Escape") {
+                    setCreating(false);
+                    setNewFolderInput("");
+                  }
+                }}
+                placeholder="Nome da pasta"
+                className="h-7 w-36 border border-white/25 bg-black px-2 text-[10px] uppercase tracking-widest text-white outline-none focus:border-white"
+              />
+              <button
+                type="button"
+                onClick={addFolder}
+                className="flex h-7 items-center gap-1 border border-white/25 bg-white px-2 text-[9px] font-bold uppercase tracking-widest text-black"
+              >
+                <Check className="size-3" />
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setCreating(false);
+                  setNewFolderInput("");
+                }}
+                className="flex h-7 w-7 items-center justify-center border border-white/25 text-white/60 hover:text-white"
+              >
+                <X className="size-3" />
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setCreating(true)}
+              className="inline-flex items-center gap-1.5 border border-white/25 bg-white/[0.04] px-3 py-1.5 text-[9px] font-bold uppercase tracking-widest text-white transition hover:bg-white hover:text-black"
+            >
+              <FolderPlus className="size-3" />
+              Nova pasta
+            </button>
+          )
+        )}
+      </div>
+
+      <div className="flex flex-col gap-4">
+        {groups.map(([folder, list]) => (
+          <FolderGroup
+            key={folder || "__root__"}
+            slug={slug}
+            kind={kind}
+            accept={accept}
+            folder={folder}
+            items={list}
+            useFolders={useFolders}
+            onChanged={onChanged}
+            onRemoveEmpty={
+              useFolders && folder && list.length === 0
+                ? () => setExtraFolders((f) => f.filter((x) => x !== folder))
+                : undefined
+            }
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function FolderGroup({
+  slug,
+  kind,
+  accept,
+  folder,
+  items,
+  useFolders,
+  onChanged,
+  onRemoveEmpty,
+}: {
+  slug: string;
+  kind: MaterialKind;
+  accept: string;
+  folder: string;
+  items: IdentityMaterial[];
+  useFolders: boolean;
+  onChanged: () => void | Promise<void>;
+  onRemoveEmpty?: () => void;
 }) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [uploading, setUploading] = useState(0);
@@ -828,7 +958,7 @@ function MaterialSection({
         const f = queue.shift();
         if (!f) break;
         try {
-          await uploadMaterial(slug, kind, f);
+          await uploadMaterial(slug, kind, f, folder);
         } catch (e) {
           console.error("[MaterialsPanel] upload", e);
         } finally {
@@ -844,26 +974,19 @@ function MaterialSection({
     await onChanged();
   };
 
-  const handleFiles = async (files: FileList | null) => {
-    await processFiles(files);
-  };
-
   const onDragEnter = (e: React.DragEvent) => {
     e.preventDefault();
     dragCounter.current += 1;
     if (dragCounter.current === 1) setIsDragging(true);
   };
-
   const onDragLeave = (e: React.DragEvent) => {
     e.preventDefault();
     dragCounter.current -= 1;
     if (dragCounter.current === 0) setIsDragging(false);
   };
-
   const onDragOver = (e: React.DragEvent) => {
     e.preventDefault();
   };
-
   const onDrop = async (e: React.DragEvent) => {
     e.preventDefault();
     dragCounter.current = 0;
@@ -872,31 +995,60 @@ function MaterialSection({
   };
 
   const busy = total > 0;
+  const label = folder || (useFolders ? "Sem pasta" : "");
 
   return (
-    <section className="mb-8">
-      <div className="mb-3 flex items-center justify-between">
-        <h3 className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/80">
-          {title} {items.length > 0 && <span className="text-white/40">· {items.length}</span>}
-        </h3>
-        <button
-          type="button"
-          onClick={() => inputRef.current?.click()}
-          disabled={busy}
-          className="inline-flex items-center gap-1.5 border border-white/25 bg-white/[0.04] px-3 py-1.5 text-[9px] font-bold uppercase tracking-widest text-white transition hover:bg-white hover:text-black disabled:opacity-50"
-        >
-          {busy ? <Loader2 className="size-3 animate-spin" /> : <Upload className="size-3" />}
-          {busy ? `${uploading}/${total}` : "Enviar"}
-        </button>
-        <input
-          ref={inputRef}
-          type="file"
-          multiple
-          accept={accept}
-          className="hidden"
-          onChange={(e) => void handleFiles(e.target.files)}
-        />
-      </div>
+    <div>
+      {useFolders && (
+        <div className="mb-2 flex items-center justify-between">
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/55">
+            📁 {label}{" "}
+            {items.length > 0 && <span className="text-white/30">· {items.length}</span>}
+          </p>
+          <div className="flex items-center gap-1">
+            <button
+              type="button"
+              onClick={() => inputRef.current?.click()}
+              disabled={busy}
+              className="inline-flex items-center gap-1.5 border border-white/20 bg-white/[0.04] px-2 py-1 text-[9px] font-bold uppercase tracking-widest text-white transition hover:bg-white hover:text-black disabled:opacity-50"
+            >
+              {busy ? <Loader2 className="size-3 animate-spin" /> : <Upload className="size-3" />}
+              {busy ? `${uploading}/${total}` : "Enviar"}
+            </button>
+            {onRemoveEmpty && (
+              <button
+                type="button"
+                onClick={onRemoveEmpty}
+                aria-label="Remover pasta vazia"
+                className="flex size-6 items-center justify-center border border-white/15 text-white/40 hover:border-red-500/60 hover:text-red-400"
+              >
+                <Trash2 className="size-3" />
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+      {!useFolders && (
+        <div className="mb-2 flex justify-end">
+          <button
+            type="button"
+            onClick={() => inputRef.current?.click()}
+            disabled={busy}
+            className="inline-flex items-center gap-1.5 border border-white/25 bg-white/[0.04] px-3 py-1.5 text-[9px] font-bold uppercase tracking-widest text-white transition hover:bg-white hover:text-black disabled:opacity-50"
+          >
+            {busy ? <Loader2 className="size-3 animate-spin" /> : <Upload className="size-3" />}
+            {busy ? `${uploading}/${total}` : "Enviar"}
+          </button>
+        </div>
+      )}
+      <input
+        ref={inputRef}
+        type="file"
+        multiple
+        accept={accept}
+        className="hidden"
+        onChange={(e) => void processFiles(e.target.files)}
+      />
       <div
         onDragEnter={onDragEnter}
         onDragLeave={onDragLeave}
@@ -909,7 +1061,7 @@ function MaterialSection({
         }`}
       >
         {items.length === 0 && !busy ? (
-          <p className="px-4 py-8 text-center text-[10px] uppercase tracking-widest text-white/30">
+          <p className="px-4 py-6 text-center text-[10px] uppercase tracking-widest text-white/30">
             Arraste arquivos aqui ou clique em "Enviar"
           </p>
         ) : (
@@ -954,6 +1106,7 @@ function MaterialSection({
           </div>
         )}
       </div>
-    </section>
+    </div>
   );
 }
+
