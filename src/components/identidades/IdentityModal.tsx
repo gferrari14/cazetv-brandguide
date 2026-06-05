@@ -6,6 +6,7 @@ import {
   type MaterialKind,
   deleteMaterial,
   listMaterials,
+  updateMaterialFolder,
   uploadMaterial,
 } from "@/lib/identity-materials";
 import {
