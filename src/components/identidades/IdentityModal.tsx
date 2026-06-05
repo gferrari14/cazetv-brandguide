@@ -786,7 +786,9 @@ function MaterialsPanel({
             accept="*/*"
             items={grouped.asset}
             onChanged={onChanged}
+            useFolders
           />
+
         </div>
       </div>
     </div>
