@@ -476,7 +476,7 @@ function TextBlockView({
           if (value !== (block.text_content ?? "")) onUpdate(value);
         }}
         placeholder="Escreva sobre o conceito por trás dessa identidade…"
-        className="min-h-[140px] w-full resize-y border-2 border-dashed border-white/20 bg-white/[0.02] p-8 text-center text-lg font-light leading-relaxed text-white/90 outline-none placeholder:text-white/30 focus:border-white/60"
+        className="min-h-[140px] w-full resize-y border-2 border-dashed border-white/20 bg-white/[0.02] p-4 text-[11px] font-light leading-relaxed text-left text-white/90 outline-none placeholder:text-white/30 focus:border-white/60"
       />
     );
   }
@@ -484,8 +484,8 @@ function TextBlockView({
   if (!value.trim()) return null;
 
   return (
-    <div className="mx-auto max-w-[820px] px-4 py-10">
-      <p className="whitespace-pre-wrap text-center text-base font-light leading-relaxed tracking-wide text-white/85 md:text-lg">
+    <div className="mx-auto max-w-[820px] px-0 py-10">
+      <p className="whitespace-pre-wrap pl-[6px] text-[11px] font-light leading-relaxed text-left text-white/85">
         {value}
       </p>
     </div>
