@@ -59,6 +59,7 @@ export type Database = {
           created_at: string
           file_url: string
           filename: string
+          folder: string
           id: string
           identity_slug: string
           kind: string
@@ -72,6 +73,7 @@ export type Database = {
           created_at?: string
           file_url: string
           filename: string
+          folder?: string
           id?: string
           identity_slug: string
           kind: string
@@ -85,6 +87,7 @@ export type Database = {
           created_at?: string
           file_url?: string
           filename?: string
+          folder?: string
           id?: string
           identity_slug?: string
           kind?: string

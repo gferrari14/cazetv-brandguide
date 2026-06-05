@@ -1,0 +1,1 @@
+ALTER TABLE public.identity_materials ADD COLUMN IF NOT EXISTS folder text NOT NULL DEFAULT '';
