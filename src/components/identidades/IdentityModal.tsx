@@ -631,8 +631,9 @@ async function downloadMaterialsZip(items: IdentityMaterial[], zipName: string) 
     items.map(async (m) => {
       const res = await fetch(m.file_url);
       const blob = await res.blob();
-      const folder = KIND_LABEL[m.kind];
-      zip.file(`${folder}/${m.filename}`, blob);
+      const kindFolder = KIND_LABEL[m.kind];
+      const sub = m.folder ? `${m.folder}/` : "";
+      zip.file(`${kindFolder}/${sub}${m.filename}`, blob);
     }),
   );
   const blob = await zip.generateAsync({ type: "blob" });
@@ -645,6 +646,7 @@ async function downloadMaterialsZip(items: IdentityMaterial[], zipName: string) 
   document.body.removeChild(a);
   URL.revokeObjectURL(obj);
 }
+
 
 function DownloadMenu({
   identity,
