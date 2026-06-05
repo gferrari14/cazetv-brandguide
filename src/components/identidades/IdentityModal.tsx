@@ -223,7 +223,7 @@ export function IdentityModal({ identity, open, onClose }: Props) {
         type: "slide",
         image_url: url,
         preserve_ratio: true,
-        natural_size: false,
+        natural_size: true,
       });
     } catch (err) {
       console.error("[IdentityModal] handleAddSlide", err);
