@@ -6,6 +6,7 @@ import {
   type MaterialKind,
   deleteMaterial,
   listMaterials,
+  updateMaterialFolder,
   uploadMaterial,
 } from "@/lib/identity-materials";
 import {
@@ -991,7 +992,21 @@ function FolderGroup({
     e.preventDefault();
     dragCounter.current = 0;
     setIsDragging(false);
-    await processFiles(e.dataTransfer.files);
+    const materialId = e.dataTransfer.getData("application/x-material-id");
+    if (materialId) {
+      // Internal drag: move existing material to this folder
+      if (items.some((m) => m.id === materialId)) return; // same folder
+      try {
+        await updateMaterialFolder(materialId, folder);
+        await onChanged();
+      } catch (err) {
+        console.error("[MaterialsPanel] move", err);
+      }
+      return;
+    }
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      await processFiles(e.dataTransfer.files);
+    }
   };
 
   const busy = total > 0;
@@ -1069,11 +1084,17 @@ function FolderGroup({
             {items.map((m) => (
               <li
                 key={m.id}
-                className="flex items-center gap-2 border-b border-white/10 bg-white/[0.02] px-3 py-2 last:border-b-0"
+                draggable
+                onDragStart={(e) => {
+                  e.dataTransfer.setData("application/x-material-id", m.id);
+                  e.dataTransfer.effectAllowed = "move";
+                }}
+                className="flex cursor-grab items-center gap-2 border-b border-white/10 bg-white/[0.02] px-3 py-2 last:border-b-0 active:cursor-grabbing"
               >
                 <a
                   href={m.file_url}
                   download={m.filename}
+                  draggable={false}
                   className="flex-1 truncate text-xs text-white/85 hover:text-white"
                   title={m.filename}
                 >
