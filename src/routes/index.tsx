@@ -50,8 +50,8 @@ function Entry() {
         </Link>
       </header>
 
-      {/* Buttons */}
-      <nav className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 flex-row flex-wrap justify-center gap-2">
+      {/* Buttons bottom-left */}
+      <nav className="absolute bottom-4 left-3 z-10 flex flex-row flex-wrap gap-2 md:left-4">
         {links.map((l) => (
           <Link
             key={l.label}
