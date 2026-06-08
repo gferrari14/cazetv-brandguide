@@ -44,12 +44,18 @@ function Entry() {
         </svg>
       </div>
 
-      {/* Logo bottom-right */}
-      <header className="absolute bottom-4 right-3 z-10 md:right-4">
-        <Link to="/" aria-label="CazéTV">
-          <img src={navLogo} alt="CazéTV" className="h-10 w-auto md:h-12" />
-        </Link>
-      </header>
+      {/* Container bottom-right: logo above copyright */}
+      <div className="absolute bottom-4 right-3 z-10 flex flex-col items-end gap-2 md:right-4">
+        <header>
+          <Link to="/" aria-label="CazéTV">
+            <img src={navLogo} alt="CazéTV" className="h-10 w-auto md:h-12" />
+          </Link>
+        </header>
+
+        <div className="text-[10px] uppercase tracking-widest text-white/70">
+          Todos os direitos reservados · CazéTV 2026
+        </div>
+      </div>
 
       {/* Buttons bottom-left */}
       <nav className="absolute bottom-4 left-3 z-10 flex flex-row flex-wrap gap-2 md:left-4">
@@ -63,11 +69,6 @@ function Entry() {
           </Link>
         ))}
       </nav>
-
-      {/* Copyright bottom-right */}
-      <div className="absolute bottom-4 right-3 z-10 text-[10px] uppercase tracking-widest text-white/70 md:right-4">
-        Todos os direitos reservados · CazéTV 2026
-      </div>
     </div>
   );
 }
