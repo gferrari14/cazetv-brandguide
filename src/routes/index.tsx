@@ -14,28 +14,18 @@ const links = [
 function Entry() {
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-background text-foreground">
-      <video
-        src="/videos/hero-bg.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-15"
-      />
-
       {/* Título no topo, ocupando toda a largura via SVG (escala precisa) */}
       <div className="pointer-events-none absolute left-0 right-0 top-0 z-[5] px-2 md:px-3">
         <h1 className="sr-only">Branding CazéTV</h1>
         <svg
-          viewBox="0 0 1000 170"
+          viewBox="0 0 1000 200"
           preserveAspectRatio="xMidYMin meet"
           className="block w-full select-none"
           aria-hidden="true"
         >
           <text
             x="500"
-            y="150"
+            y="180"
             textAnchor="middle"
             fill="currentColor"
             className="text-white"
