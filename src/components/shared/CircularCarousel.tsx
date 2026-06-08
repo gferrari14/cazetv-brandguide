@@ -39,42 +39,45 @@ export function CircularCarousel({ size = 240 }: { size?: number }) {
           100% { transform: translate(0, 0) rotate(0deg); }
         }
         @keyframes cc-slide-in {
-          0%   { transform: translateX(-120%); opacity: 0; }
+          0%   { transform: translateX(-100vw); opacity: 0; }
           100% { transform: translateX(0); opacity: 1; }
         }
         @keyframes cc-slide-out {
           0%   { transform: translateX(0); opacity: 1; }
-          100% { transform: translateX(120%); opacity: 0; }
+          100% { transform: translateX(100vw); opacity: 0; }
         }
         .cc-jitter { animation: cc-jitter 2.4s ease-in-out infinite; }
-        .cc-in     { animation: cc-slide-in 600ms cubic-bezier(0.22, 1, 0.36, 1) both; }
-        .cc-out    { animation: cc-slide-out 600ms cubic-bezier(0.65, 0, 0.35, 1) both; }
+        .cc-in     { animation: cc-slide-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+        .cc-out    { animation: cc-slide-out 700ms cubic-bezier(0.65, 0, 0.35, 1) both; }
       `}</style>
       <div
-        className="group relative cursor-pointer select-none overflow-hidden"
+        className="group relative cursor-pointer select-none"
         style={{ width: size, height: size }}
         onMouseEnter={next}
         onClick={next}
         aria-label="Carrossel de identidades"
       >
-        <div className="cc-jitter absolute inset-0">
-          {items.map((it, i) => {
-            const prev = (index - 1 + items.length) % items.length;
-            if (i !== index && i !== prev) return null;
-            return (
-              <img
-                key={`${it.label}-${i === index ? "in" : "out"}-${index}`}
-                src={it.src}
-                alt={it.label}
-                className={`absolute inset-0 h-full w-full object-contain ${
-                  i === index ? "cc-in" : "cc-out"
-                }`}
-                draggable={false}
-              />
-            );
-          })}
-        </div>
+        {items.map((it, i) => {
+          const prev = (index - 1 + items.length) % items.length;
+          if (i !== index && i !== prev) return null;
+          return (
+            <div
+              key={`${it.label}-${i === index ? "in" : "out"}-${index}`}
+              className={`absolute inset-0 ${i === index ? "cc-in" : "cc-out"}`}
+            >
+              <div className="cc-jitter h-full w-full">
+                <img
+                  src={it.src}
+                  alt={it.label}
+                  className="h-full w-full object-contain"
+                  draggable={false}
+                />
+              </div>
+            </div>
+          );
+        })}
       </div>
+
     </>
   );
 }
