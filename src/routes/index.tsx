@@ -25,13 +25,13 @@ function Entry() {
       />
 
       {/* Título no topo, ocupando toda a largura */}
-      <div className="pointer-events-none absolute left-0 right-0 top-0 z-[5] px-3 md:px-4">
+      <div className="pointer-events-none absolute left-0 right-0 top-0 z-[5] px-2 md:px-3">
         <h1
           className="select-none whitespace-nowrap uppercase text-white"
           style={{
             fontFamily: 'var(--font-display)',
             fontWeight: 500,
-            fontSize: "clamp(40px, 13.2vw, 260px)",
+            fontSize: "clamp(48px, 16vw, 320px)",
             lineHeight: 0.9,
             letterSpacing: "-0.02em",
             width: "100%",
