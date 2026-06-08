@@ -45,6 +45,13 @@ function Entry() {
         </svg>
       </div>
 
+      {/* Carrossel circular sobreposto ao título */}
+      <div className="pointer-events-none absolute left-1/2 top-[2vw] z-10 -translate-x-1/2">
+        <div className="pointer-events-auto">
+          <CircularCarousel size={Math.min(360, 22 * 16)} />
+        </div>
+      </div>
+
       {/* Container bottom-right: logo above copyright */}
       <div className="absolute bottom-4 right-3 z-10 flex flex-col items-end gap-2 md:right-4">
         <header>
