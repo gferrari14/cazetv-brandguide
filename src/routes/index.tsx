@@ -24,23 +24,34 @@ function Entry() {
         className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-15"
       />
 
-      {/* Título no topo, ocupando toda a largura */}
+      {/* Título no topo, ocupando toda a largura via SVG (escala precisa) */}
       <div className="pointer-events-none absolute left-0 right-0 top-0 z-[5] px-2 md:px-3">
-        <h1
-          className="select-none whitespace-nowrap uppercase text-white"
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontWeight: 500,
-            fontSize: "clamp(48px, 16vw, 320px)",
-            lineHeight: 0.9,
-            letterSpacing: "-0.02em",
-            width: "100%",
-            transform: "scaleY(1.05)",
-            transformOrigin: "top left",
-          }}
+        <h1 className="sr-only">Branding CazéTV</h1>
+        <svg
+          viewBox="0 0 1000 170"
+          preserveAspectRatio="xMidYMin meet"
+          className="block w-full select-none"
+          aria-hidden="true"
         >
-          BRANDING CAZÉTV
-        </h1>
+          <text
+            x="500"
+            y="150"
+            textAnchor="middle"
+            fill="currentColor"
+            className="text-white"
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontWeight: 500,
+              fontSize: "180px",
+              letterSpacing: "-3px",
+              textTransform: "uppercase",
+            }}
+            textLength="1000"
+            lengthAdjust="spacingAndGlyphs"
+          >
+            BRANDING CAZÉTV
+          </text>
+        </svg>
       </div>
 
       {/* Logo bottom-right */}
