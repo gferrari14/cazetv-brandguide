@@ -39,16 +39,16 @@ export function CircularCarousel({ size = 240 }: { size?: number }) {
           100% { transform: translate(0, 0) rotate(0deg); }
         }
         @keyframes cc-slide-in {
-          0%   { transform: translateX(100%); opacity: 0; }
+          0%   { transform: translateX(-120%); opacity: 0; }
           100% { transform: translateX(0); opacity: 1; }
         }
         @keyframes cc-slide-out {
           0%   { transform: translateX(0); opacity: 1; }
-          100% { transform: translateX(-100%); opacity: 0; }
+          100% { transform: translateX(120%); opacity: 0; }
         }
         .cc-jitter { animation: cc-jitter 2.4s ease-in-out infinite; }
-        .cc-in     { animation: cc-slide-in 500ms ease-out both; }
-        .cc-out    { animation: cc-slide-out 500ms ease-in both; }
+        .cc-in     { animation: cc-slide-in 600ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+        .cc-out    { animation: cc-slide-out 600ms cubic-bezier(0.65, 0, 0.35, 1) both; }
       `}</style>
       <div
         className="group relative cursor-pointer select-none overflow-hidden"
