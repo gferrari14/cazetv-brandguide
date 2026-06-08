@@ -1,5 +1,6 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import navLogo from "@/assets/cazetv-logo-nav.png";
+import { CircularCarousel } from "@/components/shared/CircularCarousel";
 
 export const Route = createFileRoute("/")({
   component: Entry,
@@ -42,6 +43,13 @@ function Entry() {
             BRANDING CAZÉTV
           </text>
         </svg>
+      </div>
+
+      {/* Carrossel circular sobreposto ao título */}
+      <div className="pointer-events-none absolute left-1/2 top-[2vw] z-10 -translate-x-1/2">
+        <div className="pointer-events-auto">
+          <CircularCarousel size={Math.min(360, 22 * 16)} />
+        </div>
       </div>
 
       {/* Container bottom-right: logo above copyright */}
