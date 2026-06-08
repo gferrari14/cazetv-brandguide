@@ -25,13 +25,13 @@ function Entry() {
       />
 
       {/* Título no topo, ocupando toda a largura */}
-      <div className="pointer-events-none absolute left-0 right-0 top-0 z-[5] px-3 md:px-4">
+      <div className="pointer-events-none absolute left-0 right-0 top-0 z-[5] px-2 md:px-3">
         <h1
           className="select-none whitespace-nowrap uppercase text-white"
           style={{
             fontFamily: 'var(--font-display)',
             fontWeight: 500,
-            fontSize: "clamp(40px, 13.2vw, 260px)",
+            fontSize: "clamp(48px, 16vw, 320px)",
             lineHeight: 0.9,
             letterSpacing: "-0.02em",
             width: "100%",
@@ -43,15 +43,15 @@ function Entry() {
         </h1>
       </div>
 
-      {/* Logo bottom-left */}
-      <header className="absolute bottom-4 left-3 z-10 md:left-4">
+      {/* Logo bottom-right */}
+      <header className="absolute bottom-4 right-3 z-10 md:right-4">
         <Link to="/" aria-label="CazéTV">
           <img src={navLogo} alt="CazéTV" className="h-10 w-auto md:h-12" />
         </Link>
       </header>
 
-      {/* Buttons */}
-      <nav className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 flex-row flex-wrap justify-center gap-2">
+      {/* Buttons bottom-left */}
+      <nav className="absolute bottom-4 left-3 z-10 flex flex-row flex-wrap gap-2 md:left-4">
         {links.map((l) => (
           <Link
             key={l.label}
