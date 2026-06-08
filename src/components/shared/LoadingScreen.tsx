@@ -141,11 +141,21 @@ export function LoadingScreen() {
 
       {/* Título centralizado */}
       <span
-        className="font-black uppercase tracking-[0.25em] text-black"
-        style={{ fontSize: "clamp(20px, 4vw, 48px)" }}
+        className="font-black uppercase tracking-[0.06em] text-black animate-pulse-slow"
+        style={{ fontSize: "clamp(14px, 2.5vw, 32px)" }}
       >
         BRANDING CAZÉTV
       </span>
+
+      <style>{`
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.45; }
+        }
+        .animate-pulse-slow {
+          animation: pulse-slow 2.4s ease-in-out infinite;
+        }
+      `}</style>
     </div>
   );
 }
