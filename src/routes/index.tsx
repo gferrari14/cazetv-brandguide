@@ -43,8 +43,8 @@ function Entry() {
         </h1>
       </div>
 
-      {/* Logo bottom-left */}
-      <header className="absolute bottom-4 left-3 z-10 md:left-4">
+      {/* Logo bottom-right */}
+      <header className="absolute bottom-4 right-3 z-10 md:right-4">
         <Link to="/" aria-label="CazéTV">
           <img src={navLogo} alt="CazéTV" className="h-10 w-auto md:h-12" />
         </Link>
