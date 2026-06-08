@@ -217,18 +217,20 @@ export function IdentityModal({ identity, open, onClose }: Props) {
     await insertAt(insertAfterIndex, { type: "text", text_content: "" });
   };
 
-  const handleAddSlide = async (insertAfterIndex: number, file: File) => {
+  const handleAddSlide = async (insertAfterIndex: number, files: File[]) => {
     try {
-      const url = await uploadSlideImage(identity.slug, file);
-      await insertAt(insertAfterIndex, {
-        type: "slide",
-        image_url: url,
-        preserve_ratio: true,
-        natural_size: true,
-      });
+      for (const file of files) {
+        const url = await uploadSlideImage(identity.slug, file);
+        await insertAt(insertAfterIndex, {
+          type: "slide",
+          image_url: url,
+          preserve_ratio: true,
+          natural_size: true,
+        });
+      }
     } catch (err) {
       console.error("[IdentityModal] handleAddSlide", err);
-      alert("Falha ao enviar a imagem. Verifique o arquivo e tente novamente.");
+      alert("Falha ao enviar uma ou mais imagens. Verifique os arquivos e tente novamente.");
     }
   };
 
@@ -336,7 +338,7 @@ export function IdentityModal({ identity, open, onClose }: Props) {
                 Nenhum slide ainda
               </p>
               {editMode && (
-                <InsertBar onAddText={() => handleAddText(-1)} onAddSlide={(f) => handleAddSlide(-1, f)} />
+                <InsertBar onAddText={() => handleAddText(-1)} onAddSlide={(files) => handleAddSlide(-1, files)} />
               )}
             </div>
           )}
@@ -348,7 +350,7 @@ export function IdentityModal({ identity, open, onClose }: Props) {
                   {editMode && i === 0 && (
                     <InsertBar
                       onAddText={() => handleAddText(-1)}
-                      onAddSlide={(f) => handleAddSlide(-1, f)}
+                      onAddSlide={(files) => handleAddSlide(-1, files)}
                     />
                   )}
                   <SortableBlock
@@ -361,7 +363,7 @@ export function IdentityModal({ identity, open, onClose }: Props) {
                   {editMode && (
                     <InsertBar
                       onAddText={() => handleAddText(i)}
-                      onAddSlide={(f) => handleAddSlide(i, f)}
+                      onAddSlide={(files) => handleAddSlide(i, files)}
                     />
                   )}
                 </div>
@@ -555,16 +557,17 @@ function InsertBar({
   onAddSlide,
 }: {
   onAddText: () => void;
-  onAddSlide: (file: File) => void;
+  onAddSlide: (files: File[]) => void;
 }) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [busy, setBusy] = useState(false);
 
-  const handleFile = async (file?: File | null) => {
-    if (!file) return;
+  const handleFiles = async (files: FileList | null) => {
+    if (!files || files.length === 0) return;
+    const list = Array.from(files);
     setBusy(true);
     try {
-      await onAddSlide(file);
+      await onAddSlide(list);
     } finally {
       setBusy(false);
       if (inputRef.current) inputRef.current.value = "";
@@ -595,8 +598,9 @@ function InsertBar({
         ref={inputRef}
         type="file"
         accept="image/png,image/jpeg,image/gif,image/webp"
+        multiple
         className="hidden"
-        onChange={(e) => void handleFile(e.target.files?.[0])}
+        onChange={(e) => void handleFiles(e.target.files)}
       />
       <div className="h-px flex-1 bg-white/15" />
       <Plus className="size-3 text-white/30" />
