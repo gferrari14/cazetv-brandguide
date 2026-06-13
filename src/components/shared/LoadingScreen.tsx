@@ -53,6 +53,7 @@ const publicAssetUrls: string[] = [
 const assetUrls = Array.from(new Set([...srcAssetUrls, ...publicAssetUrls]));
 
 const MIN_DURATION = 600; // piso visual mínimo para evitar flash em loads instantâneos
+const MAX_DURATION = 3500; // evita bloquear a abertura caso alguma mídia demore ou não responda
 const SESSION_KEY = "cazetv:loaded";
 
 // Baixa de fato o asset (qualquer tipo de mídia) e o coloca no cache do browser.
@@ -90,7 +91,10 @@ export function LoadingScreen() {
       }),
     );
 
-    Promise.all(promises).then(async () => {
+    Promise.race([
+      Promise.all(promises),
+      new Promise<void>((resolve) => setTimeout(resolve, MAX_DURATION)),
+    ]).then(async () => {
       if (cancelled) return;
       // Garante o piso de duração mínima apenas se o load real for mais rápido
       const remaining = MIN_DURATION - (performance.now() - start);
