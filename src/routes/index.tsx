@@ -1,5 +1,6 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import navLogo from "@/assets/cazetv-logo-nav.png";
+import gradientLine from "@/assets/Rectangle_80.png.asset.json";
 import { CircularCarousel } from "@/components/shared/CircularCarousel";
 
 export const Route = createFileRoute("/")({
@@ -51,6 +52,14 @@ function Entry() {
           <CircularCarousel size={280} />
         </div>
       </div>
+
+      {/* Linha gradiente no rodapé */}
+      <img
+        src={gradientLine.url}
+        alt=""
+        className="absolute bottom-0 left-0 z-0 h-1 w-full object-cover"
+        aria-hidden="true"
+      />
 
       {/* Container bottom-right: logo above copyright */}
       <div className="absolute bottom-4 right-3 z-10 flex flex-col items-end gap-2 md:right-4">
