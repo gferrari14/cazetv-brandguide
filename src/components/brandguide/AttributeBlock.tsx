@@ -13,11 +13,19 @@ export interface AttributeSubsection {
   placeholders?: number;
   /** URLs de mídia — substituem os placeholders quando informadas */
   media?: string[];
+  /** Grade numerada com imagem/placeholder e legenda abaixo */
+  imageGrid?: AttributeImageGridItem[];
 }
 
 export interface AttributeGridItem {
   number: string;
   text: string;
+}
+
+export interface AttributeImageGridItem {
+  number: string;
+  text: string;
+  media?: string;
 }
 
 export interface AttributeItem {
