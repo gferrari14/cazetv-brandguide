@@ -8,6 +8,8 @@ import inclusao3 from "@/assets/inclusao-3.jpg.asset.json";
 import paixaoMedia from "@/assets/paixao-copadomundo.jpg.asset.json";
 import autenticidade1 from "@/assets/autenticidade-1.png.asset.json";
 import autenticidade2 from "@/assets/autenticidade-2.gif.asset.json";
+import rebeldia1 from "@/assets/rebeldia-1.jpg.asset.json";
+import rebeldia2 from "@/assets/rebeldia-2.gif.asset.json";
 
 export const Route = createFileRoute("/atributos")({
   component: AtributosPage,
@@ -115,6 +117,12 @@ const attributes: AttributeItem[] = [
     color: colors[4],
     hideMediaPlaceholder: true,
     lines: ["A REGRA É NÃO TER REGRAS."],
+    subsections: [
+      {
+        placeholders: 2,
+        media: [rebeldia1.url, rebeldia2.url],
+      },
+    ],
   },
 ];
 
