@@ -13,6 +13,8 @@ export interface AttributeSubsection {
   placeholders?: number;
   /** URLs de mídia — substituem os placeholders quando informadas */
   media?: string[];
+  /** Textos exibidos abaixo de cada placeholder/media (mesma ordem) */
+  captions?: string[][];
   /** Grade numerada com imagem/placeholder e legenda abaixo */
   imageGrid?: AttributeImageGridItem[];
 }
