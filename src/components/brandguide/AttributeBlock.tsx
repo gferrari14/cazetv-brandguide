@@ -215,7 +215,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                         <Placeholder className="mt-3 aspect-[16/9]" />
                       )}
                       <p
-                        className="mt-3 text-sm uppercase leading-relaxed md:text-base"
+                        className="mt-3 text-center text-sm uppercase leading-relaxed md:text-base"
                         style={{ color }}
                       >
                         {item.text}
