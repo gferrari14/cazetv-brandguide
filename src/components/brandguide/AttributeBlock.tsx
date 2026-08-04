@@ -186,14 +186,23 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                         key={i}
                         src={sub.media[i]}
                         alt={`${title} ${i + 1}`}
-                        className="w-full object-cover"
+                        className="aspect-[4/3] w-full object-cover"
                       />
                     ) : (
-                      <Placeholder key={i} />
+                      <div
+                        key={i}
+                        className="flex aspect-[4/3] w-full items-center justify-center bg-[#D9D9D9]"
+                      >
+                        <span className="text-center text-sm font-extrabold uppercase tracking-tight text-black md:text-lg">
+                          PLACEHOLDER
+                        </span>
+                      </div>
                     ),
                   )}
+
                 </div>
               )}
+
 
               {sub.imageGrid && sub.imageGrid.length > 0 && (
                 <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 md:gap-8">
@@ -236,11 +245,13 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
             }`}
           >
             {media ? (
-              <img
-                src={media}
-                alt={title}
-                className="w-full object-cover"
-              />
+              <div className="h-full w-full overflow-hidden">
+                <img
+                  src={media}
+                  alt={title}
+                  className="h-full w-full scale-[1.6] object-cover object-center"
+                />
+              </div>
             ) : (
               <Placeholder
                 className={
