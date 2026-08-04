@@ -15,10 +15,17 @@ export interface AttributeSubsection {
   media?: string[];
 }
 
+export interface AttributeGridItem {
+  number: string;
+  text: string;
+}
+
 export interface AttributeItem {
   title: string;
   color: string;
   lines: string[];
+  /** Grade numerada (01, 02, ...) exibida em 3 colunas */
+  grid?: AttributeGridItem[];
   subsections?: AttributeSubsection[];
   media?: string;
   /** Esconde o placeholder lateral (GIF/foto) quando não houver mídia */
