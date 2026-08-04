@@ -57,6 +57,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
     title,
     color,
     lines,
+    grid,
     subsections,
     media,
     hideMediaPlaceholder,
