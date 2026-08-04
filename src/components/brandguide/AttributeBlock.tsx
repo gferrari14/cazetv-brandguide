@@ -186,14 +186,15 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                         key={i}
                         src={sub.media[i]}
                         alt={`${title} ${i + 1}`}
-                        className="w-full object-cover"
+                        className="aspect-[4/3] w-full object-cover"
                       />
                     ) : (
-                      <Placeholder key={i} />
+                      <Placeholder key={i} className="aspect-[4/3] max-h-none" />
                     ),
                   )}
                 </div>
               )}
+
 
               {sub.imageGrid && sub.imageGrid.length > 0 && (
                 <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 md:gap-8">
