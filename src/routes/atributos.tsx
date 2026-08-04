@@ -23,9 +23,9 @@ export const Route = createFileRoute("/atributos")({
   }),
 });
 
-// Cada atributo tem sua cor (por enquanto todas brancas).
-// Adicione `media: "url"` para trocar os placeholders por gif/foto.
-const WHITE = "var(--foreground)";
+// Cada atributo tem sua própria cor aplicada ao título e à linha superior.
+const colors = ["#FC3C73", "#52B5D8", "#FFEA17", "#0CF09D", "#FC6E4E"];
+
 
 const attributes: AttributeItem[] = [
   {
