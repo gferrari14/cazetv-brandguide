@@ -4,6 +4,11 @@ export interface AttributeListItem {
   sub?: string[];
 }
 
+export interface AttributeCaption {
+  heading?: string;
+  lines: string[];
+}
+
 export interface AttributeSubsection {
   heading?: string;
   /** Linhas sem numeração exibidas logo abaixo do heading */
@@ -14,7 +19,7 @@ export interface AttributeSubsection {
   /** URLs de mídia — substituem os placeholders quando informadas */
   media?: string[];
   /** Textos exibidos abaixo de cada placeholder/media (mesma ordem) */
-  captions?: string[][];
+  captions?: AttributeCaption[];
   /** Grade numerada com imagem/placeholder e legenda abaixo */
   imageGrid?: AttributeImageGridItem[];
 }
@@ -202,9 +207,17 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                         </div>
                       )}
 
-                      {sub.captions?.[i] && sub.captions[i].length > 0 && (
+                      {sub.captions?.[i] && sub.captions[i].lines.length > 0 && (
                         <div className="space-y-2">
-                          {sub.captions[i].map((line) => (
+                          {sub.captions[i].heading && (
+                            <p
+                              className="text-sm font-extrabold uppercase leading-relaxed md:text-base"
+                              style={{ color }}
+                            >
+                              {sub.captions[i].heading}
+                            </p>
+                          )}
+                          {sub.captions[i].lines.map((line) => (
                             <p
                               key={line}
                               className="text-sm uppercase leading-relaxed md:text-base"
