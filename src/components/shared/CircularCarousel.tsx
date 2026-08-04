@@ -25,7 +25,15 @@ const items = [
 
 export function CircularCarousel({ size = 240 }: { size?: number }) {
   const [index, setIndex] = useState(0);
-  const next = () => setIndex((i) => (i + 1) % items.length);
+  const lastChange = useRef<number>(0);
+  const cooldown = 900; // ms — evita passar slides muito rápido
+
+  const next = () => {
+    const now = Date.now();
+    if (now - lastChange.current < cooldown) return;
+    lastChange.current = now;
+    setIndex((i) => (i + 1) % items.length);
+  };
 
   return (
     <>
