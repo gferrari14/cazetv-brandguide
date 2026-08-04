@@ -1,6 +1,7 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import navLogo from "@/assets/cazetv-logo-nav.png";
 import gradientLine from "@/assets/Rectangle_80.png.asset.json";
+import homeBg from "@/assets/home-bg.gif.asset.json";
 import { CircularCarousel } from "@/components/shared/CircularCarousel";
 
 export const Route = createFileRoute("/")({
