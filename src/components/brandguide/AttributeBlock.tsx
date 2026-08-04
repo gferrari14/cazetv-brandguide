@@ -70,7 +70,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
       </div>
 
       {subsections?.map((sub, si) => (
-        <div key={sub.heading ?? `sub-${si}`} className="mt-10 md:mt-14">
+        <div key={sub.heading ?? `sub-${si}`} className="mt-6 md:mt-8">
           {sub.heading && (
             <h3
               className="text-base font-extrabold uppercase md:text-xl"
@@ -141,7 +141,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
         </div>
       ))}
 
-      <div className="h-14 md:h-24" />
+      <div className="h-10 md:h-16" />
     </section>
   );
 }
