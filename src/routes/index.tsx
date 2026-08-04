@@ -48,7 +48,7 @@ function Entry() {
       {/* Carrossel circular sobreposto ao título */}
       <div className="pointer-events-none absolute left-1/2 top-[2vw] z-10 -translate-x-1/2">
         <div className="pointer-events-auto">
-          <CircularCarousel size={Math.min(360, 22 * 16)} />
+          <CircularCarousel size={Math.min(320, 20 * 16)} />
         </div>
       </div>
 
