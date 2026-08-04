@@ -21,11 +21,23 @@ export interface AttributeItem {
   lines: string[];
   subsections?: AttributeSubsection[];
   media?: string;
+  /** Esconde o placeholder lateral (GIF/foto) quando não houver mídia */
+  hideMediaPlaceholder?: boolean;
+  /** Ajusta a altura do placeholder lateral à altura do texto */
+  mediaFit?: "text";
 }
 
-function Placeholder({ label = "PLACEHOLDER" }: { label?: string }) {
+function Placeholder({
+  label = "PLACEHOLDER",
+  className = "",
+}: {
+  label?: string;
+  className?: string;
+}) {
   return (
-    <div className="flex aspect-[16/9] max-h-56 w-full items-center justify-center bg-[#D9D9D9]">
+    <div
+      className={`flex aspect-[16/9] max-h-56 w-full items-center justify-center bg-[#D9D9D9] ${className}`}
+    >
       <span className="text-sm font-extrabold uppercase tracking-tight text-black md:text-lg">
         {label}
       </span>
