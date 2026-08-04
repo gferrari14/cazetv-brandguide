@@ -53,7 +53,7 @@ function Placeholder({
     <div
       className={`flex aspect-[16/9] max-h-56 w-full items-center justify-center bg-[#D9D9D9] ${className}`}
     >
-      <span className="text-sm font-extrabold uppercase tracking-tight text-black md:text-lg">
+      <span className="text-center text-sm font-extrabold uppercase tracking-tight text-black md:text-lg">
         {label}
       </span>
     </div>
