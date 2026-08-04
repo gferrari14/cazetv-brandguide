@@ -189,7 +189,16 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                         className="aspect-[4/3] w-full object-cover"
                       />
                     ) : (
-                      <Placeholder key={i} className="aspect-[4/3] max-h-none" />
+                      <div
+                        key={i}
+                        className="flex aspect-[4/3] w-full items-center justify-center bg-[#D9D9D9]"
+                      >
+                        <span className="text-center text-sm font-extrabold uppercase tracking-tight text-black md:text-lg">
+                          PLACEHOLDER
+                        </span>
+                      </div>
+                    )}
+
                     ),
                   )}
                 </div>
