@@ -129,6 +129,17 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
           )}
         </div>
       ))}
+        </div>
+
+        {/* Placeholder para GIF ou foto */}
+        <div className="w-full md:sticky md:top-24">
+          {media ? (
+            <img src={media} alt={title} className="w-full object-cover" />
+          ) : (
+            <Placeholder />
+          )}
+        </div>
+      </div>
 
       <div className="h-10 md:h-16" />
     </section>
