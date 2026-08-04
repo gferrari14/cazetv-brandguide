@@ -79,17 +79,6 @@ const attributes: AttributeItem[] = [
           },
         ],
       },
-      {
-        heading: "I. A EDIÇÃO DE VÍDEO MUDOU.",
-        items: [
-          {
-            text: "NÃO EXISTE MAIS INÍCIO, MEIO E FIM. A GUERRA POR ATENÇÃO E RETENÇÃO TRANSFORMOU A FORMA DE EDITAR VÍDEO NO MUNDO DIGITAL. É PRECISO BRIGAR POR CADA SEGUNDO. O INÍCIO DO VÍDEO VAI CONDICIONAR AS PESSOAS ASSISTIREM ATÉ O FIM.",
-          },
-          {
-            text: "CONTEÚDO ‘LO-FI’. CONTEÚDOS REAIS. APOSTAM NA SIMPLICIDADE, AUTENTICIDADE E VERDADE. AS PESSOAS SE CONECTAM COM HISTÓRIAS VERDADEIRAS. CONTEÚDO SIMPLES É DIFERENTE DE CONTEÚDO RUIM.",
-          },
-        ],
-      },
     ],
   },
   {
