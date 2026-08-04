@@ -74,7 +74,7 @@ export function RevealFooter({
     <>
       <div style={{ height: REVEAL_DISTANCE }} aria-hidden />
       <footer
-        className="fixed inset-x-0 bottom-0 z-50 flex h-auto min-h-[55vh] flex-col justify-end overflow-hidden bg-white text-black"
+        className="fixed inset-x-0 bottom-0 z-50 flex h-auto min-h-[55vh] flex-col justify-between overflow-hidden bg-white text-black"
         style={{
           transform: `translateY(${(1 - footerProgress) * 100}%)`,
           transition: "transform 80ms linear",
@@ -83,7 +83,7 @@ export function RevealFooter({
         onMouseMove={onMouseMove}
         onMouseLeave={onMouseLeave}
       >
-        <div className="relative z-10 flex w-full flex-col px-3 pb-6 pt-8 md:px-4">
+        <div className="relative z-10 flex h-full w-full flex-col px-3 pb-6 pt-8 md:px-4">
           <button
             onClick={scrollToTop}
             aria-label="Voltar ao topo"
@@ -92,15 +92,17 @@ export function RevealFooter({
             <ArrowUp className="size-5" />
           </button>
 
-          <div className="mt-6 space-y-4">
-            {paragraphs.map((p, i) => (
-              <p key={i} className="max-w-5xl text-sm font-normal leading-relaxed text-black md:text-base lg:text-lg">
-                {p}
-              </p>
-            ))}
+          <div className="flex flex-1 flex-col justify-center py-6">
+            <div className="space-y-4">
+              {paragraphs.map((p, i) => (
+                <p key={i} className="max-w-5xl text-sm font-normal leading-relaxed text-black md:text-base lg:text-lg">
+                  {p}
+                </p>
+              ))}
+            </div>
           </div>
 
-          <div className="relative mt-8">
+          <div className="relative mt-auto">
             <img src={footerLogo} alt="CazéTV" className="mb-4 h-10 w-auto md:h-12" />
             <div className="mb-4 h-0.5 w-full bg-black" />
             <div className="flex flex-col items-start justify-between gap-2 text-xs uppercase tracking-widest text-black/60 md:flex-row md:items-center">
