@@ -46,7 +46,7 @@ const attributes: AttributeItem[] = [
     lines: ["I. ERA DA INFORMAÇÃO X ERA DA CONEXÃO"],
     subsections: [
       {
-        heading: "NEUTRALIDADE X PERSONALIDADE",
+        heading: "I. ERA DA INFORMAÇÃO X ERA DA CONEXÃO",
         items: [
           { text: "“ANTES, INFORMAÇÃO ERA PODER. AGORA, É CONEXÃO.”" },
           { text: "“AS PESSOAS QUEREM SE SENTIR PARTE — E ISSO É O QUE FAZEMOS DE MELHOR.”" },
