@@ -33,42 +33,46 @@ function BackgroundPage() {
         description="VERSÕES OFICIAIS DO BACKGROUND DA MARCA NOS FORMATOS HORIZONTAL E VERTICAL."
       >
         <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
-          <figure className="space-y-3">
+          <div className="overflow-hidden border border-border bg-card">
             <img
               src={bgHorizontal.url}
               alt="Background CazéTV horizontal"
-              className="w-full border border-border"
+              className="w-full"
               loading="lazy"
             />
-            <figcaption className="flex items-center justify-between text-xs font-bold uppercase text-muted-foreground">
-              <span>HORIZONTAL · 1920×1080</span>
+            <div className="flex items-center justify-between border-t border-border bg-black px-5 py-4">
+              <span className="text-xs font-bold uppercase tracking-wide text-white">
+                HORIZONTAL · 1920×1080
+              </span>
               <a
                 href={bgHorizontal.url}
                 download="BACKGROUND_HORIZONTAL.png"
-                className="gradient-hover inline-flex items-center gap-2 border border-foreground bg-background px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
+                className="gradient-hover inline-flex items-center gap-2 border border-white bg-black px-4 py-2 text-xs font-bold uppercase tracking-wide text-white"
               >
                 BAIXAR
               </a>
-            </figcaption>
-          </figure>
-          <figure className="space-y-3">
+            </div>
+          </div>
+          <div className="overflow-hidden border border-border bg-card">
             <img
               src={bgVertical.url}
               alt="Background CazéTV vertical"
-              className="w-full border border-border"
+              className="w-full"
               loading="lazy"
             />
-            <figcaption className="flex items-center justify-between text-xs font-bold uppercase text-muted-foreground">
-              <span>VERTICAL · 1080×1350</span>
+            <div className="flex items-center justify-between border-t border-border bg-black px-5 py-4">
+              <span className="text-xs font-bold uppercase tracking-wide text-white">
+                VERTICAL · 1080×1350
+              </span>
               <a
                 href={bgVertical.url}
                 download="BACKGROUND_VERTICAL.png"
-                className="gradient-hover inline-flex items-center gap-2 border border-foreground bg-background px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
+                className="gradient-hover inline-flex items-center gap-2 border border-white bg-black px-4 py-2 text-xs font-bold uppercase tracking-wide text-white"
               >
                 BAIXAR
               </a>
-            </figcaption>
-          </figure>
+            </div>
+          </div>
         </div>
       </SectionBlock>
 
