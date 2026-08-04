@@ -2,6 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BrandLayout } from "@/components/brandguide/BrandLayout";
 import { PageHeader } from "@/components/brandguide/PageHeader";
 import { AttributeBlock, type AttributeItem } from "@/components/brandguide/AttributeBlock";
+import inclusao1 from "@/assets/inclusao-1.jpg.asset.json";
+import inclusao2 from "@/assets/inclusao-2.png.asset.json";
+import inclusao3 from "@/assets/inclusao-3.jpg.asset.json";
 
 export const Route = createFileRoute("/atributos")({
   component: AtributosPage,
@@ -104,9 +107,9 @@ const attributes: AttributeItem[] = [
     subsections: [
       {
         imageGrid: [
-          { number: "01", text: "LIVE COM ZECA PAGODINHO E PODPAH (ARRECADAR DINHEIRO PRAS CHUVAS)" },
-          { number: "02", text: "CAMPANHA CONTRA A FOME" },
-          { number: "03", text: "AS PESSOAS PRECISAM SE RECONHECER PARA SE CONECTAR." },
+          { number: "01", text: "LIVE COM ZECA PAGODINHO E PODPAH (ARRECADAR DINHEIRO PRAS CHUVAS)", media: inclusao1.url },
+          { number: "02", text: "CAMPANHA CONTRA A FOME", media: inclusao2.url },
+          { number: "03", text: "AS PESSOAS PRECISAM SE RECONHECER PARA SE CONECTAR.", media: inclusao3.url },
         ],
       },
     ],

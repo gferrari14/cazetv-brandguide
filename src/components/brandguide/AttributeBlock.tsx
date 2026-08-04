@@ -209,7 +209,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                         <img
                           src={item.media}
                           alt={item.text}
-                          className="mt-3 w-full object-cover"
+                          className="mt-3 aspect-[16/9] w-full object-cover"
                         />
                       ) : (
                         <Placeholder className="mt-3 aspect-[16/9]" />
