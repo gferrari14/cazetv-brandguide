@@ -26,7 +26,7 @@ export const Route = createFileRoute("/atributos")({
 });
 
 // Cada atributo tem sua própria cor aplicada ao título e à linha superior.
-const colors = ["#FC3C73", "#52B5D8", "#FFEA17", "#0CF09D", "#FC6E4E"];
+const colors = ["#F64C68", "#61B8E0", "#F3C11B", "#58C071", "#FC6E4E"];
 
 
 const attributes: AttributeItem[] = [
