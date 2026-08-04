@@ -2,6 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BrandLayout } from "@/components/brandguide/BrandLayout";
 import { PageHeader } from "@/components/brandguide/PageHeader";
 import { AttributeBlock, type AttributeItem } from "@/components/brandguide/AttributeBlock";
+import inclusao1 from "@/assets/inclusao-1.jpg.asset.json";
+import inclusao2 from "@/assets/inclusao-2.png.asset.json";
+import inclusao3 from "@/assets/inclusao-3.jpg.asset.json";
 
 export const Route = createFileRoute("/atributos")({
   component: AtributosPage,
