@@ -25,6 +25,7 @@ const attributes: AttributeItem[] = [
   {
     title: "PAIXÃO",
     color: WHITE,
+    mediaFit: "text",
     lines: [
       "I. NOSSA MISSÃO É O QUE NOS MOVE.",
       "II. TUDO COMEÇA E TERMINA NA PAIXÃO PELO ESPORTE.",
@@ -84,11 +85,14 @@ const attributes: AttributeItem[] = [
   {
     title: "COMUNIDADE",
     color: WHITE,
+    hideMediaPlaceholder: true,
     lines: [
-      "I. COPA ACERJ",
       "II. SER SEMPRE VERDADEIRO. MOSTRAR NOSSO MELHOR LADO E NOSSAS VULNERABILIDADES. NUNCA MENOSPREZAR O FÃ.",
     ],
     subsections: [
+      {
+        heading: "I. COPA ACERJ",
+      },
       {
         heading: "III. FANCENTRIC — DE VERDADE!",
         items: [
@@ -123,6 +127,7 @@ const attributes: AttributeItem[] = [
   {
     title: "INCLUSÃO",
     color: WHITE,
+    hideMediaPlaceholder: true,
     lines: ["I. ESTAR COM NOSSOS FÃS NAS BOAS E NAS MÁS"],
     subsections: [
       {
@@ -138,6 +143,7 @@ const attributes: AttributeItem[] = [
   {
     title: "REBELDIA",
     color: WHITE,
+    hideMediaPlaceholder: true,
     lines: ["A REGRA É NÃO TER REGRAS."],
   },
 ];
