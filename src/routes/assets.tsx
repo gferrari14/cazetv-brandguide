@@ -32,6 +32,7 @@ import {
 import { BrandLayout } from "@/components/brandguide/BrandLayout";
 import { PageHeader } from "@/components/brandguide/PageHeader";
 import { SectionBlock } from "@/components/brandguide/SectionBlock";
+import { CazetvAssetsGrid } from "@/components/brandguide/CazetvAssetsGrid";
 
 const DOWNLOAD_ICON_MASK =
   "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/><polyline points='7 10 12 15 17 10'/><line x1='12' y1='15' x2='12' y2='3'/></svg>\")";
@@ -232,6 +233,14 @@ function AssetsPage() {
             </ul>
           </div>
         </div>
+      </SectionBlock>
+
+      <SectionBlock
+        title="ASSETS CAZÉTV"
+        eyebrow="ELEMENTOS GRÁFICOS"
+        description="BIBLIOTECA DE ELEMENTOS GRÁFICOS DA MARCA, DISPONÍVEL EM VERSÃO BRANCA E PRETA. BAIXE INDIVIDUALMENTE EM SVG OU PNG, OU LEVE O PACOTE COMPLETO."
+      >
+        <CazetvAssetsGrid />
       </SectionBlock>
     </BrandLayout>
   );
