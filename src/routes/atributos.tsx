@@ -79,7 +79,7 @@ function AtributosPage() {
       <SectionBlock
         title="Tom de voz"
         eyebrow="COMO FALAMOS"
-        description="O TOM DE VOZ DA CAZÉTV É A MESMA COISA EM TODAS AS PLATAFORMAS: PRÓXIMO, DIRETO E COM ENERGIA. ABAIXO, OS PILARES QUE GUAM A COMUNICAÇÃO."
+        description="O TOM DE VOZ DA CAZÉTV É A MESMA COISA EM TODAS AS PLATAFORMAS: PRÓXIMO, DIRETO E COM ENERGIA. ABAIXO, OS PILARES QUE GUIAM A COMUNICAÇÃO."
       >
         <div className="grid gap-4 md:grid-cols-2">
           {toneItems.map((item) => (
