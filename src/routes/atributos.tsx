@@ -88,7 +88,7 @@ const attributes: AttributeItem[] = [
     lines: [],
     grid: [
       { number: "01", text: "SER SEMPRE VERDADEIRO" },
-      { number: "02", text: "FANCENTRIC! DE VERDADE!" },
+      { number: "02", text: "FANCENTRIC DE VERDADE!" },
       { number: "03", text: "GESTÃO DA COMUNIDADE" },
       { number: "04", text: "PRODUÇÃO DE CONTEÚDO ENTORNO DA CAZÉTV" },
       { number: "05", text: "FERRAMENTAS DE CONEXÃO EM TEMPO REAL" },
