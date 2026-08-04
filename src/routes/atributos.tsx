@@ -52,7 +52,7 @@ const attributes: AttributeItem[] = [
     title: "AUTENTICIDADE",
     color: WHITE,
     hideMediaPlaceholder: true,
-    lines: ["I. ERA DA INFORMAÇÃO X ERA DA CONEXÃO"],
+    lines: [],
     subsections: [
       {
         heading: "I. ERA DA INFORMAÇÃO X ERA DA CONEXÃO",
