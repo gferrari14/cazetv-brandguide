@@ -25,8 +25,8 @@ export interface AttributeItem {
 
 function Placeholder({ label = "PLACEHOLDER" }: { label?: string }) {
   return (
-    <div className="flex aspect-[16/10] w-full items-center justify-center bg-[#D9D9D9]">
-      <span className="text-base font-extrabold uppercase tracking-tight text-black md:text-2xl">
+    <div className="flex aspect-[16/9] max-h-56 w-full items-center justify-center bg-[#D9D9D9]">
+      <span className="text-sm font-extrabold uppercase tracking-tight text-black md:text-lg">
         {label}
       </span>
     </div>
@@ -37,16 +37,16 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
   const { title, color, lines, subsections, media } = attribute;
 
   return (
-    <section className="border-t pt-10 md:pt-14" style={{ borderColor: color }}>
-      <div className="grid items-start gap-8 md:grid-cols-[1.15fr_1fr]">
+    <section className="border-t pt-8 md:pt-10" style={{ borderColor: color }}>
+      <div className="grid items-start gap-6 md:grid-cols-[1.5fr_1fr] md:gap-10">
         <div>
           <h2
-            className="text-5xl font-extrabold uppercase leading-[0.95] md:text-7xl"
+            className="text-4xl font-extrabold uppercase leading-[0.95] md:text-6xl"
             style={{ color }}
           >
             {title}
           </h2>
-          <div className="mt-4 space-y-1">
+          <div className="mt-3 space-y-1">
             {lines.map((line) => (
               <p
                 key={line}
@@ -57,20 +57,9 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
               </p>
             ))}
           </div>
-        </div>
-
-        {/* Placeholder para GIF ou foto */}
-        <div className="w-full">
-          {media ? (
-            <img src={media} alt={title} className="w-full object-cover" />
-          ) : (
-            <Placeholder />
-          )}
-        </div>
-      </div>
 
       {subsections?.map((sub, si) => (
-        <div key={sub.heading ?? `sub-${si}`} className="mt-10 md:mt-14">
+        <div key={sub.heading ?? `sub-${si}`} className="mt-6 md:mt-8">
           {sub.heading && (
             <h3
               className="text-base font-extrabold uppercase md:text-xl"
@@ -140,8 +129,19 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
           )}
         </div>
       ))}
+        </div>
 
-      <div className="h-14 md:h-24" />
+        {/* Placeholder para GIF ou foto */}
+        <div className="w-full md:sticky md:top-24">
+          {media ? (
+            <img src={media} alt={title} className="w-full object-cover" />
+          ) : (
+            <Placeholder />
+          )}
+        </div>
+      </div>
+
+      <div className="h-10 md:h-16" />
     </section>
   );
 }
