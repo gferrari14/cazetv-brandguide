@@ -83,7 +83,7 @@ export function RevealFooter({
         onMouseMove={onMouseMove}
         onMouseLeave={onMouseLeave}
       >
-        <div className="relative z-10 flex h-full w-full flex-col px-3 pb-6 pt-8 md:px-4">
+        <div className="relative z-10 flex h-full w-full flex-col px-3 pb-0 pt-8 md:px-4">
           <button
             onClick={scrollToTop}
             aria-label="Voltar ao topo"
@@ -92,7 +92,7 @@ export function RevealFooter({
             <ArrowUp className="size-5" />
           </button>
 
-          <div className="flex flex-1 flex-col justify-center py-6">
+          <div className="flex flex-1 flex-col justify-center py-10">
             <div className="space-y-4">
               {paragraphs.map((p, i) => (
                 <p key={i} className="max-w-5xl text-sm font-normal leading-relaxed text-black md:text-base lg:text-lg">
@@ -103,14 +103,16 @@ export function RevealFooter({
           </div>
 
           <div className="relative mt-auto">
-            <img src={footerLogo} alt="CazéTV" className="mb-4 h-10 w-auto md:h-12" />
-            <div className="mb-4 h-0.5 w-full bg-black" />
-            <div className="flex flex-col items-start justify-between gap-2 text-xs uppercase tracking-widest text-black/60 md:flex-row md:items-center">
+            <img src={footerLogo} alt="CazéTV" className="mb-3 h-10 w-auto md:h-12" />
+            <div className="h-0.5 w-full bg-black" />
+            <div className="flex flex-col items-start justify-between gap-1 py-2 text-xs uppercase tracking-widest text-black/60 md:flex-row md:items-center">
               <span>© CazéTV 2026</span>
               <span>Todos os direitos reservados</span>
             </div>
           </div>
         </div>
+
+
 
         <div
           ref={gradientRef}
