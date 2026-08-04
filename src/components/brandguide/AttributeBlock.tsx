@@ -136,15 +136,19 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                 </h3>
               )}
 
-              {sub.intro?.map((line) => (
-                <p
-                  key={line}
-                  className="mt-2 text-sm uppercase leading-relaxed md:text-base"
-                  style={{ color }}
-                >
-                  {line}
-                </p>
-              ))}
+              {sub.intro &&
+                sub.intro.length > 0 &&
+                !sub.placeholders &&
+                !sub.imageGrid &&
+                sub.intro.map((line) => (
+                  <p
+                    key={line}
+                    className="mt-2 text-sm uppercase leading-relaxed md:text-base"
+                    style={{ color }}
+                  >
+                    {line}
+                  </p>
+                ))}
 
               {sub.items && sub.items.length > 0 && (
                 <ol className="mt-5 space-y-3 pl-5">
@@ -175,31 +179,55 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
 
               {(sub.placeholders ?? 0) > 0 && (
                 <div
-                  className="mt-6 grid gap-6"
-                  style={{
-                    gridTemplateColumns: `repeat(${sub.placeholders}, minmax(0, 1fr))`,
-                  }}
+                  className={`mt-6 gap-6 ${sub.intro && sub.intro.length > 0 ? "grid grid-cols-1 md:grid-cols-2" : "grid"}`}
+                  style={
+                    !sub.intro || sub.intro.length === 0
+                      ? {
+                          gridTemplateColumns: `repeat(${sub.placeholders}, minmax(0, 1fr))`,
+                        }
+                      : undefined
+                  }
                 >
-                  {Array.from({ length: sub.placeholders ?? 0 }).map((_, i) =>
-                    sub.media?.[i] ? (
-                      <img
-                        key={i}
-                        src={sub.media[i]}
-                        alt={`${title} ${i + 1}`}
-                        className="aspect-[4/3] w-full object-cover"
-                      />
-                    ) : (
-                      <div
-                        key={i}
-                        className="flex aspect-[4/3] w-full items-center justify-center bg-[#D9D9D9]"
-                      >
-                        <span className="text-center text-sm font-extrabold uppercase tracking-tight text-black md:text-lg">
-                          PLACEHOLDER
-                        </span>
-                      </div>
-                    ),
-                  )}
+                  <div
+                    className="grid gap-6"
+                    style={{
+                      gridTemplateColumns: `repeat(${sub.placeholders}, minmax(0, 1fr))`,
+                    }}
+                  >
+                    {Array.from({ length: sub.placeholders ?? 0 }).map((_, i) =>
+                      sub.media?.[i] ? (
+                        <img
+                          key={i}
+                          src={sub.media[i]}
+                          alt={`${title} ${i + 1}`}
+                          className="aspect-[4/3] w-full object-cover"
+                        />
+                      ) : (
+                        <div
+                          key={i}
+                          className="flex aspect-[4/3] w-full items-center justify-center bg-[#D9D9D9]"
+                        >
+                          <span className="text-center text-sm font-extrabold uppercase tracking-tight text-black md:text-lg">
+                            PLACEHOLDER
+                          </span>
+                        </div>
+                      ),
+                    )}
+                  </div>
 
+                  {sub.intro && sub.intro.length > 0 && (
+                    <div className="space-y-2">
+                      {sub.intro.map((line) => (
+                        <p
+                          key={line}
+                          className="text-sm uppercase leading-relaxed md:text-base"
+                          style={{ color }}
+                        >
+                          {line}
+                        </p>
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
 
