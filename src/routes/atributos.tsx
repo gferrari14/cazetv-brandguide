@@ -6,6 +6,8 @@ import inclusao1 from "@/assets/inclusao-1.jpg.asset.json";
 import inclusao2 from "@/assets/inclusao-2.png.asset.json";
 import inclusao3 from "@/assets/inclusao-3.jpg.asset.json";
 import paixaoMedia from "@/assets/paixao-copadomundo.jpg.asset.json";
+import autenticidade1 from "@/assets/autenticidade-1.png.asset.json";
+import autenticidade2 from "@/assets/autenticidade-2.gif.asset.json";
 
 export const Route = createFileRoute("/atributos")({
   component: AtributosPage,
@@ -73,6 +75,7 @@ const attributes: AttributeItem[] = [
       },
       {
         placeholders: 2,
+        media: [autenticidade1.url, autenticidade2.url],
       },
       {
         heading: "I. A EDIÇÃO DE VÍDEO MUDOU.",
