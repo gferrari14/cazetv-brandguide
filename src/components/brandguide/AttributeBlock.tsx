@@ -197,10 +197,9 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                           PLACEHOLDER
                         </span>
                       </div>
-                    )}
-
                     ),
                   )}
+
                 </div>
               )}
 
