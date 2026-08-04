@@ -92,6 +92,29 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
             ))}
           </div>
 
+          {grid && grid.length > 0 && (
+            <div className="mt-8 grid grid-cols-2 gap-x-8 gap-y-8 md:mt-10 md:grid-cols-3 md:gap-x-10 md:gap-y-10">
+              {grid.map((g) => (
+                <div key={g.number}>
+                  <p
+                    className="text-2xl font-extrabold leading-none md:text-3xl"
+                    style={{ color }}
+                  >
+                    {g.number}
+                  </p>
+                  <p
+                    className="mt-2 text-sm uppercase leading-relaxed md:text-base"
+                    style={{ color }}
+                  >
+                    {g.text}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+
+
+
           {subsections?.map((sub, si) => (
             <div key={sub.heading ?? `sub-${si}`} className="mt-6 md:mt-8">
               {sub.heading && (
