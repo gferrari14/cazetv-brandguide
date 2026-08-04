@@ -233,6 +233,14 @@ function AssetsPage() {
           </div>
         </div>
       </SectionBlock>
+
+      <SectionBlock
+        title="ASSETS CAZÉTV"
+        eyebrow="ELEMENTOS GRÁFICOS"
+        description="BIBLIOTECA DE ELEMENTOS GRÁFICOS DA MARCA, DISPONÍVEL EM VERSÃO BRANCA E PRETA. BAIXE INDIVIDUALMENTE EM SVG OU PNG, OU LEVE O PACOTE COMPLETO."
+      >
+        <CazetvAssetsGrid />
+      </SectionBlock>
     </BrandLayout>
   );
 }
