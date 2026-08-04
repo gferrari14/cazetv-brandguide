@@ -29,6 +29,7 @@ const attributes: AttributeItem[] = [
   {
     title: "PAIXÃO",
     color: WHITE,
+    media: paixaoMedia.url,
     mediaFit: "text",
     lines: [
       "I. NOSSA MISSÃO É O QUE NOS MOVE.",
