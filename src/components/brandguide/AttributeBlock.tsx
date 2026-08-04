@@ -101,8 +101,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
             {lines.map((line) => (
               <p
                 key={line}
-                className="text-sm uppercase leading-relaxed md:text-base"
-                style={{ color }}
+                className="text-sm uppercase leading-relaxed text-white md:text-base"
               >
                 {line}
               </p>
@@ -120,8 +119,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                     {g.number}
                   </p>
                   <p
-                    className="mt-2 text-sm uppercase leading-relaxed md:text-base"
-                    style={{ color }}
+                    className="mt-2 text-sm uppercase leading-relaxed text-white md:text-base"
                   >
                     {g.text}
                   </p>
@@ -150,8 +148,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                 sub.intro.map((line) => (
                   <p
                     key={line}
-                    className="mt-2 text-sm uppercase leading-relaxed md:text-base"
-                    style={{ color }}
+                    className="mt-2 text-sm uppercase leading-relaxed text-white md:text-base"
                   >
                     {line}
                   </p>
@@ -162,8 +159,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                   {sub.items.map((item, i) => (
                     <li
                       key={item.text}
-                      className="list-none text-sm uppercase leading-relaxed md:text-base"
-                      style={{ color }}
+                      className="list-none text-sm uppercase leading-relaxed text-white md:text-base"
                     >
                       <span className="mr-2">{i + 1}.</span>
                       {item.text}
@@ -220,8 +216,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                           {sub.captions[i].lines.map((line) => (
                             <p
                               key={line}
-                              className="text-sm uppercase leading-relaxed md:text-base"
-                              style={{ color }}
+                              className="text-sm uppercase leading-relaxed text-white md:text-base"
                             >
                               {line}
                             </p>
@@ -254,8 +249,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                         <Placeholder className="mt-3 aspect-[16/9]" />
                       )}
                       <p
-                        className="mt-3 text-center text-sm uppercase leading-relaxed md:text-base"
-                        style={{ color }}
+                        className="mt-3 text-center text-sm uppercase leading-relaxed text-white md:text-base"
                       >
                         {item.text}
                       </p>
