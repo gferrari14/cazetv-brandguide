@@ -42,7 +42,11 @@ function BackgroundPage() {
             />
             <figcaption className="flex items-center justify-between text-xs font-bold uppercase text-muted-foreground">
               <span>HORIZONTAL · 1920×1080</span>
-              <a href={bgHorizontal.url} download="BACKGROUND_HORIZONTAL.png" className="underline">
+              <a
+                href={bgHorizontal.url}
+                download="BACKGROUND_HORIZONTAL.png"
+                className="gradient-hover inline-flex items-center gap-2 border border-foreground bg-background px-5 py-3 text-xs font-bold uppercase tracking-wide text-foreground"
+              >
                 BAIXAR
               </a>
             </figcaption>
