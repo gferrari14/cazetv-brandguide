@@ -53,7 +53,7 @@ function Placeholder({
     <div
       className={`flex aspect-[16/9] max-h-56 w-full items-center justify-center bg-[#D9D9D9] ${className}`}
     >
-      <span className="text-sm font-extrabold uppercase tracking-tight text-black md:text-lg">
+      <span className="text-center text-sm font-extrabold uppercase tracking-tight text-black md:text-lg">
         {label}
       </span>
     </div>
@@ -74,12 +74,14 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
 
   const fitText = mediaFit === "text";
 
+  const rightColumnVisible = !!(media || !hideMediaPlaceholder);
+
   return (
     <section className="border-t pt-8 md:pt-10" style={{ borderColor: color }}>
       <div
-        className={`grid gap-6 md:grid-cols-[1.5fr_1fr] md:gap-10 ${
-          fitText ? "items-stretch" : "items-start"
-        }`}
+        className={`grid gap-6 md:gap-10 ${
+          rightColumnVisible ? "md:grid-cols-[1.5fr_1fr]" : "md:grid-cols-1"
+        } ${fitText ? "items-stretch" : "items-start"}`}
       >
         <div>
           <h2
@@ -213,7 +215,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                         <Placeholder className="mt-3 aspect-[16/9]" />
                       )}
                       <p
-                        className="mt-3 text-sm uppercase leading-relaxed md:text-base"
+                        className="mt-3 text-center text-sm uppercase leading-relaxed md:text-base"
                         style={{ color }}
                       >
                         {item.text}
