@@ -53,6 +53,14 @@ function Entry() {
         </div>
       </div>
 
+      {/* Linha gradiente no rodapé */}
+      <img
+        src={gradientLine.url}
+        alt=""
+        className="absolute bottom-0 left-0 z-0 h-1 w-full object-cover"
+        aria-hidden="true"
+      />
+
       {/* Container bottom-right: logo above copyright */}
       <div className="absolute bottom-4 right-3 z-10 flex flex-col items-end gap-2 md:right-4">
         <header>
