@@ -57,17 +57,6 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
               </p>
             ))}
           </div>
-        </div>
-
-        {/* Placeholder para GIF ou foto */}
-        <div className="w-full">
-          {media ? (
-            <img src={media} alt={title} className="w-full object-cover" />
-          ) : (
-            <Placeholder />
-          )}
-        </div>
-      </div>
 
       {subsections?.map((sub, si) => (
         <div key={sub.heading ?? `sub-${si}`} className="mt-6 md:mt-8">
