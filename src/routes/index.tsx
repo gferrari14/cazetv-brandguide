@@ -17,11 +17,11 @@ const links = [
 function Entry() {
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-background text-foreground">
-      {/* GIF de fundo com 15% de opacidade */}
+      {/* GIF de fundo com 15% de opacidade e saturação zerada */}
       <img
         src={homeBg.url}
         alt=""
-        className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-[0.15]"
+        className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-[0.15] saturate-0"
         aria-hidden="true"
       />
 
