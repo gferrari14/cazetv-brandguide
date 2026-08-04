@@ -74,7 +74,7 @@ export function RevealFooter({
     <>
       <div style={{ height: REVEAL_DISTANCE }} aria-hidden />
       <footer
-        className="fixed inset-x-0 bottom-0 z-50 h-screen overflow-hidden bg-white text-black"
+        className="fixed inset-x-0 bottom-0 z-50 flex h-auto min-h-[45vh] flex-col justify-end overflow-hidden bg-white text-black"
         style={{
           transform: `translateY(${(1 - footerProgress) * 100}%)`,
           transition: "transform 80ms linear",
@@ -83,7 +83,7 @@ export function RevealFooter({
         onMouseMove={onMouseMove}
         onMouseLeave={onMouseLeave}
       >
-        <div className="relative z-10 flex h-full w-full flex-col px-3 pb-4 pt-12 md:px-4">
+        <div className="relative z-10 flex w-full flex-col px-3 pb-3 pt-6 md:px-4">
           <button
             onClick={scrollToTop}
             aria-label="Voltar ao topo"
@@ -92,17 +92,17 @@ export function RevealFooter({
             <ArrowUp className="size-5" />
           </button>
 
-          <div className="mt-12 flex-1 space-y-5">
+          <div className="mt-4 space-y-3">
             {paragraphs.map((p, i) => (
-              <p key={i} className="max-w-5xl text-base font-normal leading-relaxed text-black md:text-lg lg:text-xl">
+              <p key={i} className="max-w-5xl text-sm font-normal leading-relaxed text-black md:text-base lg:text-lg">
                 {p}
               </p>
             ))}
           </div>
 
-          <div className="relative mt-10">
-            <img src={footerLogo} alt="CazéTV" className="mb-4 h-10 w-auto md:h-12" />
-            <div className="mb-4 h-0.5 w-full bg-black" />
+          <div className="relative mt-4">
+            <img src={footerLogo} alt="CazéTV" className="mb-3 h-10 w-auto md:h-12" />
+            <div className="mb-3 h-0.5 w-full bg-black" />
             <div className="flex flex-col items-start justify-between gap-2 text-xs uppercase tracking-widest text-black/60 md:flex-row md:items-center">
               <span>© CazéTV 2026</span>
               <span>Todos os direitos reservados</span>
@@ -113,7 +113,7 @@ export function RevealFooter({
         <div
           ref={gradientRef}
           aria-hidden
-          className="pointer-events-none absolute -bottom-24 -left-24 -right-24 z-0 h-[85%]"
+          className="pointer-events-none absolute -bottom-16 -left-16 -right-16 z-0 h-[60%]"
           style={{
             background: `
               radial-gradient(calc(60% * var(--scale, 1)) calc(80% * var(--scale, 1)) at var(--mx, 30%) var(--my, 100%), rgba(246,76,104,0.55), transparent 60%),
