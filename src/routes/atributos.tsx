@@ -62,19 +62,17 @@ const attributes: AttributeItem[] = [
         ],
       },
       {
-        placeholders: 1,
-        media: [autenticidade1.url],
-        intro: [
-          "3.ERA DA INFORMAÇÃO:",
-          "a.NEUTRALIDADE — O CANAL ERA MEIO E A IMPARCIALIDADE ERA FUNDAMENTAL PARA NÃO CORROMPER A MENSAGEM. ERA NECESSÁRIO PADRONIZAR. UNIFORMES IGUAIS. PROIBIDO SOTAQUE. PROIBIDO PINTAR O CABELO, TER BARBA, PINTAR A UNHA. PROIBIDO SE EMOCIONAR. PROIBIDO SE EXPRESSAR.",
-        ],
-      },
-      {
-        placeholders: 1,
-        media: [autenticidade2.url],
-        intro: [
-          "4.ERA DA CONEXÃO:",
-          "a.A INFORMAÇÃO JÁ EXISTE. NÃO É SOBRE PASSÁ-LA, MAS COMO PASSÁ-LA. A CAZÉTV TROUXE TODAS AS CAMADAS ANTES PROIBIDAS PRA FRENTE DA CÂMERA. NOS EXPRESSAMOS, CHORAMOS, ENTREGAMOS MODA, ESTILO DE VIDA, OPINIÃO.",
+        placeholders: 2,
+        media: [autenticidade1.url, autenticidade2.url],
+        captions: [
+          [
+            "3.ERA DA INFORMAÇÃO:",
+            "a.NEUTRALIDADE — O CANAL ERA MEIO E A IMPARCIALIDADE ERA FUNDAMENTAL PARA NÃO CORROMPER A MENSAGEM. ERA NECESSÁRIO PADRONIZAR. UNIFORMES IGUAIS. PROIBIDO SOTAQUE. PROIBIDO PINTAR O CABELO, TER BARBA, PINTAR A UNHA. PROIBIDO SE EMOCIONAR. PROIBIDO SE EXPRESSAR.",
+          ],
+          [
+            "4.ERA DA CONEXÃO:",
+            "a.A INFORMAÇÃO JÁ EXISTE. NÃO É SOBRE PASSÁ-LA, MAS COMO PASSÁ-LA. A CAZÉTV TROUXE TODAS AS CAMADAS ANTES PROIBIDAS PRA FRENTE DA CÂMERA. NOS EXPRESSAMOS, CHORAMOS, ENTREGAMOS MODA, ESTILO DE VIDA, OPINIÃO.",
+          ],
         ],
       },
       {
