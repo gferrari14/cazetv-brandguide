@@ -1,6 +1,7 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import navLogo from "@/assets/cazetv-logo-nav.png";
 import gradientLine from "@/assets/Rectangle_80.png.asset.json";
+import homeBg from "@/assets/home-bg.gif.asset.json";
 import { CircularCarousel } from "@/components/shared/CircularCarousel";
 
 export const Route = createFileRoute("/")({
@@ -16,6 +17,14 @@ const links = [
 function Entry() {
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-background text-foreground">
+      {/* GIF de fundo com 7% de opacidade */}
+      <img
+        src={homeBg.url}
+        alt=""
+        className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-[0.07]"
+        aria-hidden="true"
+      />
+
       {/* Título no topo, ocupando toda a largura via SVG (escala precisa) */}
       <div className="pointer-events-none absolute left-0 right-0 top-0 z-[5] px-2 md:px-3">
         <h1 className="sr-only">Branding CazéTV</h1>
