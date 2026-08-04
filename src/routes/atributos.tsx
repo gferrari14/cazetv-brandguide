@@ -5,6 +5,16 @@ import { SectionBlock } from "@/components/brandguide/SectionBlock";
 
 export const Route = createFileRoute("/atributos")({
   component: AtributosPage,
+  head: () => ({
+    meta: [
+      { title: "Atributos · CAZÉTV BRANDGUIDE" },
+      { name: "description", content: "Conheça os atributos, essência e tom de voz da marca CazéTV." },
+      { property: "og:title", content: "Atributos · CAZÉTV BRANDGUIDE" },
+      { property: "og:description", content: "Conheça os atributos, essência e tom de voz da marca CazéTV." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
 });
 
 const attributes = [
