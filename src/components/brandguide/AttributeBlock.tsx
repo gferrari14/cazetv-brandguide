@@ -74,12 +74,14 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
 
   const fitText = mediaFit === "text";
 
+  const rightColumnVisible = !!(media || !hideMediaPlaceholder);
+
   return (
     <section className="border-t pt-8 md:pt-10" style={{ borderColor: color }}>
       <div
-        className={`grid gap-6 md:grid-cols-[1.5fr_1fr] md:gap-10 ${
-          fitText ? "items-stretch" : "items-start"
-        }`}
+        className={`grid gap-6 md:gap-10 ${
+          rightColumnVisible ? "md:grid-cols-[1.5fr_1fr]" : "md:grid-cols-1"
+        } ${fitText ? "items-stretch" : "items-start"}`}
       >
         <div>
           <h2
