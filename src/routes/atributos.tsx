@@ -59,23 +59,23 @@ const attributes: AttributeItem[] = [
         items: [
           { text: "“ANTES, INFORMAÇÃO ERA PODER. AGORA, É CONEXÃO.”" },
           { text: "“AS PESSOAS QUEREM SE SENTIR PARTE — E ISSO É O QUE FAZEMOS DE MELHOR.”" },
-          {
-            text: "ERA DA INFORMAÇÃO:",
-            sub: [
-              "NEUTRALIDADE — O CANAL ERA MEIO E A IMPARCIALIDADE ERA FUNDAMENTAL PARA NÃO CORROMPER A MENSAGEM. ERA NECESSÁRIO PADRONIZAR. UNIFORMES IGUAIS. PROIBIDO SOTAQUE. PROIBIDO PINTAR O CABELO, TER BARBA, PINTAR A UNHA. PROIBIDO SE EMOCIONAR. PROIBIDO SE EXPRESSAR.",
-            ],
-          },
-          {
-            text: "ERA DA CONEXÃO:",
-            sub: [
-              "A INFORMAÇÃO JÁ EXISTE. NÃO É SOBRE PASSÁ-LA, MAS COMO PASSÁ-LA. A CAZÉTV TROUXE TODAS AS CAMADAS ANTES PROIBIDAS PRA FRENTE DA CÂMERA. NOS EXPRESSAMOS, CHORAMOS, ENTREGAMOS MODA, ESTILO DE VIDA, OPINIÃO.",
-            ],
-          },
         ],
       },
       {
-        placeholders: 2,
-        media: [autenticidade1.url, autenticidade2.url],
+        placeholders: 1,
+        media: [autenticidade1.url],
+        intro: [
+          "3.ERA DA INFORMAÇÃO:",
+          "a.NEUTRALIDADE — O CANAL ERA MEIO E A IMPARCIALIDADE ERA FUNDAMENTAL PARA NÃO CORROMPER A MENSAGEM. ERA NECESSÁRIO PADRONIZAR. UNIFORMES IGUAIS. PROIBIDO SOTAQUE. PROIBIDO PINTAR O CABELO, TER BARBA, PINTAR A UNHA. PROIBIDO SE EMOCIONAR. PROIBIDO SE EXPRESSAR.",
+        ],
+      },
+      {
+        placeholders: 1,
+        media: [autenticidade2.url],
+        intro: [
+          "4.ERA DA CONEXÃO:",
+          "a.A INFORMAÇÃO JÁ EXISTE. NÃO É SOBRE PASSÁ-LA, MAS COMO PASSÁ-LA. A CAZÉTV TROUXE TODAS AS CAMADAS ANTES PROIBIDAS PRA FRENTE DA CÂMERA. NOS EXPRESSAMOS, CHORAMOS, ENTREGAMOS MODA, ESTILO DE VIDA, OPINIÃO.",
+        ],
       },
       {
         heading: "I. A EDIÇÃO DE VÍDEO MUDOU.",
