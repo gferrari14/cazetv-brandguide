@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BrandLayout } from "@/components/brandguide/BrandLayout";
 import { PageHeader } from "@/components/brandguide/PageHeader";
 import { SectionBlock } from "@/components/brandguide/SectionBlock";
+import bgHorizontal from "@/assets/background-horizontal.png.asset.json";
+import bgVertical from "@/assets/background-vertical.png.asset.json";
 
 export const Route = createFileRoute("/background")({
   component: BackgroundPage,
