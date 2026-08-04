@@ -112,7 +112,7 @@ export function RevealFooter({
           </div>
         </div>
 
-        </div>
+
 
         <div
           ref={gradientRef}
