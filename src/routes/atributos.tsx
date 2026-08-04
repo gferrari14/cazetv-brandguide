@@ -92,7 +92,7 @@ const attributes: AttributeItem[] = [
       { number: "03", text: "GESTÃO DA COMUNIDADE" },
       { number: "04", text: "PRODUÇÃO DE CONTEÚDO ENTORNO DA CAZÉTV" },
       { number: "05", text: "FERRAMENTAS DE CONEXÃO EM TEMPO REAL" },
-      { number: "06", text: "CONSTRUÇÃO DE COMUNIDADES DENTRO DA CZTV, ATRAVÉS DO ELENCO" },
+      { number: "06", text: "CONSTRUÇÃO DE COMUNIDADES DENTRO DA CAZÉTV, ATRAVÉS DO ELENCO" },
     ],
   },
   {
