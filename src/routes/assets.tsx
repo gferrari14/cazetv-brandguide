@@ -195,6 +195,14 @@ function AssetsPage() {
       />
 
       <SectionBlock
+        title="ASSETS CAZÉTV"
+        eyebrow="ELEMENTOS GRÁFICOS"
+        description="ELEMENTOS GRÁFICOS INSPIRADOS NO UNIVERSO DO TECLADO, QUE TRANSFORMAM PALAVRAS, SENTIMENTOS E EMOJIS EM UMA COMUNICAÇÃO MAIS FLUIDA E EXPRESSIVA, APROXIMANDO O PÚBLICO DA EXPERIÊNCIA AO VIVO."
+      >
+        <CazetvAssetsGrid />
+      </SectionBlock>
+
+      <SectionBlock
         title="ÍCONES INSTITUCIONAIS"
         eyebrow="SISTEMA DE ÍCONES"
         description="ÍCONES EM ESTILO LINE, TRAÇO UNIFORME, COM CANTOS SUAVEMENTE ARREDONDADOS. DEVEM SER APLICADOS EM BRANCO SOBRE FUNDO PRETO OU EM PRETO SOBRE FUNDO BRANCO. CLIQUE EM SVG PARA BAIXAR INDIVIDUALMENTE."
@@ -233,14 +241,6 @@ function AssetsPage() {
             </ul>
           </div>
         </div>
-      </SectionBlock>
-
-      <SectionBlock
-        title="ASSETS CAZÉTV"
-        eyebrow="ELEMENTOS GRÁFICOS"
-        description="ELEMENTOS GRÁFICOS INSPIRADOS NO UNIVERSO DO TECLADO, QUE TRANSFORMAM PALAVRAS, SENTIMENTOS E EMOJIS EM UMA COMUNICAÇÃO MAIS FLUIDA E EXPRESSIVA, APROXIMANDO O PÚBLICO DA EXPERIÊNCIA AO VIVO."
-      >
-        <CazetvAssetsGrid />
       </SectionBlock>
     </BrandLayout>
   );
