@@ -104,9 +104,9 @@ const attributes: AttributeItem[] = [
     subsections: [
       {
         imageGrid: [
-          { number: "01", text: "LIVE COM ZECA PAGODINHO E PODPAH (ARRECADAR DINHEIRO PRAS CHUVAS)" },
-          { number: "02", text: "CAMPANHA CONTRA A FOME" },
-          { number: "03", text: "AS PESSOAS PRECISAM SE RECONHECER PARA SE CONECTAR." },
+          { number: "01", text: "LIVE COM ZECA PAGODINHO E PODPAH (ARRECADAR DINHEIRO PRAS CHUVAS)", media: inclusao1.url },
+          { number: "02", text: "CAMPANHA CONTRA A FOME", media: inclusao2.url },
+          { number: "03", text: "AS PESSOAS PRECISAM SE RECONHECER PARA SE CONECTAR.", media: inclusao3.url },
         ],
       },
     ],
