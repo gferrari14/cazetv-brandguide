@@ -8,6 +8,7 @@ const navLinks = [
   { path: "/cores", label: "CORES" },
   { path: "/fontes", label: "FONTES" },
   { path: "/assets", label: "ASSETS" },
+  { path: "/background", label: "BACKGROUND" },
   { path: "/gradiente", label: "GRADIENTE" },
 ] as const;
 
