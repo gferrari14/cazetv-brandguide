@@ -3,6 +3,7 @@ import navLogo from "@/assets/cazetv-logo-nav.png";
 import { RevealFooter } from "@/components/shared/RevealFooter";
 
 const navLinks = [
+  { path: "/atributos", label: "ATRIBUTOS" },
   { path: "/logo", label: "LOGO" },
   { path: "/cores", label: "CORES" },
   { path: "/fontes", label: "FONTES" },

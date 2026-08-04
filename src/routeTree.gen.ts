@@ -15,6 +15,7 @@ import { Route as GradienteRouteImport } from './routes/gradiente'
 import { Route as FontesRouteImport } from './routes/fontes'
 import { Route as CoresRouteImport } from './routes/cores'
 import { Route as BrandguideRouteImport } from './routes/brandguide'
+import { Route as AtributosRouteImport } from './routes/atributos'
 import { Route as AssetsRouteImport } from './routes/assets'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as IdentidadesSlugRouteImport } from './routes/identidades.$slug'
@@ -49,6 +50,11 @@ const BrandguideRoute = BrandguideRouteImport.update({
   path: '/brandguide',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AtributosRoute = AtributosRouteImport.update({
+  id: '/atributos',
+  path: '/atributos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AssetsRoute = AssetsRouteImport.update({
   id: '/assets',
   path: '/assets',
@@ -68,6 +74,7 @@ const IdentidadesSlugRoute = IdentidadesSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/assets': typeof AssetsRoute
+  '/atributos': typeof AtributosRoute
   '/brandguide': typeof BrandguideRoute
   '/cores': typeof CoresRoute
   '/fontes': typeof FontesRoute
@@ -79,6 +86,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/assets': typeof AssetsRoute
+  '/atributos': typeof AtributosRoute
   '/brandguide': typeof BrandguideRoute
   '/cores': typeof CoresRoute
   '/fontes': typeof FontesRoute
@@ -91,6 +99,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/assets': typeof AssetsRoute
+  '/atributos': typeof AtributosRoute
   '/brandguide': typeof BrandguideRoute
   '/cores': typeof CoresRoute
   '/fontes': typeof FontesRoute
@@ -104,6 +113,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/assets'
+    | '/atributos'
     | '/brandguide'
     | '/cores'
     | '/fontes'
@@ -115,6 +125,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/assets'
+    | '/atributos'
     | '/brandguide'
     | '/cores'
     | '/fontes'
@@ -126,6 +137,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/assets'
+    | '/atributos'
     | '/brandguide'
     | '/cores'
     | '/fontes'
@@ -138,6 +150,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AssetsRoute: typeof AssetsRoute
+  AtributosRoute: typeof AtributosRoute
   BrandguideRoute: typeof BrandguideRoute
   CoresRoute: typeof CoresRoute
   FontesRoute: typeof FontesRoute
@@ -190,6 +203,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BrandguideRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/atributos': {
+      id: '/atributos'
+      path: '/atributos'
+      fullPath: '/atributos'
+      preLoaderRoute: typeof AtributosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/assets': {
       id: '/assets'
       path: '/assets'
@@ -229,6 +249,7 @@ const IdentidadesRouteWithChildren = IdentidadesRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AssetsRoute: AssetsRoute,
+  AtributosRoute: AtributosRoute,
   BrandguideRoute: BrandguideRoute,
   CoresRoute: CoresRoute,
   FontesRoute: FontesRoute,
