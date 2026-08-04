@@ -44,6 +44,7 @@ const attributes: AttributeItem[] = [
   {
     title: "AUTENTICIDADE",
     color: WHITE,
+    hideMediaPlaceholder: true,
     lines: ["I. ERA DA INFORMAÇÃO X ERA DA CONEXÃO"],
     subsections: [
       {
@@ -66,7 +67,6 @@ const attributes: AttributeItem[] = [
         ],
       },
       {
-        heading: "EXEMPLOS",
         placeholders: 2,
       },
       {
