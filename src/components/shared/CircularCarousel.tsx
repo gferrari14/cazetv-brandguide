@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import aqui from "@/assets/carousel/aqui-e-brasil.png.asset.json";
 import bora from "@/assets/carousel/bora-copar.png.asset.json";
 import br360 from "@/assets/carousel/br-360.png.asset.json";
