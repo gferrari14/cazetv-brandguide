@@ -15,10 +15,17 @@ export interface AttributeSubsection {
   media?: string[];
 }
 
+export interface AttributeGridItem {
+  number: string;
+  text: string;
+}
+
 export interface AttributeItem {
   title: string;
   color: string;
   lines: string[];
+  /** Grade numerada (01, 02, ...) exibida em 3 colunas */
+  grid?: AttributeGridItem[];
   subsections?: AttributeSubsection[];
   media?: string;
   /** Esconde o placeholder lateral (GIF/foto) quando não houver mídia */
@@ -50,6 +57,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
     title,
     color,
     lines,
+    grid,
     subsections,
     media,
     hideMediaPlaceholder,
@@ -83,6 +91,29 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
               </p>
             ))}
           </div>
+
+          {grid && grid.length > 0 && (
+            <div className="mt-8 grid grid-cols-2 gap-x-8 gap-y-8 md:mt-10 md:grid-cols-3 md:gap-x-10 md:gap-y-10">
+              {grid.map((g) => (
+                <div key={g.number}>
+                  <p
+                    className="text-2xl font-extrabold leading-none md:text-3xl"
+                    style={{ color }}
+                  >
+                    {g.number}
+                  </p>
+                  <p
+                    className="mt-2 text-sm uppercase leading-relaxed md:text-base"
+                    style={{ color }}
+                  >
+                    {g.text}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+
+
 
           {subsections?.map((sub, si) => (
             <div key={sub.heading ?? `sub-${si}`} className="mt-6 md:mt-8">

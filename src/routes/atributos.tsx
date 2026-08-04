@@ -86,42 +86,14 @@ const attributes: AttributeItem[] = [
     title: "COMUNIDADE",
     color: WHITE,
     hideMediaPlaceholder: true,
-    lines: [
-      "II. SER SEMPRE VERDADEIRO. MOSTRAR NOSSO MELHOR LADO E NOSSAS VULNERABILIDADES. NUNCA MENOSPREZAR O FÃ.",
-    ],
-    subsections: [
-      {
-        heading: "I. COPA ACERJ",
-      },
-      {
-        heading: "III. FANCENTRIC — DE VERDADE!",
-        items: [
-          { text: "SER TRANSPARENTE E OFERECER SEMPRE O MELHOR PRO FÃ. MESMO QUE NÃO SEJA O MELHOR PRA CAZÉTV." },
-        ],
-      },
-      {
-        heading: "IV. FERRAMENTAS DE CONEXÃO EM TEMPO REAL:",
-        items: [
-          { text: "ENQUETES (REDES, PGMS E TRANSMISSÕES)" },
-          { text: "VÍDEOS RECEBIDOS" },
-          { text: "RESPONDER O CHAT" },
-          { text: "RESPONDER OS COMENTÁRIOS" },
-        ],
-      },
-      {
-        heading: "V. GESTÃO DA COMUNIDADE:",
-        items: [
-          { text: "GERAR BENEFÍCIOS ATRAVÉS DOS PATROCINADORES" },
-          { text: "AÇÕES FÍSICAS (CASA CAZÉ)" },
-        ],
-      },
-      {
-        heading: "VI. PRODUÇÃO DE CONTEÚDO EM TORNO DA CAZÉTV",
-        items: [
-          { text: "POSTS E VÍDEOS QUE MOSTREM O NOSSO JEITO. QUE FAÇAM AS PESSOAS SE SENTIREM PARTE." },
-          { text: "CONSTRUÇÃO DE COMUNIDADES DENTRO DA CZTV, ATRAVÉS DO ELENCO." },
-        ],
-      },
+    lines: [],
+    grid: [
+      { number: "01", text: "SER SEMPRE VERDADEIRO" },
+      { number: "02", text: "FANCENTRIC! DE VERDADE!" },
+      { number: "03", text: "GESTÃO DA COMUNIDADE" },
+      { number: "04", text: "PRODUÇÃO DE CONTEÚDO ENTORNO DA CAZÉTV" },
+      { number: "05", text: "FERRAMENTAS DE CONEXÃO EM TEMPO REAL" },
+      { number: "06", text: "CONSTRUÇÃO DE COMUNIDADES DENTRO DA CZTV, ATRAVÉS DO ELENCO" },
     ],
   },
   {
