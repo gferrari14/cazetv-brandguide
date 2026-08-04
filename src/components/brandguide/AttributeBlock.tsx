@@ -136,15 +136,19 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                 </h3>
               )}
 
-              {sub.intro?.map((line) => (
-                <p
-                  key={line}
-                  className="mt-2 text-sm uppercase leading-relaxed md:text-base"
-                  style={{ color }}
-                >
-                  {line}
-                </p>
-              ))}
+              {sub.intro &&
+                sub.intro.length > 0 &&
+                !sub.placeholders &&
+                !sub.imageGrid &&
+                sub.intro.map((line) => (
+                  <p
+                    key={line}
+                    className="mt-2 text-sm uppercase leading-relaxed md:text-base"
+                    style={{ color }}
+                  >
+                    {line}
+                  </p>
+                ))}
 
               {sub.items && sub.items.length > 0 && (
                 <ol className="mt-5 space-y-3 pl-5">
