@@ -1,7 +1,18 @@
+export interface AttributeListItem {
+  text: string;
+  /** Sub-itens numerados com letras (a., b., c.) */
+  sub?: string[];
+}
+
 export interface AttributeSubsection {
   heading?: string;
-  items: string[];
-  ordered?: boolean;
+  /** Linhas sem numeração exibidas logo abaixo do heading */
+  intro?: string[];
+  items?: AttributeListItem[];
+  /** Quantidade de placeholders exibidos lado a lado nesta subseção */
+  placeholders?: number;
+  /** URLs de mídia — substituem os placeholders quando informadas */
+  media?: string[];
 }
 
 export interface AttributeItem {
@@ -10,6 +21,16 @@ export interface AttributeItem {
   lines: string[];
   subsections?: AttributeSubsection[];
   media?: string;
+}
+
+function Placeholder({ label = "PLACEHOLDER" }: { label?: string }) {
+  return (
+    <div className="flex aspect-[16/10] w-full items-center justify-center bg-[#D9D9D9]">
+      <span className="text-base font-extrabold uppercase tracking-tight text-black md:text-2xl">
+        {label}
+      </span>
+    </div>
+  );
 }
 
 export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
@@ -43,17 +64,13 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
           {media ? (
             <img src={media} alt={title} className="w-full object-cover" />
           ) : (
-            <div className="flex aspect-[16/10] w-full items-center justify-center bg-[#D9D9D9]">
-              <span className="text-xl font-extrabold uppercase tracking-tight text-black md:text-3xl">
-                PLACEHOLDER
-              </span>
-            </div>
+            <Placeholder />
           )}
         </div>
       </div>
 
-      {subsections?.map((sub) => (
-        <div key={sub.heading ?? sub.items[0]} className="mt-10 md:mt-14">
+      {subsections?.map((sub, si) => (
+        <div key={sub.heading ?? `sub-${si}`} className="mt-10 md:mt-14">
           {sub.heading && (
             <h3
               className="text-base font-extrabold uppercase md:text-xl"
@@ -62,18 +79,65 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
               {sub.heading}
             </h3>
           )}
-          <ol className="mt-5 space-y-1.5 pl-5">
-            {sub.items.map((item, i) => (
-              <li
-                key={item}
-                className="list-none text-sm uppercase leading-relaxed md:text-base"
-                style={{ color }}
-              >
-                <span className="mr-2">{i + 1}.</span>
-                {item}
-              </li>
-            ))}
-          </ol>
+
+          {sub.intro?.map((line) => (
+            <p
+              key={line}
+              className="mt-2 text-sm uppercase leading-relaxed md:text-base"
+              style={{ color }}
+            >
+              {line}
+            </p>
+          ))}
+
+          {sub.items && sub.items.length > 0 && (
+            <ol className="mt-5 space-y-3 pl-5">
+              {sub.items.map((item, i) => (
+                <li
+                  key={item.text}
+                  className="list-none text-sm uppercase leading-relaxed md:text-base"
+                  style={{ color }}
+                >
+                  <span className="mr-2">{i + 1}.</span>
+                  {item.text}
+                  {item.sub && (
+                    <ol className="mt-2 space-y-2 pl-6">
+                      {item.sub.map((s, j) => (
+                        <li key={s} className="list-none">
+                          <span className="mr-2">
+                            {String.fromCharCode(97 + j)}.
+                          </span>
+                          {s}
+                        </li>
+                      ))}
+                    </ol>
+                  )}
+                </li>
+              ))}
+            </ol>
+          )}
+
+          {(sub.placeholders ?? 0) > 0 && (
+            <div
+              className="mt-6 grid gap-6"
+              style={{
+                gridTemplateColumns: `repeat(${sub.placeholders}, minmax(0, 1fr))`,
+              }}
+            >
+              {Array.from({ length: sub.placeholders ?? 0 }).map((_, i) =>
+                sub.media?.[i] ? (
+                  <img
+                    key={i}
+                    src={sub.media[i]}
+                    alt={`${title} ${i + 1}`}
+                    className="w-full object-cover"
+                  />
+                ) : (
+                  <Placeholder key={i} />
+                ),
+              )}
+            </div>
+          )}
         </div>
       ))}
 
