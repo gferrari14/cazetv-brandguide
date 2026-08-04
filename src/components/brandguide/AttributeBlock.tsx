@@ -192,6 +192,36 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                   )}
                 </div>
               )}
+
+              {sub.imageGrid && sub.imageGrid.length > 0 && (
+                <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 md:gap-8">
+                  {sub.imageGrid.map((item) => (
+                    <div key={item.number}>
+                      <p
+                        className="text-2xl font-extrabold leading-none md:text-3xl"
+                        style={{ color }}
+                      >
+                        {item.number}
+                      </p>
+                      {item.media ? (
+                        <img
+                          src={item.media}
+                          alt={item.text}
+                          className="mt-3 w-full object-cover"
+                        />
+                      ) : (
+                        <Placeholder className="mt-3 aspect-[16/9]" />
+                      )}
+                      <p
+                        className="mt-3 text-sm uppercase leading-relaxed md:text-base"
+                        style={{ color }}
+                      >
+                        {item.text}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
