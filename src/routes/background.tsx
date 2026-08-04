@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BrandLayout } from "@/components/brandguide/BrandLayout";
 import { PageHeader } from "@/components/brandguide/PageHeader";
 import { SectionBlock } from "@/components/brandguide/SectionBlock";
+import bgHorizontal from "@/assets/background-horizontal.png.asset.json";
+import bgVertical from "@/assets/background-vertical.png.asset.json";
 
 export const Route = createFileRoute("/background")({
   component: BackgroundPage,
@@ -28,19 +30,40 @@ function BackgroundPage() {
       <SectionBlock
         title="BACKGROUNDS"
         eyebrow="ELEMENTOS DE FUNDO"
-        description="CONTEÚDO EM DESENVOLVIMENTO. EM BREVE VOCÊ ENCONTRARÁ AQUI OS BACKGROUNDS OFICIAIS DA MARCA."
+        description="VERSÕES OFICIAIS DO BACKGROUND DA MARCA NOS FORMATOS HORIZONTAL E VERTICAL."
       >
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              className="flex aspect-video items-center justify-center border border-border bg-card"
-            >
-              <p className="text-xs font-bold uppercase text-muted-foreground">PLACEHOLDER</p>
-            </div>
-          ))}
+        <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
+          <figure className="space-y-3">
+            <img
+              src={bgHorizontal.url}
+              alt="Background CazéTV horizontal"
+              className="w-full border border-border"
+              loading="lazy"
+            />
+            <figcaption className="flex items-center justify-between text-xs font-bold uppercase text-muted-foreground">
+              <span>HORIZONTAL · 1920×1080</span>
+              <a href={bgHorizontal.url} download="BACKGROUND_HORIZONTAL.png" className="underline">
+                BAIXAR
+              </a>
+            </figcaption>
+          </figure>
+          <figure className="space-y-3">
+            <img
+              src={bgVertical.url}
+              alt="Background CazéTV vertical"
+              className="w-full border border-border"
+              loading="lazy"
+            />
+            <figcaption className="flex items-center justify-between text-xs font-bold uppercase text-muted-foreground">
+              <span>VERTICAL · 1080×1350</span>
+              <a href={bgVertical.url} download="BACKGROUND_VERTICAL.png" className="underline">
+                BAIXAR
+              </a>
+            </figcaption>
+          </figure>
         </div>
       </SectionBlock>
+
     </BrandLayout>
   );
 }
