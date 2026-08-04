@@ -4,12 +4,14 @@ import bora from "@/assets/carousel/bora-copar.png.asset.json";
 import br360 from "@/assets/carousel/br-360.png.asset.json";
 import copazona from "@/assets/carousel/copazona.png.asset.json";
 import destrincha from "@/assets/carousel/destrincha-donan.png.asset.json";
+import logoCazetv from "@/assets/carousel/logo-cazetv.png.asset.json";
 import noche from "@/assets/carousel/noche-de-copa.png.asset.json";
 import recopando from "@/assets/carousel/recopando.png.asset.json";
 import roda from "@/assets/carousel/roda-de-bobo.png.asset.json";
 import umdia from "@/assets/carousel/um-dia-com.png.asset.json";
 
 const items = [
+  { src: logoCazetv.url, label: "CazéTV" },
   { src: aqui.url, label: "Aqui é Brasil" },
   { src: bora.url, label: "Bora Copar" },
   { src: br360.url, label: "BR 360" },
