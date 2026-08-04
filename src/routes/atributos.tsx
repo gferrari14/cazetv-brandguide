@@ -5,6 +5,7 @@ import { AttributeBlock, type AttributeItem } from "@/components/brandguide/Attr
 import inclusao1 from "@/assets/inclusao-1.jpg.asset.json";
 import inclusao2 from "@/assets/inclusao-2.png.asset.json";
 import inclusao3 from "@/assets/inclusao-3.jpg.asset.json";
+import paixaoMedia from "@/assets/paixao-copadomundo.jpg.asset.json";
 
 export const Route = createFileRoute("/atributos")({
   component: AtributosPage,
@@ -28,6 +29,7 @@ const attributes: AttributeItem[] = [
   {
     title: "PAIXÃO",
     color: WHITE,
+    media: paixaoMedia.url,
     mediaFit: "text",
     lines: [
       "I. NOSSA MISSÃO É O QUE NOS MOVE.",
