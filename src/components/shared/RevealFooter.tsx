@@ -74,7 +74,7 @@ export function RevealFooter({
     <>
       <div style={{ height: REVEAL_DISTANCE }} aria-hidden />
       <footer
-        className="fixed inset-x-0 bottom-0 z-50 flex h-auto min-h-[55vh] flex-col justify-between overflow-hidden bg-white text-black"
+        className="fixed inset-x-0 bottom-0 z-50 flex min-h-[55vh] flex-col overflow-hidden bg-white text-black"
         style={{
           transform: `translateY(${(1 - footerProgress) * 100}%)`,
           transition: "transform 80ms linear",
@@ -83,50 +83,50 @@ export function RevealFooter({
         onMouseMove={onMouseMove}
         onMouseLeave={onMouseLeave}
       >
-        <div className="relative z-10 flex h-full w-full flex-col px-3 pb-0 pt-8 md:px-4">
-          <button
-            onClick={scrollToTop}
-            aria-label="Voltar ao topo"
-            className="self-start border border-black/20 p-3 transition hover:bg-black hover:text-white"
-          >
-            <ArrowUp className="size-5" />
-          </button>
+        <div className="relative z-10 flex flex-1 w-full flex-col px-3 pb-0 pt-8 md:px-4">
+          <div className="relative z-10 flex flex-1 flex-col justify-between">
+            <button
+              onClick={scrollToTop}
+              aria-label="Voltar ao topo"
+              className="self-start border border-black/20 p-3 transition hover:bg-black hover:text-white"
+            >
+              <ArrowUp className="size-5" />
+            </button>
 
-          <div className="flex flex-1 flex-col justify-center py-10">
-            <div className="space-y-4">
-              {paragraphs.map((p, i) => (
-                <p key={i} className="max-w-5xl text-sm font-normal leading-relaxed text-black md:text-base lg:text-lg">
-                  {p}
-                </p>
-              ))}
+            <div className="flex flex-1 flex-col justify-center py-10">
+              <div className="space-y-4">
+                {paragraphs.map((p, i) => (
+                  <p key={i} className="max-w-5xl text-sm font-normal leading-relaxed text-black md:text-base lg:text-lg">
+                    {p}
+                  </p>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative">
+              <img src={footerLogo} alt="CazéTV" className="mb-3 h-10 w-auto md:h-12" />
+              <div className="h-0.5 w-full bg-black" />
+              <div className="flex flex-col items-start justify-between gap-1 py-2 text-xs uppercase tracking-widest text-black/60 md:flex-row md:items-center">
+                <span>© CazéTV 2026</span>
+                <span>Todos os direitos reservados</span>
+              </div>
             </div>
           </div>
 
-          <div className="relative mt-auto">
-            <img src={footerLogo} alt="CazéTV" className="mb-3 h-10 w-auto md:h-12" />
-            <div className="h-0.5 w-full bg-black" />
-            <div className="flex flex-col items-start justify-between gap-1 py-2 text-xs uppercase tracking-widest text-black/60 md:flex-row md:items-center">
-              <span>© CazéTV 2026</span>
-              <span>Todos os direitos reservados</span>
-            </div>
-          </div>
+          <div
+            ref={gradientRef}
+            aria-hidden
+            className="pointer-events-none absolute -bottom-16 -left-16 -right-16 z-0 h-[60%]"
+            style={{
+              background: `
+                radial-gradient(calc(60% * var(--scale, 1)) calc(80% * var(--scale, 1)) at var(--mx, 30%) var(--my, 100%), rgba(246,76,104,0.55), transparent 60%),
+                radial-gradient(calc(55% * var(--scale, 1)) calc(75% * var(--scale, 1)) at calc(var(--mx, 70%) + 25%) calc(var(--my, 100%) - 5%), rgba(97,184,224,0.55), transparent 65%),
+                radial-gradient(calc(40% * var(--scale, 1)) calc(60% * var(--scale, 1)) at calc(var(--mx, 50%) - 15%) calc(var(--my, 100%) + 10%), rgba(243,193,27,0.35), transparent 70%)
+              `,
+              filter: "blur(40px)",
+            }}
+          />
         </div>
-
-
-
-        <div
-          ref={gradientRef}
-          aria-hidden
-          className="pointer-events-none absolute -bottom-16 -left-16 -right-16 z-0 h-[60%]"
-          style={{
-            background: `
-              radial-gradient(calc(60% * var(--scale, 1)) calc(80% * var(--scale, 1)) at var(--mx, 30%) var(--my, 100%), rgba(246,76,104,0.55), transparent 60%),
-              radial-gradient(calc(55% * var(--scale, 1)) calc(75% * var(--scale, 1)) at calc(var(--mx, 70%) + 25%) calc(var(--my, 100%) - 5%), rgba(97,184,224,0.55), transparent 65%),
-              radial-gradient(calc(40% * var(--scale, 1)) calc(60% * var(--scale, 1)) at calc(var(--mx, 50%) - 15%) calc(var(--my, 100%) + 10%), rgba(243,193,27,0.35), transparent 70%)
-            `,
-            filter: "blur(40px)",
-          }}
-        />
       </footer>
     </>
   );
