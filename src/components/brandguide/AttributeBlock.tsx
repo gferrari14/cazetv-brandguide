@@ -245,11 +245,13 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
             }`}
           >
             {media ? (
-              <img
-                src={media}
-                alt={title}
-                className="w-full object-cover"
-              />
+              <div className="h-full w-full overflow-hidden">
+                <img
+                  src={media}
+                  alt={title}
+                  className="h-full w-full scale-[1.6] object-cover object-center"
+                />
+              </div>
             ) : (
               <Placeholder
                 className={
