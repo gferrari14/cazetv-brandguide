@@ -103,12 +103,11 @@ const attributes: AttributeItem[] = [
     lines: ["I. ESTAR COM NOSSOS FÃS NAS BOAS E NAS MÁS"],
     subsections: [
       {
-        items: [
-          { text: "EXEMPLO: LIVE COM ZECA PAGODINHO E PODPAH (ARRECADAR DINHEIRO PRAS CHUVAS)" },
-          { text: "EXEMPLO: CAMPANHA CONTRA A FOME" },
-          { text: "SOMOS UM PAÍS DIVERSO E PLURAL. PRECISAMOS TRAZER ESSA PLURALIDADE PRA DENTRO DA CAZÉTV. AS PESSOAS PRECISAM SE RECONHECER PARA SE CONECTAR." },
+        imageGrid: [
+          { number: "01", text: "LIVE COM ZECA PAGODINHO E PODPAH (ARRECADAR DINHEIRO PRAS CHUVAS)" },
+          { number: "02", text: "CAMPANHA CONTRA A FOME" },
+          { number: "03", text: "AS PESSOAS PRECISAM SE RECONHECER PARA SE CONECTAR." },
         ],
-        placeholders: 3,
       },
     ],
   },
