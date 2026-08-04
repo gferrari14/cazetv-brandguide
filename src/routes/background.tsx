@@ -32,7 +32,7 @@ function BackgroundPage() {
         eyebrow="ELEMENTOS DE FUNDO"
         description="VERSÕES OFICIAIS DO BACKGROUND DA MARCA NOS FORMATOS HORIZONTAL E VERTICAL."
       >
-        <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
+        <div className="grid items-start gap-6 lg:grid-cols-[2fr_1fr]">
           <div className="overflow-hidden border border-border bg-card">
             <img
               src={bgHorizontal.url}
@@ -40,7 +40,7 @@ function BackgroundPage() {
               className="w-full"
               loading="lazy"
             />
-            <div className="flex items-center justify-between border-t border-border bg-black px-5 py-4">
+            <div className="flex items-center justify-between border-t border-border bg-black px-5 py-3">
               <span className="text-xs font-bold uppercase tracking-wide text-white">
                 HORIZONTAL · 1920×1080
               </span>
@@ -60,7 +60,7 @@ function BackgroundPage() {
               className="w-full"
               loading="lazy"
             />
-            <div className="flex items-center justify-between border-t border-border bg-black px-5 py-4">
+            <div className="flex items-center justify-between border-t border-border bg-black px-5 py-3">
               <span className="text-xs font-bold uppercase tracking-wide text-white">
                 VERTICAL · 1080×1350
               </span>
