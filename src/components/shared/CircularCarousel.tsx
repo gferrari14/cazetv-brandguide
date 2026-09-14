@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import aqui from "@/assets/carousel/aqui-e-brasil.png.asset.json";
 import bora from "@/assets/carousel/bora-copar.png.asset.json";
 import br360 from "@/assets/carousel/br-360.png.asset.json";
@@ -25,22 +25,86 @@ const items = [
 
 export function CircularCarousel({ size = 240 }: { size?: number }) {
   const [index, setIndex] = useState(0);
-  const [phase, setPhase] = useState<"idle" | "out">("idle");
+  const trackRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef<number | null>(null);
+  const animating = useRef(false);
   const lastChange = useRef<number>(0);
-  const cooldown = 900; // ms — evita passar slides muito rápido
-  const slideDuration = 1150; // ms — duração da animação
+  const duration = 1600;
+  const cooldown = 1750;
+
+  useEffect(() => {
+    return () => {
+      if (frameRef.current !== null) window.cancelAnimationFrame(frameRef.current);
+    };
+  }, []);
 
   const next = () => {
     const now = Date.now();
     if (now - lastChange.current < cooldown) return;
-    if (phase !== "idle") return;
+    if (animating.current) return;
+
     lastChange.current = now;
-    setPhase("out");
-    // Espera o slide atual sair completamente antes de mostrar o próximo
-    window.setTimeout(() => {
+    animating.current = true;
+
+    const track = trackRef.current;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!track || reduceMotion) {
       setIndex((i) => (i + 1) % items.length);
-      setPhase("idle");
-    }, slideDuration);
+      animating.current = false;
+      return;
+    }
+
+    const startedAt = performance.now();
+    let imageChanged = false;
+
+    const animate = (time: number) => {
+      const progress = Math.min((time - startedAt) / duration, 1);
+      // Uma única curva temporal: acelera ao sair e desacelera somente ao chegar.
+      const travel = 0.5 - Math.cos(progress * Math.PI) / 2;
+      const outgoing = travel < 0.5;
+      const halfProgress = outgoing ? travel * 2 : (travel - 0.5) * 2;
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      const horizontalReach = viewportWidth * 0.62;
+      const verticalReach = viewportHeight * 0.72;
+
+      let x: number;
+      let y: number;
+      let rotation: number;
+      let opacity: number;
+
+      if (outgoing) {
+        x = horizontalReach * halfProgress;
+        y = verticalReach * Math.sin((halfProgress * Math.PI) / 2);
+        rotation = 14 * halfProgress;
+        opacity = Math.max(0, 1 - halfProgress * 2.6);
+      } else {
+        if (!imageChanged) {
+          imageChanged = true;
+          setIndex((i) => (i + 1) % items.length);
+        }
+        const arriving = 1 - halfProgress;
+        x = -horizontalReach * arriving;
+        y = verticalReach * Math.sin((arriving * Math.PI) / 2);
+        rotation = -14 * arriving;
+        opacity = Math.max(0, 1 - arriving * 2.6);
+      }
+
+      track.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rotation}deg)`;
+      track.style.opacity = String(opacity);
+
+      if (progress < 1) {
+        frameRef.current = window.requestAnimationFrame(animate);
+        return;
+      }
+
+      track.style.transform = "translate3d(0, 0, 0) rotate(0deg)";
+      track.style.opacity = "1";
+      frameRef.current = null;
+      animating.current = false;
+    };
+
+    frameRef.current = window.requestAnimationFrame(animate);
   };
 
   return (
@@ -56,29 +120,11 @@ export function CircularCarousel({ size = 240 }: { size?: number }) {
           90%  { transform: translate(3px, -4px) rotate(1deg); }
           100% { transform: translate(0, 0) rotate(0deg); }
         }
-        @keyframes cc-slide-in {
-          0%   { transform: translate(-62vw, 72vh) rotate(-14deg); opacity: 0; }
-          20%  { transform: translate(-46vw, 52vh) rotate(-10deg); opacity: 1; }
-          40%  { transform: translate(-28vw, 32vh) rotate(-6.5deg); }
-          60%  { transform: translate(-14vw, 16vh) rotate(-3.5deg); }
-          80%  { transform: translate(-4vw, 5vh) rotate(-1deg); }
-          100% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
-        }
-        @keyframes cc-slide-out {
-          0%   { transform: translate(0, 0) rotate(0deg); opacity: 1; }
-          20%  { transform: translate(4vw, 5vh) rotate(1deg); }
-          40%  { transform: translate(14vw, 16vh) rotate(3.5deg); }
-          60%  { transform: translate(28vw, 32vh) rotate(6.5deg); }
-          80%  { transform: translate(46vw, 52vh) rotate(10deg); opacity: 1; }
-          100% { transform: translate(62vw, 72vh) rotate(14deg); opacity: 0; }
-        }
         .cc-jitter { animation: cc-jitter 2.4s ease-in-out infinite; }
-        .cc-in     { animation: cc-slide-in 1150ms cubic-bezier(0.33, 0, 0.18, 1) both; }
-        .cc-out    { animation: cc-slide-out 1150ms cubic-bezier(0.82, 0, 0.67, 1) both; }
+        .cc-track  { will-change: transform, opacity; }
 
         @media (prefers-reduced-motion: reduce) {
           .cc-jitter { animation: none; }
-          .cc-in, .cc-out { animation-duration: 1ms; }
         }
       `}</style>
       <div
@@ -88,22 +134,16 @@ export function CircularCarousel({ size = 240 }: { size?: number }) {
         onClick={next}
         aria-label="Carrossel de identidades"
       >
-        {(() => {
-          const it = items[index];
-          const animClass = phase === "out" ? "cc-out" : "cc-in";
-          return (
-            <div key={`${it.label}-${phase}-${index}`} className={`absolute inset-0 ${animClass}`}>
-              <div className="cc-jitter h-full w-full">
-                <img
-                  src={it.src}
-                  alt={it.label}
-                  className="h-full w-full object-contain"
-                  draggable={false}
-                />
-              </div>
-            </div>
-          );
-        })()}
+        <div ref={trackRef} className="cc-track absolute inset-0">
+          <div className="cc-jitter h-full w-full">
+            <img
+              src={items[index].src}
+              alt={items[index].label}
+              className="h-full w-full object-contain"
+              draggable={false}
+            />
+          </div>
+        </div>
       </div>
 
     </>
