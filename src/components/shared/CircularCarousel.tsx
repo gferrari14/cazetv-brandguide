@@ -28,7 +28,7 @@ export function CircularCarousel({ size = 240 }: { size?: number }) {
   const [phase, setPhase] = useState<"idle" | "out">("idle");
   const lastChange = useRef<number>(0);
   const cooldown = 900; // ms — evita passar slides muito rápido
-  const slideDuration = 900; // ms — duração da animação
+  const slideDuration = 1150; // ms — duração da animação
 
   const next = () => {
     const now = Date.now();
