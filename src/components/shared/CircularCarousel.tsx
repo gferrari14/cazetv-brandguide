@@ -25,14 +25,22 @@ const items = [
 
 export function CircularCarousel({ size = 240 }: { size?: number }) {
   const [index, setIndex] = useState(0);
+  const [phase, setPhase] = useState<"idle" | "out">("idle");
   const lastChange = useRef<number>(0);
   const cooldown = 900; // ms — evita passar slides muito rápido
+  const slideDuration = 900; // ms — duração da animação
 
   const next = () => {
     const now = Date.now();
     if (now - lastChange.current < cooldown) return;
+    if (phase !== "idle") return;
     lastChange.current = now;
-    setIndex((i) => (i + 1) % items.length);
+    setPhase("out");
+    // Espera o slide atual sair completamente antes de mostrar o próximo
+    window.setTimeout(() => {
+      setIndex((i) => (i + 1) % items.length);
+      setPhase("idle");
+    }, slideDuration);
   };
 
   return (
@@ -76,14 +84,11 @@ export function CircularCarousel({ size = 240 }: { size?: number }) {
         onClick={next}
         aria-label="Carrossel de identidades"
       >
-        {items.map((it, i) => {
-          const prev = (index - 1 + items.length) % items.length;
-          if (i !== index && i !== prev) return null;
+        {(() => {
+          const it = items[index];
+          const animClass = phase === "out" ? "cc-out" : "cc-in";
           return (
-            <div
-              key={`${it.label}-${i === index ? "in" : "out"}-${index}`}
-              className={`absolute inset-0 ${i === index ? "cc-in" : "cc-out"}`}
-            >
+            <div key={`${it.label}-${phase}-${index}`} className={`absolute inset-0 ${animClass}`}>
               <div className="cc-jitter h-full w-full">
                 <img
                   src={it.src}
@@ -94,7 +99,7 @@ export function CircularCarousel({ size = 240 }: { size?: number }) {
               </div>
             </div>
           );
-        })}
+        })()}
       </div>
 
     </>
