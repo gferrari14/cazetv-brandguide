@@ -5,6 +5,22 @@ import homeBg from "@/assets/home-bg.gif.asset.json";
 import { CircularCarousel } from "@/components/shared/CircularCarousel";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Branding CazéTV" },
+      {
+        name: "description",
+        content: "Guia de marca, identidades e materiais oficiais da CazéTV.",
+      },
+      { property: "og:title", content: "Branding CazéTV" },
+      {
+        property: "og:description",
+        content: "Guia de marca, identidades e materiais oficiais da CazéTV.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
   component: Entry,
 });
 
@@ -58,7 +74,7 @@ function Entry() {
       {/* Carrossel circular sobreposto ao título */}
       <div className="pointer-events-none absolute left-1/2 top-[6vw] z-10 -translate-x-1/2">
         <div className="pointer-events-auto">
-          <CircularCarousel size={280} />
+          <CircularCarousel size={420} />
         </div>
       </div>
 
