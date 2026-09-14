@@ -65,8 +65,10 @@ export function CircularCarousel({ size = 240 }: { size?: number }) {
       const halfProgress = outgoing ? travel * 2 : (travel - 0.5) * 2;
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;
-      const horizontalReach = viewportWidth * 0.62;
-      const verticalReach = viewportHeight * 0.72;
+      // Arco aberto: sai pelo extremo inferior direito e entra pelo extremo
+      // inferior esquerdo, atravessando toda a largura da viewport.
+      const horizontalReach = viewportWidth / 2 + size * 0.55;
+      const verticalReach = viewportHeight / 2 + size * 0.55;
 
       let x: number;
       let y: number;
