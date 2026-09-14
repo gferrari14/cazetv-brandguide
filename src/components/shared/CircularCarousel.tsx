@@ -58,19 +58,23 @@ export function CircularCarousel({ size = 240 }: { size?: number }) {
         }
         @keyframes cc-slide-in {
           0%   { transform: translate(-62vw, 72vh) rotate(-14deg); opacity: 0; }
-          32%  { transform: translate(-42vw, 40vh) rotate(-9deg); opacity: 1; }
-          68%  { transform: translate(-18vw, 12vh) rotate(-4deg); opacity: 1; }
+          20%  { transform: translate(-46vw, 52vh) rotate(-10deg); opacity: 1; }
+          40%  { transform: translate(-28vw, 32vh) rotate(-6.5deg); }
+          60%  { transform: translate(-14vw, 16vh) rotate(-3.5deg); }
+          80%  { transform: translate(-4vw, 5vh) rotate(-1deg); }
           100% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
         }
         @keyframes cc-slide-out {
           0%   { transform: translate(0, 0) rotate(0deg); opacity: 1; }
-          32%  { transform: translate(18vw, 12vh) rotate(4deg); opacity: 1; }
-          68%  { transform: translate(42vw, 40vh) rotate(9deg); opacity: 1; }
+          20%  { transform: translate(4vw, 5vh) rotate(1deg); }
+          40%  { transform: translate(14vw, 16vh) rotate(3.5deg); }
+          60%  { transform: translate(28vw, 32vh) rotate(6.5deg); }
+          80%  { transform: translate(46vw, 52vh) rotate(10deg); opacity: 1; }
           100% { transform: translate(62vw, 72vh) rotate(14deg); opacity: 0; }
         }
         .cc-jitter { animation: cc-jitter 2.4s ease-in-out infinite; }
-        .cc-in     { animation: cc-slide-in 900ms cubic-bezier(0.22, 0.72, 0.28, 1) both; }
-        .cc-out    { animation: cc-slide-out 900ms cubic-bezier(0.72, 0, 0.78, 0.28) both; }
+        .cc-in     { animation: cc-slide-in 1150ms cubic-bezier(0.33, 0, 0.18, 1) both; }
+        .cc-out    { animation: cc-slide-out 1150ms cubic-bezier(0.82, 0, 0.67, 1) both; }
 
         @media (prefers-reduced-motion: reduce) {
           .cc-jitter { animation: none; }
