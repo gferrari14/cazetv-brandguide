@@ -16,5 +16,5 @@
 
 # Novas identidades de programas
 - [x] Criar QUEM FEZ, FEZ e SEIS EM UM na galeria.
-- [ ] Adicionar os dez slides enviados a QUEM FEZ, FEZ em tamanho original.
-- [ ] Verificar os cards e a apresentação.
+- [x] Adicionar os dez slides enviados a QUEM FEZ, FEZ em tamanho original.
+- [x] Verificar os cards e a apresentação.
