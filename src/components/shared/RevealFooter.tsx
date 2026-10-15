@@ -74,7 +74,7 @@ export function RevealFooter({
     <>
       <div style={{ height: REVEAL_DISTANCE }} aria-hidden />
       <footer
-        className="fixed inset-x-0 bottom-0 z-50 flex min-h-[55vh] flex-col overflow-hidden bg-white text-black"
+        className="fixed inset-x-0 bottom-0 z-50 flex min-h-[48vh] flex-col overflow-hidden bg-white text-black"
         style={{
           transform: `translateY(${(1 - footerProgress) * 100}%)`,
           transition: "transform 80ms linear",
@@ -83,7 +83,7 @@ export function RevealFooter({
         onMouseMove={onMouseMove}
         onMouseLeave={onMouseLeave}
       >
-        <div className="relative z-10 flex flex-1 w-full flex-col px-3 pb-0 pt-8 md:px-4">
+        <div className="relative z-10 flex flex-1 w-full flex-col px-3 pb-3 pt-8 md:px-4 md:pb-4">
           <div className="relative z-10 flex flex-1 flex-col justify-between">
             <button
               onClick={scrollToTop}
@@ -96,7 +96,14 @@ export function RevealFooter({
             <div className="flex flex-1 flex-col justify-center py-10">
               <div className="space-y-4">
                 {paragraphs.map((p, i) => (
-                  <p key={i} className="max-w-5xl text-sm font-normal leading-relaxed text-black md:text-base lg:text-lg">
+                  <p
+                    key={i}
+                    className={
+                      i === 0
+                        ? "max-w-5xl font-display-wide text-base leading-snug text-black md:text-lg lg:text-xl"
+                        : "max-w-5xl text-sm font-normal leading-relaxed text-black md:text-base lg:text-lg"
+                    }
+                  >
                     {p}
                   </p>
                 ))}
@@ -104,12 +111,7 @@ export function RevealFooter({
             </div>
 
             <div className="relative">
-              <img src={siteLogos.black} alt="CazéTV" className="mb-3 h-10 w-auto md:h-12" />
-              <div className="h-0.5 w-full bg-black" />
-              <div className="flex flex-col items-start justify-between gap-1 py-2 text-xs uppercase tracking-widest text-black/60 md:flex-row md:items-center">
-                <span>© CazéTV 2026</span>
-                <span>Todos os direitos reservados</span>
-              </div>
+              <img src={siteLogos.black} alt="CazéTV" className="h-10 w-auto md:h-12" />
             </div>
           </div>
 
