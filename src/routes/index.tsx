@@ -41,11 +41,13 @@ function Entry() {
       if (!active || !title.parentElement) return;
       title.style.fontSize = "180px";
       const naturalWidth = title.getBoundingClientRect().width;
-      if (naturalWidth > 0) title.style.fontSize = `${180 * title.parentElement.clientWidth / naturalWidth}px`;
+      const parentStyle = getComputedStyle(title.parentElement);
+      const availableWidth = title.parentElement.clientWidth - parseFloat(parentStyle.paddingLeft) - parseFloat(parentStyle.paddingRight);
+      if (naturalWidth > 0) title.style.fontSize = `${180 * availableWidth / naturalWidth}px`;
     };
     const observer = new ResizeObserver(fit);
     if (title.parentElement) observer.observe(title.parentElement);
-    void document.fonts.ready.then(fit);
+    void document.fonts.load('700 180px "Druk"').then(fit);
     fit();
     return () => { active = false; observer.disconnect(); };
   }, []);
