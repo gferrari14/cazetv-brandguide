@@ -36,13 +36,13 @@ function IdentityPage() {
       </header>
 
       <main className="brand-container flex min-h-[80vh] flex-col items-center justify-center text-center">
-        <p className="mb-4 text-xs font-bold uppercase tracking-widest text-white/50">
+        <p className="mb-4 text-xs font-bold uppercase tracking-widest text-muted-foreground">
           Identidade
         </p>
         <h1 className="text-5xl font-bold uppercase leading-none md:text-7xl">
           {identity.name}
         </h1>
-        <p className="mt-8 text-sm uppercase tracking-widest text-white/40">
+        <p className="mt-8 text-sm uppercase tracking-widest text-muted-foreground">
           Em breve
         </p>
       </main>

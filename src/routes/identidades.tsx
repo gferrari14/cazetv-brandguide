@@ -135,7 +135,7 @@ function IdentidadesPage() {
                 className={`px-4 py-2.5 uppercase transition-colors ${
                   active
                     ? "bg-white text-black"
-                    : "text-white/70 hover:text-white"
+                    : "text-muted-foreground hover:text-white"
                 }`}
               >
                 {opt.label.toUpperCase()}

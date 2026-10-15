@@ -282,7 +282,7 @@ export function IdentityModal({ identity, open, onClose }: Props) {
       {/* Top bar */}
       <div className="flex items-center justify-between px-6 py-4 md:px-10">
         <div className="flex flex-col">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-white/50">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
             Identidade
           </span>
           <span className="text-lg font-bold uppercase tracking-wide text-white">
@@ -327,14 +327,14 @@ export function IdentityModal({ identity, open, onClose }: Props) {
       <div className="flex-1 overflow-y-auto px-4 pb-32 pt-4 md:px-10">
         <div className="mx-auto flex w-full max-w-[1100px] flex-col gap-6">
           {loading && (
-            <div className="flex items-center justify-center py-20 text-white/40">
+            <div className="flex items-center justify-center py-20 text-muted-foreground">
               <Loader2 className="size-5 animate-spin" />
             </div>
           )}
 
           {!loading && blocks.length === 0 && (
             <div className="flex flex-col items-center gap-4 py-24 text-center">
-              <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/40">
+              <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-muted-foreground">
                 Nenhum slide ainda
               </p>
               {editMode && (
@@ -434,7 +434,7 @@ function SortableBlock({
           <button
             {...attributes}
             {...listeners}
-            className="flex size-7 cursor-grab items-center justify-center border border-white/20 bg-black/70 text-white/60 hover:text-white active:cursor-grabbing"
+            className="flex size-7 cursor-grab items-center justify-center border border-white/20 bg-black/70 text-muted-foreground hover:text-white active:cursor-grabbing"
             aria-label="Arrastar"
           >
             <GripVertical className="size-3.5" />
@@ -479,7 +479,7 @@ function TextBlockView({
           if (value !== (block.text_content ?? "")) onUpdate(value);
         }}
         placeholder="Escreva sobre o conceito por trás dessa identidade…"
-        className="min-h-[140px] w-full resize-y border-2 border-dashed border-white/20 bg-white/[0.02] p-4 text-[11px] font-light leading-relaxed text-left text-white/90 outline-none placeholder:text-white/30 focus:border-white/60"
+        className="min-h-[140px] w-full resize-y border-2 border-dashed border-white/20 bg-white/[0.02] p-4 text-[11px] font-light leading-relaxed text-left text-muted-foreground outline-none placeholder:text-muted-foreground focus:border-white/60"
       />
     );
   }
@@ -488,7 +488,7 @@ function TextBlockView({
 
   return (
     <div className="mx-auto max-w-[820px] px-0 py-10">
-      <p className="whitespace-pre-wrap pl-[6px] text-[11px] font-light leading-relaxed text-left text-white/85">
+      <p className="whitespace-pre-wrap pl-[6px] text-[11px] font-light leading-relaxed text-left text-muted-foreground">
         {value}
       </p>
     </div>
@@ -521,7 +521,7 @@ function SlideBlockView({
     <img src={block.image_url} alt="" className="block h-auto w-full" />
   ) : (
     <div className="relative flex aspect-[16/9] w-full items-center justify-center overflow-hidden border-2 border-white/20 bg-gradient-to-br from-white/[0.06] to-white/[0.01]">
-      <span className="text-xs font-bold uppercase tracking-[0.3em] text-white/30">Sem imagem</span>
+      <span className="text-xs font-bold uppercase tracking-[0.3em] text-muted-foreground">Sem imagem</span>
     </div>
   );
 
@@ -580,7 +580,7 @@ function InsertBar({
       <button
         type="button"
         onClick={onAddText}
-        className="inline-flex items-center gap-1.5 border border-white/25 bg-black/60 px-3 py-1.5 text-[9px] font-bold uppercase tracking-widest text-white/80 transition hover:bg-white hover:text-black"
+        className="inline-flex items-center gap-1.5 border border-white/25 bg-black/60 px-3 py-1.5 text-[9px] font-bold uppercase tracking-widest text-muted-foreground transition hover:bg-white hover:text-black"
       >
         <Type className="size-3" />
         Texto
@@ -589,7 +589,7 @@ function InsertBar({
         type="button"
         onClick={() => inputRef.current?.click()}
         disabled={busy}
-        className="inline-flex items-center gap-1.5 border border-white/25 bg-black/60 px-3 py-1.5 text-[9px] font-bold uppercase tracking-widest text-white/80 transition hover:bg-white hover:text-black disabled:opacity-50"
+        className="inline-flex items-center gap-1.5 border border-white/25 bg-black/60 px-3 py-1.5 text-[9px] font-bold uppercase tracking-widest text-muted-foreground transition hover:bg-white hover:text-black disabled:opacity-50"
       >
         {busy ? <Loader2 className="size-3 animate-spin" /> : <ImageIcon className="size-3" />}
         Slide
@@ -603,7 +603,7 @@ function InsertBar({
         onChange={(e) => void handleFiles(e.target.files)}
       />
       <div className="h-px flex-1 bg-white/15" />
-      <Plus className="size-3 text-white/30" />
+      <Plus className="size-3 text-muted-foreground" />
     </div>
   );
 }
@@ -661,7 +661,7 @@ function DownloadMenu({
   materials: IdentityMaterial[];
 }) {
   const className =
-    "group inline-flex items-center gap-2 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white/80 transition hover:bg-white hover:text-black disabled:opacity-40";
+    "group inline-flex items-center gap-2 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground transition hover:bg-white hover:text-black disabled:opacity-40";
 
   // If no materials uploaded yet, fall back to legacy hardcoded assets.
   if (materials.length === 0) {
@@ -756,7 +756,7 @@ function MaterialsPanel({
       >
         <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">Materiais</p>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Materiais</p>
             <p className="text-base font-bold uppercase tracking-wide text-white">Logo, Fontes, Assets</p>
           </div>
           <button
@@ -852,8 +852,8 @@ function MaterialSection({
   return (
     <section className="mb-8">
       <div className="mb-3 flex items-center justify-between">
-        <h3 className="text-[11px] font-bold uppercase tracking-[0.3em] text-white/80">
-          {title} {items.length > 0 && <span className="text-white/40">· {items.length}</span>}
+        <h3 className="text-[11px] font-bold uppercase tracking-[0.3em] text-muted-foreground">
+          {title} {items.length > 0 && <span className="text-muted-foreground">· {items.length}</span>}
         </h3>
         {useFolders && (
           creating ? (
@@ -885,7 +885,7 @@ function MaterialSection({
                   setCreating(false);
                   setNewFolderInput("");
                 }}
-                className="flex h-7 w-7 items-center justify-center border border-white/25 text-white/60 hover:text-white"
+                className="flex h-7 w-7 items-center justify-center border border-white/25 text-muted-foreground hover:text-white"
               >
                 <X className="size-3" />
               </button>
@@ -1020,9 +1020,9 @@ function FolderGroup({
     <div>
       {useFolders && (
         <div className="mb-2 flex items-center justify-between">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/55">
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
             📁 {label}{" "}
-            {items.length > 0 && <span className="text-white/30">· {items.length}</span>}
+            {items.length > 0 && <span className="text-muted-foreground">· {items.length}</span>}
           </p>
           <div className="flex items-center gap-1">
             <button
@@ -1080,7 +1080,7 @@ function FolderGroup({
         }`}
       >
         {items.length === 0 && !busy ? (
-          <p className="px-4 py-6 text-center text-[10px] uppercase tracking-widest text-white/30">
+          <p className="px-4 py-6 text-center text-[10px] uppercase tracking-widest text-muted-foreground">
             Arraste arquivos aqui ou clique em "Enviar"
           </p>
         ) : (
@@ -1099,12 +1099,12 @@ function FolderGroup({
                   href={m.file_url}
                   download={m.filename}
                   draggable={false}
-                  className="flex-1 truncate text-xs text-white/85 hover:text-white"
+                  className="flex-1 truncate text-xs text-muted-foreground hover:text-white"
                   title={m.filename}
                 >
                   {m.filename}
                 </a>
-                <span className="text-[9px] text-white/40">
+                <span className="text-[9px] text-muted-foreground">
                   {(m.size / 1024).toFixed(0)} KB
                 </span>
                 <button
@@ -1124,8 +1124,8 @@ function FolderGroup({
         )}
         {busy && (
           <div className="flex items-center gap-2 border-t border-white/10 px-3 py-2">
-            <Loader2 className="size-3 animate-spin text-white/60" />
-            <span className="text-[10px] text-white/60">
+            <Loader2 className="size-3 animate-spin text-muted-foreground" />
+            <span className="text-[10px] text-muted-foreground">
               Enviando {uploading} de {total}…
             </span>
           </div>

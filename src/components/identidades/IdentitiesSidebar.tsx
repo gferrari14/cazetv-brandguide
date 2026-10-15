@@ -39,7 +39,7 @@ export function IdentitiesSidebar({ items, highlightSlug }: Props) {
                     "ml-4 whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.2em] transition-all duration-500 ease-out",
                     "-translate-x-2 opacity-0 group-hover/nav:translate-x-0 group-hover/nav:opacity-60",
                     "group-hover/item:opacity-100 group-hover/item:text-white group-hover/item:scale-110 origin-left",
-                    "text-white/80",
+                    "text-muted-foreground",
                   ].join(" ")}
                 >
                   {item.name}

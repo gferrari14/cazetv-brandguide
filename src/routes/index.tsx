@@ -89,7 +89,7 @@ function Entry() {
           </Link>
         </header>
 
-        <div className="text-[10px] uppercase tracking-widest text-white/70">
+        <div className="text-[10px] uppercase tracking-widest text-muted-foreground">
           Todos os direitos reservados · CazéTV 2026
         </div>
       </div>
