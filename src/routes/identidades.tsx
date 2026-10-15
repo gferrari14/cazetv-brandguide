@@ -1,6 +1,6 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
-import navLogo from "@/assets/cazetv-logo-nav.png";
+import { siteLogos } from "@/lib/site-media";
 import { identities, type IdentityCategory } from "@/data/identities";
 import { IdentityCard } from "@/components/identidades/IdentityCard";
 import { IdentitiesSidebar } from "@/components/identidades/IdentitiesSidebar";
@@ -108,7 +108,7 @@ function IdentidadesPage() {
       {/* Header */}
       <header className="sticky top-0 z-30 flex items-start px-3 py-4 md:px-4">
         <Link to="/" className="flex items-center gap-3" aria-label="Início">
-          <img src={navLogo} alt="CazéTV" className="h-10 w-auto md:h-12" />
+          <img src={siteLogos.white} alt="CazéTV" className="h-10 w-auto md:h-12" />
         </Link>
       </header>
 

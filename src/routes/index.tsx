@@ -1,6 +1,6 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
-import navLogo from "@/assets/cazetv-logo-nav.png";
+import { siteLogos } from "@/lib/site-media";
 import gradientLine from "@/assets/Rectangle_80.png.asset.json";
 import homeBg from "@/assets/home-bg.gif.asset.json";
 import { CircularCarousel } from "@/components/shared/CircularCarousel";
@@ -85,7 +85,7 @@ function Entry() {
       <div className="absolute bottom-4 right-3 z-10 flex flex-col items-end gap-2 md:right-4">
         <header>
           <Link to="/" aria-label="CazéTV">
-            <img src={navLogo} alt="CazéTV" className="h-10 w-auto md:h-12" />
+            <img src={siteLogos.white} alt="CazéTV" className="h-10 w-auto md:h-12" />
           </Link>
         </header>
 
