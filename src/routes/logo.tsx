@@ -5,17 +5,17 @@ import { SectionBlock } from "@/components/brandguide/SectionBlock";
 import { DownloadButton } from "@/components/brandguide/DownloadButton";
 import { DownloadAllButton } from "@/components/brandguide/DownloadAllButton";
 import logoFullColor from "@/assets/cazetv-logo-color.jpg";
-import { siteLogos } from "@/lib/site-media";
+import { siteLogos, siteSymbols } from "@/lib/site-media";
 import symbolColor from "@/assets/logo-icon-color.png";
 import logoAreaProtecao from "@/assets/logo-area-protecao.png";
-import nominativaBlack from "@/assets/nominativa-symbol-black.png";
-import nominativaWhite from "@/assets/nominativa-symbol-white.png";
-import nominativaSimboloBlack from "@/assets/nominativa-simbolo-black.png";
-import nominativaSimboloWhite from "@/assets/nominativa-simbolo-white.png";
 import logoFundosAplicacao from "@/assets/logo-fundos-aplicacao.png";
 
 const logoFullBlack = siteLogos.black;
 const logoFullWhite = siteLogos.white;
+const nominativaBlack = siteLogos.black;
+const nominativaWhite = siteLogos.white;
+const nominativaSimboloBlack = siteSymbols.black;
+const nominativaSimboloWhite = siteSymbols.white;
 
 export const Route = createFileRoute("/logo")({
   head: () => ({ meta: [
@@ -45,8 +45,10 @@ function LogoPage() {
               { url: logoFullBlack, path: "LOGOTIPO/cazetv-logo-black.svg" },
               { url: logoFullWhite, path: "LOGOTIPO/cazetv-logo-white.svg" },
               { url: symbolColor, path: "SIMBOLO/cazetv-symbol-color.png" },
-              { url: nominativaBlack, path: "NOMINATIVA/cazetv-nominativa-black.png" },
-              { url: nominativaWhite, path: "NOMINATIVA/cazetv-nominativa-white.png" },
+              { url: nominativaBlack, path: "NOMINATIVA/cazetv-nominativa-black.svg" },
+              { url: nominativaWhite, path: "NOMINATIVA/cazetv-nominativa-white.svg" },
+              { url: nominativaSimboloBlack, path: "SIMBOLO/cazetv-symbol-black.svg" },
+              { url: nominativaSimboloWhite, path: "SIMBOLO/cazetv-symbol-white.svg" },
             ]}
           />
         }
@@ -148,7 +150,7 @@ function LogoPage() {
             </div>
             <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
               <p className="text-xs font-bold uppercase text-primary">PRETO · FUNDO CLARO</p>
-              <DownloadButton href={nominativaBlack} filename="cazetv-nominativa-black.png" />
+              <DownloadButton href={nominativaBlack} filename="cazetv-nominativa-black.svg" />
             </div>
           </div>
           <div className="overflow-hidden border border-border bg-black">
@@ -157,7 +159,7 @@ function LogoPage() {
             </div>
             <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
               <p className="text-xs font-bold uppercase text-primary">BRANCO · FUNDO ESCURO</p>
-              <DownloadButton href={nominativaWhite} filename="cazetv-nominativa-white.png" />
+              <DownloadButton href={nominativaWhite} filename="cazetv-nominativa-white.svg" />
             </div>
           </div>
         </div>
@@ -176,7 +178,7 @@ function LogoPage() {
             </div>
             <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
               <p className="text-xs font-bold uppercase text-primary">PRETO · FUNDO CLARO</p>
-              <DownloadButton href={nominativaSimboloBlack} filename="cazetv-nominativa-simbolo-black.png" />
+              <DownloadButton href={nominativaSimboloBlack} filename="cazetv-nominativa-simbolo-black.svg" />
             </div>
           </div>
           <div className="overflow-hidden border border-border bg-black">
@@ -185,7 +187,7 @@ function LogoPage() {
             </div>
             <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
               <p className="text-xs font-bold uppercase text-primary">BRANCO · FUNDO ESCURO</p>
-              <DownloadButton href={nominativaSimboloWhite} filename="cazetv-nominativa-simbolo-white.png" />
+              <DownloadButton href={nominativaSimboloWhite} filename="cazetv-nominativa-simbolo-white.svg" />
             </div>
           </div>
         </div>

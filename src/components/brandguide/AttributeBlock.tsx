@@ -92,8 +92,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
       >
         <div>
           <h2
-            className="text-4xl font-extrabold uppercase leading-[0.95] md:text-6xl"
-            style={{ color }}
+            className="text-4xl font-extrabold uppercase leading-[0.95] text-foreground md:text-6xl"
           >
             {title}
           </h2>
@@ -113,8 +112,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
               {grid.map((g) => (
                 <div key={g.number}>
                   <p
-                    className="text-2xl font-extrabold leading-none md:text-3xl"
-                    style={{ color }}
+                    className="text-2xl font-extrabold leading-none text-muted-foreground md:text-3xl"
                   >
                     {g.number}
                   </p>
@@ -134,8 +132,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
             <div key={sub.heading ?? `sub-${si}`} className="mt-6 md:mt-8">
               {sub.heading && (
                 <h3
-                  className="text-base font-extrabold uppercase md:text-xl"
-                  style={{ color }}
+                  className="text-base font-extrabold uppercase text-foreground md:text-xl"
                 >
                   {sub.heading}
                 </h3>
@@ -207,8 +204,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                         <div className="space-y-2">
                           {sub.captions[i].heading && (
                             <p
-                              className="text-sm font-extrabold uppercase leading-relaxed md:text-base"
-                              style={{ color }}
+                              className="text-sm font-extrabold uppercase leading-relaxed text-foreground md:text-base"
                             >
                               {sub.captions[i].heading}
                             </p>
@@ -234,8 +230,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                   {sub.imageGrid.map((item) => (
                     <div key={item.number}>
                       <p
-                        className="text-2xl font-extrabold leading-none md:text-3xl"
-                        style={{ color }}
+                        className="text-2xl font-extrabold leading-none text-muted-foreground md:text-3xl"
                       >
                         {item.number}
                       </p>
