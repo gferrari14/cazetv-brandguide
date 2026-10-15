@@ -5,13 +5,13 @@ import { SectionBlock } from "@/components/brandguide/SectionBlock";
 import { DownloadButton } from "@/components/brandguide/DownloadButton";
 import { DownloadAllButton } from "@/components/brandguide/DownloadAllButton";
 import logoFullColor from "@/assets/cazetv-logo-color.jpg";
-import { siteLogos, siteSymbols } from "@/lib/site-media";
+import { siteLogos, siteMainLogos, siteSymbols } from "@/lib/site-media";
 import symbolColor from "@/assets/logo-icon-color.png";
 import logoAreaProtecao from "@/assets/logo-area-protecao.png";
 import logoFundosAplicacao from "@/assets/logo-fundos-aplicacao.png";
 
-const logoFullBlack = siteLogos.black;
-const logoFullWhite = siteLogos.white;
+const logoFullBlack = siteMainLogos.black;
+const logoFullWhite = siteMainLogos.white;
 const nominativaBlack = siteLogos.black;
 const nominativaWhite = siteLogos.white;
 const nominativaSimboloBlack = siteSymbols.black;
