@@ -4,6 +4,8 @@ import drukWide from "@/assets/site/DrukWide-Bold.otf.asset.json";
 import monoglyphic from "@/assets/site/Monoglyphic-VF.ttf.asset.json";
 import logoBlack from "@/assets/site/cazetv-logo-black.svg.asset.json";
 import logoWhite from "@/assets/site/cazetv-logo-white.svg.asset.json";
+import logoMainBlack from "@/assets/site/cazetv-logo-main-black.svg.asset.json";
+import logoMainWhite from "@/assets/site/cazetv-logo-main-white.svg.asset.json";
 import symbolBlack from "@/assets/site/cazetv-symbol-black.svg.asset.json";
 import symbolWhite from "@/assets/site/cazetv-symbol-white.svg.asset.json";
 import backgroundHorizontal from "@/assets/site/brand-background-horizontal.png.asset.json";
@@ -11,6 +13,7 @@ import backgroundVertical from "@/assets/site/brand-background-vertical.png.asse
 
 export const siteBackground = background;
 export const siteLogos = { black: logoBlack.url, white: logoWhite.url } as const;
+export const siteMainLogos = { black: logoMainBlack.url, white: logoMainWhite.url } as const;
 export const siteSymbols = { black: symbolBlack.url, white: symbolWhite.url } as const;
 export const brandBackgrounds = { horizontal: backgroundHorizontal.url, vertical: backgroundVertical.url } as const;
 export const siteFonts = [
