@@ -94,7 +94,7 @@ function IdentidadesPage() {
   }, []);
 
   return (
-    <div className="relative bg-background text-foreground">
+    <div className="relative bg-transparent text-foreground">
 
 
       {/* Header */}

@@ -16,7 +16,7 @@ export function BrandLayout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground">
+    <div className="relative min-h-screen bg-transparent text-foreground">
       {/* Logo top-left */}
       <header className="fixed left-3 top-4 z-40 md:left-4">
         <Link to="/" aria-label="Início">

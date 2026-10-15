@@ -1,4 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
+import { useEffect, useRef } from "react";
 import navLogo from "@/assets/cazetv-logo-nav.png";
 import gradientLine from "@/assets/Rectangle_80.png.asset.json";
 import homeBg from "@/assets/home-bg.gif.asset.json";
@@ -31,8 +32,25 @@ const links = [
 ] as const;
 
 function Entry() {
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  useEffect(() => {
+    const title = titleRef.current;
+    if (!title) return;
+    let active = true;
+    const fit = () => {
+      if (!active || !title.parentElement) return;
+      title.style.fontSize = "180px";
+      const naturalWidth = title.scrollWidth;
+      if (naturalWidth > 0) title.style.fontSize = `${180 * title.parentElement.clientWidth / naturalWidth}px`;
+    };
+    const observer = new ResizeObserver(fit);
+    if (title.parentElement) observer.observe(title.parentElement);
+    void document.fonts.ready.then(fit);
+    fit();
+    return () => { active = false; observer.disconnect(); };
+  }, []);
   return (
-    <div className="relative h-screen w-screen overflow-hidden bg-background text-foreground">
+    <div className="relative h-screen w-screen overflow-hidden bg-transparent text-foreground">
       {/* GIF de fundo com 15% de opacidade e saturação zerada */}
       <img
         src={homeBg.url}
@@ -43,32 +61,7 @@ function Entry() {
 
       {/* Título no topo, ocupando toda a largura via SVG (escala precisa) */}
       <div className="pointer-events-none absolute left-0 right-0 top-0 z-[5] px-2 md:px-3">
-        <h1 className="sr-only">Branding CazéTV</h1>
-        <svg
-          viewBox="0 0 1000 200"
-          preserveAspectRatio="xMidYMin meet"
-          className="block w-full select-none"
-          aria-hidden="true"
-        >
-          <text
-            x="500"
-            y="180"
-            textAnchor="middle"
-            fill="currentColor"
-            className="text-white"
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontWeight: 500,
-              fontSize: "180px",
-              letterSpacing: "-3px",
-              textTransform: "uppercase",
-            }}
-            textLength="1000"
-            lengthAdjust="spacingAndGlyphs"
-          >
-            BRANDING CAZÉTV
-          </text>
-        </svg>
+        <h1 ref={titleRef} className="home-title inline-block whitespace-nowrap font-display font-bold uppercase leading-none text-foreground">BRANDING CAZÉTV</h1>
       </div>
 
       {/* Carrossel circular sobreposto ao título */}
