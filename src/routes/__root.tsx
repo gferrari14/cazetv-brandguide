@@ -1,12 +1,13 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { CustomCursor } from "@/components/identidades/CustomCursor";
 import { LoadingScreen } from "@/components/shared/LoadingScreen";
+import { siteBackground, siteFonts } from "@/lib/site-media";
 
 import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <div className="flex min-h-screen items-center justify-center bg-transparent px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
         <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
@@ -41,10 +42,10 @@ export const Route = createRootRoute({
       { name: "twitter:site", content: "@Lovable" },
       { name: "twitter:title", content: "CAZÉTV BRANDGUIDE" },
       { name: "twitter:description", content: "CazéTV Brandguide Reimagined is a digital brand guide for CazéTV." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/IUHSo6mN33WrNraakyjSvYOPjFj1/social-images/social-1777558479872-CAZÉTV_ÍCONE.webp" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/IUHSo6mN33WrNraakyjSvYOPjFj1/social-images/social-1777558479872-CAZÉTV_ÍCONE.webp" },
     ],
     links: [
+      { rel: "preload", as: "image", href: siteBackground.url },
+      ...siteFonts.map((font) => ({ rel: "preload", as: "font", href: font.asset.url, type: font.asset.content_type, crossOrigin: "anonymous" as const })),
       {
         rel: "stylesheet",
         href: appCss,
@@ -61,7 +62,7 @@ export const Route = createRootRoute({
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <head>
         <HeadContent />
       </head>

@@ -11,6 +11,14 @@ import { RevealFooter } from "@/components/shared/RevealFooter";
 
 
 export const Route = createFileRoute("/identidades")({
+  head: () => ({ meta: [
+    {"title": "Identidades — CazéTV Brandguide"},
+    {"name": "description", "content": "Identidades visuais dos programas e competições da CazéTV."},
+    {"property": "og:title", "content": "Identidades — CazéTV Brandguide"},
+    {"property": "og:description", "content": "Identidades visuais dos programas e competições da CazéTV."},
+    {"property": "og:type", "content": "website"},
+    {"name": "twitter:card", "content": "summary"},
+  ] }),
   component: IdentidadesPage,
 });
 
@@ -94,7 +102,7 @@ function IdentidadesPage() {
   }, []);
 
   return (
-    <div className="relative bg-background text-foreground">
+    <div className="relative bg-transparent text-foreground">
 
 
       {/* Header */}

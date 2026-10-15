@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { siteBackground, siteFonts } from "@/lib/site-media";
 
 // Coleta as URLs de todas as mídias importáveis do projeto para pré-carregar
 const srcAssetUrls = Object.values(
@@ -50,7 +51,8 @@ const publicAssetUrls: string[] = [
   "/identidades/um-dia-com/slides/slide-8-logo-jp.png",
 ];
 
-const assetUrls = Array.from(new Set([...srcAssetUrls, ...publicAssetUrls]));
+const pointerAssets = Object.values(import.meta.glob<{ url: string }>("/src/assets/**/*.asset.json", { eager: true, import: "default" })).map((asset) => asset.url);
+const assetUrls = Array.from(new Set([...srcAssetUrls, ...publicAssetUrls.filter((url) => !url.startsWith("/fonts/")), ...pointerAssets, siteBackground.url]));
 
 const MIN_DURATION = 600; // piso visual mínimo para evitar flash em loads instantâneos
 const MAX_DURATION = 3500; // evita bloquear a abertura caso alguma mídia demore ou não responda
@@ -96,6 +98,7 @@ export function LoadingScreen() {
       new Promise<void>((resolve) => setTimeout(resolve, MAX_DURATION)),
     ]).then(async () => {
       if (cancelled) return;
+      await Promise.all(siteFonts.map((font) => document.fonts.load(`700 16px "${font.family}"`)));
       // Garante o piso de duração mínima apenas se o load real for mais rápido
       const remaining = MIN_DURATION - (performance.now() - start);
       if (remaining > 0) {
@@ -125,7 +128,7 @@ export function LoadingScreen() {
   return (
     <div
       aria-hidden={leaving}
-      className="fixed inset-0 z-[300] flex items-center justify-center bg-white text-black"
+      className="fixed inset-0 z-[300] flex items-center justify-center bg-primary text-primary-foreground"
       style={{
         transform: leaving ? "translateY(-100%)" : "translateY(0)",
         transition: "transform 900ms cubic-bezier(0.77, 0, 0.175, 1)",
@@ -133,9 +136,9 @@ export function LoadingScreen() {
       }}
     >
       {/* Barra de progresso no topo */}
-      <div className="absolute left-0 right-0 top-0 h-[4px] bg-black/20">
+      <div className="absolute left-0 right-0 top-0 h-[4px] bg-primary-foreground/20">
         <div
-          className="h-full bg-black"
+          className="h-full bg-primary-foreground"
           style={{
             width: `${progress * 100}%`,
             transition: "width 200ms ease-out",
@@ -145,8 +148,7 @@ export function LoadingScreen() {
 
       {/* Título centralizado */}
       <span
-        className="font-black uppercase tracking-[0.06em] text-black animate-pulse-slow"
-        style={{ fontSize: "clamp(14px, 2.5vw, 32px)" }}
+        className="font-display text-3xl font-bold uppercase text-primary-foreground animate-pulse-slow"
       >
         BRANDING CAZÉTV
       </span>

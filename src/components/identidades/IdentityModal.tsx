@@ -274,7 +274,7 @@ export function IdentityModal({ identity, open, onClose }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-[200] flex flex-col bg-black/95 backdrop-blur-sm animate-in fade-in duration-200"
+      className="site-surface fixed inset-0 z-[200] flex flex-col animate-in fade-in duration-200"
       role="dialog"
       aria-modal="true"
       aria-label={`Projeto ${identity.name}`}
@@ -751,7 +751,7 @@ function MaterialsPanel({
       onClick={onClose}
     >
       <div
-        className="flex h-full w-full max-w-md flex-col border-l-2 border-white/15 bg-black"
+        className="site-surface flex h-full w-full max-w-md flex-col border-l-2 border-white/15"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">

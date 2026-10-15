@@ -38,6 +38,14 @@ const DOWNLOAD_ICON_MASK =
   "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/><polyline points='7 10 12 15 17 10'/><line x1='12' y1='15' x2='12' y2='3'/></svg>\")";
 
 export const Route = createFileRoute("/assets")({
+  head: () => ({ meta: [
+    {"title": "Assets — CazéTV Brandguide"},
+    {"name": "description", "content": "Elementos gráficos e ícones oficiais da CazéTV para download."},
+    {"property": "og:title", "content": "Assets — CazéTV Brandguide"},
+    {"property": "og:description", "content": "Elementos gráficos e ícones oficiais da CazéTV para download."},
+    {"property": "og:type", "content": "website"},
+    {"name": "twitter:card", "content": "summary"},
+  ] }),
   component: AssetsPage,
 });
 

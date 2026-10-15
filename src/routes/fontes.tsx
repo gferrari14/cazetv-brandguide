@@ -4,215 +4,48 @@ import { PageHeader } from "@/components/brandguide/PageHeader";
 import { SectionBlock } from "@/components/brandguide/SectionBlock";
 import { DownloadButton } from "@/components/brandguide/DownloadButton";
 import { DownloadAllButton } from "@/components/brandguide/DownloadAllButton";
+import { siteFonts } from "@/lib/site-media";
 
 export const Route = createFileRoute("/fontes")({
+  head: () => ({ meta: [
+    { title: "Fontes — CazéTV Brandguide" },
+    { name: "description", content: "Druk, Druk Wide e Monoglyphic: tipografia oficial, regras de uso e downloads da CazéTV." },
+    { property: "og:title", content: "Fontes — CazéTV Brandguide" },
+    { property: "og:description", content: "Conheça e baixe as fontes Druk, Druk Wide e Monoglyphic da CazéTV." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
+  ] }),
   component: FontesPage,
 });
 
 function FontesPage() {
   return (
     <BrandLayout>
-      <PageHeader
-        title="TIPOGRAFIA"
-        description="A SELEÇÃO DE FONTES FOI UMA DECISÃO ESTRATÉGICA PARA COMUNICAR OS VALORES DA MARCA, CRIANDO CONTRASTE VISUAL ENTRE O TRADICIONAL E O MODERNO."
-        action={
-          <DownloadAllButton
-            zipName="cazetv-fontes.zip"
-            label="DOWNLOAD DE TODAS AS FONTES"
-            files={[
-              { url: "/fonts/GILROY-REGULAR.TTF", path: "GILROY/GILROY-REGULAR.TTF" },
-              { url: "/fonts/GILROY-BOLD.TTF", path: "GILROY/GILROY-BOLD.TTF" },
-              { url: "/fonts/GILROY-BLACK.TTF", path: "GILROY/GILROY-BLACK.TTF" },
-              { url: "/fonts/TUSKERGROTESK-3500MEDIUM.OTF", path: "TUSKER/TUSKERGROTESK-3500MEDIUM.OTF" },
-              { url: "/fonts/TUSKERGROTESK-3500MEDIUM.TTF", path: "TUSKER/TUSKERGROTESK-3500MEDIUM.TTF" },
-              { url: "/fonts/TUSKERGROTESK-4600SEMIBOLD.OTF", path: "TUSKER/TUSKERGROTESK-4600SEMIBOLD.OTF" },
-              { url: "/fonts/TUSKERGROTESK-4600SEMIBOLD.TTF", path: "TUSKER/TUSKERGROTESK-4600SEMIBOLD.TTF" },
-            ]}
-          />
-        }
-      />
-
-      <SectionBlock
-        title="GILROY"
-        eyebrow="TIPOGRAFIA PRINCIPAL"
-        description="USADA PARA TEXTOS CORRIDOS, CONTEÚDOS DE APOIO, NAVEGAÇÃO E INTERFACE. PESOS DISPONÍVEIS: REGULAR E BOLD."
-      >
-        <div className="space-y-6 border border-border bg-card p-6 md:p-10">
-          <div>
-            <p className="mb-2 text-xs font-bold uppercase text-muted-foreground">REGULAR · 400</p>
-            <p className="text-3xl font-normal uppercase text-foreground md:text-5xl">AA BB CC 0123 CAZÉTV</p>
+      <PageHeader title="TIPOGRAFIA" description="IMPACTO NOS TÍTULOS. PERSONALIDADE EM CADA DETALHE. DRUK E MONOGLYPHIC FORMAM O SISTEMA TIPOGRÁFICO DA CAZÉTV."
+        action={<DownloadAllButton zipName="cazetv-fontes.zip" label="DOWNLOAD DE TODAS AS FONTES" files={siteFonts.map((font) => ({ url: font.asset.url, path: font.path }))} />} />
+      {siteFonts.map((font) => (
+        <SectionBlock key={font.name} title={font.name} eyebrow={font.role}
+          description={font.family === "Druk" ? "VERSÃO CONDENSADA PARA TÍTULOS PRINCIPAIS, NOMES DE PÁGINAS E ATRIBUTOS, FRASES LONGAS E ÁREAS ESTREITAS. PESO BOLD · 700."
+            : font.family === "Druk Wide" ? "VERSÃO EXPANDIDA PARA TÍTULOS SECUNDÁRIOS CURTOS, EM ÁREAS COM ESPAÇO HORIZONTAL SUFICIENTE. PESO BOLD · 700."
+            : "FONTE VARIÁVEL PARA TEXTOS CORRIDOS, NAVEGAÇÃO, BOTÕES, CAMPOS, LEGENDAS E CRÉDITOS. PESOS DE 100 A 900; CORPO EM REGULAR · 400."}>
+          <div className="font-specimen border-y border-border py-8 md:py-12">
+            <p className="mb-5 text-xs text-muted-foreground">{font.family === "Monoglyphic" ? "REGULAR · 400" : "BOLD · 700"}</p>
+            <p className={`${font.className} ${font.family === "Monoglyphic" ? "text-2xl font-normal md:text-4xl" : font.family === "Druk Wide" ? "text-2xl font-bold md:text-5xl" : "text-5xl font-bold md:text-8xl"} break-words leading-tight text-foreground`}>CAZÉTV</p>
+            <p className={`${font.className} mt-6 break-words text-xl leading-relaxed md:text-3xl ${font.family === "Monoglyphic" ? "font-normal" : "font-bold"}`}>ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />0123456789 · Á É Í Ó Ú Ã Õ Ç</p>
+            {font.family === "Monoglyphic" && <p className="mt-6 max-w-3xl text-sm font-normal leading-relaxed md:text-base">A CAZÉTV TRANSFORMA A EXPERIÊNCIA DE ASSISTIR A ESPORTES EM UM EVENTO VIVO, PARTICIPATIVO E GENUINAMENTE CONECTADO.</p>}
           </div>
-          <div className="h-px bg-border" />
-          <div>
-            <p className="mb-2 text-xs font-bold uppercase text-muted-foreground">BOLD · 700</p>
-            <p className="text-3xl font-bold uppercase text-foreground md:text-5xl">AA BB CC 0123 CAZÉTV</p>
-          </div>
-          <div className="h-px bg-border" />
-          <div>
-            <p className="mb-2 text-xs font-bold uppercase text-muted-foreground">BLACK · 900</p>
-            <p className="text-3xl uppercase text-foreground md:text-5xl" style={{ fontWeight: 900 }}>AA BB CC 0123 CAZÉTV</p>
-          </div>
-        </div>
-
-        <div className="mt-4 flex flex-wrap gap-3">
-          <DownloadButton href="/fonts/GILROY-REGULAR.TTF" filename="GILROY-REGULAR.TTF" label="GILROY REGULAR" />
-          <DownloadButton href="/fonts/GILROY-BOLD.TTF" filename="GILROY-BOLD.TTF" label="GILROY BOLD" />
-          <DownloadButton href="/fonts/GILROY-BLACK.TTF" filename="GILROY-BLACK.TTF" label="GILROY BLACK" />
+          <div className="mt-5"><DownloadButton href={font.asset.url} filename={font.asset.original_filename} label={`DOWNLOAD ${font.name}`} /></div>
+        </SectionBlock>
+      ))}
+      <SectionBlock title="HIERARQUIA" eyebrow="COMO COMBINAR" description="DRUK NOS TÍTULOS. MONOGLYPHIC NOS TEXTOS E NA INTERFACE. SEMPRE EM CAIXA ALTA.">
+        <div className="space-y-10">
+          <div><p className="mb-3 text-xs text-muted-foreground">TÍTULO PRINCIPAL · DRUK CONDENSADA</p><h3 className="font-display text-6xl leading-none md:text-8xl">ESPORTE AO VIVO</h3></div>
+          <div><p className="mb-3 text-xs text-muted-foreground">TÍTULO SECUNDÁRIO CURTO · DRUK WIDE</p><p className="font-display-wide break-words text-2xl font-bold leading-tight md:text-4xl">CAZÉTV</p></div>
+          <div><p className="mb-3 text-xs text-muted-foreground">CORPO · MONOGLYPHIC REGULAR</p><p className="max-w-3xl text-sm leading-relaxed md:text-base">A DRUK CONDENSADA É A ESCOLHA PARA TÍTULOS PRINCIPAIS E FRASES LONGAS. A DRUK WIDE DESTACA TÍTULOS SECUNDÁRIOS CURTOS QUE CABEM EM UMA LINHA. EM ÁREAS ESTREITAS, USE A CONDENSADA. TEXTOS PEQUENOS E BOTÕES USAM MONOGLYPHIC.</p></div>
         </div>
       </SectionBlock>
-
-      <SectionBlock
-        title="TUSKER GROTESK"
-        eyebrow="TIPOGRAFIA DE DISPLAY"
-        description="RESERVADA PARA TÍTULOS E TEXTOS EM DESTAQUE. IDEAL PARA INFORMAÇÕES CURTAS E DE ALTO IMPACTO. PESOS: 3500 MEDIUM E 4600 SEMIBOLD."
-      >
-        <div className="space-y-6 border border-border bg-card p-6 md:p-10">
-          <div>
-            <p className="mb-2 text-xs font-bold uppercase text-muted-foreground">TUSKER GROTESK · 3500 MEDIUM</p>
-            <p
-              className="text-4xl uppercase tracking-wide text-foreground md:text-6xl"
-              style={{ fontFamily: "var(--font-display)", fontWeight: 500 }}
-            >
-              BEM-VINDO À CAZÉTV
-            </p>
-          </div>
-          <div className="h-px bg-border" />
-          <div>
-            <p className="mb-2 text-xs font-bold uppercase text-muted-foreground">TUSKER GROTESK · 4600 SEMIBOLD</p>
-            <p
-              className="text-4xl uppercase tracking-wide text-foreground md:text-6xl"
-              style={{ fontFamily: "var(--font-display)", fontWeight: 600 }}
-            >
-              ESPORTE AO VIVO
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-4 flex flex-wrap gap-3">
-          <DownloadButton
-            href="/fonts/TUSKERGROTESK-3500MEDIUM.OTF"
-            filename="TUSKERGROTESK-3500MEDIUM.OTF"
-            label="TUSKER 3500 MEDIUM (OTF)"
-          />
-          <DownloadButton
-            href="/fonts/TUSKERGROTESK-3500MEDIUM.TTF"
-            filename="TUSKERGROTESK-3500MEDIUM.TTF"
-            label="TUSKER 3500 MEDIUM (TTF)"
-          />
-          <DownloadButton
-            href="/fonts/TUSKERGROTESK-4600SEMIBOLD.OTF"
-            filename="TUSKERGROTESK-4600SEMIBOLD.OTF"
-            label="TUSKER 4600 SEMIBOLD (OTF)"
-          />
-          <DownloadButton
-            href="/fonts/TUSKERGROTESK-4600SEMIBOLD.TTF"
-            filename="TUSKERGROTESK-4600SEMIBOLD.TTF"
-            label="TUSKER 4600 SEMIBOLD (TTF)"
-          />
-        </div>
-      </SectionBlock>
-
-      <SectionBlock
-        title="REGRA #1 — SEMPRE EM CAIXA ALTA"
-        eyebrow="REGRA OBRIGATÓRIA · USO TIPOGRÁFICO"
-        description="TODA APLICAÇÃO DE TEXTO DA MARCA CAZÉTV — SEM EXCEÇÃO — DEVE SER ESCRITA EM CAIXA ALTA. ESSA REGRA VALE PARA TÍTULOS, SUBTÍTULOS, CORPO DE TEXTO, BOTÕES, LEGENDAS E QUALQUER OUTRO ELEMENTO TEXTUAL."
-      >
-        <div
-          className="relative overflow-hidden border border-border"
-          style={{ backgroundColor: "#191919" }}
-        >
-          <div className="flex flex-col gap-8 p-8 md:p-16">
-            <div className="flex items-center gap-3">
-              <span className="inline-flex items-center justify-center bg-white px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-black">
-                REGRA #1 · OBRIGATÓRIA
-              </span>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-white/70">
-                IDENTIDADE VERBAL CAZÉTV
-              </span>
-            </div>
-
-            <p
-              className="text-6xl uppercase leading-[1.1] text-white md:text-8xl lg:text-9xl"
-              style={{ fontFamily: "var(--font-display)", fontWeight: 600 }}
-            >
-              SEMPRE EM<br />CAIXA ALTA.
-            </p>
-
-            <div className="grid gap-6 border-t border-white/20 pt-6 md:grid-cols-2">
-              <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-white/60">CERTO</p>
-                <p
-                  className="mt-2 text-2xl uppercase text-white md:text-4xl"
-                  style={{ fontFamily: "var(--font-display)", fontWeight: 600 }}
-                >
-                  ESPORTE AO VIVO
-                </p>
-              </div>
-              <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-white/60">ERRADO</p>
-                <p
-                  className="mt-2 text-2xl normal-case line-through decoration-2 md:text-4xl"
-                  style={{ color: "#F64C68", fontFamily: "var(--font-display)", fontWeight: 600, textTransform: "none" }}
-                >
-                  Esporte ao vivo
-                </p>
-              </div>
-            </div>
-
-            <p className="max-w-2xl text-sm leading-relaxed text-white/90">
-              A CAIXA ALTA É PARTE DA IDENTIDADE VERBAL DA CAZÉTV. ELA REFORÇA O TOM DE TRANSMISSÃO,
-              GRITO DE TORCIDA E PRESENÇA EDITORIAL DA MARCA. NUNCA APLIQUE TEXTOS EM CAIXA BAIXA OU MISTA.
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          <div className="border border-border bg-card p-6">
-            <p className="text-xs font-bold uppercase text-foreground">DO</p>
-            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-              <li>• ESCREVA TUDO EM CAIXA ALTA, INCLUSIVE PALAVRAS COM ACENTO.</li>
-              <li>• MANTENHA HIERARQUIA POR PESO E TAMANHO, NÃO POR CASE.</li>
-            </ul>
-          </div>
-          <div className="border border-border bg-card p-6">
-            <p className="text-xs font-bold uppercase text-destructive">DON&apos;T</p>
-            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-              <li>• Não use Title Case ou caixa baixa em comunicações da marca.</li>
-              <li>• Não misture caixa alta e baixa em um mesmo bloco.</li>
-            </ul>
-          </div>
-        </div>
-      </SectionBlock>
-
-      <SectionBlock
-        title="HIERARQUIA"
-        eyebrow="COMO COMBINAR"
-        description="A TUSKER É RESERVADA PARA TÍTULOS E DESTAQUES. PARA TEXTOS CORRIDOS E CONTEÚDOS DE APOIO, UTILIZE A GILROY. SEMPRE EM CAIXA ALTA."
-      >
-        <div className="space-y-6 border border-border bg-card p-6 md:p-10">
-          <div>
-            <p className="text-xs font-bold uppercase text-primary">TÍTULO · TUSKER GROTESK SEMIBOLD</p>
-            <h3
-              className="mt-2 text-4xl uppercase text-foreground md:text-6xl"
-              style={{ fontFamily: "var(--font-display)", fontWeight: 600 }}
-            >
-              ESPORTE AO VIVO
-            </h3>
-          </div>
-          <div>
-            <p className="text-xs font-bold uppercase text-primary">SUBTÍTULO · GILROY BOLD</p>
-            <p className="mt-2 text-xl font-bold uppercase text-foreground md:text-2xl">
-              TRANSMISSÕES DIGITAIS DA NOVA GERAÇÃO
-            </p>
-          </div>
-          <div>
-            <p className="text-xs font-bold uppercase text-primary">CORPO · GILROY REGULAR</p>
-            <p className="mt-2 max-w-2xl text-base uppercase leading-relaxed text-muted-foreground">
-              A CAZÉTV TRANSFORMA A EXPERIÊNCIA DE ASSISTIR A ESPORTES EM UM EVENTO VIVO, PARTICIPATIVO
-              E GENUINAMENTE CONECTADO. A GILROY É A BASE PARA TODA A COMUNICAÇÃO EDITORIAL E DIGITAL.
-            </p>
-          </div>
-        </div>
+      <SectionBlock title="SEMPRE EM CAIXA ALTA" eyebrow="REGRA DE USO" description="A CAIXA ALTA É PARTE DA IDENTIDADE VERBAL DA CAZÉTV. VALE PARA TÍTULOS, CORPO DE TEXTO, BOTÕES E LEGENDAS.">
+        <p className="font-display text-5xl font-bold leading-none md:text-7xl">PRESENÇA. ENERGIA. CAZÉTV.</p>
       </SectionBlock>
     </BrandLayout>
   );

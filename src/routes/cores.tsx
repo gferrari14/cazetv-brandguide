@@ -6,6 +6,14 @@ import { PageHeader } from "@/components/brandguide/PageHeader";
 import { SectionBlock } from "@/components/brandguide/SectionBlock";
 
 export const Route = createFileRoute("/cores")({
+  head: () => ({ meta: [
+    {"title": "Cores — CazéTV Brandguide"},
+    {"name": "description", "content": "Paleta oficial e combinações de cores da marca CazéTV."},
+    {"property": "og:title", "content": "Cores — CazéTV Brandguide"},
+    {"property": "og:description", "content": "Paleta oficial e combinações de cores da marca CazéTV."},
+    {"property": "og:type", "content": "website"},
+    {"name": "twitter:card", "content": "summary"},
+  ] }),
   component: CoresPage,
 });
 
@@ -157,7 +165,7 @@ function CoresPage() {
             </p>
             <p
               className="text-4xl uppercase leading-[1.15] md:text-6xl"
-              style={{ color: "#FFFFFF", fontFamily: "var(--font-display)", fontWeight: 600 }}
+              style={{ color: "#FFFFFF", fontFamily: "var(--font-display)", fontWeight: 700 }}
             >
               FUNDO PRETO<br />INFORMAÇÃO EM BRANCO<br />ASSET GRADIENTE
             </p>
