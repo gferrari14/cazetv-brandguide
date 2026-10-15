@@ -140,7 +140,7 @@ export function IdentityCard({ identity, initial, zIndex, onFocus, onOpenModal }
         ) : (
           <>
             <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-white/0" />
-            <div className="absolute inset-0 flex items-center justify-center text-xs font-bold uppercase tracking-widest text-white/40">
+            <div className="absolute inset-0 flex items-center justify-center text-xs font-bold uppercase tracking-widest text-muted-foreground">
               {identity.name}
             </div>
           </>

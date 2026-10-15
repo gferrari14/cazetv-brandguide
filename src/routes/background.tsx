@@ -2,8 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BrandLayout } from "@/components/brandguide/BrandLayout";
 import { PageHeader } from "@/components/brandguide/PageHeader";
 import { SectionBlock } from "@/components/brandguide/SectionBlock";
-import bgHorizontal from "@/assets/background-horizontal.png.asset.json";
-import bgVertical from "@/assets/background-vertical.png.asset.json";
+import { brandBackgrounds } from "@/lib/site-media";
+import { DownloadButton } from "@/components/brandguide/DownloadButton";
 
 export const Route = createFileRoute("/background")({
   component: BackgroundPage,
@@ -35,7 +35,7 @@ function BackgroundPage() {
         <div className="grid items-start gap-6 lg:grid-cols-[2fr_1fr]">
           <div className="overflow-hidden border border-border bg-card">
             <img
-              src={bgHorizontal.url}
+              src={brandBackgrounds.horizontal}
               alt="Background CazéTV horizontal"
               className="w-full"
               loading="lazy"
@@ -44,18 +44,12 @@ function BackgroundPage() {
               <span className="text-xs font-bold uppercase tracking-wide text-white">
                 HORIZONTAL · 1920×1080
               </span>
-              <a
-                href={bgHorizontal.url}
-                download="BACKGROUND_HORIZONTAL.png"
-                className="gradient-hover inline-flex items-center gap-2 border border-white bg-black px-4 py-2 text-xs font-bold uppercase tracking-wide text-white"
-              >
-                BAIXAR
-              </a>
+              <DownloadButton href={brandBackgrounds.horizontal} filename="BACKGROUND_HORIZONTAL.png" label="BAIXAR" />
             </div>
           </div>
           <div className="overflow-hidden border border-border bg-card">
             <img
-              src={bgVertical.url}
+              src={brandBackgrounds.vertical}
               alt="Background CazéTV vertical"
               className="w-full"
               loading="lazy"
@@ -64,13 +58,7 @@ function BackgroundPage() {
               <span className="text-xs font-bold uppercase tracking-wide text-white">
                 VERTICAL · 1080×1350
               </span>
-              <a
-                href={bgVertical.url}
-                download="BACKGROUND_VERTICAL.png"
-                className="gradient-hover inline-flex items-center gap-2 border border-white bg-black px-4 py-2 text-xs font-bold uppercase tracking-wide text-white"
-              >
-                BAIXAR
-              </a>
+              <DownloadButton href={brandBackgrounds.vertical} filename="BACKGROUND_VERTICAL.png" label="BAIXAR" />
             </div>
           </div>
         </div>

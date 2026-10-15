@@ -119,7 +119,7 @@ function GradientePage() {
             </ul>
           </div>
           <div className="border border-border bg-card p-6">
-            <p className="text-xs font-bold uppercase text-destructive">Don&apos;t</p>
+            <p className="text-xs font-bold uppercase text-muted-foreground">Don&apos;t</p>
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
               <li>• Não alterar a ordem das cores.</li>
               <li>• Não modificar tonalidades ou aplicar efeitos adicionais.</li>

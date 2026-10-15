@@ -108,7 +108,7 @@ function AssetCard({
       />
       <p
         className={`text-center text-[10px] font-bold uppercase tracking-wide ${
-          variant === "white" ? "text-white/50" : "text-black/50"
+          variant === "white" ? "text-muted-foreground" : "text-black/50"
         }`}
       >
         {label}
