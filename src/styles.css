@@ -237,6 +237,19 @@
     margin-inline: auto;
   }
 
+  .attribute-section {
+    position: relative;
+    border-top: 1px solid transparent;
+  }
+
+  .attribute-section::before {
+    content: "";
+    position: absolute;
+    inset: -1px 0 auto;
+    height: 1px;
+    background-image: var(--brand-gradient);
+  }
+
   .section-padding {
     padding: 4rem 1rem;
   }

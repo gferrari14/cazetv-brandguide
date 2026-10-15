@@ -25,14 +25,9 @@ export const Route = createFileRoute("/atributos")({
   }),
 });
 
-// Cada atributo mantém sua cor apenas na linha superior; a tipografia é neutra.
-const colors = ["#F64C68", "#61B8E0", "#F3C11B", "#58C071", "#FC6E4E"];
-
-
 const attributes: AttributeItem[] = [
   {
     title: "PAIXÃO",
-    color: colors[0],
     media: paixaoMedia.url,
     mediaFit: "text",
     lines: [
@@ -52,7 +47,6 @@ const attributes: AttributeItem[] = [
   },
   {
     title: "AUTENTICIDADE",
-    color: colors[1],
     hideMediaPlaceholder: true,
     lines: [],
     subsections: [
@@ -85,7 +79,6 @@ const attributes: AttributeItem[] = [
   },
   {
     title: "COMUNIDADE",
-    color: colors[2],
     hideMediaPlaceholder: true,
     lines: [],
     grid: [
@@ -99,7 +92,6 @@ const attributes: AttributeItem[] = [
   },
   {
     title: "INCLUSÃO",
-    color: colors[3],
     hideMediaPlaceholder: true,
     lines: ["I. ESTAR COM NOSSOS FÃS NAS BOAS E NAS MÁS"],
     subsections: [
@@ -114,7 +106,6 @@ const attributes: AttributeItem[] = [
   },
   {
     title: "REBELDIA",
-    color: colors[4],
     hideMediaPlaceholder: true,
     lines: ["A REGRA É NÃO TER REGRAS."],
     subsections: [

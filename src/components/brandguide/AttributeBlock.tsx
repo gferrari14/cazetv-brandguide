@@ -37,7 +37,6 @@ export interface AttributeImageGridItem {
 
 export interface AttributeItem {
   title: string;
-  color: string;
   lines: string[];
   /** Grade numerada (01, 02, ...) exibida em 3 colunas */
   grid?: AttributeGridItem[];
@@ -70,7 +69,6 @@ function Placeholder({
 export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
   const {
     title,
-    color,
     lines,
     grid,
     subsections,
@@ -84,7 +82,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
   const rightColumnVisible = !!(media || !hideMediaPlaceholder);
 
   return (
-    <section className="border-t pt-8 md:pt-10" style={{ borderColor: color }}>
+    <section className="attribute-section pt-8 md:pt-10">
       <div
         className={`grid gap-6 md:gap-10 ${
           rightColumnVisible ? "md:grid-cols-[1.5fr_1fr]" : "md:grid-cols-1"
@@ -132,7 +130,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
             <div key={sub.heading ?? `sub-${si}`} className="mt-6 md:mt-8">
               {sub.heading && (
                 <h3
-                  className="text-base font-extrabold uppercase text-foreground md:text-xl"
+                  className="font-display-wide text-base font-bold uppercase text-foreground md:text-xl"
                 >
                   {sub.heading}
                 </h3>
@@ -190,7 +188,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                         <img
                           src={sub.media[i]}
                           alt={`${title} ${i + 1}`}
-                          className="aspect-[4/3] w-full object-cover"
+                          className="aspect-[4/3] w-full border-2 border-foreground object-cover"
                         />
                       ) : (
                         <div className="flex aspect-[4/3] w-full items-center justify-center bg-[#D9D9D9]">
@@ -204,7 +202,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                         <div className="space-y-2">
                           {sub.captions[i].heading && (
                             <p
-                              className="text-sm font-extrabold uppercase leading-relaxed text-foreground md:text-base"
+                              className="font-display-wide text-sm font-bold uppercase leading-relaxed text-foreground md:text-base"
                             >
                               {sub.captions[i].heading}
                             </p>
@@ -238,7 +236,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                         <img
                           src={item.media}
                           alt={item.text}
-                          className="mt-3 aspect-[16/9] w-full object-cover"
+                          className="mt-3 aspect-[16/9] w-full border-2 border-foreground object-cover"
                         />
                       ) : (
                         <Placeholder className="mt-3 aspect-[16/9]" />
@@ -264,7 +262,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
             }`}
           >
             {media ? (
-              <div className="h-full w-full overflow-hidden">
+              <div className="h-full w-full overflow-hidden border-2 border-foreground">
                 <img
                   src={media}
                   alt={title}

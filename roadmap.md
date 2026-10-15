@@ -8,3 +8,8 @@
 - [x] Atualizar backgrounds oficiais horizontal e vertical.
 - [x] Neutralizar cores dos textos e atualizar marcas nominativas e símbolos.
 - [x] Verificar páginas e aplicar atualização de segurança dos pacotes.
+
+# Ajustes de atributos
+- [x] Aplicar Druk Wide nos subtítulos e títulos de legendas.
+- [x] Aplicar gradiente oficial nas cinco linhas e molduras brancas de 2px nas mídias.
+- [ ] Verificar a página em tela larga e estreita.
