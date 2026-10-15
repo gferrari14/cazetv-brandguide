@@ -247,7 +247,7 @@
     position: absolute;
     inset: -1px 0 auto;
     height: 1px;
-    background-image: var(--brand-gradient);
+    background-color: var(--color-foreground);
   }
 
   .section-padding {
