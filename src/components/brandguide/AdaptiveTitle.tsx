@@ -22,7 +22,7 @@ export function AdaptiveTitle({ text }: { text: string }) {
   }, [text]);
 
   return (
-    <span ref={container} className="relative block min-w-0">
+    <span ref={container} className="relative block min-w-0 overflow-hidden">
       <span ref={measurement} aria-hidden="true" className="pointer-events-none invisible absolute left-0 top-0 whitespace-nowrap font-display-wide font-bold">{text}</span>
       <span className={wide ? "font-display-wide" : "font-display"}>{text}</span>
     </span>

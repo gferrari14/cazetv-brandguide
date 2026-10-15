@@ -40,7 +40,7 @@ function Entry() {
     const fit = () => {
       if (!active || !title.parentElement) return;
       title.style.fontSize = "180px";
-      const naturalWidth = title.scrollWidth;
+      const naturalWidth = title.getBoundingClientRect().width;
       if (naturalWidth > 0) title.style.fontSize = `${180 * title.parentElement.clientWidth / naturalWidth}px`;
     };
     const observer = new ResizeObserver(fit);
@@ -61,7 +61,7 @@ function Entry() {
 
       {/* Título no topo, ocupando toda a largura via SVG (escala precisa) */}
       <div className="pointer-events-none absolute left-0 right-0 top-0 z-[5] px-2 md:px-3">
-        <h1 ref={titleRef} className="home-title inline-block whitespace-nowrap font-display font-bold uppercase leading-none text-foreground">BRANDING CAZÉTV</h1>
+        <h1 ref={titleRef} className="home-title inline-block w-max whitespace-nowrap font-display font-bold uppercase leading-none text-foreground">BRANDING CAZÉTV</h1>
       </div>
 
       {/* Carrossel circular sobreposto ao título */}
