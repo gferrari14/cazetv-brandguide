@@ -13,3 +13,8 @@
 - [x] Aplicar Druk Wide nos subtítulos e títulos de legendas.
 - [x] Aplicar Druk Wide nos subtítulos, linhas brancas e molduras brancas de 2px nas mídias.
 - [x] Verificar a página em tela larga e estreita.
+
+# Novas identidades de programas
+- [x] Criar QUEM FEZ, FEZ e SEIS EM UM na galeria.
+- [x] Adicionar os dez slides enviados a QUEM FEZ, FEZ em tamanho original.
+- [x] Verificar os cards e a apresentação.

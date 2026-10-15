@@ -14,8 +14,10 @@ import rodaDeBobo from "@/assets/programas/roda-de-bobo.png";
 import recopando from "@/assets/programas/recopando.gif";
 import boraCopar from "@/assets/competicoes/bora-copar.png";
 import nocheDeCopa from "@/assets/competicoes/noche-de-copa.png";
+import quemFezFezCover from "@/assets/quem-fez-fez/LOGO_1.png.asset.json";
 
 const COVERS: Record<string, string> = {
+  "quem-fez-fez": quemFezFezCover.url,
   "um-dia-com": umDiaComCover,
   "aqui-e-brasil": aquiEBrasil,
   "br-360": br360,

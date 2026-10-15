@@ -28,6 +28,8 @@ const programasNames = [
   "UM DIA COM",
   "COPAZONA",
   "LIVE CAZÉTV",
+  "QUEM FEZ, FEZ",
+  "SEIS EM UM",
 ];
 
 const competicoesNames = [
