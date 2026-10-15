@@ -9,56 +9,21 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as LogoRouteImport } from './routes/logo'
-import { Route as IdentidadesRouteImport } from './routes/identidades'
-import { Route as GradienteRouteImport } from './routes/gradiente'
-import { Route as FontesRouteImport } from './routes/fontes'
-import { Route as CoresRouteImport } from './routes/cores'
-import { Route as BrandguideRouteImport } from './routes/brandguide'
-import { Route as BackgroundRouteImport } from './routes/background'
-import { Route as AtributosRouteImport } from './routes/atributos'
-import { Route as AssetsRouteImport } from './routes/assets'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AssetsRouteImport } from './routes/assets'
+import { Route as AtributosRouteImport } from './routes/atributos'
+import { Route as BackgroundRouteImport } from './routes/background'
+import { Route as BrandguideRouteImport } from './routes/brandguide'
+import { Route as CoresRouteImport } from './routes/cores'
+import { Route as FontesRouteImport } from './routes/fontes'
+import { Route as GradienteRouteImport } from './routes/gradiente'
+import { Route as IdentidadesRouteImport } from './routes/identidades'
+import { Route as LogoRouteImport } from './routes/logo'
 import { Route as IdentidadesSlugRouteImport } from './routes/identidades.$slug'
 
-const LogoRoute = LogoRouteImport.update({
-  id: '/logo',
-  path: '/logo',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IdentidadesRoute = IdentidadesRouteImport.update({
-  id: '/identidades',
-  path: '/identidades',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GradienteRoute = GradienteRouteImport.update({
-  id: '/gradiente',
-  path: '/gradiente',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FontesRoute = FontesRouteImport.update({
-  id: '/fontes',
-  path: '/fontes',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CoresRoute = CoresRouteImport.update({
-  id: '/cores',
-  path: '/cores',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BrandguideRoute = BrandguideRouteImport.update({
-  id: '/brandguide',
-  path: '/brandguide',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BackgroundRoute = BackgroundRouteImport.update({
-  id: '/background',
-  path: '/background',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AtributosRoute = AtributosRouteImport.update({
-  id: '/atributos',
-  path: '/atributos',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AssetsRoute = AssetsRouteImport.update({
@@ -66,9 +31,44 @@ const AssetsRoute = AssetsRouteImport.update({
   path: '/assets',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AtributosRoute = AtributosRouteImport.update({
+  id: '/atributos',
+  path: '/atributos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BackgroundRoute = BackgroundRouteImport.update({
+  id: '/background',
+  path: '/background',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BrandguideRoute = BrandguideRouteImport.update({
+  id: '/brandguide',
+  path: '/brandguide',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoresRoute = CoresRouteImport.update({
+  id: '/cores',
+  path: '/cores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FontesRoute = FontesRouteImport.update({
+  id: '/fontes',
+  path: '/fontes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GradienteRoute = GradienteRouteImport.update({
+  id: '/gradiente',
+  path: '/gradiente',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IdentidadesRoute = IdentidadesRouteImport.update({
+  id: '/identidades',
+  path: '/identidades',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LogoRoute = LogoRouteImport.update({
+  id: '/logo',
+  path: '/logo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IdentidadesSlugRoute = IdentidadesSlugRouteImport.update({
@@ -174,60 +174,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/logo': {
-      id: '/logo'
-      path: '/logo'
-      fullPath: '/logo'
-      preLoaderRoute: typeof LogoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/identidades': {
-      id: '/identidades'
-      path: '/identidades'
-      fullPath: '/identidades'
-      preLoaderRoute: typeof IdentidadesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/gradiente': {
-      id: '/gradiente'
-      path: '/gradiente'
-      fullPath: '/gradiente'
-      preLoaderRoute: typeof GradienteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/fontes': {
-      id: '/fontes'
-      path: '/fontes'
-      fullPath: '/fontes'
-      preLoaderRoute: typeof FontesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cores': {
-      id: '/cores'
-      path: '/cores'
-      fullPath: '/cores'
-      preLoaderRoute: typeof CoresRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/brandguide': {
-      id: '/brandguide'
-      path: '/brandguide'
-      fullPath: '/brandguide'
-      preLoaderRoute: typeof BrandguideRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/background': {
-      id: '/background'
-      path: '/background'
-      fullPath: '/background'
-      preLoaderRoute: typeof BackgroundRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/atributos': {
-      id: '/atributos'
-      path: '/atributos'
-      fullPath: '/atributos'
-      preLoaderRoute: typeof AtributosRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/assets': {
@@ -237,11 +188,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AssetsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/atributos': {
+      id: '/atributos'
+      path: '/atributos'
+      fullPath: '/atributos'
+      preLoaderRoute: typeof AtributosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/background': {
+      id: '/background'
+      path: '/background'
+      fullPath: '/background'
+      preLoaderRoute: typeof BackgroundRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/brandguide': {
+      id: '/brandguide'
+      path: '/brandguide'
+      fullPath: '/brandguide'
+      preLoaderRoute: typeof BrandguideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cores': {
+      id: '/cores'
+      path: '/cores'
+      fullPath: '/cores'
+      preLoaderRoute: typeof CoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fontes': {
+      id: '/fontes'
+      path: '/fontes'
+      fullPath: '/fontes'
+      preLoaderRoute: typeof FontesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gradiente': {
+      id: '/gradiente'
+      path: '/gradiente'
+      fullPath: '/gradiente'
+      preLoaderRoute: typeof GradienteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/identidades': {
+      id: '/identidades'
+      path: '/identidades'
+      fullPath: '/identidades'
+      preLoaderRoute: typeof IdentidadesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/logo': {
+      id: '/logo'
+      path: '/logo'
+      fullPath: '/logo'
+      preLoaderRoute: typeof LogoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/identidades/$slug': {
