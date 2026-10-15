@@ -1,6 +1,6 @@
 import { Link, createFileRoute, notFound } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
-import navLogo from "@/assets/cazetv-logo-nav.png";
+import { siteLogos } from "@/lib/site-media";
 import { identities } from "@/data/identities";
 
 export const Route = createFileRoute("/identidades/$slug")({
@@ -24,7 +24,7 @@ function IdentityPage() {
     <div className="min-h-screen bg-transparent text-foreground">
       <header className="flex items-center justify-between px-3 py-4 md:px-4">
         <Link to="/" className="flex items-center gap-3" aria-label="Início">
-          <img src={navLogo} alt="CazéTV" className="h-10 w-auto md:h-12" />
+          <img src={siteLogos.white} alt="CazéTV" className="h-10 w-auto md:h-12" />
         </Link>
         <Link
           to="/identidades"

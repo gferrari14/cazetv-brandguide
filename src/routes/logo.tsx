@@ -5,8 +5,7 @@ import { SectionBlock } from "@/components/brandguide/SectionBlock";
 import { DownloadButton } from "@/components/brandguide/DownloadButton";
 import { DownloadAllButton } from "@/components/brandguide/DownloadAllButton";
 import logoFullColor from "@/assets/cazetv-logo-color.jpg";
-import logoFullBlack from "@/assets/logo-full-black.png";
-import logoFullWhite from "@/assets/logo-full-white.png";
+import { siteLogos } from "@/lib/site-media";
 import symbolColor from "@/assets/logo-icon-color.png";
 import logoAreaProtecao from "@/assets/logo-area-protecao.png";
 import nominativaBlack from "@/assets/nominativa-symbol-black.png";
@@ -14,6 +13,9 @@ import nominativaWhite from "@/assets/nominativa-symbol-white.png";
 import nominativaSimboloBlack from "@/assets/nominativa-simbolo-black.png";
 import nominativaSimboloWhite from "@/assets/nominativa-simbolo-white.png";
 import logoFundosAplicacao from "@/assets/logo-fundos-aplicacao.png";
+
+const logoFullBlack = siteLogos.black;
+const logoFullWhite = siteLogos.white;
 
 export const Route = createFileRoute("/logo")({
   head: () => ({ meta: [
@@ -40,8 +42,8 @@ function LogoPage() {
             label="DOWNLOAD DE TODOS OS LOGOS"
             files={[
               { url: logoFullColor, path: "LOGOTIPO/cazetv-logo-color.png" },
-              { url: logoFullBlack, path: "LOGOTIPO/cazetv-logo-black.png" },
-              { url: logoFullWhite, path: "LOGOTIPO/cazetv-logo-white.png" },
+              { url: logoFullBlack, path: "LOGOTIPO/cazetv-logo-black.svg" },
+              { url: logoFullWhite, path: "LOGOTIPO/cazetv-logo-white.svg" },
               { url: symbolColor, path: "SIMBOLO/cazetv-symbol-color.png" },
               { url: nominativaBlack, path: "NOMINATIVA/cazetv-nominativa-black.png" },
               { url: nominativaWhite, path: "NOMINATIVA/cazetv-nominativa-white.png" },
@@ -63,7 +65,7 @@ function LogoPage() {
             </div>
             <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
               <p className="text-xs font-bold uppercase text-primary">PRETO · FUNDO CLARO</p>
-              <DownloadButton href={logoFullBlack} filename="cazetv-logo-black.png" />
+              <DownloadButton href={logoFullBlack} filename="cazetv-logo-black.svg" />
             </div>
           </div>
           <div className="overflow-hidden border border-border bg-black">
@@ -72,7 +74,7 @@ function LogoPage() {
             </div>
             <div className="flex items-center justify-between gap-3 border-t border-border bg-card p-4">
               <p className="text-xs font-bold uppercase text-primary">BRANCO · FUNDO ESCURO</p>
-              <DownloadButton href={logoFullWhite} filename="cazetv-logo-white.png" />
+              <DownloadButton href={logoFullWhite} filename="cazetv-logo-white.svg" />
             </div>
           </div>
         </div>

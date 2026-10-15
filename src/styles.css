@@ -72,6 +72,7 @@
   --font-brand: "Monoglyphic", monospace;
   --radius: 0.5rem;
   --site-background-image: url("/__l5e/assets-v1/6123d052-9bfe-48de-9564-be2236a952ad/site-background.png");
+  --site-background-dimming: oklch(0 0 0 / 60%);
   /* Paleta oficial CazéTV */
   --brand-pink: #F64C68;
   --brand-yellow: #F3C11B;
@@ -132,7 +133,7 @@
 
   html {
     background-color: var(--color-background);
-    background-image: var(--site-background-image);
+    background-image: linear-gradient(var(--site-background-dimming), var(--site-background-dimming)), var(--site-background-image);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -298,7 +299,7 @@
 /* The image belongs to page surfaces, never to the material previews. */
 .site-surface {
   background-color: var(--background);
-  background-image: var(--site-background-image);
+  background-image: linear-gradient(var(--site-background-dimming), var(--site-background-dimming)), var(--site-background-image);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

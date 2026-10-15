@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowUp } from "lucide-react";
-import footerLogo from "@/assets/cazetv-logo-footer.png";
+import { siteLogos } from "@/lib/site-media";
 
 const REVEAL_DISTANCE = 600;
 
@@ -104,7 +104,7 @@ export function RevealFooter({
             </div>
 
             <div className="relative">
-              <img src={footerLogo} alt="CazéTV" className="mb-3 h-10 w-auto md:h-12" />
+              <img src={siteLogos.black} alt="CazéTV" className="mb-3 h-10 w-auto md:h-12" />
               <div className="h-0.5 w-full bg-black" />
               <div className="flex flex-col items-start justify-between gap-1 py-2 text-xs uppercase tracking-widest text-black/60 md:flex-row md:items-center">
                 <span>© CazéTV 2026</span>

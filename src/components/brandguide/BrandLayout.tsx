@@ -1,5 +1,5 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import navLogo from "@/assets/cazetv-logo-nav.png";
+import { siteLogos } from "@/lib/site-media";
 import { RevealFooter } from "@/components/shared/RevealFooter";
 
 const navLinks = [
@@ -20,7 +20,7 @@ export function BrandLayout({ children }: { children: React.ReactNode }) {
       {/* Logo top-left */}
       <header className="fixed left-3 top-4 z-40 md:left-4">
         <Link to="/" aria-label="Início">
-          <img src={navLogo} alt="CazéTV" className="h-10 w-auto md:h-12" />
+          <img src={siteLogos.white} alt="CazéTV" className="h-10 w-auto md:h-12" />
         </Link>
       </header>
 
