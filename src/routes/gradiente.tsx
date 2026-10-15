@@ -13,6 +13,14 @@ const exemplos = [
 ];
 
 export const Route = createFileRoute("/gradiente")({
+  head: () => ({ meta: [
+    {"title": "Gradiente — CazéTV Brandguide"},
+    {"name": "description", "content": "Gradiente proprietário da CazéTV e exemplos de aplicação."},
+    {"property": "og:title", "content": "Gradiente — CazéTV Brandguide"},
+    {"property": "og:description", "content": "Gradiente proprietário da CazéTV e exemplos de aplicação."},
+    {"property": "og:type", "content": "website"},
+    {"name": "twitter:card", "content": "summary"},
+  ] }),
   component: GradientePage,
 });
 

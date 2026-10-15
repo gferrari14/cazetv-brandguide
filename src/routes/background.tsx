@@ -40,7 +40,7 @@ function BackgroundPage() {
               className="w-full"
               loading="lazy"
             />
-            <div className="flex items-center justify-between border-t border-border bg-black px-5 py-3">
+            <div className="flex items-center justify-between border-t border-border bg-card/80 px-5 py-3">
               <span className="text-xs font-bold uppercase tracking-wide text-white">
                 HORIZONTAL · 1920×1080
               </span>
@@ -60,7 +60,7 @@ function BackgroundPage() {
               className="w-full"
               loading="lazy"
             />
-            <div className="flex items-center justify-between border-t border-border bg-black px-5 py-3">
+            <div className="flex items-center justify-between border-t border-border bg-card/80 px-5 py-3">
               <span className="text-xs font-bold uppercase tracking-wide text-white">
                 VERTICAL · 1080×1350
               </span>

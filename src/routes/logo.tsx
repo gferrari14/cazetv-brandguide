@@ -16,6 +16,14 @@ import nominativaSimboloWhite from "@/assets/nominativa-simbolo-white.png";
 import logoFundosAplicacao from "@/assets/logo-fundos-aplicacao.png";
 
 export const Route = createFileRoute("/logo")({
+  head: () => ({ meta: [
+    {"title": "Logo — CazéTV Brandguide"},
+    {"name": "description", "content": "Versões oficiais, símbolos e regras de aplicação do logotipo CazéTV."},
+    {"property": "og:title", "content": "Logo — CazéTV Brandguide"},
+    {"property": "og:description", "content": "Versões oficiais, símbolos e regras de aplicação do logotipo CazéTV."},
+    {"property": "og:type", "content": "website"},
+    {"name": "twitter:card", "content": "summary"},
+  ] }),
   component: LogoPage,
 });
 

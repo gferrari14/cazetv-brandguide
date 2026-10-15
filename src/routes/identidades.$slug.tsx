@@ -9,6 +9,11 @@ export const Route = createFileRoute("/identidades/$slug")({
     if (!identity) throw notFound();
     return { identity };
   },
+  head: ({ loaderData }) => {
+    const title = `${loaderData?.identity.name ?? "Identidade"} — CazéTV`;
+    const description = `Identidade visual de ${loaderData?.identity.name ?? "um programa da CazéTV"}.`;
+    return { meta: [{ title }, { name: "description", content: description }, { property: "og:title", content: title }, { property: "og:description", content: description }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] };
+  },
   component: IdentityPage,
 });
 
@@ -16,7 +21,7 @@ function IdentityPage() {
   const { identity } = Route.useLoaderData();
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-transparent text-foreground">
       <header className="flex items-center justify-between px-3 py-4 md:px-4">
         <Link to="/" className="flex items-center gap-3" aria-label="Início">
           <img src={navLogo} alt="CazéTV" className="h-10 w-auto md:h-12" />
