@@ -19,3 +19,4 @@
 - [x] Adicionar os dez slides enviados a QUEM FEZ, FEZ em tamanho original.
 - [x] Verificar os cards e a apresentação.
 - [x] Trocar a capa de QUEM FEZ, FEZ pela TELA CONCEITO enviada (card e primeiro slide).
+- [x] Adicionar os sete slides enviados a SEIS EM UM e usar a capa no card.
