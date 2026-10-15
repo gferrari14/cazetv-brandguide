@@ -12,4 +12,4 @@
 # Ajustes de atributos
 - [x] Aplicar Druk Wide nos subtítulos e títulos de legendas.
 - [x] Aplicar gradiente oficial nas cinco linhas e molduras brancas de 2px nas mídias.
-- [ ] Verificar a página em tela larga e estreita.
+- [x] Verificar a página em tela larga e estreita.
