@@ -441,7 +441,7 @@ function SortableBlock({
           </button>
           <button
             onClick={onDelete}
-            className="flex size-7 items-center justify-center border border-white/20 bg-black/70 text-white/60 transition hover:border-red-500/60 hover:text-red-400"
+            className="flex size-7 items-center justify-center border border-white/20 bg-black/70 text-muted-foreground transition hover:border-foreground hover:text-foreground"
             aria-label="Excluir"
           >
             <Trash2 className="size-3.5" />
@@ -1039,7 +1039,7 @@ function FolderGroup({
                 type="button"
                 onClick={onRemoveEmpty}
                 aria-label="Remover pasta vazia"
-                className="flex size-6 items-center justify-center border border-white/15 text-white/40 hover:border-red-500/60 hover:text-red-400"
+                className="flex size-6 items-center justify-center border border-white/15 text-muted-foreground hover:border-foreground hover:text-foreground"
               >
                 <Trash2 className="size-3" />
               </button>
@@ -1113,7 +1113,7 @@ function FolderGroup({
                     await deleteMaterial(m);
                     await onChanged();
                   }}
-                  className="flex size-6 items-center justify-center text-white/40 transition hover:text-red-400"
+                  className="flex size-6 items-center justify-center text-muted-foreground transition hover:text-foreground"
                   aria-label="Excluir"
                 >
                   <Trash2 className="size-3.5" />

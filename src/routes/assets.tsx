@@ -240,7 +240,7 @@ function AssetsPage() {
             </ul>
           </div>
           <div className="border border-border bg-card p-6">
-            <p className="text-xs font-bold uppercase text-destructive">DON&apos;T</p>
+            <p className="text-xs font-bold uppercase text-muted-foreground">DON&apos;T</p>
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
               <li>• NÃO PREENCHER OS ÍCONES COM CORES DA PALETA.</li>
               <li>• NÃO APLICAR SOMBRAS, GRADIENTES OU EFEITOS.</li>

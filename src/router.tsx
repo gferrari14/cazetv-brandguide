@@ -10,7 +10,7 @@ function DefaultErrorComponent({ error, reset }: { error: Error; reset: () => vo
         <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-destructive/10">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-8 w-8 text-destructive"
+            className="h-8 w-8 text-muted-foreground"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -28,7 +28,7 @@ function DefaultErrorComponent({ error, reset }: { error: Error; reset: () => vo
           An unexpected error occurred. Please try again.
         </p>
         {import.meta.env.DEV && error.message && (
-          <pre className="mt-4 max-h-40 overflow-auto rounded-md bg-muted p-3 text-left font-mono text-xs text-destructive">
+          <pre className="mt-4 max-h-40 overflow-auto rounded-md bg-muted p-3 text-left font-mono text-xs text-muted-foreground">
             {error.message}
           </pre>
         )}

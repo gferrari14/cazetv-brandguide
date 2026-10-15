@@ -256,7 +256,7 @@ function LogoPage() {
             </ul>
           </div>
           <div className="border border-border bg-card p-6">
-            <p className="text-xs font-bold uppercase text-destructive">Don&apos;t</p>
+            <p className="text-xs font-bold uppercase text-muted-foreground">Don&apos;t</p>
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
               <li>• Não alterar as cores do logotipo.</li>
               <li>• Não deformar o logotipo.</li>
@@ -298,7 +298,7 @@ function LogoPage() {
                 </div>
               </div>
               <div className="border-t border-border bg-card p-4">
-                <p className="text-xs font-bold uppercase text-destructive">✕ {item.label}</p>
+                <p className="text-xs font-bold uppercase text-muted-foreground">✕ {item.label}</p>
               </div>
             </div>
           ))}

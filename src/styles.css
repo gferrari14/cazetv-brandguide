@@ -305,11 +305,6 @@
   background-attachment: fixed;
 }
 .home-title { font-size: 180px; }
-/* Alerts and destructive actions keep neutral typography; graphics retain their colors. */
-@layer utilities {
-  .text-destructive { color: var(--muted-foreground); }
-  .hover\:text-red-400:hover { color: var(--foreground); }
-}
 @layer base {
   body * { letter-spacing: 0; }
   input, textarea, select, button { font-family: var(--font-brand); }

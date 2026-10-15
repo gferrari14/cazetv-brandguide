@@ -189,7 +189,7 @@ function CoresPage() {
             </ul>
           </div>
           <div className="border border-border bg-card p-6">
-            <p className="text-xs font-bold uppercase text-destructive">DON&apos;T</p>
+            <p className="text-xs font-bold uppercase text-muted-foreground">DON&apos;T</p>
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
               <li>• NÃO USE O GRADIENTE COMO FUNDO DE TEXTOS LONGOS.</li>
               <li>• NÃO APLIQUE CORES FORA DO PRETO/BRANCO EM TIPOGRAFIA.</li>
