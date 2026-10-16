@@ -232,7 +232,7 @@ function AssetsPage() {
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <div className="border border-border bg-card p-6">
             <p className="text-xs font-bold uppercase text-primary">ESPECIFICAÇÕES</p>
-            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+            <ul className="mt-3 space-y-2 text-[12px] leading-[1.6] tracking-[0.02em] md:text-[13px] text-muted-foreground">
               <li>• ESTILO: LINE / OUTLINE.</li>
               <li>• ESPESSURA UNIFORME DO TRAÇO.</li>
               <li>• CANTOS SUAVEMENTE ARREDONDADOS.</li>
@@ -241,7 +241,7 @@ function AssetsPage() {
           </div>
           <div className="border border-border bg-card p-6">
             <p className="text-xs font-bold uppercase text-muted-foreground">DON&apos;T</p>
-            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+            <ul className="mt-3 space-y-2 text-[12px] leading-[1.6] tracking-[0.02em] md:text-[13px] text-muted-foreground">
               <li>• NÃO PREENCHER OS ÍCONES COM CORES DA PALETA.</li>
               <li>• NÃO APLICAR SOMBRAS, GRADIENTES OU EFEITOS.</li>
               <li>• NÃO DISTORCER OU ROTACIONAR.</li>

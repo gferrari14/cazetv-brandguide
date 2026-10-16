@@ -111,7 +111,7 @@ function GradientePage() {
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           <div className="border border-border bg-card p-6">
             <p className="text-xs font-bold uppercase text-primary">Do</p>
-            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+            <ul className="mt-3 space-y-2 text-[12px] leading-[1.6] tracking-[0.02em] md:text-[13px] text-muted-foreground">
               <li>• Aplicar somente sobre fundo preto ou branco.</li>
               <li>• Manter a ordem fixa: rosa → amarelo → azul → verde.</li>
               <li>• Usar como detalhe gráfico em transmissões, redes e materiais especiais.</li>
@@ -120,7 +120,7 @@ function GradientePage() {
           </div>
           <div className="border border-border bg-card p-6">
             <p className="text-xs font-bold uppercase text-muted-foreground">Don&apos;t</p>
-            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+            <ul className="mt-3 space-y-2 text-[12px] leading-[1.6] tracking-[0.02em] md:text-[13px] text-muted-foreground">
               <li>• Não alterar a ordem das cores.</li>
               <li>• Não modificar tonalidades ou aplicar efeitos adicionais.</li>
               <li>• Não usar sobre fundos coloridos, fotos ou texturas poluídas.</li>

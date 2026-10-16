@@ -66,7 +66,7 @@ function ColorCard({ color }: { color: BrandColor }) {
         </span>
       </div>
       <div className="space-y-1 p-5 text-xs text-muted-foreground">
-        <p className="text-sm font-bold uppercase text-foreground">{color.hex}</p>
+        <p className="text-[12px] md:text-[13px] font-bold uppercase text-foreground">{color.hex}</p>
         <p>RGB: {color.rgb}</p>
         <p>CMYK: {color.cmyk}</p>
       </div>
@@ -102,7 +102,7 @@ function GradientCopyCard() {
         </span>
       </div>
       <div className="border-t border-border p-5">
-        <p className="text-sm font-bold uppercase text-foreground">GRADIENTE PRINCIPAL</p>
+        <p className="text-[12px] md:text-[13px] font-bold uppercase text-foreground">GRADIENTE PRINCIPAL</p>
         <p className="mt-1 text-xs text-muted-foreground">
           ROSA → AMARELO → AZUL → VERDE. VEJA A PÁGINA GRADIENTE PARA REGRAS COMPLETAS.
         </p>
@@ -164,13 +164,13 @@ function CoresPage() {
               COMBINAÇÃO PRINCIPAL
             </p>
             <p
-              className="text-4xl uppercase leading-[1.15] md:text-6xl"
+              className="text-3xl uppercase leading-[1.1] md:text-5xl"
               style={{ color: "#FFFFFF", fontFamily: "var(--font-display)", fontWeight: 700 }}
             >
               FUNDO PRETO<br />INFORMAÇÃO EM BRANCO<br />ASSET GRADIENTE
             </p>
             <div className="h-2 w-full" style={{ background: "var(--brand-gradient)" }} />
-            <p className="max-w-2xl text-sm leading-relaxed" style={{ color: "#FFFFFF" }}>
+            <p className="max-w-2xl text-[12px] leading-[1.6] tracking-[0.02em] md:text-[13px]" style={{ color: "#FFFFFF" }}>
               A COMBINAÇÃO MAIS RECOMENDADA PARA TRANSMITIR CAZÉTV É O <strong>FUNDO PRETO</strong> COM{" "}
               <strong>INFORMAÇÃO EM BRANCO</strong>, COMPLEMENTADA POR UM <strong>ASSET GRADIENTE</strong> —
               DE PREFERÊNCIA UM RETÂNGULO FINO APLICADO COMO DETALHE GRÁFICO. ESSA FÓRMULA GARANTE O MÁXIMO
@@ -182,7 +182,7 @@ function CoresPage() {
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <div className="border border-border bg-card p-6">
             <p className="text-xs font-bold uppercase text-foreground">DO</p>
-            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+            <ul className="mt-3 space-y-2 text-[12px] leading-[1.6] tracking-[0.02em] md:text-[13px] text-muted-foreground">
               <li>• PRIORIZE SEMPRE FUNDO PRETO + TEXTO BRANCO.</li>
               <li>• USE O GRADIENTE COMO ASSET GRÁFICO FINO (RÉGUA, DETALHE, DIVISOR).</li>
               <li>• MANTENHA ALTO CONTRASTE E LEITURA LIMPA.</li>
@@ -190,7 +190,7 @@ function CoresPage() {
           </div>
           <div className="border border-border bg-card p-6">
             <p className="text-xs font-bold uppercase text-muted-foreground">DON&apos;T</p>
-            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+            <ul className="mt-3 space-y-2 text-[12px] leading-[1.6] tracking-[0.02em] md:text-[13px] text-muted-foreground">
               <li>• NÃO USE O GRADIENTE COMO FUNDO DE TEXTOS LONGOS.</li>
               <li>• NÃO APLIQUE CORES FORA DO PRETO/BRANCO EM TIPOGRAFIA.</li>
               <li>• NÃO SUBSTITUA O FUNDO PRETO POR CORES CHAPADAS DA PALETA.</li>
