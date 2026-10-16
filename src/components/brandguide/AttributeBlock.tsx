@@ -82,23 +82,24 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
   const rightColumnVisible = !!(media || !hideMediaPlaceholder);
 
   return (
-    <section className="attribute-section pt-8 md:pt-10">
+    <section className="attribute-section pt-6 md:pt-8">
       <div
         className={`grid gap-6 md:gap-10 ${
           rightColumnVisible ? "md:grid-cols-[1.5fr_1fr]" : "md:grid-cols-1"
         } ${fitText ? "items-stretch" : "items-start"}`}
       >
-        <div>
+        <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,2.2fr)] md:gap-12">
           <h2
-            className="text-4xl font-extrabold uppercase leading-[0.95] text-foreground md:text-6xl"
+            className="text-3xl font-extrabold uppercase leading-[0.9] text-foreground md:sticky md:top-24 md:self-start md:text-5xl"
           >
             {title}
           </h2>
-          <div className="mt-3 space-y-1">
+          <div className="min-w-0">
+          <div className="space-y-1">
             {lines.map((line) => (
               <p
                 key={line}
-                className="text-sm uppercase leading-relaxed text-white md:text-base"
+                className="max-w-[58ch] text-[12px] uppercase leading-[1.6] tracking-[0.02em] text-white/90 md:text-[13px]"
               >
                 {line}
               </p>
@@ -106,16 +107,16 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
           </div>
 
           {grid && grid.length > 0 && (
-            <div className="mt-8 grid grid-cols-2 gap-x-8 gap-y-8 md:mt-10 md:grid-cols-3 md:gap-x-10 md:gap-y-10">
+            <div className="mt-2 grid grid-cols-2 gap-x-6 gap-y-6 md:grid-cols-3 md:gap-x-8">
               {grid.map((g) => (
-                <div key={g.number}>
+                <div key={g.number} className="border-t border-white/15 pt-3">
                   <p
-                    className="text-2xl font-extrabold leading-none text-muted-foreground md:text-3xl"
+                    className="text-[11px] font-medium leading-none tracking-[0.08em] text-muted-foreground md:text-xs"
                   >
                     {g.number}
                   </p>
                   <p
-                    className="mt-2 text-sm uppercase leading-relaxed text-white md:text-base"
+                    className="mt-2 text-[12px] uppercase leading-[1.6] tracking-[0.02em] text-white/90 md:text-[13px]"
                   >
                     {g.text}
                   </p>
@@ -127,10 +128,10 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
 
 
           {subsections?.map((sub, si) => (
-            <div key={sub.heading ?? `sub-${si}`} className="mt-6 md:mt-8">
+            <div key={sub.heading ?? `sub-${si}`} className="mt-6 first:mt-0 md:mt-10">
               {sub.heading && (
                 <h3
-                  className="font-display-wide text-base font-bold uppercase text-foreground md:text-xl"
+                  className="font-display-wide text-sm font-bold uppercase leading-tight text-foreground md:text-base"
                 >
                   {sub.heading}
                 </h3>
@@ -143,20 +144,20 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                 sub.intro.map((line) => (
                   <p
                     key={line}
-                    className="mt-2 text-sm uppercase leading-relaxed text-white md:text-base"
+                    className="mt-2 text-[12px] uppercase leading-[1.6] tracking-[0.02em] text-white/90 md:text-[13px]"
                   >
                     {line}
                   </p>
                 ))}
 
               {sub.items && sub.items.length > 0 && (
-                <ol className="mt-5 space-y-3 pl-5">
+                <ol className="mt-4 space-y-3">
                   {sub.items.map((item, i) => (
                     <li
                       key={item.text}
-                      className="list-none text-sm uppercase leading-relaxed text-white md:text-base"
+                      className="list-none max-w-[58ch] border-t border-white/15 pt-3 text-[12px] uppercase leading-[1.6] tracking-[0.02em] text-white/90 md:text-[13px]"
                     >
-                      <span className="mr-2">{i + 1}.</span>
+                      <span className="mr-3 text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
                       {item.text}
                       {item.sub && (
                         <ol className="mt-2 space-y-2 pl-6">
@@ -202,7 +203,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                         <div className="space-y-2">
                           {sub.captions[i].heading && (
                             <p
-                              className="font-display-wide text-sm font-bold uppercase leading-relaxed text-foreground md:text-base"
+                              className="font-display-wide text-xs font-bold uppercase leading-tight text-foreground md:text-sm"
                             >
                               {sub.captions[i].heading}
                             </p>
@@ -210,7 +211,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                           {sub.captions[i].lines.map((line) => (
                             <p
                               key={line}
-                              className="text-sm uppercase leading-relaxed text-white md:text-base"
+                              className="max-w-[58ch] text-[12px] uppercase leading-[1.6] tracking-[0.02em] text-white/90 md:text-[13px]"
                             >
                               {line}
                             </p>
@@ -228,7 +229,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                   {sub.imageGrid.map((item) => (
                     <div key={item.number}>
                       <p
-                        className="text-2xl font-extrabold leading-none text-muted-foreground md:text-3xl"
+                        className="text-[11px] font-medium leading-none tracking-[0.08em] text-muted-foreground md:text-xs"
                       >
                         {item.number}
                       </p>
@@ -242,7 +243,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                         <Placeholder className="mt-3 aspect-[16/9]" />
                       )}
                       <p
-                        className="mt-3 text-center text-sm uppercase leading-relaxed text-white md:text-base"
+                        className="mt-3 text-[12px] uppercase leading-[1.6] tracking-[0.02em] text-white/90 md:text-[13px]"
                       >
                         {item.text}
                       </p>
@@ -252,6 +253,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
               )}
             </div>
           ))}
+          </div>
         </div>
 
         {/* Placeholder para GIF ou foto */}
@@ -280,7 +282,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
         )}
       </div>
 
-      <div className="h-10 md:h-16" />
+      <div className="h-12 md:h-20" />
     </section>
   );
 }
