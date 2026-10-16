@@ -2,7 +2,9 @@ import { Link, useLocation } from "@tanstack/react-router";
 import { siteLogos } from "@/lib/site-media";
 import { RevealFooter } from "@/components/shared/RevealFooter";
 
-const navLinks = [
+export type BrandNavItem = { path: string; label: string };
+
+const brandNav: readonly BrandNavItem[] = [
   { path: "/atributos", label: "ATRIBUTOS" },
   { path: "/logo", label: "LOGO" },
   { path: "/cores", label: "CORES" },
@@ -10,9 +12,15 @@ const navLinks = [
   { path: "/assets", label: "ASSETS" },
   { path: "/background", label: "BACKGROUND" },
   { path: "/gradiente", label: "GRADIENTE" },
-] as const;
+];
 
-export function BrandLayout({ children }: { children: React.ReactNode }) {
+export function BrandLayout({
+  children,
+  navItems = brandNav,
+}: {
+  children: React.ReactNode;
+  navItems?: readonly BrandNavItem[];
+}) {
   const location = useLocation();
 
   return (

@@ -1,8 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { BrandLayout } from "@/components/brandguide/BrandLayout";
+import { BrandLayout, type BrandNavItem } from "@/components/brandguide/BrandLayout";
 import { PageHeader } from "@/components/brandguide/PageHeader";
 import { SectionBlock } from "@/components/brandguide/SectionBlock";
+
+const pageNav: readonly BrandNavItem[] = [
+  { path: "/brandguide", label: "CAZÉTV" },
+  { path: "/identidades", label: "IDENTIDADES" },
+  { path: "/duvidas", label: "DÚVIDAS" },
+];
 
 export const Route = createFileRoute("/duvidas")({
   head: () => ({
