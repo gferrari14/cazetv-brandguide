@@ -28,7 +28,7 @@ export const Route = createFileRoute("/")({
 const links = [
   { to: "/brandguide", label: "CAZÉTV" },
   { to: "/identidades", label: "IDENTIDADES" },
-  { to: "/", label: "DÚVIDAS" },
+  { to: "/duvidas", label: "DÚVIDAS" },
 ] as const;
 
 function Entry() {

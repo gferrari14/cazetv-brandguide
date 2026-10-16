@@ -15,6 +15,7 @@ import { Route as AtributosRouteImport } from './routes/atributos'
 import { Route as BackgroundRouteImport } from './routes/background'
 import { Route as BrandguideRouteImport } from './routes/brandguide'
 import { Route as CoresRouteImport } from './routes/cores'
+import { Route as DuvidasRouteImport } from './routes/duvidas'
 import { Route as FontesRouteImport } from './routes/fontes'
 import { Route as GradienteRouteImport } from './routes/gradiente'
 import { Route as IdentidadesRouteImport } from './routes/identidades'
@@ -51,6 +52,11 @@ const CoresRoute = CoresRouteImport.update({
   path: '/cores',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DuvidasRoute = DuvidasRouteImport.update({
+  id: '/duvidas',
+  path: '/duvidas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FontesRoute = FontesRouteImport.update({
   id: '/fontes',
   path: '/fontes',
@@ -84,6 +90,7 @@ export interface FileRoutesByFullPath {
   '/background': typeof BackgroundRoute
   '/brandguide': typeof BrandguideRoute
   '/cores': typeof CoresRoute
+  '/duvidas': typeof DuvidasRoute
   '/fontes': typeof FontesRoute
   '/gradiente': typeof GradienteRoute
   '/identidades': typeof IdentidadesRouteWithChildren
@@ -97,6 +104,7 @@ export interface FileRoutesByTo {
   '/background': typeof BackgroundRoute
   '/brandguide': typeof BrandguideRoute
   '/cores': typeof CoresRoute
+  '/duvidas': typeof DuvidasRoute
   '/fontes': typeof FontesRoute
   '/gradiente': typeof GradienteRoute
   '/identidades': typeof IdentidadesRouteWithChildren
@@ -111,6 +119,7 @@ export interface FileRoutesById {
   '/background': typeof BackgroundRoute
   '/brandguide': typeof BrandguideRoute
   '/cores': typeof CoresRoute
+  '/duvidas': typeof DuvidasRoute
   '/fontes': typeof FontesRoute
   '/gradiente': typeof GradienteRoute
   '/identidades': typeof IdentidadesRouteWithChildren
@@ -126,6 +135,7 @@ export interface FileRouteTypes {
     | '/background'
     | '/brandguide'
     | '/cores'
+    | '/duvidas'
     | '/fontes'
     | '/gradiente'
     | '/identidades'
@@ -139,6 +149,7 @@ export interface FileRouteTypes {
     | '/background'
     | '/brandguide'
     | '/cores'
+    | '/duvidas'
     | '/fontes'
     | '/gradiente'
     | '/identidades'
@@ -152,6 +163,7 @@ export interface FileRouteTypes {
     | '/background'
     | '/brandguide'
     | '/cores'
+    | '/duvidas'
     | '/fontes'
     | '/gradiente'
     | '/identidades'
@@ -166,6 +178,7 @@ export interface RootRouteChildren {
   BackgroundRoute: typeof BackgroundRoute
   BrandguideRoute: typeof BrandguideRoute
   CoresRoute: typeof CoresRoute
+  DuvidasRoute: typeof DuvidasRoute
   FontesRoute: typeof FontesRoute
   GradienteRoute: typeof GradienteRoute
   IdentidadesRoute: typeof IdentidadesRouteWithChildren
@@ -214,6 +227,13 @@ declare module '@tanstack/react-router' {
       path: '/cores'
       fullPath: '/cores'
       preLoaderRoute: typeof CoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/duvidas': {
+      id: '/duvidas'
+      path: '/duvidas'
+      fullPath: '/duvidas'
+      preLoaderRoute: typeof DuvidasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fontes': {
@@ -273,6 +293,7 @@ const rootRouteChildren: RootRouteChildren = {
   BackgroundRoute: BackgroundRoute,
   BrandguideRoute: BrandguideRoute,
   CoresRoute: CoresRoute,
+  DuvidasRoute: DuvidasRoute,
   FontesRoute: FontesRoute,
   GradienteRoute: GradienteRoute,
   IdentidadesRoute: IdentidadesRouteWithChildren,
