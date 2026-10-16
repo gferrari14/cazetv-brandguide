@@ -29,8 +29,8 @@ export function CircularCarousel({ size = 240 }: { size?: number }) {
   const frameRef = useRef<number | null>(null);
   const animating = useRef(false);
   const lastChange = useRef<number>(0);
-  const duration = 1600;
-  const cooldown = 1750;
+  const duration = 2000;
+  const cooldown = 2100;
 
   useEffect(() => {
     return () => {
@@ -65,10 +65,14 @@ export function CircularCarousel({ size = 240 }: { size?: number }) {
       const halfProgress = outgoing ? travel * 2 : (travel - 0.5) * 2;
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;
-      // Arco aberto: sai pelo extremo inferior direito e entra pelo extremo
-      // inferior esquerdo, atravessando toda a largura da viewport.
-      const horizontalReach = viewportWidth / 2 + size * 0.55;
-      const verticalReach = viewportHeight / 2 + size * 0.55;
+      // O ícone atravessa a tela de ponta a ponta: entra pelo extremo esquerdo
+      // e sai pelo extremo direito, sempre totalmente fora da área visível no
+      // instante em que a imagem troca.
+      const horizontalReach = viewportWidth / 2 + size / 2 + 48;
+      // Queda suave: mantém o ícone dentro da tela durante toda a travessia.
+      const verticalReach = Math.min(viewportHeight * 0.28, horizontalReach * 0.5);
+      // Some apenas ao encostar na borda, nunca no meio do caminho.
+      const fadeAt = 0.92;
 
       let x: number;
       let y: number;
@@ -79,7 +83,7 @@ export function CircularCarousel({ size = 240 }: { size?: number }) {
         x = horizontalReach * halfProgress;
         y = verticalReach * Math.sin((halfProgress * Math.PI) / 2);
         rotation = 14 * halfProgress;
-        opacity = Math.max(0, 1 - halfProgress * 2.6);
+        opacity = halfProgress < fadeAt ? 1 : Math.max(0, (1 - halfProgress) / (1 - fadeAt));
       } else {
         if (!imageChanged) {
           imageChanged = true;
@@ -89,7 +93,7 @@ export function CircularCarousel({ size = 240 }: { size?: number }) {
         x = -horizontalReach * arriving;
         y = verticalReach * Math.sin((arriving * Math.PI) / 2);
         rotation = -14 * arriving;
-        opacity = Math.max(0, 1 - arriving * 2.6);
+        opacity = arriving < fadeAt ? 1 : Math.max(0, (1 - arriving) / (1 - fadeAt));
       }
 
       track.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rotation}deg)`;
