@@ -36,7 +36,7 @@ export function BrandLayout({
 
       {/* Bottom nav — fixed, centered-left */}
       <nav className="fixed bottom-4 left-3 z-40 flex flex-row flex-wrap gap-2 md:left-4">
-        {navLinks.map((link) => {
+        {navItems.map((link) => {
           const active = location.pathname === link.path;
           return (
             <Link

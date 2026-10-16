@@ -76,7 +76,7 @@ function DuvidasPage() {
   };
 
   return (
-    <BrandLayout>
+    <BrandLayout navItems={pageNav}>
       <PageHeader
         title="DÚVIDAS"
         description="TEM ALGUMA PERGUNTA SOBRE A MARCA CAZÉTV, AS IDENTIDADES OU O USO DOS MATERIAIS? PREENCHA O FORMULÁRIO ABAIXO E ENVIEMOS A SUA DÚVIDA PARA A EQUIPE."
