@@ -32,16 +32,16 @@ function FontesPage() {
             <p className="mb-5 text-xs text-muted-foreground">{font.family === "Monoglyphic" ? "REGULAR · 400" : "BOLD · 700"}</p>
             <p className={`${font.className} ${font.family === "Monoglyphic" ? "text-2xl font-normal md:text-4xl" : font.family === "Druk Wide" ? "text-2xl font-bold md:text-5xl" : "text-5xl font-bold md:text-8xl"} break-words leading-tight text-foreground`}>CAZÉTV</p>
             <p className={`${font.className} mt-6 break-words text-xl leading-relaxed md:text-3xl ${font.family === "Monoglyphic" ? "font-normal" : "font-bold"}`}>ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />0123456789 · Á É Í Ó Ú Ã Õ Ç</p>
-            {font.family === "Monoglyphic" && <p className="mt-6 max-w-3xl text-sm font-normal leading-relaxed md:text-base">A CAZÉTV TRANSFORMA A EXPERIÊNCIA DE ASSISTIR A ESPORTES EM UM EVENTO VIVO, PARTICIPATIVO E GENUINAMENTE CONECTADO.</p>}
+            {font.family === "Monoglyphic" && <p className="mt-6 max-w-3xl text-[12px] leading-[1.6] tracking-[0.02em] md:text-[13px]">A CAZÉTV TRANSFORMA A EXPERIÊNCIA DE ASSISTIR A ESPORTES EM UM EVENTO VIVO, PARTICIPATIVO E GENUINAMENTE CONECTADO.</p>}
           </div>
           <div className="mt-5"><DownloadButton href={font.asset.url} filename={font.asset.original_filename} label={`DOWNLOAD ${font.name}`} /></div>
         </SectionBlock>
       ))}
       <SectionBlock title="HIERARQUIA" eyebrow="COMO COMBINAR" description="DRUK NOS TÍTULOS. MONOGLYPHIC NOS TEXTOS E NA INTERFACE. SEMPRE EM CAIXA ALTA.">
         <div className="space-y-10">
-          <div><p className="mb-3 text-xs text-muted-foreground">TÍTULO PRINCIPAL · DRUK CONDENSADA</p><h3 className="font-display text-6xl leading-none md:text-8xl">ESPORTE AO VIVO</h3></div>
-          <div><p className="mb-3 text-xs text-muted-foreground">TÍTULO SECUNDÁRIO CURTO · DRUK WIDE</p><p className="font-display-wide break-words text-2xl font-bold leading-tight md:text-4xl">CAZÉTV</p></div>
-          <div><p className="mb-3 text-xs text-muted-foreground">CORPO · MONOGLYPHIC REGULAR</p><p className="max-w-3xl text-sm leading-relaxed md:text-base">A DRUK CONDENSADA É A ESCOLHA PARA TÍTULOS PRINCIPAIS E FRASES LONGAS. A DRUK WIDE DESTACA TÍTULOS SECUNDÁRIOS CURTOS QUE CABEM EM UMA LINHA. EM ÁREAS ESTREITAS, USE A CONDENSADA. TEXTOS PEQUENOS E BOTÕES USAM MONOGLYPHIC.</p></div>
+          <div><p className="mb-3 text-[11px] tracking-[0.08em] text-muted-foreground">TÍTULO PRINCIPAL · DRUK CONDENSADA</p><h3 className="font-display text-6xl leading-none md:text-8xl">ESPORTE AO VIVO</h3></div>
+          <div><p className="mb-3 text-[11px] tracking-[0.08em] text-muted-foreground">TÍTULO SECUNDÁRIO CURTO · DRUK WIDE</p><p className="font-display-wide break-words text-2xl font-bold leading-tight md:text-4xl">CAZÉTV</p></div>
+          <div><p className="mb-3 text-[11px] tracking-[0.08em] text-muted-foreground">CORPO · MONOGLYPHIC REGULAR</p><p className="max-w-3xl text-[12px] leading-[1.6] tracking-[0.02em] md:text-[13px]">A DRUK CONDENSADA É A ESCOLHA PARA TÍTULOS PRINCIPAIS E FRASES LONGAS. A DRUK WIDE DESTACA TÍTULOS SECUNDÁRIOS CURTOS QUE CABEM EM UMA LINHA. EM ÁREAS ESTREITAS, USE A CONDENSADA. TEXTOS PEQUENOS E BOTÕES USAM MONOGLYPHIC.</p></div>
         </div>
       </SectionBlock>
       <SectionBlock title="SEMPRE EM CAIXA ALTA" eyebrow="REGRA DE USO" description="A CAIXA ALTA É PARTE DA IDENTIDADE VERBAL DA CAZÉTV. VALE PARA TÍTULOS, CORPO DE TEXTO, BOTÕES E LEGENDAS.">

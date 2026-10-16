@@ -117,7 +117,7 @@ function LogoPage() {
       >
         <div className="border border-border bg-white p-6 md:p-12">
           <div className="grid gap-10 md:grid-cols-[1fr_2fr] md:items-center">
-            <div className="space-y-4 text-sm leading-relaxed text-neutral-700">
+            <div className="space-y-4 text-[12px] leading-[1.6] tracking-[0.02em] md:text-[13px] text-neutral-700">
               <p>
                 Nosso logotipo deve sempre ter espaço para <strong>respirar e se destacar</strong>. Para garantir essa presença, definimos uma área de respiro mínima em torno da marca.
               </p>
@@ -218,23 +218,23 @@ function LogoPage() {
           <div className="border border-border bg-card p-6">
             <p className="mb-4 text-xs font-bold uppercase text-primary">Impresso</p>
             <div className="flex items-baseline justify-between border-b border-border pb-3">
-              <span className="text-sm text-foreground">Logotipo</span>
-              <span className="text-sm font-bold text-foreground">25 mm</span>
+              <span className="text-[12px] md:text-[13px] text-foreground">Logotipo</span>
+              <span className="text-[12px] md:text-[13px] font-bold text-foreground">25 mm</span>
             </div>
             <div className="mt-3 flex items-baseline justify-between">
-              <span className="text-sm text-foreground">Símbolo</span>
-              <span className="text-sm font-bold text-foreground">8,5 mm</span>
+              <span className="text-[12px] md:text-[13px] text-foreground">Símbolo</span>
+              <span className="text-[12px] md:text-[13px] font-bold text-foreground">8,5 mm</span>
             </div>
           </div>
           <div className="border border-border bg-card p-6">
             <p className="mb-4 text-xs font-bold uppercase text-primary">Digital</p>
             <div className="flex items-baseline justify-between border-b border-border pb-3">
-              <span className="text-sm text-foreground">Logotipo</span>
-              <span className="text-sm font-bold text-foreground">100 px</span>
+              <span className="text-[12px] md:text-[13px] text-foreground">Logotipo</span>
+              <span className="text-[12px] md:text-[13px] font-bold text-foreground">100 px</span>
             </div>
             <div className="mt-3 flex items-baseline justify-between">
-              <span className="text-sm text-foreground">Símbolo</span>
-              <span className="text-sm font-bold text-foreground">35 px</span>
+              <span className="text-[12px] md:text-[13px] text-foreground">Símbolo</span>
+              <span className="text-[12px] md:text-[13px] font-bold text-foreground">35 px</span>
             </div>
           </div>
         </div>
@@ -245,7 +245,7 @@ function LogoPage() {
         <div className="grid gap-4 md:grid-cols-2">
           <div className="border border-border bg-card p-6">
             <p className="text-xs font-bold uppercase text-primary">Do</p>
-            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+            <ul className="mt-3 space-y-2 text-[12px] leading-[1.6] tracking-[0.02em] md:text-[13px] text-muted-foreground">
               <li>• Utilizar sempre os arquivos oficiais do logo.</li>
               <li>• Respeitar a área de proteção.</li>
               <li>• Aplicar sobre fundos com bom contraste.</li>
@@ -257,7 +257,7 @@ function LogoPage() {
           </div>
           <div className="border border-border bg-card p-6">
             <p className="text-xs font-bold uppercase text-muted-foreground">Don&apos;t</p>
-            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+            <ul className="mt-3 space-y-2 text-[12px] leading-[1.6] tracking-[0.02em] md:text-[13px] text-muted-foreground">
               <li>• Não alterar as cores do logotipo.</li>
               <li>• Não deformar o logotipo.</li>
               <li>• Não aplicar sobre fundos poluídos ou sem contraste.</li>
