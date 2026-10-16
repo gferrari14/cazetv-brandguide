@@ -116,7 +116,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                     {g.number}
                   </p>
                   <p
-                    className="mt-2 text-sm uppercase leading-relaxed text-white md:text-base"
+                    className="mt-2 text-[12px] uppercase leading-[1.6] tracking-[0.02em] text-white/90 md:text-[13px]"
                   >
                     {g.text}
                   </p>
@@ -144,7 +144,7 @@ export function AttributeBlock({ attribute }: { attribute: AttributeItem }) {
                 sub.intro.map((line) => (
                   <p
                     key={line}
-                    className="mt-2 text-sm uppercase leading-relaxed text-white md:text-base"
+                    className="mt-2 text-[12px] uppercase leading-[1.6] tracking-[0.02em] text-white/90 md:text-[13px]"
                   >
                     {line}
                   </p>
