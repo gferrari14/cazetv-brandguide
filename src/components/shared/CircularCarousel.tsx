@@ -69,32 +69,23 @@ export function CircularCarousel({ size = 240 }: { size?: number }) {
       // e sai pelo extremo direito, sempre totalmente fora da área visível no
       // instante em que a imagem troca.
       const horizontalReach = viewportWidth / 2 + size / 2 + 48;
-      // Queda suave: mantém o ícone dentro da tela durante toda a travessia.
-      const verticalReach = Math.min(viewportHeight * 0.28, horizontalReach * 0.5);
-      // Some apenas ao encostar na borda, nunca no meio do caminho.
+      // Roda: o ícone percorre um arco de círculo real (centro abaixo dele),
+      // girando junto, com ângulo sempre crescente — sem ondulações.
+      const dropRatio = Math.min((viewportHeight * 0.3) / horizontalReach, 0.5);
+      const maxAngle = 2 * Math.atan(dropRatio);
+      const radius = horizontalReach / Math.sin(maxAngle);
       const fadeAt = 0.92;
 
-      let x: number;
-      let y: number;
-      let rotation: number;
-      let opacity: number;
-
-      if (outgoing) {
-        x = horizontalReach * halfProgress;
-        y = verticalReach * Math.sin((halfProgress * Math.PI) / 2);
-        rotation = 14 * halfProgress;
-        opacity = halfProgress < fadeAt ? 1 : Math.max(0, (1 - halfProgress) / (1 - fadeAt));
-      } else {
-        if (!imageChanged) {
-          imageChanged = true;
-          setIndex((i) => (i + 1) % items.length);
-        }
-        const arriving = 1 - halfProgress;
-        x = -horizontalReach * arriving;
-        y = verticalReach * Math.sin((arriving * Math.PI) / 2);
-        rotation = -14 * arriving;
-        opacity = arriving < fadeAt ? 1 : Math.max(0, (1 - arriving) / (1 - fadeAt));
+      if (!outgoing && !imageChanged) {
+        imageChanged = true;
+        setIndex((i) => (i + 1) % items.length);
       }
+      const edge = outgoing ? halfProgress : 1 - halfProgress;
+      const angle = outgoing ? maxAngle * halfProgress : -maxAngle * (1 - halfProgress);
+      const x = radius * Math.sin(angle);
+      const y = radius * (1 - Math.cos(angle));
+      const rotation = (angle * 180) / Math.PI;
+      const opacity = edge < fadeAt ? 1 : Math.max(0, (1 - edge) / (1 - fadeAt));
 
       track.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rotation}deg)`;
       track.style.opacity = String(opacity);
