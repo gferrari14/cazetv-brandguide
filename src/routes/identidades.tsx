@@ -1,4 +1,4 @@
-import { Link, createFileRoute } from "@tanstack/react-router";
+import { Link, Outlet, createFileRoute, useRouterState } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { siteLogos } from "@/lib/site-media";
 import { identities, type IdentityCategory } from "@/data/identities";
@@ -19,8 +19,13 @@ export const Route = createFileRoute("/identidades")({
     {"property": "og:type", "content": "website"},
     {"name": "twitter:card", "content": "summary"},
   ] }),
-  component: IdentidadesPage,
+  component: IdentitiesRoute,
 });
+
+function IdentitiesRoute() {
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  return pathname.replace(/\/$/, "") === "/identidades" ? <IdentidadesPage /> : <Outlet />;
+}
 
 const COLS = 3;
 const CARD_W = 440;
@@ -163,7 +168,8 @@ function IdentidadesPage() {
       >
 
         {layout.map((l, i) => {
-          const identity = categoryItems.find((id) => id.slug === l.slug)!;
+          const identity = categoryItems.find((id) => id.slug === l.slug);
+          if (!identity) return null;
           const isVisible = visibleSlugs.has(l.slug);
           return (
             <div
@@ -179,11 +185,7 @@ function IdentidadesPage() {
                 initial={l}
                 zIndex={topSlug === l.slug ? 50 : 10 + i}
                 onFocus={() => setTopSlug(l.slug)}
-                onOpenModal={
-                  identity.category === "programas"
-                    ? (id) => setModalIdentity(id)
-                    : undefined
-                }
+                onOpenModal={(id) => setModalIdentity(id)}
               />
 
             </div>
