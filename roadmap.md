@@ -1,4 +1,5 @@
 # Atualização visual
+- [ ] Usar a apresentação dos programas nas competições, adicionar a capa de FUTEBOL INTERNACIONAL e verificar a abertura.
 - [x] Aplicar imagem de fundo contínua, preservando GIF e materiais.
 - [x] Aplicar Druk / Druk Wide / Monoglyphic e atualizar FONTES e downloads.
 - [x] Integrar mídias ao carregamento e verificar páginas e telas estreitas.

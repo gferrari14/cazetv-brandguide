@@ -163,7 +163,8 @@ function IdentidadesPage() {
       >
 
         {layout.map((l, i) => {
-          const identity = categoryItems.find((id) => id.slug === l.slug)!;
+          const identity = categoryItems.find((id) => id.slug === l.slug);
+          if (!identity) return null;
           const isVisible = visibleSlugs.has(l.slug);
           return (
             <div
@@ -179,11 +180,7 @@ function IdentidadesPage() {
                 initial={l}
                 zIndex={topSlug === l.slug ? 50 : 10 + i}
                 onFocus={() => setTopSlug(l.slug)}
-                onOpenModal={
-                  identity.category === "programas"
-                    ? (id) => setModalIdentity(id)
-                    : undefined
-                }
+                onOpenModal={(id) => setModalIdentity(id)}
               />
 
             </div>

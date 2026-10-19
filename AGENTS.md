@@ -1,4 +1,5 @@
 # Project rules
+- Program and competition identities share `IdentityModal` for both gallery cards and direct identity URLs, keeping presentation and editing behavior consistent.
 - Site media URLs, monochrome logos and symbols, official background variants and font download specifications are centralized in `src/lib/site-media.ts`; use asset pointers to keep binary media out of source control.
 - Global typography and background roles live in `src/styles.css`; page shells are transparent so the continuous background remains visible.
 - Secondary editorial headings use `AdaptiveTitle` to measure the wide face after font loading and fall back to the condensed face when it cannot fit; primary headings remain condensed. Attribute subsection and caption headings use the wide face explicitly and wrap naturally.

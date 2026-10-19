@@ -16,8 +16,10 @@ import boraCopar from "@/assets/competicoes/bora-copar.png";
 import nocheDeCopa from "@/assets/competicoes/noche-de-copa.png";
 import quemFezFezCover from "@/assets/quem-fez-fez/TELA_CONCEITO.png.asset.json";
 import seisEmUmCover from "@/assets/seis-em-um/LOGO.png.asset.json";
+import futInterCover from "@/assets/futebol-internacional/CAPA_FUT_INTER.png.asset.json";
 
 const COVERS: Record<string, string> = {
+  "futebol-internacional": futInterCover.url,
   "quem-fez-fez": quemFezFezCover.url,
   "seis-em-um": seisEmUmCover.url,
   "um-dia-com": umDiaComCover,
