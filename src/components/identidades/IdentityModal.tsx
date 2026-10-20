@@ -436,7 +436,7 @@ function SortableBlock({
   };
 
   return (
-    <div ref={setNodeRef} style={style} className="relative">
+    <div ref={setNodeRef} style={style} className="relative" data-keep-open>
       {editMode && (
         <div className="absolute -left-10 top-1/2 z-10 flex -translate-y-1/2 flex-col gap-1">
           <button
