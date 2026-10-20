@@ -279,6 +279,13 @@ export function IdentityModal({ identity, open, onClose }: Props) {
       role="dialog"
       aria-modal="true"
       aria-label={`Projeto ${identity.name}`}
+      onClick={(e) => {
+        const target = e.target as HTMLElement;
+        // Cliques vindos de portais (diálogos, menus) não pertencem a esta árvore DOM
+        if (!e.currentTarget.contains(target)) return;
+        if (target.closest("[data-keep-open], button, a, input, textarea, select, label, [role='menu'], [role='menuitem']")) return;
+        onClose();
+      }}
     >
       {/* Top bar */}
       <div className="flex items-center justify-between px-6 py-4 md:px-10">
@@ -429,7 +436,7 @@ function SortableBlock({
   };
 
   return (
-    <div ref={setNodeRef} style={style} className="relative">
+    <div ref={setNodeRef} style={style} className="relative" data-keep-open>
       {editMode && (
         <div className="absolute -left-10 top-1/2 z-10 flex -translate-y-1/2 flex-col gap-1">
           <button
@@ -781,7 +788,11 @@ function MaterialsPanel({
   return (
     <div
       className="fixed inset-0 z-[300] flex justify-end bg-black/70 backdrop-blur-sm animate-in fade-in duration-150"
-      onClick={onClose}
+      data-keep-open
+      onClick={(e) => {
+        e.stopPropagation();
+        onClose();
+      }}
     >
       <div
         className="site-surface flex h-full w-full max-w-md flex-col border-l-2 border-white/15"
