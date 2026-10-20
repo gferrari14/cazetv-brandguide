@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "@tanstack/react-router";
 import { siteBackground, siteFonts } from "@/lib/site-media";
+import { supabase } from "@/integrations/supabase/client";
 
 // Coleta as URLs de todas as mídias importáveis do projeto para pré-carregar
 const srcAssetUrls = Object.values(
@@ -55,7 +57,9 @@ const pointerAssets = Object.values(import.meta.glob<{ url: string }>("/src/asse
 const assetUrls = Array.from(new Set([...srcAssetUrls, ...publicAssetUrls.filter((url) => !url.startsWith("/fonts/")), ...pointerAssets, siteBackground.url]));
 
 const MIN_DURATION = 600; // piso visual mínimo para evitar flash em loads instantâneos
-const MAX_DURATION = 3500; // evita bloquear a abertura caso alguma mídia demore ou não responda
+const MAX_DURATION = 15000; // evita bloquear a abertura caso alguma mídia demore ou não responda
+// Todas as páginas do site: código e dados são pré-carregados durante o loading
+const SITE_ROUTES = ["/", "/identidades", "/atributos", "/logo", "/cores", "/fontes", "/assets", "/background", "/gradiente", "/duvidas", "/brandguide"];
 const SESSION_KEY = "cazetv:loaded";
 
 // Baixa de fato o asset (qualquer tipo de mídia) e o coloca no cache do browser.
@@ -81,20 +85,40 @@ export function LoadingScreen() {
     if (!mounted) return;
     let cancelled = false;
     const start = performance.now();
-    const total = assetUrls.length || 1;
-    let loaded = 0;
 
-    // Atualiza o progresso real conforme cada asset termina de baixar
-    const promises = assetUrls.map((url) =>
-      preloadAsset(url).then(() => {
+    const run = async () => {
+      // Imagens das apresentações e capas salvas no banco
+      const remoteUrls: string[] = [];
+      try {
+        const [blocks, covers] = await Promise.all([
+          supabase.from("identity_blocks").select("image_url"),
+          supabase.from("identity_covers").select("image_url"),
+        ]);
+        for (const row of [...(blocks.data ?? []), ...(covers.data ?? [])]) {
+          if (row.image_url) remoteUrls.push(row.image_url);
+        }
+      } catch {
+        /* segue sem as imagens remotas */
+      }
+      const urls = Array.from(new Set([...assetUrls, ...remoteUrls]));
+      const routeTasks = SITE_ROUTES.map((to) =>
+        router.preloadRoute({ to } as never).catch(() => undefined),
+      );
+      const total = urls.length + routeTasks.length || 1;
+      let loaded = 0;
+      const tick = () => {
         if (cancelled) return;
         loaded += 1;
         setProgress(loaded / total);
-      }),
-    );
+      };
+      await Promise.all([
+        ...urls.map((url) => preloadAsset(url).then(tick)),
+        ...routeTasks.map((p) => p.then(tick)),
+      ]);
+    };
 
     Promise.race([
-      Promise.all(promises),
+      run(),
       new Promise<void>((resolve) => setTimeout(resolve, MAX_DURATION)),
     ]).then(async () => {
       if (cancelled) return;
