@@ -6,7 +6,7 @@ export interface Identity {
   category: IdentityCategory;
 }
 
-const slugify = (name: string) =>
+export const slugify = (name: string) =>
   name
     .toLowerCase()
     .normalize("NFD")

@@ -14,6 +14,27 @@ export type Database = {
   }
   public: {
     Tables: {
+      custom_identities: {
+        Row: {
+          category: string
+          created_at: string
+          name: string
+          slug: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          name: string
+          slug: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          name?: string
+          slug?: string
+        }
+        Relationships: []
+      }
       identity_blocks: {
         Row: {
           created_at: string

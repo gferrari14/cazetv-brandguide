@@ -1,4 +1,5 @@
 # Atualização visual
+- [x] Adicionar criação persistente de identidades em Programas e Competições e verificar apresentação e links diretos.
 - [x] Usar a apresentação dos programas nas competições, adicionar a capa de FUTEBOL INTERNACIONAL e verificar a abertura.
 - [x] Aplicar imagem de fundo contínua, preservando GIF e materiais.
 - [x] Aplicar Druk / Druk Wide / Monoglyphic e atualizar FONTES e downloads.
