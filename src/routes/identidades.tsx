@@ -1,7 +1,9 @@
 import { Link, Outlet, createFileRoute, useRouterState } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { siteLogos } from "@/lib/site-media";
-import { identities, type IdentityCategory } from "@/data/identities";
+import { type Identity, type IdentityCategory } from "@/data/identities";
+import { listIdentityCatalog } from "@/lib/identity-catalog.functions";
+import { AddIdentityDialog } from "@/components/identidades/AddIdentityDialog";
 import { IdentityCard } from "@/components/identidades/IdentityCard";
 import { IdentitiesSidebar } from "@/components/identidades/IdentitiesSidebar";
 import { IdentityModal } from "@/components/identidades/IdentityModal";
@@ -12,6 +14,7 @@ import { listCovers, onCoversChanged } from "@/lib/identity-covers";
 
 
 export const Route = createFileRoute("/identidades")({
+  loader: () => listIdentityCatalog(),
   head: () => ({ meta: [
     {"title": "Identidades — CazéTV Brandguide"},
     {"name": "description", "content": "Identidades visuais dos programas e competições da CazéTV."},
@@ -37,6 +40,9 @@ const TOP_PAD = 100;
 const PARALLAX_STRENGTH = 50; // px máximo de deslocamento dos cards seguindo o cursor
 
 function IdentidadesPage() {
+  const loadedCatalog = Route.useLoaderData();
+  const [catalog, setCatalog] = useState(loadedCatalog);
+  useEffect(() => setCatalog(loadedCatalog), [loadedCatalog]);
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<IdentityCategory>("programas");
   const [topSlug, setTopSlug] = useState<string | null>(null);
@@ -53,8 +59,8 @@ function IdentidadesPage() {
 
 
   const categoryItems = useMemo(
-    () => identities.filter((i) => i.category === category),
-    [category],
+    () => catalog.filter((i) => i.category === category),
+    [category, catalog],
   );
 
   const filtered = useMemo(
@@ -123,6 +129,15 @@ function IdentidadesPage() {
           <img src={siteLogos.white} alt="CazéTV" className="h-10 w-auto md:h-12" />
         </Link>
       </header>
+
+      <div className="fixed right-3 top-4 z-40 md:right-4">
+        <AddIdentityDialog category={category} catalog={catalog} onCreated={(identity: Identity) => {
+          setCatalog((current) => [...current, identity]);
+          setCategory(identity.category);
+          setQuery("");
+          setModalIdentity(identity);
+        }} />
+      </div>
 
       {/* Switch Programas/Competições — canto inferior esquerdo, alinhado à busca */}
       <div className="fixed bottom-20 left-3 z-40 md:left-4">

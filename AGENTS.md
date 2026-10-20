@@ -1,4 +1,5 @@
 # Project rules
+- The identity catalog merges bundled identities with persisted custom identities through one shared catalog boundary; gallery and direct URLs must both resolve that catalog so newly created projects remain accessible after refresh.
 - Program and competition identities share `IdentityModal` for both gallery cards and direct identity URLs, keeping presentation and editing behavior consistent.
 - Site media URLs, monochrome logos and symbols, official background variants and font download specifications are centralized in `src/lib/site-media.ts`; use asset pointers to keep binary media out of source control.
 - Global typography and background roles live in `src/styles.css`; page shells are transparent so the continuous background remains visible.

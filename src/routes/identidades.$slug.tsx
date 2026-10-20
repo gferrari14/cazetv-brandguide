@@ -1,10 +1,11 @@
 import { createFileRoute, notFound, useNavigate } from "@tanstack/react-router";
 import { IdentityModal } from "@/components/identidades/IdentityModal";
-import { identities } from "@/data/identities";
+import { listIdentityCatalog } from "@/lib/identity-catalog.functions";
 
 export const Route = createFileRoute("/identidades/$slug")({
-  loader: ({ params }) => {
-    const identity = identities.find((i) => i.slug === params.slug);
+  loader: async ({ params }) => {
+    const catalog = await listIdentityCatalog();
+    const identity = catalog.find((i) => i.slug === params.slug);
     if (!identity) throw notFound();
     return { identity };
   },
