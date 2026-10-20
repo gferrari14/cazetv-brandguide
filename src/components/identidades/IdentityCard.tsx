@@ -43,11 +43,12 @@ interface Props {
   zIndex: number;
   onFocus: () => void;
   onOpenModal?: (identity: Identity) => void;
+  coverUrl?: string;
 }
 
 const DRAG_THRESHOLD = 4;
 
-export function IdentityCard({ identity, initial, zIndex, onFocus, onOpenModal }: Props) {
+export function IdentityCard({ identity, initial, zIndex, onFocus, onOpenModal, coverUrl }: Props) {
 
   const navigate = useNavigate();
   const [pos, setPos] = useState({ x: initial.x, y: initial.y });
@@ -136,9 +137,9 @@ export function IdentityCard({ identity, initial, zIndex, onFocus, onOpenModal }
         ].join(" ")}
         style={{ aspectRatio: "16 / 9" }}
       >
-        {COVERS[identity.slug] ? (
+        {coverUrl || COVERS[identity.slug] ? (
           <img
-            src={COVERS[identity.slug]}
+            src={coverUrl || COVERS[identity.slug]}
             alt={identity.name}
             draggable={false}
             className="absolute inset-0 h-full w-full object-cover"
