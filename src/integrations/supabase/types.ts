@@ -53,6 +53,24 @@ export type Database = {
         }
         Relationships: []
       }
+      identity_covers: {
+        Row: {
+          identity_slug: string
+          image_url: string
+          updated_at: string
+        }
+        Insert: {
+          identity_slug: string
+          image_url: string
+          updated_at?: string
+        }
+        Update: {
+          identity_slug?: string
+          image_url?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       identity_materials: {
         Row: {
           content_type: string | null
