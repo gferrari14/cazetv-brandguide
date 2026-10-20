@@ -72,6 +72,7 @@ function preloadAsset(src: string): Promise<void> {
 }
 
 export function LoadingScreen() {
+  const router = useRouter();
   const [progress, setProgress] = useState(0);
   const [leaving, setLeaving] = useState(false);
   // mount apenas no cliente para evitar mismatch de SSR
@@ -145,7 +146,7 @@ export function LoadingScreen() {
     return () => {
       cancelled = true;
     };
-  }, [mounted]);
+  }, [mounted, router]);
 
   if (!mounted) return null;
 
@@ -172,7 +173,7 @@ export function LoadingScreen() {
 
       {/* Título centralizado */}
       <span
-        className="font-display text-3xl font-bold uppercase text-primary-foreground animate-pulse-slow"
+        className="font-display-wide text-3xl font-bold uppercase text-primary-foreground animate-pulse-slow"
       >
         BRANDING CAZÉTV
       </span>
