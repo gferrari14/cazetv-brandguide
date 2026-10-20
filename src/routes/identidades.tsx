@@ -7,6 +7,7 @@ import { IdentitiesSidebar } from "@/components/identidades/IdentitiesSidebar";
 import { IdentityModal } from "@/components/identidades/IdentityModal";
 import { SearchBar } from "@/components/identidades/SearchBar";
 import { RevealFooter } from "@/components/shared/RevealFooter";
+import { listCovers, onCoversChanged } from "@/lib/identity-covers";
 
 
 
@@ -42,6 +43,12 @@ function IdentidadesPage() {
   const [modalIdentity, setModalIdentity] = useState<
     import("@/data/identities").Identity | null
   >(null);
+  const [covers, setCovers] = useState<Record<string, string>>({});
+  useEffect(() => {
+    const load = () => listCovers().then(setCovers).catch(() => {});
+    load();
+    return onCoversChanged(load);
+  }, []);
 
 
 
@@ -186,6 +193,7 @@ function IdentidadesPage() {
                 zIndex={topSlug === l.slug ? 50 : 10 + i}
                 onFocus={() => setTopSlug(l.slug)}
                 onOpenModal={(id) => setModalIdentity(id)}
+                coverUrl={covers[l.slug]}
               />
 
             </div>

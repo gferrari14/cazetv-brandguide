@@ -34,6 +34,7 @@ import {
   updateBlock,
   uploadSlideImage,
 } from "@/lib/identity-blocks";
+import { setCover } from "@/lib/identity-covers";
 
 interface Props {
   identity: Identity;
@@ -506,6 +507,7 @@ function SlideBlockView({
 }) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [busy, setBusy] = useState(false);
+  const [coverState, setCoverState] = useState<"idle" | "busy" | "done">("idle");
 
   const onPick = async (file?: File | null) => {
     if (!file) return;
@@ -525,9 +527,40 @@ function SlideBlockView({
     </div>
   );
 
+  const onSetCover = async () => {
+    if (!block.image_url) return;
+    setCoverState("busy");
+    try {
+      await setCover(block.identity_slug, block.image_url);
+      setCoverState("done");
+      window.setTimeout(() => setCoverState("idle"), 2000);
+    } catch {
+      setCoverState("idle");
+    }
+  };
+
   return (
-    <div className="relative">
+    <div className="group/slide relative">
       {content}
+      {block.image_url && (
+        <button
+          type="button"
+          onClick={() => void onSetCover()}
+          disabled={coverState === "busy"}
+          className={`absolute left-3 top-3 z-10 flex items-center gap-2 border border-white/30 bg-black/80 px-3 py-2 text-[10px] font-bold uppercase tracking-widest text-white backdrop-blur transition hover:bg-white hover:text-black disabled:opacity-50 ${
+            coverState === "idle" ? "opacity-0 group-hover/slide:opacity-100 focus:opacity-100" : "opacity-100"
+          }`}
+        >
+          {coverState === "busy" ? (
+            <Loader2 className="size-3 animate-spin" />
+          ) : coverState === "done" ? (
+            <Check className="size-3" />
+          ) : (
+            <ImageIcon className="size-3" />
+          )}
+          {coverState === "done" ? "Capa definida" : "Definir como capa"}
+        </button>
+      )}
       {editMode && (
         <>
           <input
