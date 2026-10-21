@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import { assertIdentityEditingEnabled } from "@/lib/identity-editing";
 
 export type IdentityBlock = {
   id: string;
@@ -31,6 +32,7 @@ export async function listBlocks(slug: string): Promise<IdentityBlock[]> {
 export async function createBlock(
   input: Partial<IdentityBlock> & { identity_slug: string; type: "slide" | "text"; position: number },
 ): Promise<IdentityBlock> {
+  assertIdentityEditingEnabled();
   const { data, error } = await db().insert(input).select().single();
   if (error) throw error;
   return data as IdentityBlock;
@@ -40,11 +42,13 @@ export async function updateBlock(
   id: string,
   patch: Partial<IdentityBlock>,
 ): Promise<void> {
+  assertIdentityEditingEnabled();
   const { error } = await db().update(patch).eq("id", id);
   if (error) throw error;
 }
 
 export async function deleteBlock(id: string): Promise<void> {
+  assertIdentityEditingEnabled();
   const { error } = await db().delete().eq("id", id);
   if (error) throw error;
 }
@@ -52,6 +56,7 @@ export async function deleteBlock(id: string): Promise<void> {
 export async function reorderBlocks(
   items: { id: string; position: number }[],
 ): Promise<void> {
+  assertIdentityEditingEnabled();
   // Sequential updates — small lists, fine in client.
   for (const it of items) {
     const { error } = await db().update({ position: it.position }).eq("id", it.id);
@@ -66,6 +71,7 @@ export async function uploadSlideImage(
   slug: string,
   file: File,
 ): Promise<string> {
+  assertIdentityEditingEnabled();
   const ext = file.name.split(".").pop() ?? "png";
   const path = `${slug}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
   const { error } = await supabase.storage.from(BUCKET).upload(path, file, {

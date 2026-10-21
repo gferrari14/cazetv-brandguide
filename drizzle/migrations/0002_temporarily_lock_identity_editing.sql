@@ -1,0 +1,17 @@
+REVOKE INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER ON public.custom_identities, public.identity_blocks, public.identity_materials, public.identity_covers FROM PUBLIC, anon, authenticated;
+GRANT SELECT ON public.custom_identities, public.identity_blocks, public.identity_materials, public.identity_covers TO anon, authenticated;
+CREATE POLICY "Temporary lock identity blocks insert" ON public.identity_blocks AS RESTRICTIVE FOR INSERT TO anon, authenticated WITH CHECK (false);
+CREATE POLICY "Temporary lock identity blocks update" ON public.identity_blocks AS RESTRICTIVE FOR UPDATE TO anon, authenticated USING (false) WITH CHECK (false);
+CREATE POLICY "Temporary lock identity blocks delete" ON public.identity_blocks AS RESTRICTIVE FOR DELETE TO anon, authenticated USING (false);
+CREATE POLICY "Temporary lock custom identities insert" ON public.custom_identities AS RESTRICTIVE FOR INSERT TO anon, authenticated WITH CHECK (false);
+CREATE POLICY "Temporary lock custom identities update" ON public.custom_identities AS RESTRICTIVE FOR UPDATE TO anon, authenticated USING (false) WITH CHECK (false);
+CREATE POLICY "Temporary lock custom identities delete" ON public.custom_identities AS RESTRICTIVE FOR DELETE TO anon, authenticated USING (false);
+CREATE POLICY "Temporary lock identity materials insert" ON public.identity_materials AS RESTRICTIVE FOR INSERT TO anon, authenticated WITH CHECK (false);
+CREATE POLICY "Temporary lock identity materials update" ON public.identity_materials AS RESTRICTIVE FOR UPDATE TO anon, authenticated USING (false) WITH CHECK (false);
+CREATE POLICY "Temporary lock identity materials delete" ON public.identity_materials AS RESTRICTIVE FOR DELETE TO anon, authenticated USING (false);
+CREATE POLICY "Temporary lock identity covers insert" ON public.identity_covers AS RESTRICTIVE FOR INSERT TO anon, authenticated WITH CHECK (false);
+CREATE POLICY "Temporary lock identity covers update" ON public.identity_covers AS RESTRICTIVE FOR UPDATE TO anon, authenticated USING (false) WITH CHECK (false);
+CREATE POLICY "Temporary lock identity covers delete" ON public.identity_covers AS RESTRICTIVE FOR DELETE TO anon, authenticated USING (false);
+CREATE POLICY "Temporary lock identity slide uploads" ON storage.objects AS RESTRICTIVE FOR INSERT TO anon, authenticated WITH CHECK (bucket_id <> 'identity-slides');
+CREATE POLICY "Temporary lock identity slide changes" ON storage.objects AS RESTRICTIVE FOR UPDATE TO anon, authenticated USING (bucket_id <> 'identity-slides') WITH CHECK (bucket_id <> 'identity-slides');
+CREATE POLICY "Temporary lock identity slide deletions" ON storage.objects AS RESTRICTIVE FOR DELETE TO anon, authenticated USING (bucket_id <> 'identity-slides');

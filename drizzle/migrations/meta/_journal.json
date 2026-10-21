@@ -15,6 +15,13 @@
       "when": 1792508408387,
       "tag": "0001_create_custom_identities",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792600642943,
+      "tag": "0002_temporarily_lock_identity_editing",
+      "breakpoints": true
     }
   ]
 }

@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import { Plus, Loader2 } from "lucide-react";
 import type { Identity, IdentityCategory } from "@/data/identities";
 import { prepareIdentity } from "@/lib/identity-catalog";
+import { IDENTITY_EDITING_ENABLED, assertIdentityEditingEnabled } from "@/lib/identity-editing";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,6 +27,7 @@ export function AddIdentityDialog({ category, catalog, onCreated }: Props) {
     setError("");
     setSaving(true);
     try {
+      assertIdentityEditingEnabled();
       const identity = prepareIdentity(name, selected, catalog);
       const { error: insertError } = await supabase.from("custom_identities").insert(identity);
       if (insertError) {
@@ -40,6 +42,8 @@ export function AddIdentityDialog({ category, catalog, onCreated }: Props) {
       setSaving(false);
     }
   }
+
+  if (!IDENTITY_EDITING_ENABLED) return null;
 
   return <>
     <Button variant="outline" className="h-10 rounded-none border-foreground/30 bg-background/80 text-[11px] uppercase" onClick={() => {
