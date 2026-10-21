@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import { assertIdentityEditingEnabled } from "@/lib/identity-editing";
 
 const EVENT = "identity-covers-changed";
 
@@ -9,6 +10,7 @@ export async function listCovers(): Promise<Record<string, string>> {
 }
 
 export async function setCover(slug: string, imageUrl: string): Promise<void> {
+  assertIdentityEditingEnabled();
   const { error } = await supabase
     .from("identity_covers")
     .upsert({ identity_slug: slug, image_url: imageUrl, updated_at: new Date().toISOString() });

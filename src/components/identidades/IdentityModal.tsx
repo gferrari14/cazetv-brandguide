@@ -35,6 +35,7 @@ import {
   uploadSlideImage,
 } from "@/lib/identity-blocks";
 import { setCover } from "@/lib/identity-covers";
+import { IDENTITY_EDITING_ENABLED } from "@/lib/identity-editing";
 
 interface Props {
   identity: Identity;
@@ -135,7 +136,8 @@ const DEFAULT_ASSETS: AssetItem[] = [
 export function IdentityModal({ identity, open, onClose }: Props) {
   const [blocks, setBlocks] = useState<IdentityBlock[]>([]);
   const [loading, setLoading] = useState(false);
-  const [editMode, setEditMode] = useState(false);
+  const [editingRequested, setEditMode] = useState(false);
+  const editMode = IDENTITY_EDITING_ENABLED && editingRequested;
   const [materials, setMaterials] = useState<IdentityMaterial[]>([]);
   const [materialsOpen, setMaterialsOpen] = useState(false);
 
@@ -310,7 +312,7 @@ export function IdentityModal({ identity, open, onClose }: Props) {
               </span>
             )}
           </button>
-          <button
+          {IDENTITY_EDITING_ENABLED && <button
             onClick={() => setEditMode((v) => !v)}
             className={`flex h-10 items-center gap-2 border-2 px-4 text-[10px] font-bold uppercase tracking-widest transition ${
               editMode
@@ -320,7 +322,7 @@ export function IdentityModal({ identity, open, onClose }: Props) {
           >
             {editMode ? <Check className="size-3.5" /> : <Pencil className="size-3.5" />}
             {editMode ? "Concluir" : "Editar"}
-          </button>
+          </button>}
           <button
             onClick={onClose}
             aria-label="Fechar"
@@ -549,7 +551,7 @@ function SlideBlockView({
   return (
     <div className="group/slide relative">
       {content}
-      {block.image_url && (
+      {IDENTITY_EDITING_ENABLED && block.image_url && (
         <button
           type="button"
           onClick={() => void onSetCover()}
@@ -899,7 +901,7 @@ function MaterialSection({
         <h3 className="text-[11px] font-bold uppercase tracking-[0.3em] text-muted-foreground">
           {title} {items.length > 0 && <span className="text-muted-foreground">· {items.length}</span>}
         </h3>
-        {useFolders && (
+        {IDENTITY_EDITING_ENABLED && useFolders && (
           creating ? (
             <div className="flex items-center gap-1">
               <input
@@ -996,7 +998,7 @@ function FolderGroup({
   const dragCounter = useRef(0);
 
   const processFiles = async (files: FileList | null) => {
-    if (!files || files.length === 0) return;
+    if (!IDENTITY_EDITING_ENABLED || !files || files.length === 0) return;
     const list = Array.from(files);
     setTotal(list.length);
     setUploading(0);
@@ -1025,6 +1027,7 @@ function FolderGroup({
 
   const onDragEnter = (e: React.DragEvent) => {
     e.preventDefault();
+    if (!IDENTITY_EDITING_ENABLED) return;
     dragCounter.current += 1;
     if (dragCounter.current === 1) setIsDragging(true);
   };
@@ -1038,6 +1041,7 @@ function FolderGroup({
   };
   const onDrop = async (e: React.DragEvent) => {
     e.preventDefault();
+    if (!IDENTITY_EDITING_ENABLED) return;
     dragCounter.current = 0;
     setIsDragging(false);
     const materialId = e.dataTransfer.getData("application/x-material-id");
@@ -1068,7 +1072,7 @@ function FolderGroup({
             📁 {label}{" "}
             {items.length > 0 && <span className="text-muted-foreground">· {items.length}</span>}
           </p>
-          <div className="flex items-center gap-1">
+          {IDENTITY_EDITING_ENABLED && <div className="flex items-center gap-1">
             <button
               type="button"
               onClick={() => inputRef.current?.click()}
@@ -1088,10 +1092,10 @@ function FolderGroup({
                 <Trash2 className="size-3" />
               </button>
             )}
-          </div>
+          </div>}
         </div>
       )}
-      {!useFolders && (
+      {IDENTITY_EDITING_ENABLED && !useFolders && (
         <div className="mb-2 flex justify-end">
           <button
             type="button"
@@ -1104,14 +1108,14 @@ function FolderGroup({
           </button>
         </div>
       )}
-      <input
+      {IDENTITY_EDITING_ENABLED && <input
         ref={inputRef}
         type="file"
         multiple
         accept={accept}
         className="hidden"
         onChange={(e) => void processFiles(e.target.files)}
-      />
+      />}
       <div
         onDragEnter={onDragEnter}
         onDragLeave={onDragLeave}
@@ -1125,19 +1129,20 @@ function FolderGroup({
       >
         {items.length === 0 && !busy ? (
           <p className="px-4 py-6 text-center text-[10px] uppercase tracking-widest text-muted-foreground">
-            Arraste arquivos aqui ou clique em "Enviar"
+            {IDENTITY_EDITING_ENABLED ? 'Arraste arquivos aqui ou clique em "Enviar"' : "Nenhum material"}
           </p>
         ) : (
           <ul className="flex flex-col">
             {items.map((m) => (
               <li
                 key={m.id}
-                draggable
+                draggable={IDENTITY_EDITING_ENABLED}
                 onDragStart={(e) => {
+                  if (!IDENTITY_EDITING_ENABLED) { e.preventDefault(); return; }
                   e.dataTransfer.setData("application/x-material-id", m.id);
                   e.dataTransfer.effectAllowed = "move";
                 }}
-                className="flex cursor-grab items-center gap-2 border-b border-white/10 bg-white/[0.02] px-3 py-2 last:border-b-0 active:cursor-grabbing"
+                className={`flex items-center gap-2 border-b border-white/10 bg-white/[0.02] px-3 py-2 last:border-b-0 ${IDENTITY_EDITING_ENABLED ? "cursor-grab active:cursor-grabbing" : ""}`}
               >
                 <a
                   href={m.file_url}
@@ -1151,7 +1156,7 @@ function FolderGroup({
                 <span className="text-[9px] text-muted-foreground">
                   {(m.size / 1024).toFixed(0)} KB
                 </span>
-                <button
+                {IDENTITY_EDITING_ENABLED && <button
                   onClick={async () => {
                     if (!confirm(`Excluir ${m.filename}?`)) return;
                     await deleteMaterial(m);
@@ -1161,7 +1166,7 @@ function FolderGroup({
                   aria-label="Excluir"
                 >
                   <Trash2 className="size-3.5" />
-                </button>
+                </button>}
               </li>
             ))}
           </ul>

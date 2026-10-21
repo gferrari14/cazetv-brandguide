@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import { assertIdentityEditingEnabled } from "@/lib/identity-editing";
 
 export type MaterialKind = "logo" | "asset" | "fonte";
 
@@ -42,6 +43,7 @@ export async function uploadMaterial(
   file: File,
   folder: string = "",
 ): Promise<IdentityMaterial> {
+  assertIdentityEditingEnabled();
   const safeName = file.name.replace(/[^\w.\-]+/g, "_");
   const safeFolder = folder.replace(/[^\w\- ]+/g, "_").trim();
   const folderSeg = safeFolder ? `${safeFolder}/` : "";
@@ -79,12 +81,14 @@ export async function uploadMaterial(
 
 
 export async function updateMaterialFolder(id: string, folder: string): Promise<void> {
+  assertIdentityEditingEnabled();
   const safeFolder = folder.replace(/[^\w\- ]+/g, "_").trim();
   const { error } = await db().update({ folder: safeFolder }).eq("id", id);
   if (error) throw error;
 }
 
 export async function deleteMaterial(m: IdentityMaterial): Promise<void> {
+  assertIdentityEditingEnabled();
   await supabase.storage.from(BUCKET).remove([m.storage_path]).catch(() => {});
   const { error } = await db().delete().eq("id", m.id);
   if (error) throw error;
