@@ -1,5 +1,5 @@
 # Atualização visual
-- [ ] Bloquear temporariamente edição de identidades e arquivos, mantendo visualização e downloads, e verificar o bloqueio.
+- [x] Bloquear temporariamente edição de identidades e arquivos, mantendo visualização e downloads, e verificar o bloqueio.
 - [x] Adicionar criação persistente de identidades em Programas e Competições e verificar apresentação e links diretos.
 - [x] Usar a apresentação dos programas nas competições, adicionar a capa de FUTEBOL INTERNACIONAL e verificar a abertura.
 - [x] Aplicar imagem de fundo contínua, preservando GIF e materiais.
