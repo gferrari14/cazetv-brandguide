@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { IDENTITY_EDITING_ENABLED, assertIdentityEditingEnabled } from "./identity-editing";
 
-test("identity editing is temporarily blocked as requested by the owner", () => {
-  assert.equal(IDENTITY_EDITING_ENABLED, false);
-  assert.throws(assertIdentityEditingEnabled, /TEMPORARIAMENTE BLOQUEADA/);
+test("identity editing is enabled as explicitly requested by the owner", () => {
+  assert.equal(IDENTITY_EDITING_ENABLED, true);
+  assert.doesNotThrow(assertIdentityEditingEnabled);
 });
