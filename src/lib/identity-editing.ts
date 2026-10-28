@@ -1,5 +1,5 @@
-// Re-enabled on the site owner's explicit request.
-export const IDENTITY_EDITING_ENABLED: boolean = true;
+// Temporarily locked by the site owner; re-enable only on explicit request.
+export const IDENTITY_EDITING_ENABLED: boolean = false;
 
 export function assertIdentityEditingEnabled(): void {
   if (!IDENTITY_EDITING_ENABLED) {

@@ -43,6 +43,13 @@
       "when": 1793195323209,
       "tag": "0005_reenable_identity_editing_oct28",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1793195938470,
+      "tag": "0006_lock_identity_editing_oct28",
+      "breakpoints": true
     }
   ]
 }
