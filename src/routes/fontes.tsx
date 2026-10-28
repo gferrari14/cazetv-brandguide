@@ -24,7 +24,7 @@ function FontesPage() {
       <PageHeader title="TIPOGRAFIA" description="IMPACTO NOS TÍTULOS. PERSONALIDADE EM CADA DETALHE. DRUK E MONOGLYPHIC FORMAM O SISTEMA TIPOGRÁFICO DA CAZÉTV."
         action={<DownloadAllButton zipName="cazetv-fontes.zip" label="DOWNLOAD DE TODAS AS FONTES" files={siteFonts.map((font) => ({ url: font.asset.url, path: font.path }))} />} />
       {siteFonts.map((font) => (
-        <SectionBlock key={font.name} title={font.name} eyebrow={font.role}
+        <SectionBlock key={font.name} title={font.name} titleClassName={font.className} eyebrow={font.role}
           description={font.family === "Druk" ? "VERSÃO CONDENSADA PARA TÍTULOS PRINCIPAIS, NOMES DE PÁGINAS E ATRIBUTOS, FRASES LONGAS E ÁREAS ESTREITAS. PESO BOLD · 700."
             : font.family === "Druk Wide" ? "VERSÃO EXPANDIDA PARA TÍTULOS SECUNDÁRIOS CURTOS, EM ÁREAS COM ESPAÇO HORIZONTAL SUFICIENTE. PESO BOLD · 700."
             : "FONTE VARIÁVEL PARA TEXTOS CORRIDOS, NAVEGAÇÃO, BOTÕES, CAMPOS, LEGENDAS E CRÉDITOS. PESOS DE 100 A 900; CORPO EM REGULAR · 400."}>
