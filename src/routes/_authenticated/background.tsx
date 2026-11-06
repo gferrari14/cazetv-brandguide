@@ -5,7 +5,7 @@ import { SectionBlock } from "@/components/brandguide/SectionBlock";
 import { brandBackgrounds } from "@/lib/site-media";
 import { DownloadButton } from "@/components/brandguide/DownloadButton";
 
-export const Route = createFileRoute("/background")({
+export const Route = createFileRoute("/_authenticated/background")({
   component: BackgroundPage,
   head: () => ({
     meta: [

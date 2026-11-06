@@ -14,7 +14,7 @@ import { listCovers, onCoversChanged } from "@/lib/identity-covers";
 
 
 
-export const Route = createFileRoute("/identidades")({
+export const Route = createFileRoute("/_authenticated/identidades")({
   loader: () => listIdentityCatalog(),
   head: () => ({ meta: [
     {"title": "Identidades — CazéTV Brandguide"},

@@ -10,7 +10,7 @@ const pageNav: readonly BrandNavItem[] = [
   { path: "/duvidas", label: "DÚVIDAS" },
 ];
 
-export const Route = createFileRoute("/duvidas")({
+export const Route = createFileRoute("/_authenticated/duvidas")({
   head: () => ({
     meta: [
       { title: "Dúvidas — CazéTV Brandguide" },

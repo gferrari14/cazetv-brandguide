@@ -12,7 +12,7 @@ const exemplos = [
   { src: exemplo3, alt: "Post CazéTV — Desfalque no Clássico, Lucas Paquetá" },
 ];
 
-export const Route = createFileRoute("/gradiente")({
+export const Route = createFileRoute("/_authenticated/gradiente")({
   head: () => ({ meta: [
     {"title": "Gradiente — CazéTV Brandguide"},
     {"name": "description", "content": "Gradiente proprietário da CazéTV e exemplos de aplicação."},

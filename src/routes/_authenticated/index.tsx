@@ -5,7 +5,7 @@ import gradientLine from "@/assets/Rectangle_80.png.asset.json";
 import homeBg from "@/assets/home-bg.gif.asset.json";
 import { CircularCarousel } from "@/components/shared/CircularCarousel";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/_authenticated/")({
   head: () => ({
     meta: [
       { title: "Branding CazéTV" },

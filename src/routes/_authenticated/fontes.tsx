@@ -6,7 +6,7 @@ import { DownloadButton } from "@/components/brandguide/DownloadButton";
 import { DownloadAllButton } from "@/components/brandguide/DownloadAllButton";
 import { siteFonts } from "@/lib/site-media";
 
-export const Route = createFileRoute("/fontes")({
+export const Route = createFileRoute("/_authenticated/fontes")({
   head: () => ({ meta: [
     { title: "Fontes — CazéTV Brandguide" },
     { name: "description", content: "Druk, Druk Wide e Monoglyphic: tipografia oficial, regras de uso e downloads da CazéTV." },
