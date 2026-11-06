@@ -1,7 +1,6 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useState } from "react";
 import { lovable } from "@/integrations/lovable/index";
-import { siteLogos } from "@/lib/site-media";
 import { ALLOWED_EMAIL_DOMAINS, safeRedirectPath } from "@/lib/site-access";
 import { getSiteAccess, signOutOfSite } from "@/lib/site-session";
 
@@ -77,7 +76,7 @@ function AuthPage() {
           <div className="space-y-2">
             <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">ACESSO RESTRITO</p>
             <p className="text-[13px] uppercase leading-relaxed text-foreground">
-              ENTRE COM A SUA CONTA GOOGLE DA EMPRESA (@{domain.toUpperCase()}) PARA ACESSAR O GUIA DE MARCA.
+              FAÇA LOGIN COM A SUA CONTA GOOGLE DA EMPRESA PARA ACESSAR A ÁREA DE BRANDING DA CAZÉTV.
             </p>
           </div>
 
@@ -93,8 +92,6 @@ function AuthPage() {
           )}
         </div>
       </section>
-
-      <img src={siteLogos.white} alt="CazéTV" className="absolute bottom-3 right-3 h-10 w-auto md:bottom-4 md:right-4 md:h-12" />
     </main>
   );
 }
