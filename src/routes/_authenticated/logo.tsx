@@ -17,7 +17,7 @@ const nominativaWhite = siteLogos.white;
 const nominativaSimboloBlack = siteSymbols.black;
 const nominativaSimboloWhite = siteSymbols.white;
 
-export const Route = createFileRoute("/logo")({
+export const Route = createFileRoute("/_authenticated/logo")({
   head: () => ({ meta: [
     {"title": "Logo — CazéTV Brandguide"},
     {"name": "description", "content": "Versões oficiais, símbolos e regras de aplicação do logotipo CazéTV."},

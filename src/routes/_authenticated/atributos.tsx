@@ -11,7 +11,7 @@ import autenticidade2 from "@/assets/autenticidade-2.gif.asset.json";
 import rebeldia1 from "@/assets/rebeldia-1.jpg.asset.json";
 import rebeldia2 from "@/assets/rebeldia-2.gif.asset.json";
 
-export const Route = createFileRoute("/atributos")({
+export const Route = createFileRoute("/_authenticated/atributos")({
   component: AtributosPage,
   head: () => ({
     meta: [

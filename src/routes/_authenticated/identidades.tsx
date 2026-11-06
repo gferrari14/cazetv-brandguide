@@ -2,7 +2,7 @@ import { Link, Outlet, createFileRoute, useRouterState } from "@tanstack/react-r
 import { useEffect, useMemo, useRef, useState } from "react";
 import { siteLogos } from "@/lib/site-media";
 import { type Identity, type IdentityCategory } from "@/data/identities";
-import { listIdentityCatalog } from "@/lib/identity-catalog.functions";
+import { listIdentityCatalog } from "@/lib/identity-catalog-source";
 import { shuffle } from "@/lib/shuffle";
 import { AddIdentityDialog } from "@/components/identidades/AddIdentityDialog";
 import { IdentityCard } from "@/components/identidades/IdentityCard";
@@ -14,7 +14,7 @@ import { listCovers, onCoversChanged } from "@/lib/identity-covers";
 
 
 
-export const Route = createFileRoute("/identidades")({
+export const Route = createFileRoute("/_authenticated/identidades")({
   loader: () => listIdentityCatalog(),
   head: () => ({ meta: [
     {"title": "Identidades — CazéTV Brandguide"},

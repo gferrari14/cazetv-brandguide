@@ -5,7 +5,7 @@ import { BrandLayout } from "@/components/brandguide/BrandLayout";
 import { PageHeader } from "@/components/brandguide/PageHeader";
 import { SectionBlock } from "@/components/brandguide/SectionBlock";
 
-export const Route = createFileRoute("/cores")({
+export const Route = createFileRoute("/_authenticated/cores")({
   head: () => ({ meta: [
     {"title": "Cores — CazéTV Brandguide"},
     {"name": "description", "content": "Paleta oficial e combinações de cores da marca CazéTV."},

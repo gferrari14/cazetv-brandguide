@@ -1,6 +1,6 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/brandguide")({
+export const Route = createFileRoute("/_authenticated/brandguide")({
   head: () => ({ meta: [
     {"title": "Brandguide — CazéTV Brandguide"},
     {"name": "description", "content": "Guia oficial de identidade visual da CazéTV."},

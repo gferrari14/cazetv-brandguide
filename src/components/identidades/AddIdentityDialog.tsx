@@ -2,7 +2,7 @@ import { useState, type FormEvent } from "react";
 import { Plus, Loader2 } from "lucide-react";
 import type { Identity, IdentityCategory } from "@/data/identities";
 import { prepareIdentity } from "@/lib/identity-catalog";
-import { IDENTITY_EDITING_ENABLED, assertIdentityEditingEnabled } from "@/lib/identity-editing";
+import { assertIdentityEditingEnabled, useIdentityEditing } from "@/lib/identity-editing";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,6 +15,7 @@ interface Props {
 }
 
 export function AddIdentityDialog({ category, catalog, onCreated }: Props) {
+  const canEdit = useIdentityEditing();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [selected, setSelected] = useState(category);
@@ -43,7 +44,7 @@ export function AddIdentityDialog({ category, catalog, onCreated }: Props) {
     }
   }
 
-  if (!IDENTITY_EDITING_ENABLED) return null;
+  if (!canEdit) return null;
 
   return <>
     <Button variant="outline" className="h-10 rounded-none border-foreground/30 bg-background/80 text-[11px] uppercase" onClick={() => {

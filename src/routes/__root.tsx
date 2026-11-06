@@ -1,6 +1,7 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { Outlet, Link, createRootRoute, HeadContent, Scripts, useRouter } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { CustomCursor } from "@/components/identidades/CustomCursor";
-import { LoadingScreen } from "@/components/shared/LoadingScreen";
+import { supabase } from "@/integrations/supabase/client";
 import { siteBackground, siteFonts } from "@/lib/site-media";
 
 import appCss from "../styles.css?url";
@@ -75,9 +76,16 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
+  const router = useRouter();
+  useEffect(() => {
+    const { data } = supabase.auth.onAuthStateChange((event) => {
+      if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
+      void router.invalidate();
+    });
+    return () => data.subscription.unsubscribe();
+  }, [router]);
   return (
     <>
-      <LoadingScreen />
       <CustomCursor />
       <Outlet />
     </>

@@ -1,5 +1,6 @@
 # Project rules
-- Identity editing is gated through a shared client capability and enforced independently by database grants and restrictive storage/table policies; UI hiding alone must never authorize writes.
+- The whole site sits behind the client-only `_authenticated` gate: Google sign-in, allowed company domains checked in `src/lib/site-access.ts` and independently by `public.is_site_member()` in RLS; content reads are never granted to anon.
+- Identity editing is admin-only: the gate sets a shared client capability from `has_role(admin)` (roles in `public.user_roles`, granted by an `auth.users` trigger for an email allowlist), and RLS/storage policies enforce the same role; UI hiding alone must never authorize writes.
 - The identity catalog merges bundled identities with persisted custom identities through one shared catalog boundary; gallery and direct URLs must both resolve that catalog so newly created projects remain accessible after refresh.
 - Program and competition identities share `IdentityModal` for both gallery cards and direct identity URLs, keeping presentation and editing behavior consistent.
 - Site media URLs, monochrome logos and symbols, official background variants and font download specifications are centralized in `src/lib/site-media.ts`; use asset pointers to keep binary media out of source control.
