@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { siteLogos } from "@/lib/site-media";
 import { type Identity, type IdentityCategory } from "@/data/identities";
 import { listIdentityCatalog } from "@/lib/identity-catalog.functions";
+import { shuffle } from "@/lib/shuffle";
 import { AddIdentityDialog } from "@/components/identidades/AddIdentityDialog";
 import { IdentityCard } from "@/components/identidades/IdentityCard";
 import { IdentitiesSidebar } from "@/components/identidades/IdentitiesSidebar";
@@ -58,10 +59,19 @@ function IdentidadesPage() {
 
 
 
-  const categoryItems = useMemo(
-    () => catalog.filter((i) => i.category === category),
-    [category, catalog],
-  );
+  const [order, setOrder] = useState<Record<string, number> | null>(null);
+  useEffect(() => {
+    const map: Record<string, number> = {};
+    shuffle(loadedCatalog.map((i) => i.slug)).forEach((s, idx) => (map[s] = idx));
+    setOrder(map);
+  }, [loadedCatalog]);
+
+  const categoryItems = useMemo(() => {
+    const items = catalog.filter((i) => i.category === category);
+    if (!order) return items;
+    const rank = (s: string) => order[s] ?? Number.MAX_SAFE_INTEGER;
+    return [...items].sort((a, b) => rank(a.slug) - rank(b.slug));
+  }, [category, catalog, order]);
 
   const filtered = useMemo(
     () =>
