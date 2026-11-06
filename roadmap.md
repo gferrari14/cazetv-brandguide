@@ -24,3 +24,6 @@
 - [x] Trocar a capa de QUEM FEZ, FEZ pela TELA CONCEITO enviada (card e primeiro slide).
 - [x] Adicionar os sete slides enviados a SEIS EM UM e usar a capa no card.
 - [x] Adicionar os materiais de download de QUEM FEZ, FEZ (logos PNG e SVG, claro e escuro).
+# Login
+- [x] Tela de login com Google antes da tela inicial (somente e-mails @livemode.com).
+- [x] Edição de identidades liberada só para os 3 administradores.
