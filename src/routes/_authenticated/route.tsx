@@ -1,6 +1,5 @@
 import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
 import { LoadingScreen } from "@/components/shared/LoadingScreen";
-import { SessionBadge } from "@/components/shared/SessionBadge";
 import { getSiteAccess, signOutOfSite } from "@/lib/site-session";
 
 export const Route = createFileRoute("/_authenticated")({
@@ -24,7 +23,6 @@ function AuthenticatedLayout() {
   return (
     <>
       <LoadingScreen />
-      <SessionBadge email={access.email} isAdmin={access.isAdmin} />
       <Outlet />
     </>
   );

@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as AuthenticatedAssetsRouteImport } from './routes/_authenticated/assets'
 import { Route as AuthenticatedAtributosRouteImport } from './routes/_authenticated/atributos'
@@ -22,61 +23,65 @@ import { Route as AuthenticatedIdentidadesRouteImport } from './routes/_authenti
 import { Route as AuthenticatedLogoRouteImport } from './routes/_authenticated/logo'
 import { Route as AuthenticatedIdentidadesSlugRouteImport } from './routes/_authenticated/identidades.$slug'
 
-const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
-  id: '/_authenticated/',
-  path: '/',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedAssetsRoute = AuthenticatedAssetsRouteImport.update({
-  id: '/_authenticated/assets',
+  id: '/assets',
   path: '/assets',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedAtributosRoute = AuthenticatedAtributosRouteImport.update({
-  id: '/_authenticated/atributos',
+  id: '/atributos',
   path: '/atributos',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedBackgroundRoute = AuthenticatedBackgroundRouteImport.update({
-  id: '/_authenticated/background',
+  id: '/background',
   path: '/background',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedBrandguideRoute = AuthenticatedBrandguideRouteImport.update({
-  id: '/_authenticated/brandguide',
+  id: '/brandguide',
   path: '/brandguide',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedCoresRoute = AuthenticatedCoresRouteImport.update({
-  id: '/_authenticated/cores',
+  id: '/cores',
   path: '/cores',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedDuvidasRoute = AuthenticatedDuvidasRouteImport.update({
-  id: '/_authenticated/duvidas',
+  id: '/duvidas',
   path: '/duvidas',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedFontesRoute = AuthenticatedFontesRouteImport.update({
-  id: '/_authenticated/fontes',
+  id: '/fontes',
   path: '/fontes',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedGradienteRoute = AuthenticatedGradienteRouteImport.update({
-  id: '/_authenticated/gradiente',
+  id: '/gradiente',
   path: '/gradiente',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedIdentidadesRoute =
   AuthenticatedIdentidadesRouteImport.update({
-    id: '/_authenticated/identidades',
+    id: '/identidades',
     path: '/identidades',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedLogoRoute = AuthenticatedLogoRouteImport.update({
-  id: '/_authenticated/logo',
+  id: '/logo',
   path: '/logo',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedIdentidadesSlugRoute =
   AuthenticatedIdentidadesSlugRouteImport.update({
@@ -86,6 +91,7 @@ const AuthenticatedIdentidadesSlugRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof AuthenticatedIndexRoute
   '/assets': typeof AuthenticatedAssetsRoute
   '/atributos': typeof AuthenticatedAtributosRoute
   '/background': typeof AuthenticatedBackgroundRoute
@@ -96,7 +102,6 @@ export interface FileRoutesByFullPath {
   '/gradiente': typeof AuthenticatedGradienteRoute
   '/identidades': typeof AuthenticatedIdentidadesRouteWithChildren
   '/logo': typeof AuthenticatedLogoRoute
-  '/': typeof AuthenticatedIndexRoute
   '/identidades/$slug': typeof AuthenticatedIdentidadesSlugRoute
 }
 export interface FileRoutesByTo {
@@ -115,6 +120,7 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/_authenticated/assets': typeof AuthenticatedAssetsRoute
   '/_authenticated/atributos': typeof AuthenticatedAtributosRoute
   '/_authenticated/background': typeof AuthenticatedBackgroundRoute
@@ -131,6 +137,7 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/'
     | '/assets'
     | '/atributos'
     | '/background'
@@ -141,7 +148,6 @@ export interface FileRouteTypes {
     | '/gradiente'
     | '/identidades'
     | '/logo'
-    | '/'
     | '/identidades/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -159,6 +165,7 @@ export interface FileRouteTypes {
     | '/identidades/$slug'
   id:
     | '__root__'
+    | '/_authenticated'
     | '/_authenticated/assets'
     | '/_authenticated/atributos'
     | '/_authenticated/background'
@@ -174,97 +181,94 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  AuthenticatedAssetsRoute: typeof AuthenticatedAssetsRoute
-  AuthenticatedAtributosRoute: typeof AuthenticatedAtributosRoute
-  AuthenticatedBackgroundRoute: typeof AuthenticatedBackgroundRoute
-  AuthenticatedBrandguideRoute: typeof AuthenticatedBrandguideRoute
-  AuthenticatedCoresRoute: typeof AuthenticatedCoresRoute
-  AuthenticatedDuvidasRoute: typeof AuthenticatedDuvidasRoute
-  AuthenticatedFontesRoute: typeof AuthenticatedFontesRoute
-  AuthenticatedGradienteRoute: typeof AuthenticatedGradienteRoute
-  AuthenticatedIdentidadesRoute: typeof AuthenticatedIdentidadesRouteWithChildren
-  AuthenticatedLogoRoute: typeof AuthenticatedLogoRoute
-  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/': {
       id: '/_authenticated/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/assets': {
       id: '/_authenticated/assets'
       path: '/assets'
       fullPath: '/assets'
       preLoaderRoute: typeof AuthenticatedAssetsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/atributos': {
       id: '/_authenticated/atributos'
       path: '/atributos'
       fullPath: '/atributos'
       preLoaderRoute: typeof AuthenticatedAtributosRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/background': {
       id: '/_authenticated/background'
       path: '/background'
       fullPath: '/background'
       preLoaderRoute: typeof AuthenticatedBackgroundRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/brandguide': {
       id: '/_authenticated/brandguide'
       path: '/brandguide'
       fullPath: '/brandguide'
       preLoaderRoute: typeof AuthenticatedBrandguideRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/cores': {
       id: '/_authenticated/cores'
       path: '/cores'
       fullPath: '/cores'
       preLoaderRoute: typeof AuthenticatedCoresRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/duvidas': {
       id: '/_authenticated/duvidas'
       path: '/duvidas'
       fullPath: '/duvidas'
       preLoaderRoute: typeof AuthenticatedDuvidasRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/fontes': {
       id: '/_authenticated/fontes'
       path: '/fontes'
       fullPath: '/fontes'
       preLoaderRoute: typeof AuthenticatedFontesRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/gradiente': {
       id: '/_authenticated/gradiente'
       path: '/gradiente'
       fullPath: '/gradiente'
       preLoaderRoute: typeof AuthenticatedGradienteRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/identidades': {
       id: '/_authenticated/identidades'
       path: '/identidades'
       fullPath: '/identidades'
       preLoaderRoute: typeof AuthenticatedIdentidadesRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/logo': {
       id: '/_authenticated/logo'
       path: '/logo'
       fullPath: '/logo'
       preLoaderRoute: typeof AuthenticatedLogoRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/identidades/$slug': {
       id: '/_authenticated/identidades/$slug'
@@ -290,7 +294,21 @@ const AuthenticatedIdentidadesRouteWithChildren =
     AuthenticatedIdentidadesRouteChildren,
   )
 
-const rootRouteChildren: RootRouteChildren = {
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAssetsRoute: typeof AuthenticatedAssetsRoute
+  AuthenticatedAtributosRoute: typeof AuthenticatedAtributosRoute
+  AuthenticatedBackgroundRoute: typeof AuthenticatedBackgroundRoute
+  AuthenticatedBrandguideRoute: typeof AuthenticatedBrandguideRoute
+  AuthenticatedCoresRoute: typeof AuthenticatedCoresRoute
+  AuthenticatedDuvidasRoute: typeof AuthenticatedDuvidasRoute
+  AuthenticatedFontesRoute: typeof AuthenticatedFontesRoute
+  AuthenticatedGradienteRoute: typeof AuthenticatedGradienteRoute
+  AuthenticatedIdentidadesRoute: typeof AuthenticatedIdentidadesRouteWithChildren
+  AuthenticatedLogoRoute: typeof AuthenticatedLogoRoute
+  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAssetsRoute: AuthenticatedAssetsRoute,
   AuthenticatedAtributosRoute: AuthenticatedAtributosRoute,
   AuthenticatedBackgroundRoute: AuthenticatedBackgroundRoute,
@@ -302,6 +320,13 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedIdentidadesRoute: AuthenticatedIdentidadesRouteWithChildren,
   AuthenticatedLogoRoute: AuthenticatedLogoRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
+const rootRouteChildren: RootRouteChildren = {
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
