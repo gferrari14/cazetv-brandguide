@@ -57,6 +57,13 @@
       "when": 1793985922094,
       "tag": "0007_reenable_identity_editing_nov06",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1793987143076,
+      "tag": "0008_lock_identity_editing_nov06",
+      "breakpoints": true
     }
   ]
 }
