@@ -71,19 +71,13 @@ function AuthPage() {
 
   return (
     <main className="site-surface relative flex min-h-screen w-screen flex-col overflow-hidden text-foreground">
-      <div className="px-2 pt-2 md:px-3">
-        <h1 className="font-display text-[22vw] font-bold uppercase leading-[0.82] md:text-[17vw]">BRANDING<br />CAZÉTV</h1>
-      </div>
-
-      <section className="flex flex-1 items-end px-3 pb-24 md:px-4 md:pb-28">
+      <h1 className="sr-only">Entrar — Branding CazéTV</h1>
+      <section className="flex flex-1 items-center justify-center px-3 py-24 md:px-4">
         <div className="w-full max-w-sm space-y-5">
           <div className="space-y-2">
             <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">ACESSO RESTRITO</p>
             <p className="text-[13px] uppercase leading-relaxed text-foreground">
               ENTRE COM A SUA CONTA GOOGLE DA EMPRESA (@{domain.toUpperCase()}) PARA ACESSAR O GUIA DE MARCA.
-            </p>
-            <p className="text-[11px] uppercase leading-relaxed text-muted-foreground">
-              ADMINISTRADORES USAM O MESMO BOTÃO — A EDIÇÃO É LIBERADA AUTOMATICAMENTE PARA OS E-MAILS AUTORIZADOS.
             </p>
           </div>
 
