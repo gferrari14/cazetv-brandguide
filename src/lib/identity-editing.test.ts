@@ -1,8 +1,16 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { IDENTITY_EDITING_ENABLED, assertIdentityEditingEnabled } from "./identity-editing";
+import { assertIdentityEditingEnabled, canEditIdentities, setIdentityEditingAllowed } from "./identity-editing";
 
-test("identity editing is locked as requested by the owner", () => {
-  assert.equal(IDENTITY_EDITING_ENABLED, false);
+test("non-admin visitors cannot edit identities", () => {
+  setIdentityEditingAllowed(false);
+  assert.equal(canEditIdentities(), false);
   assert.throws(assertIdentityEditingEnabled);
+});
+
+test("administrators can edit identities", () => {
+  setIdentityEditingAllowed(true);
+  assert.equal(canEditIdentities(), true);
+  assert.doesNotThrow(assertIdentityEditingEnabled);
+  setIdentityEditingAllowed(false);
 });
