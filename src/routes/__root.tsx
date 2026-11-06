@@ -1,6 +1,7 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts, useRouter } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { CustomCursor } from "@/components/identidades/CustomCursor";
+import { AnimatedBackground } from "@/components/shared/AnimatedBackground";
 import { supabase } from "@/integrations/supabase/client";
 import { siteBackground, siteFonts } from "@/lib/site-media";
 
@@ -86,6 +87,7 @@ function RootComponent() {
   }, [router]);
   return (
     <>
+      <AnimatedBackground />
       <CustomCursor />
       <Outlet />
     </>
