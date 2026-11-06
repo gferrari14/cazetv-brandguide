@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as AuthenticatedAssetsRouteImport } from './routes/_authenticated/assets'
 import { Route as AuthenticatedAtributosRouteImport } from './routes/_authenticated/atributos'
@@ -25,6 +26,11 @@ import { Route as AuthenticatedIdentidadesSlugRouteImport } from './routes/_auth
 
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
@@ -92,6 +98,7 @@ const AuthenticatedIdentidadesSlugRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
+  '/auth': typeof AuthRoute
   '/assets': typeof AuthenticatedAssetsRoute
   '/atributos': typeof AuthenticatedAtributosRoute
   '/background': typeof AuthenticatedBackgroundRoute
@@ -105,6 +112,7 @@ export interface FileRoutesByFullPath {
   '/identidades/$slug': typeof AuthenticatedIdentidadesSlugRoute
 }
 export interface FileRoutesByTo {
+  '/auth': typeof AuthRoute
   '/assets': typeof AuthenticatedAssetsRoute
   '/atributos': typeof AuthenticatedAtributosRoute
   '/background': typeof AuthenticatedBackgroundRoute
@@ -121,6 +129,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/_authenticated/assets': typeof AuthenticatedAssetsRoute
   '/_authenticated/atributos': typeof AuthenticatedAtributosRoute
   '/_authenticated/background': typeof AuthenticatedBackgroundRoute
@@ -138,6 +147,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/assets'
     | '/atributos'
     | '/background'
@@ -151,6 +161,7 @@ export interface FileRouteTypes {
     | '/identidades/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/auth'
     | '/assets'
     | '/atributos'
     | '/background'
@@ -166,6 +177,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/_authenticated'
+    | '/auth'
     | '/_authenticated/assets'
     | '/_authenticated/atributos'
     | '/_authenticated/background'
@@ -182,6 +194,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -191,6 +204,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/': {
@@ -327,6 +347,7 @@ const AuthenticatedRouteRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
