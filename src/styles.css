@@ -324,47 +324,69 @@
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
-  background-color: var(--background);
+  background-color: rgb(20 20 20);
 }
-.site-bg-animated__image {
+.site-bg-animated__frame {
   position: absolute;
-  inset: -4%;
-  background-image: var(--site-background-image);
-  background-size: cover;
-  background-position: center;
-  animation: siteBgDrift 70s ease-in-out infinite alternate;
-  will-change: transform;
+  left: 50%;
+  top: 50%;
+  width: max(100vw, 177.78vh);
+  height: max(56.25vw, 100vh);
+  transform: translate(-50%, -50%);
 }
-.site-bg-animated__squares {
+.site-bg-shape {
   position: absolute;
-  inset: 0;
-}
-.site-bg-animated__square {
-  position: absolute;
-  background-color: oklch(1 0 0 / var(--square-alpha, 0.08));
-  opacity: 0;
-  animation-name: siteBgSquare;
+  height: auto;
+  max-width: none;
+  user-select: none;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
-  will-change: opacity;
+  animation-direction: alternate;
+  will-change: transform, opacity;
+}
+.site-bg-shape--wide {
+  left: 40%;
+  top: -20%;
+  width: 73.3%;
+  animation-name: siteBgShapeWide;
+  animation-duration: 38s;
+}
+.site-bg-shape--stairs {
+  left: -7%;
+  top: 22%;
+  width: 32.3%;
+  animation-name: siteBgShapeStairs;
+  animation-duration: 29s;
+}
+.site-bg-shape--long {
+  left: 18%;
+  top: 48%;
+  width: 81.9%;
+  animation-name: siteBgShapeLong;
+  animation-duration: 45s;
 }
 .site-bg-animated__dim {
   position: absolute;
   inset: 0;
-  background-color: var(--site-background-dimming);
+  background-color: oklch(0 0 0 / 25%);
 }
-@keyframes siteBgDrift {
-  0% { transform: translate3d(-1.5%, -1%, 0) scale(1.02); }
-  50% { transform: translate3d(1%, 1.5%, 0) scale(1.06); }
-  100% { transform: translate3d(1.5%, -1.5%, 0) scale(1.03); }
+@keyframes siteBgShapeWide {
+  0% { transform: translate3d(0, 0, 0); opacity: 1; }
+  50% { transform: translate3d(-6%, 8%, 0); opacity: 0.8; }
+  100% { transform: translate3d(-10%, 2%, 0); opacity: 1; }
 }
-@keyframes siteBgSquare {
-  0%, 100% { opacity: 0; }
-  35%, 60% { opacity: 1; }
+@keyframes siteBgShapeStairs {
+  0% { transform: translate3d(0, 0, 0); opacity: 0.9; }
+  50% { transform: translate3d(18%, -10%, 0); opacity: 1; }
+  100% { transform: translate3d(8%, 14%, 0); opacity: 0.85; }
+}
+@keyframes siteBgShapeLong {
+  0% { transform: translate3d(0, 0, 0); opacity: 1; }
+  50% { transform: translate3d(6%, -6%, 0); opacity: 0.85; }
+  100% { transform: translate3d(-5%, -2%, 0); opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .site-bg-animated__image,
-  .site-bg-animated__square { animation: none; }
+  .site-bg-shape { animation: none; }
 }
 
 .home-title { font-size: 180px; }
