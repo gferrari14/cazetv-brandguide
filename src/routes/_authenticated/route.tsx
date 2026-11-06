@@ -19,7 +19,6 @@ export const Route = createFileRoute("/_authenticated")({
 });
 
 function AuthenticatedLayout() {
-  const { access } = Route.useRouteContext();
   return (
     <>
       <LoadingScreen />
