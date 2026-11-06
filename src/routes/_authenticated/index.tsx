@@ -33,7 +33,6 @@ const links = [
 ] as const;
 
 function Entry() {
-  const { access } = Route.useRouteContext();
   const navigate = useNavigate();
   const titleRef = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
@@ -110,7 +109,7 @@ function Entry() {
           }}
           className="inline-flex w-fit items-center border-2 border-white/30 bg-transparent px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:border-white/80 hover:text-white"
         >
-          SAIR{access.isAdmin ? " · ADMIN" : ""}
+          SAIR
         </button>
       </nav>
     </div>
