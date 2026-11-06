@@ -317,6 +317,56 @@
   background-position: center;
   background-attachment: fixed;
 }
+/* Ambient motion for the shared background (sits behind every transparent page). */
+.site-bg-animated {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: var(--background);
+}
+.site-bg-animated__image {
+  position: absolute;
+  inset: -4%;
+  background-image: var(--site-background-image);
+  background-size: cover;
+  background-position: center;
+  animation: siteBgDrift 70s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.site-bg-animated__squares {
+  position: absolute;
+  inset: 0;
+}
+.site-bg-animated__square {
+  position: absolute;
+  background-color: oklch(1 0 0 / var(--square-alpha, 0.08));
+  opacity: 0;
+  animation-name: siteBgSquare;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  will-change: opacity;
+}
+.site-bg-animated__dim {
+  position: absolute;
+  inset: 0;
+  background-color: var(--site-background-dimming);
+}
+@keyframes siteBgDrift {
+  0% { transform: translate3d(-1.5%, -1%, 0) scale(1.02); }
+  50% { transform: translate3d(1%, 1.5%, 0) scale(1.06); }
+  100% { transform: translate3d(1.5%, -1.5%, 0) scale(1.03); }
+}
+@keyframes siteBgSquare {
+  0%, 100% { opacity: 0; }
+  35%, 60% { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-bg-animated__image,
+  .site-bg-animated__square { animation: none; }
+}
+
 .home-title { font-size: 180px; }
 @layer base {
   body * { letter-spacing: 0; }

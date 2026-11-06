@@ -69,7 +69,7 @@ function AuthPage() {
   };
 
   return (
-    <main className="site-surface relative flex min-h-screen w-screen flex-col overflow-hidden text-foreground">
+    <main className="relative flex min-h-screen w-screen flex-col overflow-hidden text-foreground">
       <h1 className="sr-only">Entrar — Branding CazéTV</h1>
       <section className="flex flex-1 items-center justify-center px-3 py-24 md:px-4">
         <div className="w-full max-w-sm space-y-5">
