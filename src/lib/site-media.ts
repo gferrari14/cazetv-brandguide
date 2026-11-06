@@ -1,4 +1,7 @@
 import background from "@/assets/site/background.png.asset.json";
+import bgShapeStairs from "@/assets/site/bg-shape-stairs.svg.asset.json";
+import bgShapeWide from "@/assets/site/bg-shape-wide.svg.asset.json";
+import bgShapeLong from "@/assets/site/bg-shape-long.svg.asset.json";
 import druk from "@/assets/site/Druk-Bold.otf.asset.json";
 import drukWide from "@/assets/site/DrukWide-Bold.otf.asset.json";
 import monoglyphic from "@/assets/site/Monoglyphic-VF.ttf.asset.json";
@@ -12,6 +15,12 @@ import backgroundHorizontal from "@/assets/site/brand-background-horizontal.png.
 import backgroundVertical from "@/assets/site/brand-background-vertical.png.asset.json";
 
 export const siteBackground = background;
+/** Official background shapes (vector), animated individually by AnimatedBackground. */
+export const siteBackgroundShapes = {
+  stairs: bgShapeStairs.url,
+  wide: bgShapeWide.url,
+  long: bgShapeLong.url,
+} as const;
 export const siteLogos = { black: logoBlack.url, white: logoWhite.url } as const;
 export const siteMainLogos = { black: logoMainBlack.url, white: logoMainWhite.url } as const;
 export const siteSymbols = { black: symbolBlack.url, white: symbolWhite.url } as const;
