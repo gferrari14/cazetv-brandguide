@@ -1,0 +1,16 @@
+DROP POLICY IF EXISTS "Temporary lock identity blocks insert" ON public.identity_blocks;
+DROP POLICY IF EXISTS "Temporary lock identity blocks update" ON public.identity_blocks;
+DROP POLICY IF EXISTS "Temporary lock identity blocks delete" ON public.identity_blocks;
+DROP POLICY IF EXISTS "Temporary lock custom identities insert" ON public.custom_identities;
+DROP POLICY IF EXISTS "Temporary lock custom identities update" ON public.custom_identities;
+DROP POLICY IF EXISTS "Temporary lock custom identities delete" ON public.custom_identities;
+DROP POLICY IF EXISTS "Temporary lock identity materials insert" ON public.identity_materials;
+DROP POLICY IF EXISTS "Temporary lock identity materials update" ON public.identity_materials;
+DROP POLICY IF EXISTS "Temporary lock identity materials delete" ON public.identity_materials;
+DROP POLICY IF EXISTS "Temporary lock identity covers insert" ON public.identity_covers;
+DROP POLICY IF EXISTS "Temporary lock identity covers update" ON public.identity_covers;
+DROP POLICY IF EXISTS "Temporary lock identity covers delete" ON public.identity_covers;
+DROP POLICY IF EXISTS "Temporary lock identity slide uploads" ON storage.objects;
+DROP POLICY IF EXISTS "Temporary lock identity slide changes" ON storage.objects;
+DROP POLICY IF EXISTS "Temporary lock identity slide deletions" ON storage.objects;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.custom_identities, public.identity_blocks, public.identity_materials, public.identity_covers TO anon, authenticated;
