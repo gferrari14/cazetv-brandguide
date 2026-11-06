@@ -35,7 +35,7 @@ import {
   uploadSlideImage,
 } from "@/lib/identity-blocks";
 import { setCover } from "@/lib/identity-covers";
-import { IDENTITY_EDITING_ENABLED } from "@/lib/identity-editing";
+import { useIdentityEditing } from "@/lib/identity-editing";
 
 interface Props {
   identity: Identity;
@@ -134,10 +134,11 @@ const DEFAULT_ASSETS: AssetItem[] = [
 ];
 
 export function IdentityModal({ identity, open, onClose }: Props) {
+  const canEdit = useIdentityEditing();
   const [blocks, setBlocks] = useState<IdentityBlock[]>([]);
   const [loading, setLoading] = useState(false);
   const [editingRequested, setEditMode] = useState(false);
-  const editMode = IDENTITY_EDITING_ENABLED && editingRequested;
+  const editMode = canEdit && editingRequested;
   const [materials, setMaterials] = useState<IdentityMaterial[]>([]);
   const [materialsOpen, setMaterialsOpen] = useState(false);
 
@@ -312,7 +313,7 @@ export function IdentityModal({ identity, open, onClose }: Props) {
               </span>
             )}
           </button>
-          {IDENTITY_EDITING_ENABLED && <button
+          {canEdit && <button
             onClick={() => setEditMode((v) => !v)}
             className={`flex h-10 items-center gap-2 border-2 px-4 text-[10px] font-bold uppercase tracking-widest transition ${
               editMode
@@ -514,6 +515,7 @@ function SlideBlockView({
   editMode: boolean;
   onReplace: (file: File) => void;
 }) {
+  const canEdit = useIdentityEditing();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [busy, setBusy] = useState(false);
   const [coverState, setCoverState] = useState<"idle" | "busy" | "done">("idle");
@@ -551,7 +553,7 @@ function SlideBlockView({
   return (
     <div className="group/slide relative">
       {content}
-      {IDENTITY_EDITING_ENABLED && block.image_url && (
+      {canEdit && block.image_url && (
         <button
           type="button"
           onClick={() => void onSetCover()}
@@ -863,6 +865,7 @@ function MaterialSection({
   onChanged: () => void | Promise<void>;
   useFolders?: boolean;
 }) {
+  const canEdit = useIdentityEditing();
   const [extraFolders, setExtraFolders] = useState<string[]>([]);
   const [newFolderInput, setNewFolderInput] = useState("");
   const [creating, setCreating] = useState(false);
@@ -901,7 +904,7 @@ function MaterialSection({
         <h3 className="text-[11px] font-bold uppercase tracking-[0.3em] text-muted-foreground">
           {title} {items.length > 0 && <span className="text-muted-foreground">· {items.length}</span>}
         </h3>
-        {IDENTITY_EDITING_ENABLED && useFolders && (
+        {canEdit && useFolders && (
           creating ? (
             <div className="flex items-center gap-1">
               <input
@@ -991,6 +994,7 @@ function FolderGroup({
   onChanged: () => void | Promise<void>;
   onRemoveEmpty?: () => void;
 }) {
+  const canEdit = useIdentityEditing();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [uploading, setUploading] = useState(0);
   const [total, setTotal] = useState(0);
@@ -998,7 +1002,7 @@ function FolderGroup({
   const dragCounter = useRef(0);
 
   const processFiles = async (files: FileList | null) => {
-    if (!IDENTITY_EDITING_ENABLED || !files || files.length === 0) return;
+    if (!canEdit || !files || files.length === 0) return;
     const list = Array.from(files);
     setTotal(list.length);
     setUploading(0);
@@ -1027,7 +1031,7 @@ function FolderGroup({
 
   const onDragEnter = (e: React.DragEvent) => {
     e.preventDefault();
-    if (!IDENTITY_EDITING_ENABLED) return;
+    if (!canEdit) return;
     dragCounter.current += 1;
     if (dragCounter.current === 1) setIsDragging(true);
   };
@@ -1041,7 +1045,7 @@ function FolderGroup({
   };
   const onDrop = async (e: React.DragEvent) => {
     e.preventDefault();
-    if (!IDENTITY_EDITING_ENABLED) return;
+    if (!canEdit) return;
     dragCounter.current = 0;
     setIsDragging(false);
     const materialId = e.dataTransfer.getData("application/x-material-id");
@@ -1072,7 +1076,7 @@ function FolderGroup({
             📁 {label}{" "}
             {items.length > 0 && <span className="text-muted-foreground">· {items.length}</span>}
           </p>
-          {IDENTITY_EDITING_ENABLED && <div className="flex items-center gap-1">
+          {canEdit && <div className="flex items-center gap-1">
             <button
               type="button"
               onClick={() => inputRef.current?.click()}
@@ -1095,7 +1099,7 @@ function FolderGroup({
           </div>}
         </div>
       )}
-      {IDENTITY_EDITING_ENABLED && !useFolders && (
+      {canEdit && !useFolders && (
         <div className="mb-2 flex justify-end">
           <button
             type="button"
@@ -1108,7 +1112,7 @@ function FolderGroup({
           </button>
         </div>
       )}
-      {IDENTITY_EDITING_ENABLED && <input
+      {canEdit && <input
         ref={inputRef}
         type="file"
         multiple
@@ -1129,20 +1133,20 @@ function FolderGroup({
       >
         {items.length === 0 && !busy ? (
           <p className="px-4 py-6 text-center text-[10px] uppercase tracking-widest text-muted-foreground">
-            {IDENTITY_EDITING_ENABLED ? 'Arraste arquivos aqui ou clique em "Enviar"' : "Nenhum material"}
+            {canEdit ? 'Arraste arquivos aqui ou clique em "Enviar"' : "Nenhum material"}
           </p>
         ) : (
           <ul className="flex flex-col">
             {items.map((m) => (
               <li
                 key={m.id}
-                draggable={IDENTITY_EDITING_ENABLED}
+                draggable={canEdit}
                 onDragStart={(e) => {
-                  if (!IDENTITY_EDITING_ENABLED) { e.preventDefault(); return; }
+                  if (!canEdit) { e.preventDefault(); return; }
                   e.dataTransfer.setData("application/x-material-id", m.id);
                   e.dataTransfer.effectAllowed = "move";
                 }}
-                className={`flex items-center gap-2 border-b border-white/10 bg-white/[0.02] px-3 py-2 last:border-b-0 ${IDENTITY_EDITING_ENABLED ? "cursor-grab active:cursor-grabbing" : ""}`}
+                className={`flex items-center gap-2 border-b border-white/10 bg-white/[0.02] px-3 py-2 last:border-b-0 ${canEdit ? "cursor-grab active:cursor-grabbing" : ""}`}
               >
                 <a
                   href={m.file_url}
@@ -1156,7 +1160,7 @@ function FolderGroup({
                 <span className="text-[9px] text-muted-foreground">
                   {(m.size / 1024).toFixed(0)} KB
                 </span>
-                {IDENTITY_EDITING_ENABLED && <button
+                {canEdit && <button
                   onClick={async () => {
                     if (!confirm(`Excluir ${m.filename}?`)) return;
                     await deleteMaterial(m);
