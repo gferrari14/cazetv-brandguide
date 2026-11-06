@@ -349,21 +349,21 @@
   top: -20%;
   width: 73.3%;
   animation-name: siteBgShapeWide;
-  animation-duration: 38s;
+  animation-duration: 28s;
 }
 .site-bg-shape--stairs {
   left: -7%;
   top: 22%;
   width: 32.3%;
   animation-name: siteBgShapeStairs;
-  animation-duration: 29s;
+  animation-duration: 22s;
 }
 .site-bg-shape--long {
   left: 18%;
   top: 48%;
   width: 81.9%;
   animation-name: siteBgShapeLong;
-  animation-duration: 45s;
+  animation-duration: 34s;
 }
 .site-bg-animated__dim {
   position: absolute;
