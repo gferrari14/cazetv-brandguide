@@ -1,4 +1,5 @@
-import { Link, createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
+import { signOutOfSite } from "@/lib/site-session";
 import { useEffect, useRef } from "react";
 import { siteLogos } from "@/lib/site-media";
 import gradientLine from "@/assets/Rectangle_80.png.asset.json";
@@ -32,6 +33,8 @@ const links = [
 ] as const;
 
 function Entry() {
+  const { access } = Route.useRouteContext();
+  const navigate = useNavigate();
   const titleRef = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
     const title = titleRef.current;
@@ -99,6 +102,16 @@ function Entry() {
             {l.label}
           </Link>
         ))}
+        <button
+          type="button"
+          onClick={async () => {
+            await signOutOfSite();
+            void navigate({ to: "/auth", replace: true });
+          }}
+          className="inline-flex w-fit items-center border-2 border-white/30 bg-transparent px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:border-white/80 hover:text-white"
+        >
+          SAIR{access.isAdmin ? " · ADMIN" : ""}
+        </button>
       </nav>
     </div>
   );

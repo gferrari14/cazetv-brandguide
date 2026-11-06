@@ -15,6 +15,7 @@ interface Props {
 }
 
 export function AddIdentityDialog({ category, catalog, onCreated }: Props) {
+  const canEdit = useIdentityEditing();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [selected, setSelected] = useState(category);
