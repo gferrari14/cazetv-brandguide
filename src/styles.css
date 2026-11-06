@@ -368,7 +368,7 @@
 .site-bg-animated__dim {
   position: absolute;
   inset: 0;
-  background-color: var(--site-background-dimming);
+  background-color: oklch(0 0 0 / 25%);
 }
 @keyframes siteBgShapeWide {
   0% { transform: translate3d(0, 0, 0); opacity: 1; }
